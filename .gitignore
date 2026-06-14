@@ -1,0 +1,14 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# macOS archive metadata
+__MACOSX/
+._*
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Office temporary lock files
+~$*.docx
