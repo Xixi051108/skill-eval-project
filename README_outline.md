@@ -1,10 +1,130 @@
-# README 提纲草稿
+﻿# Skill Evaluation Project
 
-## 1. 项目目标
-- 说明本项目是 Skill 评估任务，不是 Skill 开发任务。
-- 说明评估对象为 `db_report` 与 `tracingclaw_finance` 两个 Skill。
+## 1. 项目背景
 
-## 2. 提交目录结构
+### 1.1 专项目的
+本专项旨在构建一套通用的 Skill 自动化评估体系，保障各业务场景下各类 Skill 的交付质量与用户体验；重点攻坚并提升 Skill 在各类主流大模型上的鲁棒性与泛化能力，从而全面降低 Skill 的接入门槛、测试使用成本，并提升其实际落地效果，让其真正做到“开箱即用、结果可信”。
+
+### 1.2 项目意义
+
+#### 对学生的意义
+- 定义问题的能力：在 AI 领域，往往“定义问题比解决问题更难”。通过参与本专项，需要将模糊的业务需求转化为可量化评测指标，锻炼系统性思维与问题定义能力。
+- 快速学习与知识迁移：面对不断涌现的新 Skill，需要快速掌握相关垂直领域知识，并提炼为可执行的评估框架。
+- 前沿 AI 评测专业度：深度接触大模型评测体系、测试集设计、Rubrics 设计和 Prompt 工程化实践，积累专业评估经验。
+
+#### 对公司的意义
+- 建立质量准入卡点：为 Skill 产出建立统一质量标尺，拦截不合格结果进入真实业务场景。
+- 消除单一模型依赖：通过跨模型评估暴露兼容性问题，降低对单一优质模型的依赖风险。
+- 沉淀评估资产生态：把评估用例、评分模板和评测 SOP 沉淀为可复用资产，支持更多 Skill 的快速落地。
+
+## 2. 项目目标 Skill
+本项目需要完成两个目标 Skill 的评估方案设计：
+- `db_report`
+- `tracingclaw_finance`
+
+## 3. 用户群体
+
+### 3.1 职位
+- 性能测试工程师
+- 测试开发工程师
+- AI Agent 开发者
+- 业务数据分析师
+
+### 3.2 职级
+- 初级工程师
+- 中级工程师
+- 高级工程师
+
+## 4. 评估方法说明
+
+### 4.1 ideal_state
+用于定义一个 Skill 的理想状态，也就是“满分 Skill 应该是什么样”。
+重点回答：
+- 能力边界是什么
+- 支持哪些输入输出
+- 遇到异常数据时应该如何处理
+- 哪些行为属于红线违规
+
+### 4.2 rubrics
+用于定义评分规则。
+重点回答：
+- 评分维度有哪些
+- 每个维度权重是多少
+- 满分标准是什么
+- 扣分点和严重违规项是什么
+
+### 4.3 testcases
+用于定义测试用例集，是核心交付物。
+每条用例至少应包含：
+- `id`
+- `title`
+- `tags`
+- `input`
+- `expected_output`
+- `judge`
+- `fatal_errors`
+
+### 4.4 meta_testcases
+用于检验测试用例集本身是否合格。
+重点检查：
+- 覆盖是否全面
+- 判定是否明确
+- 是否可复现
+- 是否存在重复或不可判定用例
+
+### 4.5 coverage_matrix
+用于证明测试覆盖范围是否完整。
+建议至少覆盖：
+- task_types / report_types
+- data_sources
+- risk_types
+- path_types
+- fatal_errors
+
+## 5. 设计原则
+
+### 5.1 可量化
+所有理想态、rubrics 和 testcase 都应尽量写成可观察、可验证、可映射到实际输出的条件。
+
+### 5.2 可判定
+避免使用“输出合理”“内容完整”“分析较好”这类模糊表述，所有 judge 都应能明确判断通过或失败。
+
+### 5.3 可复现
+同一输入应能重复触发同一类行为，测试结论不依赖主观感受。
+
+### 5.4 跨模型稳健
+评估方案不仅要验证单次结果，还要尽量覆盖跨模型稳定性、泛化性和边界条件。
+
+### 5.5 结果可信
+任何结论都应基于真实输入与可追溯证据，避免编造、估算和未经验证的推断。
+
+## 6. 先导知识与学习方式
+
+### 6.1 怎么定义理想态
+把“好”转化为可量化、可判定的标准，包括能力边界、质量分级和跨模型基准线。
+
+### 6.2 如何快速学习一个新 Skill
+建议顺序：
+1. 先理解输入输出格式
+2. 再通过少量真实调用建立直觉
+3. 最后提炼可评测的质量维度
+
+### 6.3 testcase 应包含什么，为什么
+每条 testcase 至少应包含 ID、输入、预期输出、判定规则和严重错误项。其中 `judge` 最关键，因为它决定能否客观、重复地判断通过或失败。
+
+### 6.4 Rubrics 怎么设计
+Rubrics 需要定义评分维度、权重和判定标准，核心原则是可复现、可自动执行、可稳定复核。
+
+### 6.5 测试用例质量如何衡量
+通过 Meta-Testcase 检验 testcase 本身：
+- 是否覆盖全面
+- 是否判定明确
+- 是否能重复执行
+- 是否存在模糊或重复用例
+
+## 7. 提交结构
+最终提交物建议为：
+
 ```text
 submission.zip
 ├── db_report_eval.yaml
@@ -12,52 +132,31 @@ submission.zip
 └── README.md
 ```
 
-## 3. 两个 YAML 的统一结构
-- `meta`
-- `logic_chain`
-- `ideal_state`
-- `rubrics`
-- `testcases`
-- `meta_testcases`
-- `coverage_matrix`
+## 8. 每个 YAML 的建议结构
+每个 Skill 的 YAML 建议统一包含：
 
-## 4. 每个模块是什么意思
-- `meta`：评估对象、版本、范围、命名规范。
-- `logic_chain`：Skill 从输入到输出的关键链路。
-- `ideal_state`：满分 Skill 应该表现出的能力边界与质量上限。
-- `rubrics`：评分维度、权重、扣分规则和零分触发条件。
-- `testcases`：实际拿来测 Skill 的输入和判定条件。
-- `meta_testcases`：检查测试集本身是否完整、清晰、可判定。
-- `coverage_matrix`：证明测试覆盖到了哪些任务类型、风险和路径。
+```text
+1. meta
+2. logic_chain
+3. ideal_state
+4. rubrics
+5. testcases
+6. meta_testcases
+7. coverage_matrix
+```
 
-## 5. 统一命名规范
-- testcase id：`DB-XX` / `FIN-XX`
-- meta-testcase id：`META-DB-XX` / `META-FIN-XX`
-- tags：统一使用小写 `snake_case`
-- judge：统一使用 `pass_if_all` 与 `fail_if_any`
+## 9. 验收要求
+- 每个 Skill 不少于 5 条 testcase
+- 测试用例集需通过完整版 Meta-Testcase 验收集检验
+- 最终验收分数需大于 80 分
 
-## 6. 评估设计原则
-- 先定义能力边界，再写评分规则。
-- judge 必须可执行、可观察、可复核。
-- 红线场景必须既写进 rubrics，也写进 testcase。
-- failure path 和 edge case 不能少于 happy path 的重要性。
+## 10. 当前推进策略
+- 先把 `db_report` 做成样板
+- 再将统一结构迁移到 `tracingclaw_finance`
+- 最后统一补齐 meta_testcases、coverage_matrix 和最终 README
 
-## 7. Skill 级别概览
-### db_report
-- 核心是本地数据接入、报告类型识别、质量门控、三格式交付。
-
-### tracingclaw_finance
-- 核心是金融事实拆解、工具路由、口径一致性、0/1/2 评分与修正答案。
-
-## 8. coverage_matrix 如何阅读
-- `task_types`：测了哪些任务类型。
-- `data_sources`：测了哪些数据源或工具来源。
-- `risk_types`：测了哪些高风险错误。
-- `path_types`：测了正常、失败、边界、红线哪些路径。
-- `fatal_error_types`：测了哪些一票否决问题。
-
-## 9. 本周推进节奏
-- Day 1：搭统一框架与命名规范。
-- Day 2-3：完成 `db_report`。
-- Day 4-6：完成 `tracingclaw_finance`。
-- Day 7：做 meta-testcases、coverage_matrix、README 和最终打包。
+## 11. 当前进度使用建议
+- Day 1：统一模板、命名规范、README 提纲、工作清单
+- Day 2-3：完成 `db_report`
+- Day 4-6：完成 `tracingclaw_finance`
+- Day 7：统一检查、补充自检规则、完成打包
