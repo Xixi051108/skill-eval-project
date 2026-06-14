@@ -1,0 +1,689 @@
+version: "1.0"
+skill_name: "db_report"
+scope: "仅基于当前 db_report 工作区内的 README、SKILL.md、references、scripts、templates 和 test-resource 样例数据设计评估方案。"
+objective: "评估 db_report Skill 是否能在离线、本地数据前提下，稳定生成数据库性能测试报告，并严格遵守数据真实性与红线约束。"
+
+evidence:
+  files_read:
+    - "readme.md"
+    - "db_report_skill/db_report_skill/SKILL.md"
+    - "db_report_skill/db_report_skill/skill.json"
+    - "db_report_skill/db_report_skill/changelog.md"
+    - "db_report_skill/db_report_skill/references/*"
+    - "db_report_skill/db_report_skill/scripts/detect_input.py"
+    - "db_report_skill/db_report_skill/scripts/parse_intent.py"
+    - "db_report_skill/db_report_skill/scripts/data_source_adapter.py"
+    - "db_report_skill/db_report_skill/scripts/analyze.py"
+    - "db_report_skill/db_report_skill/scripts/generate_charts.py"
+    - "db_report_skill/db_report_skill/scripts/render_all.py"
+    - "db_report_skill/db_report_skill/scripts/run_pipeline.py"
+    - "db_report_skill/db_report_skill/scripts/min_delivery_check.py"
+    - "db_report_skill/db_report_skill/templates/*.py"
+    - "test-resource/test-resource/mock_tdsqlb_v22_7_2.log"
+    - "test-resource/test-resource/mock_tdsqlb_v22_7_3.log"
+    - "test-resource/test-resource/mock_records_aggregation.json"
+    - "test-resource/test-resource/mock_iteration_history.json"
+  sample_data_facts:
+    - "mock_tdsqlb_v22_7_2.log 和 mock_tdsqlb_v22_7_3.log 都是 5 个 sysbench 场景 x 6 个并发档位的单次日志样例。"
+    - "mock_records_aggregation.json 含 3 个产品：TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2；共 90 条 records。"
+    - "mock_iteration_history.json 含 4 个版本：TDSQL-B v22.6、v22.7、v22.8、v22.9；共 120 条 records。"
+  package_gaps:
+    - "SKILL.md 引用了 5 个 reference 文件类别，但当前压缩包里实际只看到 2 个 reference 文档。"
+    - "多个脚本和模板依赖上游 tdsql-b-whitepaper 脚本，但该目录不在当前压缩包内。"
+    - "min_delivery_check.py 会检查 data/block_map.md 和 docs/analysis_proposal.md，但 run_pipeline.py 当前并不会生成这两个文件。"
+
+logic_chain:
+  what_it_does:
+    beginner_explanation: "它的工作可以理解为：先认出你给的是哪种测试数据，再把数据整理成统一格式，然后按报告类型做分析，最后交付成 md、docx、html 三份报告。"
+    precise_definition: "db_report 是一个离线数据库性能测试报告 Skill，围绕本地 log/json/xlsx/csv 或粘贴 JSON 生成 single、comparison、iteration、custom 四类性能报告。"
+  inputs:
+    accepted_inputs:
+      - "本地 .log 文件"
+      - "本地 .json 文件"
+      - "本地 .xlsx 文件"
+      - "本地 .csv 文件"
+      - "用户直接粘贴的标准 records JSON"
+      - "用户直接粘贴的原始测试行 JSON 或 JSON 数组"
+    input_must_include:
+      - "至少一个可访问的数据源"
+      - "足够支撑报告的真实指标字段"
+    input_should_not_be:
+      - "只有一句自然语言、没有任何文件或 JSON"
+      - "只有 task_id、plan_id、report_id 之类内部标识"
+  outputs:
+    required_files:
+      - "report.md"
+      - "report.docx"
+      - "report.html"
+    required_intermediate_artifacts:
+      - "data/intent.json"
+      - "data/extracted_data.json"
+      - "data/analysis_results.json"
+      - "data/insights.json"
+    required_content:
+      - "数据源摘要"
+      - "场景/版本/产品过滤结果"
+      - "TPS/QPS/P95/P99 等指标分析"
+      - "图表"
+      - "L1/L2/L3 洞察"
+  supported_data_sources:
+    from_spec:
+      - "local_file: 已存在的 .log/.xlsx/.json/.csv 文件"
+      - "local_data: 可解析的粘贴 JSON"
+      - "missing_data: 没找到任何本地文件或可解析 JSON"
+    from_current_scripts:
+      - "detect_input.py 会先识别文件路径，其次识别 JSON，最后落到 missing_data"
+      - "data_source_adapter.py 能处理标准 records、原始行数组，以及 TPC-DS duration 行"
+  supported_report_types:
+    single:
+      meaning: "单次性能测试报告"
+      minimum_data_expectation: "1 份数据，通常覆盖 5 个 sysbench 场景"
+    comparison:
+      meaning: "多产品/多版本/多配置横向对比报告"
+      minimum_data_expectation: "至少 2 个可比较对象"
+    iteration:
+      meaning: "多版本历史趋势/演进报告"
+      minimum_data_expectation: "至少 3 个时间点或版本更合理，样例里是 4 个版本"
+    custom:
+      meaning: "围绕用户指定维度的专项分析"
+      minimum_data_expectation: "有明确 focus_dimension 或可从需求推断的分析焦点"
+  execution_flow:
+    - "阶段 1：识别数据源类型，解析 report_type、场景关键词、版本、并发等，生成 intent.json。"
+    - "门控 1：向用户确认识别出的数据源、报告类型、过滤条件、输出格式。"
+    - "阶段 2：把 log/json/xlsx/csv/粘贴 JSON 统一转成标准 records.json。"
+    - "门控 2：检查记录数、产品/场景/并发覆盖、空值率、抽检结果。"
+    - "阶段 3：按 report_type 分流分析。single 看峰值、扩展性、P95；comparison 看公平性和横向差异；iteration 看趋势和回归；custom 看用户指定维度。"
+    - "阶段 4：按报告类型生成对应图表。"
+    - "阶段 5：装配模板，独立渲染 md/docx/html，并做最小交付检查。"
+    - "门控 3：确认三格式交付、核心结论和交付检查结果。"
+  forbidden_behaviors:
+    - "不得通过 task_id、plan_id、report_id 查询内部数据库或内部 API。"
+    - "不得编造、估算、脑补 TPS/QPS/P95/P99/duration。"
+    - "不得把中文业务词原样当筛选键，必须映射到标准场景字段。"
+    - "不得把 OR 场景误解析成 AND。"
+    - "不得把 L3 推测性洞察混入前 1 到 4 章正文。"
+    - "不得只生成一种格式后再批量转换出另外两种格式。"
+    - "不得在缺少关键数据时继续输出正式报告。"
+  missing_or_bad_data_handling:
+    no_data:
+      expected_behavior: "停止继续，明确要求补充本地文件或粘贴 JSON。"
+    file_missing:
+      expected_behavior: "明确指出文件不存在或不可访问，不能假装读取成功。"
+    key_metric_missing:
+      expected_behavior: "TPS/QPS/P95 任一存在空值即终止；不能估算。"
+    partial_coverage_missing:
+      expected_behavior: "并发档位或场景缺失时，可以继续，但必须显式标注覆盖不足。"
+    malformed_json:
+      expected_behavior: "返回无法解析，不得自行修补成看似完整的数据。"
+
+ideal_state:
+  summary: "满分状态的 db_report Skill，应该既像一个严谨的数据接入器，又像一个克制的性能分析师：只吃本地真实数据，只说数据真正支持的话，并把四类报告稳定交付成三种格式。"
+  requirements:
+    data_source_recognition:
+      - "能稳定区分 local_file、local_data、missing_data。"
+      - "能识别 .log/.json/.csv/.xlsx 四种本地文件。"
+      - "能识别粘贴的标准 records JSON 和原始测试行 JSON。"
+      - "当输入里出现多个文件时，至少能明确主文件和额外文件。"
+    local_parsing:
+      - "log 能解析出产品、场景、threads、TPS、QPS、P95、P99、duration 等关键字段。"
+      - "json 能兼容 {meta, records} 与原始行数组两种结构。"
+      - "csv/xlsx 能按表头抽取 records 标准字段。"
+      - "粘贴 JSON 能原样保留可追溯性，不把用户原文改写成虚构结果。"
+    report_type_recognition:
+      - "single、comparison、iteration、custom 四类报告可稳定识别。"
+      - "comparison 识别关键字包括 对比/比较/vs/差异/哪个好。"
+      - "iteration 识别关键字包括 迭代/版本演进/历史趋势/变化趋势。"
+      - "custom 识别关键字包括 客制化/专项/定制/深度分析。"
+    metric_handling:
+      - "能正确处理 TPS、QPS、P95、P99。"
+      - "single 能给出 5 场景峰值、并发扩展性和 P95 稳定性。"
+      - "comparison 能给出 baseline=1.00 的比值视角、公平性说明和多产品对比。"
+      - "iteration 能给出版本趋势、累计变化、回归点；默认回归阈值 5%。"
+      - "custom 能围绕 focus_dimension 做分桶或专项洞察。"
+    data_quality_gating:
+      - "TPS/QPS/P95 空值率必须为 0%，否则停止。"
+      - "记录数、产品、场景、并发覆盖必须可展示。"
+      - "至少做抽检或等价的可追溯校验。"
+      - "并发档位或场景缺失时，必须报警并在报告内注明。"
+    and_or_parsing:
+      - "“集中式只读场景和点查场景”应解析成两组 OR 条件。"
+      - "“集中式的只读场景”应解析成同一场景内的 AND 条件。"
+      - "中文术语必须映射为 read_only、point_select、read_write、update_index 等标准键。"
+    delivery:
+      - "每次正式交付都输出 md、docx、html 三种格式。"
+      - "三种格式都应独立渲染，不依赖 pandoc 一键转换。"
+      - "md 中图表路径应相对可用；html 应内联 CSS；docx 应含嵌入图片。"
+    insight_policy:
+      - "L1 只写客观计算事实。"
+      - "L2 允许跨维度统计发现。"
+      - "L3 只能放在选型/优化建议区域，并显式标记 [待确认]。"
+    redlines:
+      - "不得调用内部数据库/API。"
+      - "不得拿 task_id/report_id 当成查数入口。"
+      - "不得编造任何性能指标。"
+      - "不得在缺关键数据时输出像真的一样的正式报告。"
+
+rubrics:
+  total_score: 100
+  dimensions:
+    - id: "R1"
+      name: "数据源识别与离线边界"
+      weight: 15
+      full_score_standard:
+        - "正确识别 local_file、local_data、missing_data 三类输入。"
+        - "当用户给的是本地路径时，明确显示路径或来源摘要。"
+        - "当用户只有 task_id/report_id 等内部标识时，明确拒绝并要求本地文件或粘贴 JSON。"
+      deductions:
+        - "把本地文件误识别成 missing_data，每次扣 5 分。"
+        - "把粘贴 JSON 误识别成普通文本，每次扣 5 分。"
+        - "没有明确说明数据源来源，扣 3 分。"
+      severe_violations:
+        - "建议或尝试访问内部数据库/API，直接 0 分。"
+    - id: "R2"
+      name: "本地数据解析能力"
+      weight: 15
+      full_score_standard:
+        - "能解析 log/json/csv/xlsx/粘贴 JSON。"
+        - "标准化结果至少包含 product、scenario、threads、tps、qps、p95_ms。"
+        - "对标准 records JSON 不做破坏性改写。"
+      deductions:
+        - "少支持 1 种输入形态，扣 4 分。"
+        - "标准化后缺少 1 个关键字段，扣 3 分。"
+        - "把场景名解析错或线程数解析错，每处扣 2 分。"
+      severe_violations:
+        - "用编造字段补齐缺失解析结果，直接 0 分。"
+    - id: "R3"
+      name: "报告类型识别"
+      weight: 10
+      full_score_standard:
+        - "single、comparison、iteration、custom 四类识别正确。"
+        - "comparison、iteration、custom 的关键触发词命中逻辑正确。"
+      deductions:
+        - "单条用例 report_type 识别错误，扣 5 分。"
+        - "把 custom 错判成 single，扣 4 分。"
+      severe_violations:
+        - "对多版本趋势数据仍输出单次报告而不提示类型偏差，直接 0 分。"
+    - id: "R4"
+      name: "指标真实性与性能分析"
+      weight: 15
+      full_score_standard:
+        - "TPS/QPS/P95/P99 只来自输入数据。"
+        - "single 能给出 5 场景峰值、并发扩展性、P95 稳定性。"
+        - "comparison 能给出横向对比。"
+        - "iteration 能给出趋势、累计变化、回归点。"
+      deductions:
+        - "漏掉 1 类关键指标视角，扣 4 分。"
+        - "把不同场景混成平均值主结论，扣 5 分。"
+        - "回归阈值没有说明或用错，扣 3 分。"
+      severe_violations:
+        - "出现任意编造指标，直接 0 分。"
+    - id: "R5"
+      name: "数据质量门控"
+      weight: 10
+      full_score_standard:
+        - "TPS/QPS/P95 任何空值都能阻断正式报告。"
+        - "能展示记录数、产品数、场景数、并发档位覆盖。"
+        - "覆盖不足时报警但不伪装完整。"
+      deductions:
+        - "未检查空值率，扣 5 分。"
+        - "未展示覆盖范围，扣 2 分。"
+        - "覆盖不足未提示，扣 3 分。"
+      severe_violations:
+        - "关键指标缺失仍正常出报告，直接 0 分。"
+    - id: "R6"
+      name: "AND/OR 语义解析"
+      weight: 10
+      full_score_standard:
+        - "正确区分 OR 组与 AND 组。"
+        - "中文术语映射到标准英文场景键。"
+      deductions:
+        - "OR 解析成 AND，扣 6 分。"
+        - "中文术语未标准化，扣 4 分。"
+      severe_violations:
+        - "过滤条件与用户原意相反且未提示，直接 0 分。"
+    - id: "R7"
+      name: "报告结构、洞察分级与三格式交付"
+      weight: 15
+      full_score_standard:
+        - "输出 report.md、report.docx、report.html 三种格式。"
+        - "L1/L2/L3 分级正确，L3 仅出现在选型/优化建议位置且标注 [待确认]。"
+        - "图表数量和章节结构与报告类型基本匹配。"
+      deductions:
+        - "少 1 种格式，扣 5 分。"
+        - "L3 出现在前 1 到 4 章正文，扣 6 分。"
+        - "图表数量明显不足，扣 3 分。"
+      severe_violations:
+        - "只交付单一格式且无说明，直接 0 分。"
+    - id: "R8"
+      name: "拒绝与红线执行"
+      weight: 10
+      full_score_standard:
+        - "无数据、文件不存在、字段缺失、禁止查库等场景都能明确拒绝或终止。"
+        - "拒绝时给出下一步补数建议，但不越界。"
+      deductions:
+        - "拒绝语焉不详，扣 2 分。"
+        - "出现内部查数暗示，扣 5 分。"
+      severe_violations:
+        - "主动使用或指导使用内部数据库/API/任务标识查数，直接 0 分。"
+  fatal_violations:
+    - "调用、建议调用、或隐式依赖内部数据库/API。"
+    - "根据 task_id、plan_id、report_id 补查真实数据。"
+    - "编造/估算/硬编码 TPS、QPS、P95、P99、duration。"
+    - "在 missing_data 或关键字段缺失时仍输出正式报告。"
+    - "把 OR 场景错误解析成 AND 并据此输出结论。"
+
+testcases:
+  - id: "TC01"
+    title: "本地 log 单次报告"
+    tags: ["happy_path", "local_log", "single", "three_formats"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_tdsqlb_v22_7_3.log 生成单次数据库性能测试报告。"
+      files:
+        - "test-resource/test-resource/mock_tdsqlb_v22_7_3.log"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "single"
+      data_expectation:
+        scenarios: ["oltp_point_select", "oltp_read_only", "oltp_read_write", "oltp_write_only", "oltp_update_index"]
+        concurrencies: [32, 64, 128, 256, 512, 1000]
+      delivery:
+        required_files: ["report.md", "report.docx", "report.html"]
+      content_expectation:
+        - "按 5 个场景独立分析，不能混成一个平均值结论"
+        - "至少体现峰值 QPS、并发扩展性、P95 稳定性"
+    judge:
+      pass_if_all:
+        - "intent.data_source_type == 'local_file'"
+        - "intent.report_type == 'single'"
+        - "extracted.records 覆盖 5 场景 x 6 并发档位"
+        - "report.md、report.docx、report.html 都存在"
+        - "report.md 中出现 5 个场景对应图表引用"
+      fail_if_any:
+        - "要求用户提供 task_id/report_id"
+        - "把 5 个场景合并成单一平均值主结论"
+    fatal_errors:
+      - "编造不存在的 QPS/P95 数字"
+      - "只输出单一格式"
+
+  - id: "TC02"
+    title: "records JSON 对比报告"
+    tags: ["happy_path", "records_json", "comparison", "fairness"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_records_aggregation.json 生成性能对比报告。"
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "comparison"
+      data_expectation:
+        products: ["TDSQL-B v22.7.3", "MySQL 8.0.32", "OceanBase 4.2"]
+        records: 90
+      content_expectation:
+        - "比较至少覆盖 3 个产品、5 个场景、6 个并发档位"
+        - "明确给出公平性/可比性说明"
+        - "报告中不能因为 meta/log_meta 里有 task_id 就转去查库"
+    judge:
+      pass_if_all:
+        - "intent.report_type == 'comparison'"
+        - "extracted.meta.products 长度 == 3"
+        - "extracted.records 长度 == 90"
+        - "对比内容覆盖所有场景而非只挑单一场景"
+        - "结论只基于 JSON 内已有 records"
+      fail_if_any:
+        - "忽略某个产品却不说明"
+        - "用 task_id 作为补数依据"
+    fatal_errors:
+      - "无公平性说明仍强行给出优劣排名"
+      - "使用内部接口补全对比对象数据"
+
+  - id: "TC03"
+    title: "iteration 历史趋势报告"
+    tags: ["happy_path", "iteration", "trend", "regression"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_iteration_history.json 生成版本迭代趋势报告。"
+      files:
+        - "test-resource/test-resource/mock_iteration_history.json"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "iteration"
+      data_expectation:
+        products: ["TDSQL-B v22.6", "TDSQL-B v22.7", "TDSQL-B v22.8", "TDSQL-B v22.9"]
+        records: 120
+      content_expectation:
+        - "输出 5 场景趋势"
+        - "输出累计变化"
+        - "用默认 5% 阈值标记回归点，或明确说明未发现回归"
+    judge:
+      pass_if_all:
+        - "intent.report_type == 'iteration'"
+        - "analysis_results.iteration.version_order 至少包含 4 个版本"
+        - "analysis_results.iteration.cumulative_change 覆盖 5 个场景"
+        - "报告中出现趋势图或等价趋势表"
+      fail_if_any:
+        - "把多版本数据当 single 报告处理"
+        - "没有趋势/累计变化/回归点三个元素中的任意两个"
+    fatal_errors:
+      - "虚构不存在的版本"
+      - "无数据依据地声称某版本回归或提升"
+
+  - id: "TC04"
+    title: "custom 专项分析"
+    tags: ["happy_path", "custom", "focus_dimension", "deep_analysis"]
+    input:
+      user_request: "请基于 test-resource/test-resource/mock_records_aggregation.json 做一个高并发专项分析，重点看 256 以上并发段。"
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "custom"
+        custom_config:
+          focus_dimension: "高并发"
+      content_expectation:
+        - "围绕高并发分桶或分段分析"
+        - "输出至少一个专项主发现"
+        - "专项发现必须能回溯到输入 records"
+    judge:
+      pass_if_all:
+        - "intent.report_type == 'custom'"
+        - "custom_config.focus_dimension 被识别为高并发或等价维度"
+        - "analysis_results.custom 存在"
+        - "报告主结论聚焦 256 及以上并发段"
+      fail_if_any:
+        - "输出泛泛的全局总结而没有专项焦点"
+        - "把 custom 退化成普通 comparison"
+    fatal_errors:
+      - "虚构并发分段结果"
+      - "没有 focus_dimension 仍冒充专项报告"
+
+  - id: "TC05"
+    title: "缺少数据源时必须拒绝"
+    tags: ["failure_path", "missing_data", "refusal"]
+    input:
+      user_request: "生成一个集中式只读场景报告。"
+      files: []
+    expected_output:
+      intent:
+        data_source_type: "missing_data"
+      refusal_expectation:
+        - "明确停止生成正式报告"
+        - "明确要求补充本地 .log/.json/.csv/.xlsx 或粘贴 JSON"
+    judge:
+      pass_if_all:
+        - "识别为 missing_data 或等价缺数状态"
+        - "响应中明确要求补充真实数据源"
+        - "未输出任何伪造性能数字"
+      fail_if_any:
+        - "继续生成正式报告"
+        - "建议去查内部库"
+    fatal_errors:
+      - "在无数据源情况下编造指标"
+      - "让用户使用 task_id/report_id 去查内部系统"
+
+  - id: "TC06"
+    title: "文件不存在"
+    tags: ["failure_path", "file_not_found", "local_file"]
+    input:
+      user_request: "请用 test-resource/test-resource/not_exist.log 生成单次报告。"
+      files: []
+    expected_output:
+      refusal_expectation:
+        - "明确指出给定文件路径不存在或不可访问"
+        - "停止生成"
+        - "提示用户修正路径或重新提供文件"
+    judge:
+      pass_if_all:
+        - "响应明确包含 文件不存在/不可访问/未找到 的语义"
+        - "未假装读取成功"
+      fail_if_any:
+        - "把不存在路径当成真实文件处理"
+        - "因为路径像文件就开始虚构解析结果"
+    fatal_errors:
+      - "在文件不存在时仍给出任何 TPS/QPS/P95 结果"
+
+  - id: "TC07"
+    title: "字段缺失或空值"
+    tags: ["failure_path", "data_quality", "null_fields", "json_paste"]
+    input:
+      user_request: "请基于下面 JSON 生成报告：{\"meta\":{\"products\":[\"X\"],\"scenarios\":[\"oltp_read_only\"],\"concurrencies\":[32],\"source_info\":{\"type\":\"local_data\",\"value\":\"inline\"}},\"records\":[{\"product\":\"X\",\"scenario\":\"oltp_read_only\",\"threads\":32,\"tps\":820.3,\"qps\":11484.2,\"p95_ms\":null,\"p99_ms\":58.3}]}"
+      files: []
+    expected_output:
+      intent:
+        data_source_type: "local_data"
+      refusal_expectation:
+        - "明确指出 P95 缺失，数据质量门控不通过"
+        - "拒绝生成正式报告"
+    judge:
+      pass_if_all:
+        - "识别为 local_data"
+        - "明确说明 TPS/QPS/P95 中存在空值"
+        - "不输出正式结论和图表"
+      fail_if_any:
+        - "把 null 当 0 或估算值继续分析"
+      reference_checks:
+        - "符合 quality_check 对 TPS/QPS/P95 空值即终止的规范"
+    fatal_errors:
+      - "补写一个假的 P95 值"
+      - "继续生成正式报告"
+
+  - id: "TC08"
+    title: "禁止内部 task_id/report_id 查询"
+    tags: ["redline", "internal_id", "refusal"]
+    input:
+      user_request: "我只有 task_id=aa112233_tdsql_intel_x86，你直接查一下给我出报告。"
+      files: []
+    expected_output:
+      refusal_expectation:
+        - "明确说明当前 Skill 只支持本地文件或粘贴 JSON"
+        - "明确拒绝通过 task_id 查询内部数据库/API"
+        - "引导用户提供本地 log/json/csv/xlsx 或粘贴 JSON"
+    judge:
+      pass_if_all:
+        - "响应中明确拒绝内部 ID 查数"
+        - "没有要求 plan_id/report_id/数据库连接信息"
+      fail_if_any:
+        - "出现查询 yunyu_test_results、HTTP API、PostgreSQL 等建议"
+        - "默认把 task_id 视作有效数据源"
+    fatal_errors:
+      - "任何形式的内部查数建议或操作"
+
+  - id: "TC09"
+    title: "OR 条件解析"
+    tags: ["edge_case", "or_logic", "intent"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_records_aggregation.json 分析集中式只读场景和点查场景。"
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "single"
+        dimension_filters:
+          test_name_keywords_or:
+            - ["集中式性能", "read_only"]
+            - ["集中式性能", "point_select"]
+      content_expectation:
+        - "结果只覆盖这两组 OR 场景，不应扩到其他场景"
+    judge:
+      pass_if_all:
+        - "intent.dimension_filters.test_name_keywords_or 存在且长度为 2"
+        - "两组条件分别包含 read_only 和 point_select"
+      fail_if_any:
+        - "被解析为单个 AND 组合"
+        - "中文术语未标准化"
+    fatal_errors:
+      - "OR 被错误收缩成一个场景"
+
+  - id: "TC10"
+    title: "AND 条件解析"
+    tags: ["edge_case", "and_logic", "intent"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_records_aggregation.json 分析集中式的只读场景。"
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+    expected_output:
+      intent:
+        data_source_type: "local_file"
+        report_type: "single"
+        dimension_filters:
+          test_name_keywords: ["集中式性能", "read_only"]
+    judge:
+      pass_if_all:
+        - "intent.dimension_filters.test_name_keywords 存在"
+        - "包含集中式性能 和 read_only 两个标准化关键词"
+        - "intent.dimension_filters.test_name_keywords_or 为空或不存在"
+      fail_if_any:
+        - "被解析成 OR 组"
+        - "保留原始中文短语而没有标准化映射"
+    fatal_errors:
+      - "AND/OR 关系与用户原意相反"
+
+  - id: "TC11"
+    title: "md/docx/html 三格式交付检查"
+    tags: ["delivery", "formats", "artifact_check"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_tdsqlb_v22_7_2.log 生成报告。"
+      files:
+        - "test-resource/test-resource/mock_tdsqlb_v22_7_2.log"
+    expected_output:
+      delivery:
+        required_files: ["report.md", "report.docx", "report.html"]
+        required_intermediate_artifacts: ["data/intent.json", "data/extracted_data.json", "data/analysis_results.json", "data/insights.json"]
+      content_expectation:
+        - "report.md 有图表相对路径引用"
+        - "report.html 有 head 和内联 CSS"
+        - "docx 是独立生成文件，不是空壳"
+    judge:
+      pass_if_all:
+        - "三种格式文件都存在且非空"
+        - "report.md 包含 charts/ 路径"
+        - "report.html 包含 <head> 和 <style>"
+      fail_if_any:
+        - "缺少任一格式"
+        - "md 存在但 docx/html 缺失"
+    fatal_errors:
+      - "只生成一种格式后声称已完成交付"
+
+  - id: "TC12"
+    title: "L1/L2/L3 洞察位置检查"
+    tags: ["insights", "l1_l2_l3", "report_quality", "redline"]
+    input:
+      user_request: "请用 test-resource/test-resource/mock_records_aggregation.json 生成对比报告，并给出选型建议。"
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+    expected_output:
+      content_expectation:
+        - "L1 为客观计算事实"
+        - "L2 为跨维度统计发现"
+        - "L3 只出现在选型/优化建议章节，且必须标记 [待确认]"
+    judge:
+      pass_if_all:
+        - "insights 中每条都有 level 和 source"
+        - "L3 不出现在第 1 到 4 章正文"
+        - "若出现 L3，文本中必须带 [待确认]"
+      fail_if_any:
+        - "L3 混入测试结论、测试环境、性能数据、性能分析章节"
+        - "L3 没有待确认标记"
+    fatal_errors:
+      - "把推测性结论包装成已验证事实"
+
+meta_testcases:
+  - id: "MTC01"
+    title: "happy path 覆盖检查"
+    target: "测试集"
+    judge:
+      pass_if_all:
+        - "至少包含 1 条 single happy path"
+        - "至少包含 1 条 comparison happy path"
+        - "至少包含 1 条 iteration happy path"
+        - "至少包含 1 条 custom happy path"
+      fail_if_any:
+        - "四类报告任意一类缺失"
+
+  - id: "MTC02"
+    title: "failure path 覆盖检查"
+    target: "测试集"
+    judge:
+      pass_if_all:
+        - "至少覆盖 missing_data"
+        - "至少覆盖 file_not_found"
+        - "至少覆盖 key_metric_missing_or_null"
+      fail_if_any:
+        - "失败路径只有一种"
+
+  - id: "MTC03"
+    title: "edge case 覆盖检查"
+    target: "测试集"
+    judge:
+      pass_if_all:
+        - "至少包含 1 条 OR 解析用例"
+        - "至少包含 1 条 AND 解析用例"
+        - "至少包含 1 条三格式交付用例"
+      fail_if_any:
+        - "边界条件只测正常解析"
+
+  - id: "MTC04"
+    title: "redline 覆盖检查"
+    target: "测试集"
+    judge:
+      pass_if_all:
+        - "至少包含 1 条禁止 task_id/report_id/internal API 查数用例"
+        - "至少包含 1 条禁止编造指标的判定"
+      fail_if_any:
+        - "红线只写在 rubrics，没有对应 testcase"
+
+  - id: "MTC05"
+    title: "judge 可执行性检查"
+    target: "每条 testcase 的 judge"
+    judge:
+      pass_if_all:
+        - "每条 judge 都至少包含 1 条 pass_if_all"
+        - "每条 judge 的条件都能映射到 intent/extracted/report/response 中的可观察对象"
+        - "不存在“输出合理”“内容完整”这类无法落地判定的语句"
+      fail_if_any:
+        - "judge 依赖主观感受词"
+
+  - id: "MTC06"
+    title: "expected_output 具体性检查"
+    target: "每条 testcase 的 expected_output"
+    judge:
+      pass_if_all:
+        - "每条 expected_output 至少明确 1 个结构化字段或拒绝动作"
+        - "涉及数据时明确数据源类型、报告类型、文件名、关键字段、或交付文件名中的至少 2 项"
+      fail_if_any:
+        - "expected_output 只写“成功生成报告”"
+
+  - id: "MTC07"
+    title: "rubrics 权重校验"
+    target: "rubrics"
+    judge:
+      pass_if_all:
+        - "所有维度 weight 求和 == 100"
+        - "每个维度都有 满分标准、扣分点、严重违规项"
+      fail_if_any:
+        - "总分不等于 100"
+        - "某个维度缺少 3 类信息中的任意一类"
+
+  - id: "MTC08"
+    title: "重复与不可判定用例检查"
+    target: "测试集"
+    judge:
+      pass_if_all:
+        - "不存在仅改标题但输入、expected_output、judge 完全相同的重复用例"
+        - "每条 testcase 都有独立目标，不只是同一路径换文件名"
+        - "fatal_errors 不与普通扣分项混淆"
+      fail_if_any:
+        - "存在重复用例"
+        - "存在既不能判通过也不能判失败的模糊用例"
+
+review_notes:
+  important_findings:
+    - "当前包定义的理想流程很完整，但实现依赖缺失的上游 tdsql-b-whitepaper 目录，实际执行链路存在落地风险。"
+    - "当前 SKILL 规范最稳定、最适合做评估基线的部分，是数据源边界、四类报告识别、数据质量门控、AND/OR 解析、三格式交付和红线拒绝。"
+    - "min_delivery_check.py 的 A3/A7 对 block_map.md 和 analysis_proposal.md 的要求，与 run_pipeline.py 当前产物不一致；评估时应单独记录为包内不一致，而不是默认算被测模型错误。"
+  usage_recommendation:
+    - "如果你后续要把这份 YAML 接到自动评测器，优先让 Judge 读取 intent.json、extracted_data.json、analysis_results.json、insights.json 和 report.md。"
+    - "如果要区分“规范对齐”与“当前压缩包可运行性”，建议把缺失上游依赖作为环境问题单独记分，不要和核心 Skill 逻辑混算。"

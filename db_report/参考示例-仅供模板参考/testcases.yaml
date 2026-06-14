@@ -1,0 +1,50 @@
+meta:
+  count: 4
+  notice: "学生版离线测试用例：仅允许本地文件或粘贴 JSON，不允许内部数据库/API 查询。"
+
+cases:
+  - Input: 请用 db_report/test-resource/mock_tdsqlb_v22_7_3.log 生成单次性能测试报告
+    ExpectedOutput: |
+      - data_source_type: local_file
+      - report_type: single
+      - 数据来自本地 sysbench log
+      - 生成 md/docx/html 三格式报告
+    Judge: |
+      - 正确识别本地 .log 文件。
+      - 不要求或尝试使用任何线上数据库权限。
+      - 按 5 个 sysbench 场景独立分析。
+      - 所有 TPS/QPS/P95 来自日志解析结果。
+
+  - Input: 请用 db_report/test-resource/mock_records_aggregation.json 生成性能对比报告
+    ExpectedOutput: |
+      - data_source_type: local_file
+      - report_type: comparison
+      - 识别多产品 records 数据
+      - 输出公平性检查、场景对比和图表
+    Judge: |
+      - 正确读取标准 records JSON。
+      - comparison 报告至少覆盖各产品、各场景、各并发档。
+      - 明确披露公平性条件。
+      - 不根据任务标识查询或补全数据。
+
+  - Input: 请用 db_report/test-resource/mock_iteration_history.json 生成迭代演进报告
+    ExpectedOutput: |
+      - data_source_type: local_file
+      - report_type: iteration
+      - 识别多版本 records 数据
+      - 输出趋势、累计变化和回归点
+    Judge: |
+      - 正确识别 iteration 报告类型。
+      - 使用 JSON 中已有多版本数据进行趋势分析。
+      - 回归阈值默认 5%。
+      - L3 推测仅出现在选型与调优建议章节。
+
+  - Input: 生成集中式只读场景报告
+    ExpectedOutput: |
+      - data_source_type: missing_data
+      - 停止在意图确认/数据补充阶段
+      - 提示用户提供 .log/.xlsx/.json/.csv 或粘贴 JSON
+    Judge: |
+      - 缺少本地数据源时不得继续生成报告。
+      - 不估算、不编造性能指标。
+      - 不提示学生使用内部数据库查询能力。

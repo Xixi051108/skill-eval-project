@@ -1,0 +1,113 @@
+meta:
+  skill_name: "db_report"
+  eval_version: "0.1"
+  task_type: "skill_evaluation"
+  status: "template"
+  objective: "评估 db_report Skill 是否能基于用户提供的本地数据稳定生成数据库性能报告，并严格遵守离线数据与质量门控约束。"
+  path_reference_basis: "relative_to_project_root"
+  source_materials:
+    - "readme.md"
+    - "skill_eval_week_plan.md"
+    - "db_report/readme.md"
+    - "db_report/db_report_skill/db_report_skill/SKILL.md"
+    - "db_report/参考示例-仅供模板参考/ideal_state.md"
+    - "db_report/参考示例-仅供模板参考/testcases.yaml"
+  naming_conventions:
+    testcase_id_pattern: "DB-XX"
+    tag_style: "lower_snake_case"
+    judge_style: "pass_if_all + fail_if_any"
+
+logic_chain:
+  skill_goal: ""
+  input_modes: []
+  output_contract: []
+  tool_or_data_routing: []
+  execution_stages: []
+  refusal_or_stop_conditions: []
+
+ideal_state:
+  summary: ""
+  required_capabilities: []
+  boundary_constraints: []
+  quality_bar: []
+  redlines: []
+
+rubrics:
+  total_score: 100
+  scoring_method: "weighted_dimensions"
+  dimensions:
+    - id: "R1"
+      name: ""
+      weight: 0
+      intent: ""
+      full_score_criteria: []
+      partial_deductions: []
+      zero_score_triggers: []
+
+testcases:
+  - id: "DB-01"
+    title: ""
+    objective: ""
+    tags: []
+    priority: ""
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input: {}
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation: {}
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+meta_testcases:
+  - id: "META-DB-01"
+    title: ""
+    purpose: ""
+    target: ""
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+
+coverage_matrix:
+  axes:
+    task_types:
+      - "single"
+      - "comparison"
+      - "iteration"
+      - "custom"
+    data_sources:
+      - "local_log"
+      - "local_json"
+      - "local_csv"
+      - "local_xlsx"
+      - "pasted_json"
+    risk_types:
+      - "data_fabrication"
+      - "data_quality_gate_failure"
+      - "report_type_misrouting"
+      - "logic_parse_error"
+      - "delivery_incomplete"
+      - "boundary_violation"
+    path_types:
+      - "happy_path"
+      - "failure_path"
+      - "edge_case"
+      - "redline"
+    fatal_error_types:
+      - "internal_data_access"
+      - "fabricated_metrics"
+      - "report_without_data"
+      - "stop_condition_ignored"
+    refusal_types:
+      - "missing_data"
+      - "file_not_found"
+      - "key_metric_missing"
+      - "malformed_json"
+  mapping: []
