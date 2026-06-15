@@ -1,6 +1,10 @@
 rubrics:
   total_score: 100
   scoring_method: "weighted_dimensions"
+  scoring_rules:
+  - "各维度独立计分。"
+  - "同一维度扣分累计后最低为 0 分，不出现负分。"
+  - "若触发 zero_score_triggers，则该维度直接记 0 分。"
   dimensions:
     - id: "R1"
       name: "输入解析与意图识别"
@@ -15,15 +19,15 @@ rubrics:
         - "能在门控①中清晰展示意图解析结果，包括数据源类型、报告类型、筛选条件和输出格式。"
       partial_deductions:
         - condition: "用户已提供本地文件或可解析粘贴数据，但 Skill 误判为 missing_data。"
-          deduction: 5
-        - condition: "report_type 识别错误，但后续门控①中展示了解析结果，用户仍有机会纠正。"
           deduction: 4
+        - condition: "report_type 识别错误，但后续门控①中展示了解析结果，用户仍有机会纠正。"
+          deduction: 3
         - condition: "未完成中文场景词标准化映射。"
           deduction: 3
         - condition: "AND/OR 逻辑解析错误。"
           deduction: 3
         - condition: "门控①展示不完整或表达模糊。"
-          deduction: 3
+          deduction: 2
       zero_score_triggers:
         - "在没有数据源的情况下仍将任务识别为可直接生成正式报告。"
         - "完全忽略用户指定的报告类型、场景条件或输出格式。"
@@ -45,7 +49,7 @@ rubrics:
       partial_deductions:
         - condition: "未校验文件路径、存在性、非空性或扩展名支持情况。"
           deduction: 4
-        - condition: "仅支持部分输入类型，每缺失一种主要输入类型。"
+        - condition: "未支持 log/json/csv/xlsx/粘贴 JSON 中的一种主要输入类型。"
           deduction: 3
         - condition: "未统一输出为 StandardRecords。"
           deduction: 5

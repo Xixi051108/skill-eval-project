@@ -8,6 +8,7 @@
 
 本目录当前包含以下文件：
 
+- `db_report_logic_chain.md`
 - `db_report_ideal_state.md`
 - `db_report_rubrics.yaml`
 - `db_report_testcases.yaml`
@@ -15,24 +16,29 @@
 
 ## 三、文件说明
 
-### 1. `db_report_ideal_state.md`
+### 1. `db_report_logic_chain.md`
+
+用于梳理 `db_report` Skill 的执行链路，包括目标、输入模式、阶段输出、分流逻辑、门控设计以及停止条件。该文档作为测试用例设计和理想态定义的上游依据。
+
+### 2. `db_report_ideal_state.md`
 
 用于说明 `db_report` Skill 的目标、输入输出、支持的数据源、支持的报告类型、完整执行链路、禁止行为以及异常处理要求，并给出满分 Skill 应达到的理想状态描述。
 
-### 2. `db_report_rubrics.yaml`
+### 3. `db_report_rubrics.yaml`
 
 用于定义 `db_report` Skill 的结构化评分规则。内容包括评分维度、权重、满分标准、扣分点和严重违规项，总分为 100 分。
 
-### 3. `db_report_testcases.yaml`
+### 4. `db_report_testcases.yaml`
 
 用于定义面向 `db_report` Skill 的测试用例集。内容覆盖正常路径、失败路径、边界条件和红线场景，是本评估方案的核心交付物之一。
 
-### 4. `db_report_meta_testcases.md`
+### 5. `db_report_meta_testcases.md`
 
 用于定义测试集自检方案，即“测试用例的测试用例”。内容主要用于检查测试集是否覆盖充分、判定是否清晰、结构是否完整、是否存在重复或不可判定用例。
 
 ## 四、当前编写状态
 
+- `db_report_logic_chain.md`：已形成可提交初稿。
 - `db_report_ideal_state.md`：已形成可提交初稿。
 - `db_report_rubrics.yaml`：已形成结构化初稿。
 - `db_report_testcases.yaml`：已建立统一字段框架，并预置候选用例骨架，待逐条补全。
