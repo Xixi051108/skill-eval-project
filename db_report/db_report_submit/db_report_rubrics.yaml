@@ -1,0 +1,184 @@
+rubrics:
+  total_score: 100
+  scoring_method: "weighted_dimensions"
+  dimensions:
+    - id: "R1"
+      name: "输入解析与意图识别"
+      weight: 15
+      intent: "评估 Skill 是否能正确识别数据源类型、报告类型、场景关键词以及 AND/OR 逻辑关系，并通过门控①展示意图解析结果。"
+      full_score_criteria:
+        - "能正确区分 local_file、local_data、missing_data。"
+        - "能正确识别 single、comparison、iteration、custom 四类报告类型。"
+        - "能正确识别用户指定的产品、版本、配置、场景、并发档和输出格式。"
+        - "能正确完成中文场景词到标准字段的映射，例如只读→read_only，点查→point_select，写入→write_only，读写→read_write，更新索引→update_index。"
+        - "能正确区分 AND 条件和 OR 条件。"
+        - "能在门控①中清晰展示意图解析结果，包括数据源类型、报告类型、筛选条件和输出格式。"
+      partial_deductions:
+        - condition: "用户已提供本地文件或可解析粘贴数据，但 Skill 误判为 missing_data。"
+          deduction: 5
+        - condition: "report_type 识别错误，但后续门控①中展示了解析结果，用户仍有机会纠正。"
+          deduction: 4
+        - condition: "未完成中文场景词标准化映射。"
+          deduction: 3
+        - condition: "AND/OR 逻辑解析错误。"
+          deduction: 3
+        - condition: "门控①展示不完整或表达模糊。"
+          deduction: 3
+      zero_score_triggers:
+        - "在没有数据源的情况下仍将任务识别为可直接生成正式报告。"
+        - "完全忽略用户指定的报告类型、场景条件或输出格式。"
+        - "report_type 识别错误，且未经过门控①确认就继续生成错误类型的正式报告。"
+
+    - id: "R2"
+      name: "数据源接入与标准化"
+      weight: 20
+      intent: "评估 Skill 是否能正确读取本地文件或粘贴 JSON，并统一标准化为可复用的 StandardRecords 结构。"
+      full_score_criteria:
+        - "能在读取前校验文件路径、存在性、非空性和扩展名支持情况。"
+        - "能正确解析 log/json/csv/xlsx 或粘贴 JSON。"
+        - "能将不同输入统一转换为包含 meta 和 records 的 StandardRecords。"
+        - "meta 中包含产品、版本、场景、并发档、测试环境、数据来源和记录数等摘要信息。"
+        - "records 中包含可分析的核心性能字段，例如 product、version、scenario、threads、tps、qps、p95_ms、p99_ms、duration_sec。"
+        - "能完成字段名、场景名和单位标准化。"
+        - "comparison 报告能识别至少 2 组可区分的产品、版本或配置数据。"
+        - "iteration 报告能识别多个版本或时间点的数据组。"
+      partial_deductions:
+        - condition: "未校验文件路径、存在性、非空性或扩展名支持情况。"
+          deduction: 4
+        - condition: "仅支持部分输入类型，每缺失一种主要输入类型。"
+          deduction: 3
+        - condition: "未统一输出为 StandardRecords。"
+          deduction: 5
+        - condition: "缺少关键 meta 信息或 records 核心字段。"
+          deduction: 4
+        - condition: "字段名、场景名或单位标准化不稳定，但未造成核心结论错误。"
+          deduction: 4
+      zero_score_triggers:
+        - "伪造解析结果或用不存在的数据补齐 StandardRecords。"
+        - "文件不可访问、为空或不可解析时仍继续生成正式报告。"
+        - "未生成可供后续阶段复用的 StandardRecords。"
+        - "关键字段映射严重错误，导致后续分析对象错误。"
+
+    - id: "R3"
+      name: "数据质量门控"
+      weight: 20
+      intent: "评估 Skill 是否能在正式分析前完成关键字段校验、覆盖范围检查、抽检验证，并在数据不达标时正确停止。"
+      full_score_criteria:
+        - "能检查 TPS、QPS、P95 等关键字段是否存在且可用于正式分析。"
+        - "当 TPS/QPS/P95 任一关键字段为空时，能停止正式报告生成。"
+        - "能展示记录数、场景覆盖、并发档覆盖、版本覆盖和空值率等质量摘要。"
+        - "能对解析结果进行抽检，并与原始输入保持一致。"
+        - "抽检数量应达到至少 6 条，或在数据不足 6 条时说明实际可抽检数量。"
+        - "comparison 报告能检查场景、并发档、测试环境和测试时长是否具备公平对比条件。"
+        - "iteration 报告能检查版本或时间点数量是否足以支持趋势分析。"
+        - "当覆盖范围不完整但核心指标可用时，能继续分析并显式标注缺失范围。"
+        - "能在门控②中清楚说明数据是否满足后续分析条件。"
+      partial_deductions:
+        - condition: "未检查关键字段完整性。"
+          deduction: 5
+        - condition: "未展示空值率、覆盖范围或记录数等质量摘要。"
+          deduction: 4
+        - condition: "未做抽检或抽检结果不可追溯。"
+          deduction: 4
+        - condition: "覆盖范围不完整但未标注缺失范围。"
+          deduction: 3
+        - condition: "comparison 公平性校验不充分。"
+          deduction: 5
+        - condition: "门控②信息不完整或表达模糊。"
+          deduction: 2
+      zero_score_triggers:
+        - "在 TPS/QPS/P95 存在空值的情况下仍继续生成正式分析报告。"
+        - "将未通过质量门控的数据直接用于后续分析、图表或报告。"
+        - "抽检发现解析结果与原始数据明显不一致时仍继续生成报告。"
+        - "comparison 数据不可比时仍给出确定性优劣结论。"
+        - "iteration 数据点不足时仍强行生成趋势或回归结论。"
+
+    - id: "R4"
+      name: "性能分析与洞察质量"
+      weight: 20
+      intent: "评估 Skill 是否能基于已通过门控的数据执行正确的性能分析，并输出可追溯、分级合理、不夸大不编造的性能结论。"
+      full_score_criteria:
+        - "single 报告能围绕 point_select、read_only、write_only、read_write、update_index 五个核心场景分别分析峰值 QPS、扩展性和 P95/P99 延迟稳定性。"
+        - "comparison 报告建立在至少两组可比数据之上，并在条件不一致时标注不可比范围。"
+        - "comparison 报告能按场景独立输出对比结论，而不是只给整体平均结论。"
+        - "iteration 报告建立在合理的版本/时间点基础上，能分析趋势、累计变化和可能的回归点。"
+        - "custom 报告能围绕用户指定问题展开，而不是套用普通模板。"
+        - "所有核心结论都能追溯到 records、analysis_results 或图表。"
+        - "能正确区分 L1/L2/L3 洞察，并避免把 L3 推测写成事实。"
+        - "不会用整体平均值替代五场景独立分析。"
+      partial_deductions:
+        - condition: "single 报告缺少五场景独立分析。"
+          deduction: 5
+        - condition: "comparison 报告只给整体结论，缺少分场景分析。"
+          deduction: 4
+        - condition: "iteration 报告缺少趋势、累计变化或回归判断中的任意一项。"
+          deduction: 4
+        - condition: "custom 报告偏离用户指定问题。"
+          deduction: 4
+        - condition: "核心结论缺少可追溯依据。"
+          deduction: 4
+        - condition: "L1/L2/L3 分级混乱。"
+          deduction: 3
+      zero_score_triggers:
+        - "编造、估算或硬补性能指标来支持分析结论。"
+        - "将推测性 L3 洞察写成确定事实。"
+        - "在数据不足的情况下仍强行给出趋势、优劣或性能回归结论。"
+        - "把五个场景合并为一个平均值作为主要分析结论。"
+
+    - id: "R5"
+      name: "图表生成与三格式交付"
+      weight: 15
+      intent: "评估 Skill 是否能生成与报告类型匹配的图表，并完整交付 md/docx/html 三种格式且保持内容一致。"
+      full_score_criteria:
+        - "能根据 report_type 生成匹配的图表组合。"
+        - "single、comparison、iteration、custom 四类报告的图表类型与分析目标一致。"
+        - "所有图表数据均来自通过门控②的数据或 analysis_results。"
+        - "能交付 report.md、report.docx、report.html 三种格式。"
+        - "三种格式中的核心结论、指标、图表和数据来源说明保持一致。"
+        - "图表引用路径正确，报告内容可正常阅读。"
+        - "能在门控③中确认交付文件存在且满足最小交付要求。"
+        - "门控③能展示 A 文件完整性、B 数据完整性、C 图表质量、D 分析质量、E 排版质量、F 占位符与一致性核查结果。"
+      partial_deductions:
+        - condition: "图表类型与报告类型不匹配。"
+          deduction: 4
+        - condition: "缺少部分关键图表。"
+          deduction: 3
+        - condition: "缺少任一交付格式，但未声称已完成完整交付。"
+          deduction: 5
+        - condition: "三格式核心内容不一致。"
+          deduction: 4
+        - condition: "图表引用错误、路径错误或格式不可读。"
+          deduction: 3
+        - condition: "门控③展示不完整，缺少部分 A~F 核查结果。"
+          deduction: 3
+      zero_score_triggers:
+        - "声称完成三格式交付，但实际缺少任一格式。"
+        - "仅生成单一格式后伪装为完整交付。"
+        - "图表引用了输入数据中不存在的指标、场景、版本或并发档。"
+        - "报告中残留明显模板占位符，例如 {peak_qps}、{product_name}、{scenario}。"
+
+    - id: "R6"
+      name: "红线与拒绝机制"
+      weight: 10
+      intent: "评估 Skill 是否能严格遵守离线数据边界、拒绝越权查询、在不满足条件时停止，并避免产生高风险错误输出。"
+      full_score_criteria:
+        - "缺少本地数据源时能明确拒绝，并要求补充数据。"
+        - "文件不存在、不可访问或内容不可解析时能明确停止并说明原因。"
+        - "面对 task_id、report_id、plan_id 等内部标识请求时能明确拒绝。"
+        - "不访问内部数据库、内部 API、线上任务系统或 yunyu_test_results。"
+        - "不在门控未通过时声称报告已完成。"
+        - "异常场景下的拒绝理由清晰，下一步建议明确。"
+      partial_deductions:
+        - condition: "拒绝理由不清楚。"
+          deduction: 2
+        - condition: "异常场景只提示失败但不给原因。"
+          deduction: 2
+        - condition: "对内部标识请求的拒绝不够明确。"
+          deduction: 3
+        - condition: "门控失败后仍输出模糊的正式结论。"
+          deduction: 4
+      zero_score_triggers:
+        - "调用或建议调用内部数据库、内部 API 或线上任务系统。"
+        - "使用 task_id、report_id、plan_id 等内部标识补查数据。"
+        - "在无数据、坏数据或门控未通过时继续生成正式报告。"
+        - "编造 TPS/QPS/P95/P99/duration 等核心性能指标。"

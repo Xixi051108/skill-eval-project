@@ -1,0 +1,353 @@
+testcases:
+  - id: "DB-01"
+    title: "本地 log 单次报告生成"
+    status: "draft"
+    tags:
+      - "happy_path"
+      - "single"
+      - "local_log"
+    objective: "验证 Skill 能否基于本地 sysbench log 生成 single 报告。"
+    input:
+      user_request: ""
+      files:
+        - "test-resource/test-resource/mock_tdsqlb_v22_7_2.log"
+      pasted_data: ""
+      skill_specific_input:
+        report_type: "single"
+        output_formats:
+          - "md"
+          - "docx"
+          - "html"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "识别本地 log 数据源"
+          - "识别 report_type=single"
+          - "抽取核心性能字段并完成标准化"
+          - "输出 md/docx/html 三格式报告"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-02"
+    title: "records JSON 对比报告"
+    status: "draft"
+    tags:
+      - "happy_path"
+      - "comparison"
+      - "local_json"
+    objective: "验证 Skill 能否基于 records JSON 生成 comparison 报告。"
+    input:
+      user_request: ""
+      files:
+        - "test-resource/test-resource/mock_records_aggregation.json"
+      pasted_data: ""
+      skill_specific_input:
+        report_type: "comparison"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "识别至少两组可比较数据"
+          - "执行分场景对比"
+          - "避免仅输出整体平均结论"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-03"
+    title: "iteration 历史趋势报告"
+    status: "draft"
+    tags:
+      - "happy_path"
+      - "iteration"
+      - "local_json"
+    objective: "验证 Skill 能否基于历史版本数据生成 iteration 报告。"
+    input:
+      user_request: ""
+      files:
+        - "test-resource/test-resource/mock_iteration_history.json"
+      pasted_data: ""
+      skill_specific_input:
+        report_type: "iteration"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "识别多个版本或时间点"
+          - "输出变化分析"
+          - "在点数足够时输出趋势和可疑回归点"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-04"
+    title: "custom 专项分析报告"
+    status: "draft"
+    tags:
+      - "happy_path"
+      - "custom"
+      - "local_json"
+    objective: "验证 Skill 能否围绕用户指定问题输出 custom 报告。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        report_type: "custom"
+        analysis_question: ""
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "围绕用户指定问题分析"
+          - "不套用普通模板"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-05"
+    title: "缺少数据源时拒绝"
+    status: "draft"
+    tags:
+      - "failure_path"
+      - "missing_data"
+    objective: "验证 Skill 在没有本地文件或粘贴 JSON 时会拒绝生成正式报告。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input: {}
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions:
+        - "缺少本地文件或粘贴 JSON"
+      skill_specific_expectation:
+        draft_focus:
+          - "明确拒绝正式报告生成"
+          - "要求用户补充数据"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-06"
+    title: "文件不存在或路径错误"
+    status: "draft"
+    tags:
+      - "failure_path"
+      - "file_not_found"
+    objective: "验证 Skill 在文件路径错误时会在读取前停止。"
+    input:
+      user_request: ""
+      files:
+        - "test-resource/test-resource/not_exist.log"
+      pasted_data: ""
+      skill_specific_input: {}
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions:
+        - "文件不存在或不可访问"
+      skill_specific_expectation:
+        draft_focus:
+          - "进行路径校验"
+          - "说明错误原因"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-07"
+    title: "关键字段缺失或空值"
+    status: "draft"
+    tags:
+      - "failure_path"
+      - "data_quality_gate_failure"
+    objective: "验证 TPS/QPS/P95 任一关键字段缺失或为空时，Skill 会停止正式报告。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        note: "待补一个关键字段缺失样例数据，或在后续通过 pasted JSON 构造"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions:
+        - "TPS/QPS/P95 任一关键字段为空或缺失"
+      skill_specific_expectation:
+        draft_focus:
+          - "门控②失败"
+          - "停止正式报告生成"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-08"
+    title: "禁止内部 task_id 或 report_id 查询"
+    status: "draft"
+    tags:
+      - "redline"
+      - "boundary_violation"
+    objective: "验证 Skill 会拒绝通过内部标识补查数据。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        forbidden_identifiers:
+          - "task_id"
+          - "report_id"
+          - "plan_id"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions:
+        - "请求使用内部标识查数"
+      skill_specific_expectation:
+        draft_focus:
+          - "明确拒绝"
+          - "说明仅支持本地文件或粘贴 JSON"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors:
+      - "internal_data_access"
+
+  - id: "DB-09"
+    title: "OR 条件解析"
+    status: "draft"
+    tags:
+      - "edge_case"
+      - "logic_parse_or"
+    objective: "验证 Skill 能正确解析 OR 条件。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        condition_type: "or"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "将多个候选场景解析为 OR 关系"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-10"
+    title: "AND 条件解析"
+    status: "draft"
+    tags:
+      - "edge_case"
+      - "logic_parse_and"
+    objective: "验证 Skill 能正确解析 AND 条件。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        condition_type: "and"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "将组合限定词解析为同一组 AND 条件"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-11"
+    title: "md/docx/html 三格式交付一致性"
+    status: "draft"
+    tags:
+      - "edge_case"
+      - "delivery_consistency"
+    objective: "验证三格式报告均生成且核心内容一致。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        output_formats:
+          - "md"
+          - "docx"
+          - "html"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "生成三格式报告"
+          - "核心结论与关键指标一致"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors: []
+
+  - id: "DB-12"
+    title: "L1/L2/L3 洞察位置与措辞检查"
+    status: "draft"
+    tags:
+      - "edge_case"
+      - "insight_governance"
+    objective: "验证洞察分级正确，L3 不被写成确定事实。"
+    input:
+      user_request: ""
+      files: []
+      pasted_data: ""
+      skill_specific_input:
+        insight_levels:
+          - "L1"
+          - "L2"
+          - "L3"
+    expected_output:
+      task_understanding: []
+      required_actions: []
+      required_content: []
+      refusal_conditions: []
+      skill_specific_expectation:
+        draft_focus:
+          - "L1/L2 可作为正文事实或统计发现"
+          - "L3 仅作为建议或假设，并标注 [待确认]"
+    judge:
+      pass_if_all: []
+      fail_if_any: []
+    fatal_errors:
+      - "fabricated_metrics"
+      - "speculative_claim_presented_as_fact"
