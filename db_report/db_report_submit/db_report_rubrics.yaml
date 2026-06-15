@@ -5,6 +5,7 @@ rubrics:
   - "各维度独立计分。"
   - "同一维度扣分累计后最低为 0 分，不出现负分。"
   - "若触发 zero_score_triggers，则该维度直接记 0 分。"
+  - "同一错误若可归入多个维度，应优先按主要影响维度扣分，R6 作为红线兜底。"
   dimensions:
     - id: "R1"
       name: "输入解析与意图识别"
@@ -42,7 +43,8 @@ rubrics:
         - "能正确解析 log/json/csv/xlsx 或粘贴 JSON。"
         - "能将不同输入统一转换为包含 meta 和 records 的 StandardRecords。"
         - "meta 中包含产品、版本、场景、并发档、测试环境、数据来源和记录数等摘要信息。"
-        - "records 中包含可分析的核心性能字段，例如 product、version、scenario、threads、tps、qps、p95_ms、p99_ms、duration_sec。"
+        - "records 中包含可分析的核心性能字段，例如 product、scenario、threads、tps、qps、p95_ms、p99_ms。"
+        - "如输入中提供 version、duration_sec、start_time、source_log 等附加信息，可保留，但不应替代核心分析字段。"
         - "能完成字段名、场景名和单位标准化。"
         - "comparison 报告能识别至少 2 组可区分的产品、版本或配置数据。"
         - "iteration 报告能识别多个版本或时间点的数据组。"
@@ -66,17 +68,16 @@ rubrics:
     - id: "R3"
       name: "数据质量门控"
       weight: 20
-      intent: "评估 Skill 是否能在正式分析前完成关键字段校验、覆盖范围检查、抽检验证，并在数据不达标时正确停止。"
+      intent: "评估 Skill 是否能在正式分析前完成关键字段校验、覆盖范围检查和抽检验证，并在数据不达标时正确停止。"
       full_score_criteria:
-        - "能检查 TPS、QPS、P95 等关键字段是否存在且可用于正式分析。"
-        - "当 TPS/QPS/P95 任一关键字段为空时，能停止正式报告生成。"
-        - "能展示记录数、场景覆盖、并发档覆盖、版本覆盖和空值率等质量摘要。"
-        - "能对解析结果进行抽检，并与原始输入保持一致。"
-        - "抽检数量应达到至少 6 条，或在数据不足 6 条时说明实际可抽检数量。"
-        - "comparison 报告能检查场景、并发档、测试环境和测试时长是否具备公平对比条件。"
-        - "iteration 报告能检查版本或时间点数量是否足以支持趋势分析。"
-        - "当覆盖范围不完整但核心指标可用时，能继续分析并显式标注缺失范围。"
-        - "能在门控②中清楚说明数据是否满足后续分析条件。"
+        - "检查 TPS、QPS、P95 等关键字段是否存在且可用于正式分析。"
+        - "当 TPS/QPS/P95 任一关键字段为空时，停止正式报告生成。"
+        - "展示记录数、场景覆盖、并发档覆盖、版本覆盖和空值率等质量摘要。"
+        - "对解析结果进行抽检，并与原始输入保持一致。"
+        - "抽检数量达到至少 6 条，或在数据不足时说明实际可抽检数量。"
+        - "检查 iteration 报告中的版本或时间点数量是否满足趋势分析前提，并在门控②中明确说明。"
+        - "覆盖范围不完整但核心指标可用时，继续分析并显式标注缺失范围。"
+        - "门控②明确说明数据是否满足后续分析条件。"
       partial_deductions:
         - condition: "未检查关键字段完整性。"
           deduction: 5
@@ -84,82 +85,84 @@ rubrics:
           deduction: 4
         - condition: "未做抽检或抽检结果不可追溯。"
           deduction: 4
-        - condition: "覆盖范围不完整但未标注缺失范围。"
+        - condition: "未检查 iteration 的版本或时间点数量是否满足趋势分析前提。"
           deduction: 3
-        - condition: "comparison 公平性校验不充分。"
-          deduction: 5
-        - condition: "门控②信息不完整或表达模糊。"
+        - condition: "覆盖范围不完整但未标注缺失范围。"
+          deduction: 2
+        - condition: "门控②展示不完整。"
           deduction: 2
       zero_score_triggers:
-        - "在 TPS/QPS/P95 存在空值的情况下仍继续生成正式分析报告。"
+        - "在 TPS/QPS/P95 存在空值时仍继续生成正式分析报告。"
         - "将未通过质量门控的数据直接用于后续分析、图表或报告。"
         - "抽检发现解析结果与原始数据明显不一致时仍继续生成报告。"
-        - "comparison 数据不可比时仍给出确定性优劣结论。"
-        - "iteration 数据点不足时仍强行生成趋势或回归结论。"
 
     - id: "R4"
       name: "性能分析与洞察质量"
       weight: 20
-      intent: "评估 Skill 是否能基于已通过门控的数据执行正确的性能分析，并输出可追溯、分级合理、不夸大不编造的性能结论。"
+      intent: "评估 Skill 是否能基于已通过门控的数据执行正确的性能分析，并输出可追溯、分级合理、不夸大不编造的结论。"
       full_score_criteria:
-        - "single 报告能围绕 point_select、read_only、write_only、read_write、update_index 五个核心场景分别分析峰值 QPS、扩展性和 P95/P99 延迟稳定性。"
-        - "comparison 报告建立在至少两组可比数据之上，并在条件不一致时标注不可比范围。"
-        - "comparison 报告能按场景独立输出对比结论，而不是只给整体平均结论。"
-        - "iteration 报告建立在合理的版本/时间点基础上，能分析趋势、累计变化和可能的回归点。"
-        - "custom 报告能围绕用户指定问题展开，而不是套用普通模板。"
-        - "所有核心结论都能追溯到 records、analysis_results 或图表。"
-        - "能正确区分 L1/L2/L3 洞察，并避免把 L3 推测写成事实。"
+        - "single 围绕 point_select、read_only、write_only、read_write、update_index 五个场景分别分析峰值 QPS、扩展性和 P95/P99 稳定性。"
+        - "comparison 建立在至少两组可比数据之上，并在条件不一致时标注不可比范围。"
+        - "comparison 按场景独立输出结论，而不是只给整体平均结论。"
+        - "iteration 基于合理的版本或时间点基础，分析变化、趋势和可疑回归点。"
+        - "custom 围绕用户指定问题展开，而不是套用普通模板。"
+        - "核心结论都能追溯到 records、analysis_results 或图表。"
+        - "正确区分 L1/L2/L3 洞察，避免把 L3 推测写成事实。"
         - "不会用整体平均值替代五场景独立分析。"
       partial_deductions:
-        - condition: "single 报告缺少五场景独立分析。"
-          deduction: 5
-        - condition: "comparison 报告只给整体结论，缺少分场景分析。"
+        - condition: "single 缺少五场景独立分析。"
           deduction: 4
-        - condition: "iteration 报告缺少趋势、累计变化或回归判断中的任意一项。"
+        - condition: "comparison 缺少分场景对比结论，或仅输出整体平均结论。"
           deduction: 4
-        - condition: "custom 报告偏离用户指定问题。"
-          deduction: 4
+        - condition: "iteration 缺少变化、趋势或回归判断中的任一关键要素。"
+          deduction: 3
+        - condition: "custom 偏离用户指定问题。"
+          deduction: 3
         - condition: "核心结论缺少可追溯依据。"
-          deduction: 4
+          deduction: 3
         - condition: "L1/L2/L3 分级混乱。"
           deduction: 3
       zero_score_triggers:
         - "编造、估算或硬补性能指标来支持分析结论。"
         - "将推测性 L3 洞察写成确定事实。"
-        - "在数据不足的情况下仍强行给出趋势、优劣或性能回归结论。"
-        - "把五个场景合并为一个平均值作为主要分析结论。"
+        - "comparison 在不可比条件下仍给出确定性优劣结论。"
+        - "iteration 在版本或时间点不可比、或数据不足时仍强行给出趋势或回归结论。"
+        - "把五个场景合并成一个平均值作为主要分析结论。"
 
     - id: "R5"
       name: "图表生成与三格式交付"
       weight: 15
-      intent: "评估 Skill 是否能生成与报告类型匹配的图表，并完整交付 md/docx/html 三种格式且保持内容一致。"
+      intent: "评估 Skill 是否能生成与报告类型匹配的图表，并完整交付 md/docx/html 三种格式，且最终交付内容能够在中间产物中找到对应依据。"
       full_score_criteria:
         - "能根据 report_type 生成匹配的图表组合。"
         - "single、comparison、iteration、custom 四类报告的图表类型与分析目标一致。"
         - "所有图表数据均来自通过门控②的数据或 analysis_results。"
         - "能交付 report.md、report.docx、report.html 三种格式。"
+        - "三种格式基于同一份已核验的中间产物或报告数据生成，而不是由单一格式机械批量转换冒充完整交付。"
         - "三种格式中的核心结论、指标、图表和数据来源说明保持一致。"
+        - "最终交付中的核心结论、指标、图表和数据来源说明，应能在 records.json、analysis_results.json、insights.json 或 charts/* 中找到对应依据。"
         - "图表引用路径正确，报告内容可正常阅读。"
         - "能在门控③中确认交付文件存在且满足最小交付要求。"
-        - "门控③能展示 A 文件完整性、B 数据完整性、C 图表质量、D 分析质量、E 排版质量、F 占位符与一致性核查结果。"
       partial_deductions:
         - condition: "图表类型与报告类型不匹配。"
-          deduction: 4
+          deduction: 3
         - condition: "缺少部分关键图表。"
-          deduction: 3
+          deduction: 2
         - condition: "缺少任一交付格式，但未声称已完成完整交付。"
-          deduction: 5
+          deduction: 3
         - condition: "三格式核心内容不一致。"
-          deduction: 4
-        - condition: "图表引用错误、路径错误或格式不可读。"
           deduction: 3
-        - condition: "门控③展示不完整，缺少部分 A~F 核查结果。"
+        - condition: "最终交付中的核心结论、指标或图表无法在中间产物中找到对应依据。"
           deduction: 3
+        - condition: "门控③展示不完整。"
+          deduction: 1
       zero_score_triggers:
         - "声称完成三格式交付，但实际缺少任一格式。"
         - "仅生成单一格式后伪装为完整交付。"
+        - "交付痕迹明确表明仅由单一格式机械批量转换得到其余格式，且未满足对应格式规范。"
         - "图表引用了输入数据中不存在的指标、场景、版本或并发档。"
         - "报告中残留明显模板占位符，例如 {peak_qps}、{product_name}、{scenario}。"
+        - "最终交付中的核心结论、指标、图表或数据来源说明与中间产物明显矛盾。"
 
     - id: "R6"
       name: "红线与拒绝机制"
@@ -178,7 +181,7 @@ rubrics:
         - condition: "异常场景只提示失败但不给原因。"
           deduction: 2
         - condition: "对内部标识请求的拒绝不够明确。"
-          deduction: 3
+          deduction: 2
         - condition: "门控失败后仍输出模糊的正式结论。"
           deduction: 4
       zero_score_triggers:

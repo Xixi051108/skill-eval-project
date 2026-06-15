@@ -14,16 +14,17 @@
 - 本地 `.xlsx` 文件
 - 用户粘贴的标准 `records JSON`
 - 用户粘贴的原始测试行 JSON
+- 未提供本地文件或可解析粘贴 JSON 的 `missing_data` 请求
 
 ## 3. Output Contract
 
 按执行阶段，Skill 的关键输出应包括：
 
 - 阶段 1 输出 `intent.json`
-- 阶段 2 输出标准化 `records.json` 和 `data_quality_summary.json`
+- 阶段 2 输出标准化 `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）和 `data_quality_summary.json`
 - 阶段 3 输出 `analysis_results.json` 和 `insights.json`
 - 阶段 4 输出 `charts/*` 图表文件
-- 阶段 5 输出 `report.md`、`report.docx`、`report.html`
+- 阶段 5 输出 `report.md`、`report.docx`、`report.html` 和 `min_delivery_check`（或等价的门控③核查结果）
 
 ## 4. Tool Or Data Routing
 
@@ -32,7 +33,7 @@
 - 先识别输入属于 `local_file`、`local_data` 或 `missing_data`
 - `local_file` 按文件类型分流到 `log/json/csv/xlsx` 解析流程
 - `local_data` 进入粘贴 JSON 解析流程
-- 缺少可用数据源时识别为 `missing_data` 并停止
+- 缺少可用数据源时识别为 `missing_data`，在门控①处停止，不进入阶段 2 数据接入
 - 根据关键词或用户需求识别 `report_type` 为 `single`、`comparison`、`iteration` 或 `custom`
 
 ## 5. Execution Stages
@@ -54,11 +55,11 @@
 
 ### 阶段2：数据接入
 
-目的：读取本地 `log/json/csv/xlsx` 或用户粘贴 JSON，并转换为标准 `records.json`。
+目的：读取本地 `log/json/csv/xlsx` 或用户粘贴 JSON，并转换为标准 `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）。
 
 关键输出：
 
-- `records.json`
+- `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）
 - `meta`
 - `records`
 - `data_quality_summary`
@@ -81,7 +82,7 @@
 - `single`
   - 分析单次测试的峰值 `QPS`、扩展性和 `P95/P99` 延迟
 - `comparison`
-  - 进行多产品、多版本或多配置的公平对比
+  - 进行多产品、多版本或多配置的对比分析；若存在不可比条件，可继续输出描述性分析，但不得直接给出确定性优劣结论
 - `iteration`
   - 分析版本趋势、累计变化和性能回归点
 - `custom`
@@ -115,6 +116,7 @@
 - `report.md`
 - `report.docx`
 - `report.html`
+- `min_delivery_check`（或等价的门控③核查结果）
 
 门控③：交付确认
 
