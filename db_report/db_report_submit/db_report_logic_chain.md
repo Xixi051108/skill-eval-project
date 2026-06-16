@@ -24,7 +24,7 @@
 - 阶段 2 输出标准化 `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）和 `data_quality_summary.json`
 - 阶段 3 输出 `analysis_results.json` 和 `insights.json`
 - 阶段 4 输出 `charts/*` 图表文件
-- 阶段 5 输出 `report.md`、`report.docx`、`report.html` 和 `min_delivery_check`（或等价的门控③核查结果）
+- 阶段 5 输出 `report.md`、`report.docx`、`report.html` 和最小交付检查结果（或等价的门控③核查结果）
 
 ## 4. Tool Or Data Routing
 
@@ -116,7 +116,7 @@
 - `report.md`
 - `report.docx`
 - `report.html`
-- `min_delivery_check`（或等价的门控③核查结果）
+- 最小交付检查结果（或等价的门控③核查结果）
 
 门控③：交付确认
 

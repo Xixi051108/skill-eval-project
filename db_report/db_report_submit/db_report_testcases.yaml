@@ -1,353 +1,2046 @@
 testcases:
   - id: "DB-01"
-    title: "本地 log 单次报告生成"
-    status: "draft"
+    title: "本地 log 单次性能报告端到端生成"
+    priority: "P0"
     tags:
       - "happy_path"
-      - "single"
       - "local_log"
-    objective: "验证 Skill 能否基于本地 sysbench log 生成 single 报告。"
+      - "single_report"
+      - "end_to_end"
+      - "three_format_delivery"
+    objective: "验证 Skill 在用户提供存在的本地 sysbench log 文件时，能够正确识别 single 报告类型，完成数据接入、标准化、质量检查、性能分析、图表生成和 md/docx/html 三格式报告交付，并保证核心性能指标可追溯到原始 log。"
     input:
-      user_request: ""
+      user_request: "请基于 test-resource/mock_tdsqlb_v22_7_2.log 生成一份数据库性能测试报告，报告类型按 single 单次测试报告处理，并输出 report.md、report.docx、report.html 三种格式。"
       files:
-        - "test-resource/test-resource/mock_tdsqlb_v22_7_2.log"
+        - "test-resource/mock_tdsqlb_v22_7_2.log"
       pasted_data: ""
       skill_specific_input:
-        report_type: "single"
-        output_formats:
+        expected_input_mode: "local_file"
+        expected_file_type: "log"
+        expected_report_type: "single"
+        expected_product_family:
+          - "TDSQL-B"
+        expected_version:
+          - "v22.7.2"
+        expected_scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        expected_concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        expected_record_count: 30
+        expected_chart_min_count: 11
+        expected_output_formats:
           - "md"
           - "docx"
           - "html"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供了本地 log 文件 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "识别输入模式为 local_file。"
+        - "识别文件类型为 log。"
+        - "识别报告类型为 single。"
+        - "识别用户要求输出 report.md、report.docx、report.html 三种格式。"
+      required_actions:
+        - "读取 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "解析 sysbench log 中的产品、场景、并发、TPS、QPS、P95、P99、duration 等信息。"
+        - "生成 intent.json。"
+        - "生成 extracted_data.json，且 records 数量为 30。"
+        - "生成 data_quality_summary.json，且 TPS/QPS/P95 空值率为 0%。"
+        - "生成 analysis_results.json，包含 single 产品分析结果。"
+        - "生成 insights.json，且每条 insight 包含 level 和 source。"
+        - "生成 single 报告所需图表。"
+        - "生成 report.md、report.docx、report.html 三格式报告。"
+        - "生成最小交付检查结果（或等价的门控③最小交付核查结果）。"
+      required_content:
+        - "报告中必须明确体现产品 TDSQL-B 和版本 v22.7.2。"
+        - "报告中必须覆盖 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "报告中必须覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "报告中必须包含 TPS、QPS、P95、P99 核心性能指标。"
+        - "报告中必须包含 5 场景峰值 QPS 汇总。"
+        - "报告中必须包含每个场景的并发-QPS 曲线和并发-P95 曲线。"
+        - "报告中必须说明数据来源为 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "报告中不得包含未替换的模板占位符。"
       skill_specific_expectation:
-        draft_focus:
-          - "识别本地 log 数据源"
-          - "识别 report_type=single"
-          - "抽取核心性能字段并完成标准化"
-          - "输出 md/docx/html 三格式报告"
+        stop_stage: "completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "最小交付检查结果（或等价的门控③核查结果）"
+          - "charts/single_peak_summary.png"
+          - "charts/single_qps_oltp_point_select.png"
+          - "charts/single_p95_oltp_point_select.png"
+          - "charts/single_qps_oltp_read_only.png"
+          - "charts/single_p95_oltp_read_only.png"
+          - "charts/single_qps_oltp_read_write.png"
+          - "charts/single_p95_oltp_read_write.png"
+          - "charts/single_qps_oltp_write_only.png"
+          - "charts/single_p95_oltp_write_only.png"
+          - "charts/single_qps_oltp_update_index.png"
+          - "charts/single_p95_oltp_update_index.png"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        forbidden_outputs:
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+          - "根据 task_id/report_id/plan_id 生成的 records"
+      data_expectation:
+        source_info:
+          type: "local_file"
+          value: "test-resource/mock_tdsqlb_v22_7_2.log"
+        record_count: 30
+        product_family:
+          - "TDSQL-B"
+        versions:
+          - "v22.7.2"
+        scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        required_non_null_fields:
+          - "tps"
+          - "qps"
+          - "p95_ms"
+          - "p99_ms"
+        traceable_metric_examples:
+          - metric: "oltp_point_select peak_qps"
+            expected_value: 78230.60
+            expected_threads: 512
+          - metric: "oltp_read_only peak_qps"
+            expected_value: 47322.80
+            expected_threads: 512
+          - metric: "oltp_update_index peak_qps"
+            expected_value: 13250.40
+            expected_threads: 512
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "生成 data/intent.json，且 report_type 为 single。"
+        - "生成 data/extracted_data.json，且 source_info.type 为 local_file。"
+        - "data/extracted_data.json 中 source_info.value 指向 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "data/extracted_data.json 中 records 数量为 30。"
+        - "data/extracted_data.json 中能识别出产品家族 TDSQL-B 和版本 v22.7.2，允许使用等价的标准化表达。"
+        - "data/extracted_data.json 中包含 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "data/extracted_data.json 中包含 32、64、128、256、512、1000 六个并发档。"
+        - "data_quality_summary.json 或等价数据质量摘要明确显示 TPS/QPS/P95 空值率为 0%。"
+        - "生成 data/analysis_results.json，且包含 single 产品分析结果。"
+        - "analysis_results.json 中 oltp_point_select 的峰值 QPS 为 78230.60，峰值并发为 512。"
+        - "analysis_results.json 中 oltp_read_only 的峰值 QPS 为 47322.80，峰值并发为 512。"
+        - "生成 data/insights.json，且每条 insight 包含 level 和 source。"
+        - "charts/ 下至少生成 11 张 single 报告图表。"
+        - "charts/ 下生成 single_peak_summary.png。"
+        - "charts/ 下为 5 个场景分别生成 single_qps_*.png 和 single_p95_*.png。"
+        - "生成 report.md、report.docx、report.html。"
+        - "report.md、report.docx、report.html 三种格式中均明确体现产品 TDSQL-B 和版本 v22.7.2。"
+        - "report.md、report.docx、report.html 三种格式中的核心 TPS/QPS/P95/P99 数值一致。"
+        - "生成最小交付检查结果（或等价的门控③核查结果），且明确确认三格式文件存在、图表引用正常、核心内容满足最小交付要求。"
+        - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
+        - "report.md 和 report.html 中不存在形如 {xxx} 的模板占位符残留。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "未生成 report.md、report.docx、report.html 中任意一种格式。"
+        - "未生成 data/intent.json、data/extracted_data.json、data/analysis_results.json 或 data/insights.json。"
+        - "data/extracted_data.json 中 records 数量不是 30。"
+        - "data/extracted_data.json 缺少 TPS、QPS、P95、P99 任一核心指标字段。"
+        - "data_quality_summary.json 或等价数据质量摘要显示 TPS/QPS/P95 任一空值率大于 0%。"
+        - "将 single 报告误判为 comparison、iteration 或 custom。"
+        - "将 5 个 sysbench 场景合并成一个平均值进行分析。"
+        - "未按场景分别生成并发-QPS 曲线和并发-P95 曲线。"
+        - "charts/ 下 single 报告图表数量少于 11 张。"
+        - "报告中的核心性能指标无法从 test-resource/mock_tdsqlb_v22_7_2.log 追溯。"
+        - "report.md、report.docx、report.html 三格式中的核心 TPS/QPS/P95/P99 数值不一致。"
+        - "report.md 或 report.html 中出现未替换的模板占位符。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+        - "未生成最小交付检查结果（或等价的门控③核查结果）。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "门控②-数据质量确认"
+        - "阶段3-single性能分析"
+        - "阶段4-图表生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "wrong_report_type"
+      - "local_log_not_parsed"
+      - "missing_intermediate_artifacts"
+      - "incorrect_record_count"
+      - "missing_required_metric"
+      - "fabricated_performance_metrics"
+      - "scenario_aggregation_error"
+      - "insufficient_charts"
+      - "missing_three_format_delivery"
+      - "three_format_metric_inconsistency"
+      - "untraceable_core_metrics"
+      - "template_placeholder_leftover"
+      - "internal_data_access"
+
 
   - id: "DB-02"
-    title: "records JSON 对比报告"
-    status: "draft"
+    title: "records JSON 多产品对比报告端到端生成"
+    priority: "P0"
     tags:
       - "happy_path"
-      - "comparison"
       - "local_json"
-    objective: "验证 Skill 能否基于 records JSON 生成 comparison 报告。"
+      - "records_json"
+      - "comparison_report"
+      - "end_to_end"
+      - "fairness_check"
+      - "three_format_delivery"
+    objective: "验证 Skill 在用户提供题目 test-resource 中的标准 records JSON 文件时，能够正确识别 comparison 报告类型，基于相同场景、相同并发档和相同测试口径完成多产品横向对比，生成分析结果、洞察、对比图表以及 report.md、report.docx、report.html 三格式报告。"
     input:
-      user_request: ""
+      user_request: "请基于 test-resource/mock_records_aggregation.json 生成一份数据库性能对比报告，对比 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品在 sysbench 五个 OLTP 场景下的表现，并输出 report.md、report.docx、report.html 三种格式。"
       files:
-        - "test-resource/test-resource/mock_records_aggregation.json"
+        - "test-resource/mock_records_aggregation.json"
       pasted_data: ""
       skill_specific_input:
-        report_type: "comparison"
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "comparison"
+        expected_products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        expected_product_count: 3
+        expected_scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        expected_scenario_count: 5
+        expected_concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        expected_concurrency_count: 6
+        expected_record_count: 90
+        expected_chart_min_count: 20
+        expected_output_formats:
+          - "md"
+          - "docx"
+          - "html"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_records_aggregation.json。"
+        - "识别输入文件是标准 records JSON。"
+        - "识别输入模式为 local_file。"
+        - "识别报告类型为 comparison。"
+        - "识别对比对象为 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2。"
+        - "识别用户要求输出 report.md、report.docx、report.html 三种格式。"
+      required_actions:
+        - "读取 test-resource/mock_records_aggregation.json。"
+        - "解析 meta.products、meta.scenarios、meta.concurrencies、meta.source_info 和 records。"
+        - "生成 data/intent.json，且 report_type 为 comparison。"
+        - "生成 data/extracted_data.json，且 records 数量为 90。"
+        - "生成 data/data_quality_summary.json，且 TPS/QPS/P95 空值率为 0%。"
+        - "执行公平性核查，检查三个产品是否覆盖相同场景、相同并发档、相同测试时长和相同数据集口径。"
+        - "生成 data/analysis_results.json，且包含 product_compare 对比分析结果。"
+        - "生成 data/insights.json，且 comparison 相关 insight 包含 level 和 source。"
+        - "按五个场景分别生成峰值 QPS 对比、并发-QPS 对比、并发-P95 对比图表。"
+        - "生成综合评分雷达图和综合排名图。"
+        - "生成 report.md、report.docx、report.html 三格式报告。"
+      required_content:
+        - "报告中必须出现 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "报告中必须覆盖 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "报告中必须覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "报告中必须包含 TPS、QPS、P95、P99 核心性能指标。"
+        - "报告中必须按相同 scenario 和相同 threads 进行横向比较。"
+        - "报告中必须包含公平性说明，说明对比是否满足相同场景、相同并发档、相同数据集和相同测试时长。"
+        - "报告中必须包含每个场景的峰值 QPS 对比结论。"
+        - "报告中必须说明数据来源为 test-resource/mock_records_aggregation.json。"
+        - "报告中不得包含未替换的模板占位符。"
       skill_specific_expectation:
-        draft_focus:
-          - "识别至少两组可比较数据"
-          - "执行分场景对比"
-          - "避免仅输出整体平均结论"
+        stop_stage: "completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        forbidden_outputs:
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+          - "根据 task_id/report_id/plan_id 补查得到的 records"
+      data_expectation:
+        source_info:
+          type: "local_file"
+          value: "test-resource/mock_records_aggregation.json"
+          rows_fetched: 90
+        record_count: 90
+        products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        required_non_null_fields:
+          - "tps"
+          - "qps"
+          - "p95_ms"
+          - "p99_ms"
+        traceable_metric_examples:
+          - product: "TDSQL-B v22.7.3"
+            scenario: "oltp_point_select"
+            threads: 512
+            metric: "qps"
+            expected_value: 89928.71
+          - product: "MySQL 8.0.32"
+            scenario: "oltp_point_select"
+            threads: 512
+            metric: "qps"
+            expected_value: 71646.19
+          - product: "OceanBase 4.2"
+            scenario: "oltp_point_select"
+            threads: 512
+            metric: "qps"
+            expected_value: 79641.75
+          - product: "TDSQL-B v22.7.3"
+            scenario: "oltp_read_only"
+            threads: 512
+            metric: "qps"
+            expected_value: 52086.84
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "生成 data/intent.json，且 report_type 为 comparison。"
+        - "生成 data/extracted_data.json，且 source_info.type 为 local_file。"
+        - "data/extracted_data.json 中 source_info.value 指向 test-resource/mock_records_aggregation.json。"
+        - "data/extracted_data.json 中 records 数量为 90。"
+        - "data/extracted_data.json 中包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "data/extracted_data.json 中包含 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "data/extracted_data.json 中每个产品在每个场景下均覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "data_quality_summary.json 或等价数据质量摘要明确显示 TPS/QPS/P95 空值率为 0%。"
+        - "生成 data/analysis_results.json，且 report_type 为 comparison。"
+        - "analysis_results.json 中包含 product_compare 字段。"
+        - "analysis_results.json 中 product_compare 至少包含 peak_qps、concurrent_scale、p95_latency、overall_score 中的三个分析维度。"
+        - "analysis_results.json 或报告正文中包含公平性核查结果。"
+        - "公平性核查未把不同 scenario 的数据直接混合比较。"
+        - "公平性核查未把不同 threads 的数据直接混合比较。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.7.3 在 oltp_point_select、threads=512 时 qps=89928.71。"
+        - "analysis_results.json 或报告正文中能追溯 MySQL 8.0.32 在 oltp_point_select、threads=512 时 qps=71646.19。"
+        - "analysis_results.json 或报告正文中能追溯 OceanBase 4.2 在 oltp_point_select、threads=512 时 qps=79641.75。"
+        - "生成 data/insights.json，且 comparison 相关 insight 每条包含 level 和 source。"
+        - "charts/ 下至少生成 20 张 comparison 报告图表。"
+        - "charts/ 中包含五个场景的峰值 QPS 对比图。"
+        - "charts/ 中包含五个场景的并发-QPS 对比图。"
+        - "charts/ 中包含五个场景的并发-P95 对比图。"
+        - "charts/ 中包含综合评分雷达图或综合排名图。"
+        - "生成 report.md、report.docx、report.html。"
+        - "report.md、report.docx、report.html 三种格式中均出现 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2。"
+        - "report.md、report.docx、report.html 三种格式中的核心 TPS/QPS/P95/P99 数值一致。"
+        - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
+        - "report.md 和 report.html 中不存在形如 {xxx} 的模板占位符残留。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+        - "未根据 task_id、report_id 或 plan_id 补查或伪造数据。"
+      fail_if_any:
+        - "未生成 report.md、report.docx、report.html 中任意一种格式。"
+        - "未生成 data/intent.json、data/extracted_data.json、data/analysis_results.json 或 data/insights.json。"
+        - "将 comparison 报告误判为 single、iteration 或 custom。"
+        - "data/extracted_data.json 中 records 数量不是 90。"
+        - "data/extracted_data.json 缺少 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 任一产品。"
+        - "data/extracted_data.json 缺少 TPS、QPS、P95、P99 任一核心指标字段。"
+        - "data_quality_summary.json 或等价数据质量摘要显示 TPS/QPS/P95 任一空值率大于 0%。"
+        - "只分析单个产品，未形成多产品 comparison 对比。"
+        - "只输出总体平均值，未按五个场景分别对比。"
+        - "把不同场景的数据混合后直接比较。"
+        - "把不同并发档的数据混合后直接比较。"
+        - "忽略公平性核查，未说明相同场景、相同并发档、相同测试时长或相同数据集口径。"
+        - "未生成 product_compare 分析结果。"
+        - "未生成 comparison 对比图表。"
+        - "charts/ 下 comparison 报告图表数量少于 20 张。"
+        - "report.md、report.docx、report.html 三格式中的核心 TPS/QPS/P95/P99 数值不一致。"
+        - "报告中的核心性能指标无法从 test-resource/mock_records_aggregation.json 追溯。"
+        - "report.md 或 report.html 中出现未替换的模板占位符。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "门控②-数据质量确认"
+        - "阶段3-comparison性能分析"
+        - "阶段3-公平性核查"
+        - "阶段4-图表生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "wrong_report_type"
+      - "records_json_not_parsed"
+      - "missing_intermediate_artifacts"
+      - "incorrect_record_count"
+      - "missing_required_metric"
+      - "fabricated_performance_metrics"
+      - "missing_product_compare"
+      - "fairness_check_missing"
+      - "cross_scenario_comparison_error"
+      - "cross_concurrency_comparison_error"
+      - "insufficient_charts"
+      - "missing_three_format_delivery"
+      - "three_format_metric_inconsistency"
+      - "untraceable_core_metrics"
+      - "template_placeholder_leftover"
+      - "internal_data_access"
+
+
+
 
   - id: "DB-03"
-    title: "iteration 历史趋势报告"
-    status: "draft"
+    title: "iteration 历史趋势报告端到端生成"
+    priority: "P0"
     tags:
       - "happy_path"
-      - "iteration"
       - "local_json"
-    objective: "验证 Skill 能否基于历史版本数据生成 iteration 报告。"
+      - "iteration_report"
+      - "trend_analysis"
+      - "regression_detection"
+      - "end_to_end"
+      - "three_format_delivery"
+    objective: "验证 Skill 在用户提供题目 test-resource 中的历史迭代 records JSON 文件时，能够正确识别 iteration 报告类型，基于相同场景、相同并发档和相同测试口径分析多个版本的性能趋势，识别性能提升与回退点，并生成趋势分析结果、洞察、图表以及 report.md、report.docx、report.html 三格式报告。"
     input:
-      user_request: ""
+      user_request: "请基于 test-resource/mock_iteration_history.json 生成一份 TDSQL-B 历史迭代性能趋势报告，分析 v22.6、v22.7、v22.8、v22.9 四个版本在五个 OLTP 场景下的性能变化，并输出 report.md、report.docx、report.html 三种格式。"
       files:
-        - "test-resource/test-resource/mock_iteration_history.json"
+        - "test-resource/mock_iteration_history.json"
       pasted_data: ""
       skill_specific_input:
-        report_type: "iteration"
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "iteration"
+        expected_products:
+          - "TDSQL-B v22.6"
+          - "TDSQL-B v22.7"
+          - "TDSQL-B v22.8"
+          - "TDSQL-B v22.9"
+        expected_version_count: 4
+        expected_scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        expected_scenario_count: 5
+        expected_concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        expected_concurrency_count: 6
+        expected_record_count: 120
+        expected_chart_min_count: 12
+        expected_output_formats:
+          - "md"
+          - "docx"
+          - "html"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能历史迭代趋势报告生成请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_iteration_history.json。"
+        - "识别输入文件是历史迭代 records JSON。"
+        - "识别输入模式为 local_file。"
+        - "识别报告类型为 iteration。"
+        - "识别历史版本为 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9。"
+        - "识别用户要求输出 report.md、report.docx、report.html 三种格式。"
+      required_actions:
+        - "读取 test-resource/mock_iteration_history.json。"
+        - "解析 meta.products、meta.scenarios、meta.concurrencies、meta.log_meta、meta.source_info 和 records。"
+        - "生成 data/intent.json，且 report_type 为 iteration。"
+        - "生成 data/extracted_data.json，且 records 数量为 120。"
+        - "生成 data/data_quality_summary.json，且 TPS/QPS/P95 空值率为 0%。"
+        - "检查四个版本是否覆盖相同场景、相同并发档、相同测试时长和相同数据集口径。"
+        - "生成 data/analysis_results.json，且包含 iteration 趋势分析结果。"
+        - "按场景分析 v22.6 到 v22.9 的峰值 QPS 趋势。"
+        - "识别 v22.8 到 v22.9 之间的性能回退场景。"
+        - "生成 data/insights.json，且 iteration 相关 insight 包含 level 和 source。"
+        - "生成历史趋势图、版本对比图和回归点标记图。"
+        - "生成 report.md、report.docx、report.html 三格式报告。"
+      required_content:
+        - "报告中必须出现 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9 四个版本。"
+        - "报告中必须覆盖 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "报告中必须覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "报告中必须包含 TPS、QPS、P95、P99 核心性能指标。"
+        - "报告中必须按相同 scenario 和相同 threads 比较不同版本，不得跨场景或跨并发档直接比较。"
+        - "报告中必须包含四个版本的峰值 QPS 趋势分析。"
+        - "报告中必须指出 oltp_read_only 在 v22.8 到 v22.9 之间出现峰值 QPS 回退。"
+        - "报告中必须指出 oltp_read_write 在 v22.8 到 v22.9 之间出现峰值 QPS 回退。"
+        - "报告中必须说明数据来源为 test-resource/mock_iteration_history.json。"
+        - "报告中不得包含未替换的模板占位符。"
       skill_specific_expectation:
-        draft_focus:
-          - "识别多个版本或时间点"
-          - "输出变化分析"
-          - "在点数足够时输出趋势和可疑回归点"
+        stop_stage: "completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        forbidden_outputs:
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+          - "根据 task_id/report_id/plan_id 补查得到的 records"
+      data_expectation:
+        source_info:
+          type: "local_file"
+          value: "test-resource/mock_iteration_history.json"
+          rows_fetched: 120
+        record_count: 120
+        versions:
+          - "TDSQL-B v22.6"
+          - "TDSQL-B v22.7"
+          - "TDSQL-B v22.8"
+          - "TDSQL-B v22.9"
+        scenarios:
+          - "oltp_point_select"
+          - "oltp_read_only"
+          - "oltp_read_write"
+          - "oltp_write_only"
+          - "oltp_update_index"
+        concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        required_non_null_fields:
+          - "tps"
+          - "qps"
+          - "p95_ms"
+          - "p99_ms"
+        traceable_metric_examples:
+          - product: "TDSQL-B v22.6"
+            scenario: "oltp_point_select"
+            threads: 512
+            metric: "qps"
+            expected_value: 79274.90
+          - product: "TDSQL-B v22.9"
+            scenario: "oltp_point_select"
+            threads: 512
+            metric: "qps"
+            expected_value: 87702.72
+          - product: "TDSQL-B v22.8"
+            scenario: "oltp_read_only"
+            threads: 512
+            metric: "qps"
+            expected_value: 51672.30
+          - product: "TDSQL-B v22.9"
+            scenario: "oltp_read_only"
+            threads: 512
+            metric: "qps"
+            expected_value: 40809.21
+          - product: "TDSQL-B v22.8"
+            scenario: "oltp_read_write"
+            threads: 512
+            metric: "qps"
+            expected_value: 44114.88
+          - product: "TDSQL-B v22.9"
+            scenario: "oltp_read_write"
+            threads: 512
+            metric: "qps"
+            expected_value: 41135.99
+        expected_trend_checks:
+          - scenario: "oltp_point_select"
+            comparison: "v22.6_to_v22.9_peak_qps"
+            expected_direction: "increase"
+            expected_change_percent_approx: 10.63
+          - scenario: "oltp_read_only"
+            comparison: "v22.8_to_v22.9_peak_qps"
+            expected_direction: "decrease"
+            expected_change_percent_approx: -21.02
+          - scenario: "oltp_read_write"
+            comparison: "v22.8_to_v22.9_peak_qps"
+            expected_direction: "decrease"
+            expected_change_percent_approx: -6.75
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "生成 data/intent.json，且 report_type 为 iteration。"
+        - "生成 data/extracted_data.json，且 source_info.type 为 local_file。"
+        - "data/extracted_data.json 中 source_info.value 指向 test-resource/mock_iteration_history.json。"
+        - "data/extracted_data.json 中 records 数量为 120。"
+        - "data/extracted_data.json 中包含 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9 四个版本。"
+        - "data/extracted_data.json 中包含 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
+        - "data/extracted_data.json 中每个版本在每个场景下均覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "data_quality_summary.json 或等价数据质量摘要明确显示 TPS/QPS/P95 空值率为 0%。"
+        - "生成 data/analysis_results.json，且 report_type 为 iteration。"
+        - "analysis_results.json 中包含 iteration_trend 或等价历史趋势分析字段。"
+        - "analysis_results.json 或报告正文中包含版本级趋势分析，而不是仅做单版本分析。"
+        - "analysis_results.json 或报告正文中按相同 scenario 和相同 threads 对比不同版本。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.6 在 oltp_point_select、threads=512 时 qps=79274.90。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.9 在 oltp_point_select、threads=512 时 qps=87702.72。"
+        - "analysis_results.json 或报告正文中指出 oltp_point_select 从 v22.6 到 v22.9 峰值 QPS 提升。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.8 在 oltp_read_only、threads=512 时 qps=51672.30。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.9 在 oltp_read_only、threads=512 时 qps=40809.21。"
+        - "analysis_results.json 或报告正文中指出 oltp_read_only 从 v22.8 到 v22.9 峰值 QPS 回退。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.8 在 oltp_read_write、threads=512 时 qps=44114.88。"
+        - "analysis_results.json 或报告正文中能追溯 TDSQL-B v22.9 在 oltp_read_write、threads=512 时 qps=41135.99。"
+        - "analysis_results.json 或报告正文中指出 oltp_read_write 从 v22.8 到 v22.9 峰值 QPS 回退。"
+        - "生成 data/insights.json，且 iteration 相关 insight 每条包含 level 和 source。"
+        - "charts/ 下至少生成 12 张 iteration 趋势图表。"
+        - "charts/ 中包含五个场景的版本-峰值 QPS 趋势图。"
+        - "charts/ 中包含五个场景的版本-P95 趋势图。"
+        - "charts/ 中包含性能回退或趋势汇总图。"
+        - "生成 report.md、report.docx、report.html。"
+        - "存在最小交付检查结果或等价的门控③核查结果，且能够证明三格式文件存在、图表可引用、核心内容满足最小交付要求。"
+        - "analysis_results.json、data/intent.json 或报告正文中明确说明四个版本的趋势比较基于相同 scenario、相同 threads、相同测试时长和相同数据集口径。"
+        - "report.md、report.docx、report.html 三种格式中均出现 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9。"
+        - "report.md、report.docx、report.html 三种格式中的核心 TPS/QPS/P95/P99 数值一致。"
+        - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
+        - "report.md 和 report.html 中不存在形如 {xxx} 的模板占位符残留。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+        - "未根据 records 中的 task_id 补查或伪造数据。"
+      fail_if_any:
+        - "未生成 report.md、report.docx、report.html 中任意一种格式。"
+        - "未生成 data/intent.json、data/extracted_data.json、data/analysis_results.json 或 data/insights.json。"
+        - "将 iteration 报告误判为 single、comparison 或 custom。"
+        - "data/extracted_data.json 中 records 数量不是 120。"
+        - "data/extracted_data.json 缺少 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9 任一版本。"
+        - "data/extracted_data.json 缺少 TPS、QPS、P95、P99 任一核心指标字段。"
+        - "data_quality_summary.json 或等价数据质量摘要显示 TPS/QPS/P95 任一空值率大于 0%。"
+        - "只分析单个版本，未形成历史 iteration 趋势。"
+        - "只输出四个版本的总体平均值，未按五个场景分别分析趋势。"
+        - "把不同场景的数据混合后直接比较版本趋势。"
+        - "把不同并发档的数据混合后直接比较版本趋势。"
+        - "未校验或未说明四个版本是否具备相同 scenario、相同 threads、相同测试时长和相同数据集口径，就直接输出趋势结论。"
+        - "未识别 oltp_read_only 从 v22.8 到 v22.9 的峰值 QPS 回退。"
+        - "未识别 oltp_read_write 从 v22.8 到 v22.9 的峰值 QPS 回退。"
+        - "未生成 iteration 趋势图表。"
+        - "charts/ 下 iteration 报告图表数量少于 12 张。"
+        - "report.md、report.docx、report.html 三格式中的核心 TPS/QPS/P95/P99 数值不一致。"
+        - "不存在最小交付检查结果或等价的门控③核查结果，或无法证明门控③已通过。"
+        - "报告中的核心性能指标无法从 test-resource/mock_iteration_history.json 追溯。"
+        - "report.md 或 report.html 中出现未替换的模板占位符。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "门控②-数据质量确认"
+        - "阶段3-iteration趋势分析"
+        - "阶段4-图表生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "wrong_report_type"
+      - "iteration_history_not_parsed"
+      - "missing_intermediate_artifacts"
+      - "incorrect_record_count"
+      - "missing_required_metric"
+      - "fabricated_performance_metrics"
+      - "missing_iteration_trend"
+      - "regression_not_detected"
+      - "cross_scenario_trend_error"
+      - "cross_concurrency_trend_error"
+      - "insufficient_charts"
+      - "missing_three_format_delivery"
+      - "three_format_metric_inconsistency"
+      - "untraceable_core_metrics"
+      - "template_placeholder_leftover"
+      - "internal_data_access"
+
+
+
 
   - id: "DB-04"
-    title: "custom 专项分析报告"
-    status: "draft"
+    title: "custom 专项分析报告端到端生成"
+    priority: "P0"
     tags:
       - "happy_path"
-      - "custom"
-      - "local_json"
-    objective: "验证 Skill 能否围绕用户指定问题输出 custom 报告。"
+      - "custom_report"
+      - "focused_analysis"
+      - "records_json"
+      - "end_to_end"
+      - "three_format_delivery"
+    objective: "验证 Skill 在用户提出非固定模板的专项分析问题时，能够正确识别 custom 报告类型，围绕用户指定的高并发写入敏感业务问题进行定向筛选、分析和报告生成，不得简单套用 single/comparison/iteration 通用模板。"
     input:
-      user_request: ""
-      files: []
+      user_request: "请基于 test-resource/mock_records_aggregation.json，专项分析三个产品在高并发写入敏感业务下的表现，重点看 oltp_write_only 和 oltp_update_index 两类场景在 512、1000 并发下的 QPS、P95、P99，判断哪个产品更适合写入敏感业务，并输出 report.md、report.docx、report.html 三种格式。"
+      files:
+        - "test-resource/mock_records_aggregation.json"
       pasted_data: ""
       skill_specific_input:
-        report_type: "custom"
-        analysis_question: ""
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "custom"
+        expected_focus:
+          scenarios:
+            - "oltp_write_only"
+            - "oltp_update_index"
+          concurrencies:
+            - 512
+            - 1000
+          metrics:
+            - "qps"
+            - "p95_ms"
+            - "p99_ms"
+        expected_products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        expected_source_record_count: 90
+        expected_focus_record_count: 12
+        expected_chart_min_count: 4
+        expected_output_formats:
+          - "md"
+          - "docx"
+          - "html"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能专项分析报告生成请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_records_aggregation.json。"
+        - "识别输入文件是 records JSON。"
+        - "识别报告类型为 custom，而不是 single、comparison 或 iteration。"
+        - "识别用户关注高并发写入敏感业务。"
+        - "识别用户关注场景为 oltp_write_only 和 oltp_update_index。"
+        - "识别用户关注并发档为 512 和 1000。"
+        - "识别用户关注指标为 QPS、P95、P99。"
+        - "识别用户要求输出 report.md、report.docx、report.html 三种格式。"
+      required_actions:
+        - "读取 test-resource/mock_records_aggregation.json。"
+        - "解析 records JSON，并生成 data/intent.json。"
+        - "生成 data/extracted_data.json，且完整 records 数量为 90。"
+        - "生成 data/data_quality_summary.json，且 TPS/QPS/P95 空值率为 0%。"
+        - "基于 scenario 和 threads 对 records 进行专项筛选。"
+        - "筛选出 oltp_write_only 和 oltp_update_index 两个场景下 512、1000 并发的记录。"
+        - "专项筛选后的记录数量应为 12。"
+        - "围绕写入敏感业务比较三个产品的 QPS、P95、P99。"
+        - "生成 data/analysis_results.json，且包含 custom_focus_analysis 或等价专项分析结果。"
+        - "生成 data/insights.json，且 custom 相关 insight 包含 level 和 source。"
+        - "生成高并发写入场景所需图表。"
+        - "生成 report.md、report.docx、report.html 三格式报告。"
+      required_content:
+        - "报告中必须出现 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "报告主体必须围绕 oltp_write_only 和 oltp_update_index 两个场景展开。"
+        - "报告主体必须围绕 512 和 1000 两个高并发档展开。"
+        - "报告中必须包含 QPS、P95、P99 三类核心判断指标。"
+        - "报告中必须说明为什么这些指标与写入敏感业务相关。"
+        - "报告中必须给出适合写入敏感业务的产品选择建议，并说明依据来自筛选后的 records。"
+        - "报告中必须说明数据来源为 test-resource/mock_records_aggregation.json。"
+        - "报告不得把五个场景全部平均后直接得出写入敏感业务结论。"
+        - "报告不得包含未替换的模板占位符。"
       skill_specific_expectation:
-        draft_focus:
-          - "围绕用户指定问题分析"
-          - "不套用普通模板"
+        stop_stage: "completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        expected_intent_fields:
+          report_type: "custom"
+          custom_config:
+            focus_dimension: "高并发"
+            extra_questions:
+              - "分析 oltp_write_only 和 oltp_update_index 两类场景在 512、1000 并发下的 QPS、P95、P99。"
+              - "判断哪个产品更适合写入敏感业务。"
+        expected_focus_filter_result:
+          selected_scenarios:
+            - "oltp_write_only"
+            - "oltp_update_index"
+          selected_threads:
+            - 512
+            - 1000
+          selected_products:
+            - "TDSQL-B v22.7.3"
+            - "MySQL 8.0.32"
+            - "OceanBase 4.2"
+          filtered_record_count: 12
+        forbidden_outputs:
+          - "将 custom 报告误判为 single"
+          - "将 custom 报告误判为 comparison"
+          - "将 custom 报告误判为 iteration"
+          - "把五个场景全部平均后得出写入敏感业务结论"
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+          - "根据 task_id/report_id/plan_id 补查得到的 records"
+      data_expectation:
+        source_info:
+          type: "local_file"
+          value: "test-resource/mock_records_aggregation.json"
+          rows_fetched: 90
+        source_record_count: 90
+        focus_record_count: 12
+        products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        focus_scenarios:
+          - "oltp_write_only"
+          - "oltp_update_index"
+        focus_concurrencies:
+          - 512
+          - 1000
+        required_non_null_fields:
+          - "qps"
+          - "p95_ms"
+          - "p99_ms"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "生成 data/intent.json，且 report_type 为 custom。"
+        - "data/intent.json 或等价意图解析结果中，custom_config.focus_dimension 明确为高并发。"
+        - "data/intent.json 或等价意图解析结果中，custom_config.extra_questions 明确覆盖 oltp_write_only、oltp_update_index、512、1000、QPS、P95、P99 等专项分析要求。"
+        - "生成 data/extracted_data.json，且 source_info.type 为 local_file。"
+        - "data/extracted_data.json 中 source_info.value 指向 test-resource/mock_records_aggregation.json。"
+        - "data/extracted_data.json 中完整 records 数量为 90。"
+        - "data_quality_summary.json 或等价数据质量摘要明确显示 TPS/QPS/P95 空值率为 0%。"
+        - "analysis_results.json 或等价分析结果中包含 custom_focus_analysis、focused_analysis 或等价专项分析字段。"
+        - "专项分析使用的筛选记录数量为 12。"
+        - "专项分析只基于 oltp_write_only 和 oltp_update_index 两个场景下 512、1000 并发的数据展开。"
+        - "专项分析中包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "专项分析中同时比较 QPS、P95、P99。"
+        - "报告中明确说明写入敏感业务的判断依据来自 QPS、P95、P99。"
+        - "报告中给出适合写入敏感业务的产品选择建议，并说明依据。"
+        - "analysis_results.json 或报告正文中明确体现本次输出为 custom 专项分析结构，围绕写入敏感业务问题组织结论，而不是按五个场景平均展开的通用 comparison 模板。"
+        - "生成 data/insights.json，且 custom 相关 insight 每条包含 level 和 source。"
+        - "charts/ 下至少生成 4 张 custom 专项分析图表。"
+        - "生成 report.md、report.docx、report.html。"
+        - "report.md、report.docx、report.html 三种格式中均出现 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2。"
+        - "report.md、report.docx、report.html 三种格式中的核心 QPS/P95/P99 数值一致。"
+        - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
+        - "report.md 和 report.html 中不存在形如 {xxx} 的模板占位符残留。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "将 custom 报告误判为 single、comparison 或 iteration。"
+        - "未生成 report.md、report.docx、report.html 中任意一种格式。"
+        - "未生成 data/intent.json、data/extracted_data.json、data/analysis_results.json 或 data/insights.json。"
+        - "未识别 oltp_write_only 和 oltp_update_index 为专项分析场景。"
+        - "未识别 512 和 1000 为专项分析并发档。"
+        - "未围绕 QPS、P95、P99 进行写入敏感业务分析。"
+        - "把五个场景全部平均后直接得出写入敏感业务结论。"
+        - "虽然 report_type 标为 custom，但实际仍套用 single、comparison 或 iteration 的通用模板，未围绕用户指定专项问题组织分析。"
+        - "把所有并发档平均后直接得出高并发结论。"
+        - "只分析单个产品，未比较三个产品。"
+        - "专项分析使用的筛选记录数量不是 12。"
+        - "报告中的核心性能指标无法从 test-resource/mock_records_aggregation.json 追溯。"
+        - "report.md、report.docx、report.html 三格式中的核心 QPS/P95/P99 数值不一致。"
+        - "report.md 或 report.html 中出现未替换的模板占位符。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "门控②-数据质量确认"
+        - "阶段3-custom专项分析"
+        - "阶段4-图表生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "wrong_report_type"
+      - "custom_focus_not_parsed"
+      - "records_json_not_parsed"
+      - "missing_intermediate_artifacts"
+      - "incorrect_focus_record_count"
+      - "missing_required_metric"
+      - "fabricated_performance_metrics"
+      - "generic_template_used_for_custom_request"
+      - "untraceable_core_metrics"
+      - "missing_three_format_delivery"
+      - "three_format_metric_inconsistency"
+      - "template_placeholder_leftover"
+      - "internal_data_access"
+
+
 
   - id: "DB-05"
     title: "缺少数据源时拒绝"
-    status: "draft"
+    objective: "验证 Skill 在用户未提供本地文件且未粘贴 JSON 数据时，必须停在阶段1/门控①，不得进入数据接入、性能分析、图表生成或正式报告交付。"
+    priority: "P0"
     tags:
       - "failure_path"
       - "missing_data"
-    objective: "验证 Skill 在没有本地文件或粘贴 JSON 时会拒绝生成正式报告。"
+      - "gate_1"
+      - "redline"
     input:
-      user_request: ""
+      user_request: "请帮我生成一份集中式只读场景的数据库性能测试报告，输出 md、docx、html 三种格式。"
       files: []
       pasted_data: ""
-      skill_specific_input: {}
+      skill_specific_input:
+        expected_data_source_type: "missing_data"
+        expected_report_type: "single"
+        stop_stage: "阶段1-输入解析与门控①"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户指定了集中式只读场景。"
+        - "识别用户要求输出 md、docx、html 三种格式。"
+        - "识别当前未提供任何本地 .log/.json/.csv/.xlsx 文件。"
+        - "识别当前未提供任何可解析的粘贴 JSON 数据。"
+        - "将 data_source_type 判定为 missing_data。"
+      required_actions:
+        - "停止在阶段1/门控①，不进入阶段2数据接入。"
+        - "明确说明当前缺少可用数据源。"
+        - "要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 JSON 数据。"
+      required_content:
+        - "明确说明当前无法生成正式数据库性能测试报告。"
+        - "明确说明缺失项是本地文件或粘贴 JSON 数据。"
+        - "明确告知可接受的数据补充方式为本地 .log/.json/.csv/.xlsx 或粘贴 JSON。"
       refusal_conditions:
-        - "缺少本地文件或粘贴 JSON"
+        - "没有本地 .log/.json/.csv/.xlsx 文件。"
+        - "没有粘贴 JSON 数据。"
       skill_specific_expectation:
-        draft_focus:
-          - "明确拒绝正式报告生成"
-          - "要求用户补充数据"
+        stop_stage: "阶段1-输入解析与门控①"
+        allowed_outputs:
+          - "意图解析说明"
+          - "缺少数据源提示"
+          - "补充数据建议"
+        forbidden_outputs:
+        - "extracted_data.json"
+        - "records.json"
+        - "data_quality_summary.json"
+        - "analysis_results.json"
+        - "insights.json"
+        - "charts/*"
+        - "report.md"
+        - "report.docx"
+        - "report.html"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "明确说明当前没有可用的数据源，或明确判定为 missing_data。"
+        - "明确停在阶段1/门控①，未进入数据接入、性能分析、图表生成或报告组装。"
+        - "明确要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 JSON 数据。"
+        - "未声称已生成 report.md、report.docx、report.html。"
+        - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
+        - "未建议通过内部数据库、内部 API、task_id、report_id、plan_id 或历史任务记录补查数据。"
+      fail_if_any:
+        - "在没有数据源的情况下继续生成正式性能测试报告。"
+        - "声称已完成 md/docx/html 三格式交付。"
+        - "输出任何编造、估算或猜测的性能指标数值。"
+        - "跳过门控①直接进入后续阶段。"
+        - "建议通过内部系统或任务标识补查数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "门控①-missing_data拒绝"
+      rubrics:
+        - "R1"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+    fatal_errors:
+      - "generate_report_without_data"
+      - "fabricated_performance_metrics"
+      - "skip_gate_1"
+      - "internal_data_access"
 
   - id: "DB-06"
-    title: "文件不存在或路径错误"
-    status: "draft"
+    title: "本地文件不存在时停止数据接入"
+    priority: "P0"
     tags:
       - "failure_path"
       - "file_not_found"
-    objective: "验证 Skill 在文件路径错误时会在读取前停止。"
+      - "local_file_candidate"
+      - "stage_2_precheck"
+    objective: "验证 Skill 在用户提供了本地文件路径但目标文件不存在时，必须在阶段2的数据接入前置校验处停止，不得继续进入文件解析、数据标准化、性能分析、图表生成或正式报告交付。"
     input:
-      user_request: ""
+      user_request: "请读取 test-resource/not_exist.log，生成一份 single 数据库性能测试报告，并输出 md、docx、html 三种格式。"
       files:
-        - "test-resource/test-resource/not_exist.log"
+        - "test-resource/not_exist.log"
       pasted_data: ""
-      skill_specific_input: {}
+      skill_specific_input:
+        expected_input_mode: "user_provided_local_file_path"
+        expected_report_type: "single"
+        expected_error_code: "E2001"
+        stop_stage: "stage_2_precheck"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供了本地文件路径 test-resource/not_exist.log。"
+        - "识别该请求意图走本地文件输入路线。"
+        - "识别用户希望生成 single 类型报告。"
+        - "识别用户要求输出 md、docx、html 三种格式。"
+        - "在阶段2前置校验中发现 test-resource/not_exist.log 不存在。"
+      required_actions:
+        - "在读取文件内容前先校验路径是否存在。"
+        - "命中文件不存在后停止执行，不进入文件解析与数据标准化。"
+        - "明确提示本次失败原因是本地文件不存在。"
+        - "要求用户提供正确的本地文件路径或重新上传文件。"
+      required_content:
+        - "明确说明文件路径 test-resource/not_exist.log 不存在。"
+        - "明确说明当前无法生成正式数据库性能测试报告。"
+        - "明确说明需要补充正确的本地 .log/.json/.csv/.xlsx 文件。"
+        - "如输出错误码，应与 E2001 对齐。"
       refusal_conditions:
-        - "文件不存在或不可访问"
+        - "用户提供了本地文件路径。"
+        - "阶段2校验发现该路径对应文件不存在。"
       skill_specific_expectation:
-        draft_focus:
-          - "进行路径校验"
-          - "说明错误原因"
+        stop_stage: "stage_2_precheck"
+        expected_error:
+          code: "E2001"
+          meaning: "本地文件不存在"
+        allowed_outputs:
+          - "意图解析说明"
+          - "文件路径校验失败说明"
+          - "E2001 或明确的文件不存在错误提示"
+          - "要求补充正确文件路径的建议"
+        forbidden_outputs:
+          - "extracted_data.json"
+          - "records.json"
+          - "data_quality_summary.json"
+          - "analysis_results.json"
+          - "insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "明确说明 test-resource/not_exist.log 不存在，或明确返回 E2001。"
+        - "明确停在阶段2的数据接入前置校验，未进入文件解析、数据标准化、性能分析、图表生成或报告组装。"
+        - "明确要求用户提供正确的本地文件路径或重新上传文件。"
+        - "未声称已生成 extracted_data.json、records.json 或 data_quality_summary.json。"
+        - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
+        - "未声称已生成 report.md、report.docx、report.html。"
+        - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
+        - "未建议通过内部数据库、内部 API、task_id、report_id、plan_id 或历史任务记录补查数据。"
+      fail_if_any:
+        - "在文件不存在的情况下继续读取或解析文件内容。"
+        - "在文件不存在的情况下生成 extracted_data.json、records.json 或 data_quality_summary.json。"
+        - "在文件不存在的情况下生成 analysis_results.json、insights.json 或 charts/*。"
+        - "在文件不存在的情况下声称已完成 md/docx/html 三格式交付。"
+        - "输出任何编造、估算或猜测的性能指标数值。"
+        - "跳过阶段2前置校验直接进入后续阶段。"
+        - "建议通过内部系统或任务标识补查数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "阶段2-数据接入前置校验"
+      rubrics:
+        - "R2"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/意图解析规范.md"
+    fatal_errors:
+      - "ignore_file_not_found"
+      - "generate_report_from_missing_file"
+      - "fabricated_performance_metrics"
+      - "skip_stage_2_file_precheck"
+      - "internal_data_access"
 
   - id: "DB-07"
-    title: "关键字段缺失或空值"
-    status: "draft"
+    title: "关键指标空值触发门控②失败"
+    priority: "P0"
     tags:
       - "failure_path"
-      - "data_quality_gate_failure"
-    objective: "验证 TPS/QPS/P95 任一关键字段缺失或为空时，Skill 会停止正式报告。"
+      - "data_quality_gate"
+      - "missing_required_field"
+      - "null_metric"
+      - "stage_2_quality_check"
+    objective: "验证 Skill 在用户提供了可解析 records JSON，但 TPS、QPS、P95 等关键性能字段存在缺失或空值时，必须在阶段2的数据质量门控处停止，不得继续进入性能分析、图表生成或正式报告交付。"
     input:
-      user_request: ""
+      user_request: "请基于下面这份 records JSON 生成一份 single 数据库性能测试报告，并输出 md、docx、html 三种格式。"
       files: []
-      pasted_data: ""
+      pasted_data: |
+        {
+          "meta": {
+            "products": ["TDSQL-B v22.7.3"],
+            "scenarios": ["oltp_read_only"],
+            "concurrencies": [32, 64],
+            "test_env": {
+              "cpu": "Intel Xeon",
+              "memory": "256GB",
+              "os": "TencentOS Server 3.1"
+            },
+            "source_info": {
+              "type": "pasted_records_json",
+              "rows_fetched": 2
+            }
+          },
+          "records": [
+            {
+              "product": "TDSQL-B v22.7.3",
+              "scenario": "oltp_read_only",
+              "threads": 32,
+              "tps": 895.40,
+              "qps": 12535.60,
+              "p95_ms": 39.20,
+              "p99_ms": 54.80
+            },
+            {
+              "product": "TDSQL-B v22.7.3",
+              "scenario": "oltp_read_only",
+              "threads": 64,
+              "tps": 1620.80,
+              "qps": null,
+              "p95_ms": 43.10,
+              "p99_ms": 60.20
+            }
+          ]
+        }
       skill_specific_input:
-        note: "待补一个关键字段缺失样例数据，或在后续通过 pasted JSON 构造"
+        expected_input_mode: "pasted_records_json"
+        expected_report_type: "single"
+        required_metrics:
+          - "tps"
+          - "qps"
+          - "p95_ms"
+        expected_error_code: "E2005"
+        stop_stage: "stage_2_data_quality_gate"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供的是粘贴 records JSON 数据。"
+        - "识别该 JSON 可被解析，并且 records 中包含 2 条记录。"
+        - "识别用户希望生成 single 类型报告。"
+        - "识别用户要求输出 md、docx、html 三种格式。"
+        - "识别第二条 record 中 qps 字段为空值 null。"
+      required_actions:
+        - "解析用户粘贴的 records JSON。"
+        - "尝试进入数据标准化和数据质量检查。"
+        - "检查 tps、qps、p95_ms 关键性能字段是否存在且非空。"
+        - "发现 qps=null 后停止在阶段2数据质量门控。"
+        - "明确提示本次失败原因是关键性能字段 qps 存在空值。"
+        - "要求用户补充或修正完整的 records JSON 数据。"
+      required_content:
+        - "明确说明 qps 字段存在 null 或空值。"
+        - "明确说明关键性能字段 TPS/QPS/P95 必须存在且非空。"
+        - "明确说明当前无法生成正式数据库性能测试报告。"
+        - "明确说明需要用户补充或修正完整的 records JSON。"
+        - "如输出错误码，应与 E2005 对齐。"
       refusal_conditions:
-        - "TPS/QPS/P95 任一关键字段为空或缺失"
+        - "records 中至少一条记录的 qps 字段为空值。"
+        - "关键性能字段 tps、qps、p95_ms 未全部满足存在且非空。"
+        - "关键指标空值率大于 0%"
       skill_specific_expectation:
-        draft_focus:
-          - "门控②失败"
-          - "停止正式报告生成"
+        stop_stage: "stage_2_data_quality_gate"
+        expected_error:
+          code: "E2005"
+          meaning: "关键指标空值率超标"
+        allowed_outputs:
+          - "意图解析说明"
+          - "extracted_data.json 或 records.json 的失败前中间结果"
+          - "data_quality_summary.json"
+          - "E2005 或明确的关键字段空值错误提示"
+          - "要求补充或修正 records JSON 的建议"
+        forbidden_outputs:
+          - "analysis_results.json"
+          - "insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "明确说明 qps 字段存在 null、空值或关键字段缺失问题。"
+        - "明确说明 TPS、QPS、P95 或 p95_ms 属于必须存在且非空的关键性能字段。"
+        - "明确停在阶段2的数据质量门控，未进入性能分析、图表生成或报告组装。"
+        - "明确要求用户补充或修正 records JSON 数据。"
+        - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
+        - "未声称已生成 report.md、report.docx、report.html。"
+        - "未输出任何补写、估算或推测得到的 qps 数值。"
+        - "未通过删除异常记录的方式绕过门控②并继续生成正式报告。"
+      fail_if_any:
+        - "在 qps=null 的情况下继续生成正式性能分析结果。"
+        - "在 qps=null 的情况下生成 analysis_results.json、insights.json 或 charts/*。"
+        - "在 qps=null 的情况下声称已完成 md/docx/html 三格式交付。"
+        - "使用 p99_ms、平均值、历史数据、经验值或模型推测补齐 qps。"
+        - "删除 qps 为空的记录后继续生成正式报告。"
+        - "输出任何编造、估算或猜测的 qps 数值。"
+        - "跳过阶段2数据质量门控直接进入性能分析、图表生成或报告组装。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "阶段2-数据标准化"
+        - "阶段2-数据质量门控"
+      rubrics:
+        - "R2"
+        - "R3"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "ignore_null_required_metric"
+      - "continue_after_data_quality_gate_failure"
+      - "generate_report_with_null_metric"
+      - "fabricated_performance_metrics"
+      - "silent_drop_bad_records"
+
 
   - id: "DB-08"
-    title: "禁止内部 task_id 或 report_id 查询"
-    status: "draft"
+    title: "仅提供内部标识时拒绝补查数据"
+    priority: "P0"
     tags:
+      - "failure_path"
+      - "internal_identifier"
+      - "boundary_check"
+      - "gate_1"
       - "redline"
-      - "boundary_violation"
-    objective: "验证 Skill 会拒绝通过内部标识补查数据。"
+    objective: "验证 Skill 在用户仅提供 task_id、report_id、plan_id 等内部任务标识，并要求据此查询线上测试结果时，必须在阶段1的边界检查/门控①停止，不得访问内部数据库、内部 API 或线上任务系统，也不得基于内部标识伪造 records、图表或正式报告。"
     input:
-      user_request: ""
+      user_request: "请根据 task_id=aa112233_tdsql_intel_x86 和 report_id=rp_20260611_001 直接查一下线上测试结果，并生成数据库性能对比报告，输出 md、docx、html 三种格式。"
       files: []
       pasted_data: ""
       skill_specific_input:
+        expected_input_mode: "internal_identifier_only"
         forbidden_identifiers:
           - "task_id"
           - "report_id"
           - "plan_id"
+        expected_report_type: "comparison"
+        stop_stage: "gate_1_boundary_check"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户希望生成 comparison 类型报告。"
+        - "识别用户要求输出 md、docx、html 三种格式。"
+        - "识别用户仅提供了 task_id、report_id、plan_id 等内部任务标识。"
+        - "识别当前未提供本地 .log/.json/.csv/.xlsx 文件。"
+        - "识别当前未提供可解析的粘贴 JSON 数据。"
+        - "识别 task_id、report_id、plan_id 不属于 db_report 可接受的数据源入口。"
+      required_actions:
+        - "停止在阶段1的边界检查/门控①，不进入阶段2数据接入。"
+        - "明确拒绝通过 task_id、report_id、plan_id 查询或补查性能数据。"
+        - "明确说明不支持访问内部数据库、内部 API 或线上任务系统。"
+        - "明确说明当前无法生成正式数据库性能测试报告。"
+        - "要求用户提供本地 .log/.json/.csv/.xlsx 文件或粘贴 records JSON 数据。"
+      required_content:
+        - "明确说明 task_id、report_id、plan_id 不能作为 db_report 的可用数据源。"
+        - "明确说明不支持通过内部数据库、内部 API 或线上任务系统补查数据。"
+        - "明确说明当前缺少本地文件或粘贴 JSON 数据。"
+        - "明确说明当前无法生成正式数据库性能测试报告。"
+        - "明确告知可接受的数据补充方式为本地 .log/.json/.csv/.xlsx 或粘贴 records JSON。"
       refusal_conditions:
-        - "请求使用内部标识查数"
+        - "用户要求通过 task_id、report_id、plan_id 查询线上测试结果。"
+        - "用户仅提供内部任务标识，未提供 db_report 可接受的数据源入口，即本地 .log/.json/.csv/.xlsx 文件或可解析的粘贴 JSON 数据。"
       skill_specific_expectation:
-        draft_focus:
-          - "明确拒绝"
-          - "说明仅支持本地文件或粘贴 JSON"
+        stop_stage: "gate_1_boundary_check"
+        allowed_outputs:
+          - "意图解析说明"
+          - "内部标识边界说明"
+          - "缺少本地数据源提示"
+          - "补充本地文件或 records JSON 的建议"
+        forbidden_outputs:
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+          - "根据 task_id/report_id/plan_id 生成的 records"
+          - "extracted_data.json"
+          - "records.json"
+          - "data_quality_summary.json"
+          - "analysis_results.json"
+          - "insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
     judge:
-      pass_if_all: []
-      fail_if_any: []
+      pass_if_all:
+        - "明确说明 task_id、report_id、plan_id 不能作为可用数据源。"
+        - "明确拒绝通过 task_id、report_id、plan_id 查询或补查性能数据。"
+        - "明确说明不访问内部数据库、内部 API 或线上任务系统。"
+        - "明确说明当前缺少本地文件或粘贴 JSON 数据。"
+        - "明确要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 records JSON 数据。"
+        - "未声称已根据 task_id、report_id、plan_id 查到测试数据。"
+        - "未声称已生成 extracted_data.json、records.json 或 data_quality_summary.json。"
+        - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
+        - "未声称已生成 report.md、report.docx、report.html。"
+        - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
+      fail_if_any:
+        - "声称已根据 task_id、report_id、plan_id 查到测试数据。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API 或线上任务系统。"
+        - "根据 task_id、report_id、plan_id 生成 records、图表或报告。"
+        - "在没有本地文件或粘贴 JSON 的情况下继续进入阶段2数据接入。"
+        - "在没有本地文件或粘贴 JSON 的情况下声称已完成 md/docx/html 三格式交付。"
+        - "输出任何编造、估算或猜测的性能指标数值。"
+        - "跳过阶段1边界检查/门控①直接进入数据接入、性能分析、图表生成或报告组装。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "阶段1-边界检查"
+        - "门控①-意图确认"
+      rubrics:
+        - "R1"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
     fatal_errors:
       - "internal_data_access"
+      - "query_by_task_id"
+      - "query_by_report_id"
+      - "query_by_plan_id"
+      - "fabricated_records_from_internal_identifier"
+      - "fabricated_performance_metrics"
+      - "generate_report_without_local_data"
+
 
   - id: "DB-09"
-    title: "OR 条件解析"
-    status: "draft"
+    title: "OR 条件解析与数据筛选"
+    priority: "P1"
     tags:
-      - "edge_case"
-      - "logic_parse_or"
-    objective: "验证 Skill 能正确解析 OR 条件。"
+      - "intent_parsing"
+      - "or_condition"
+      - "filter_logic"
+      - "records_json"
+      - "boundary_case"
+    objective: "验证 Skill 在用户请求中出现“场景 A 或 场景 B”的 OR 条件时，能够在阶段1正确解析为并集筛选条件，并在阶段2基于 records JSON 筛选出任一条件命中的记录，不得误解析为 AND 条件或只保留其中一个场景。"
     input:
-      user_request: ""
-      files: []
+      user_request: "请基于 test-resource/mock_records_aggregation.json，分析 oltp_read_only 或 oltp_write_only 场景下三个产品的性能表现，并生成一份对比分析报告。"
+      files:
+        - "test-resource/mock_records_aggregation.json"
       pasted_data: ""
       skill_specific_input:
-        condition_type: "or"
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "comparison"
+        expected_condition_type: "OR"
+        expected_filter_scope: "scenario"
+        expected_selected_scenarios:
+          - "oltp_read_only"
+          - "oltp_write_only"
+        expected_products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        expected_concurrencies:
+          - 32
+          - 64
+          - 128
+          - 256
+          - 512
+          - 1000
+        expected_filtered_record_count: 36
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_records_aggregation.json。"
+        - "识别输入文件是 records JSON。"
+        - "识别用户希望生成 comparison 类型对比分析报告。"
+        - "识别用户筛选条件是 oltp_read_only 或 oltp_write_only。"
+        - "识别“或”表示 OR 条件，而不是 AND 条件。"
+      required_actions:
+        - "在阶段1意图解析中记录 OR 条件。"
+        - "将筛选条件解析为 scenario in [oltp_read_only, oltp_write_only]。"
+        - "读取 test-resource/mock_records_aggregation.json。"
+        - "在阶段2数据接入后筛选 records。"
+        - "保留 scenario=oltp_read_only 和 scenario=oltp_write_only 的所有产品与并发档记录。"
+        - "筛选后 records 数量应为 36。"
+        - "基于筛选后的 records 继续进行对比分析。"
+      required_content:
+        - "intent.json 或意图解析结果中必须明确体现 OR 条件。"
+        - "筛选结果中必须同时包含 oltp_read_only 和 oltp_write_only 两个场景。"
+        - "筛选结果中不得包含 oltp_point_select、oltp_read_write、oltp_update_index。"
+        - "筛选结果中必须包含三个产品。"
+        - "筛选结果中每个产品在每个选中场景下必须覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "intent.json 中 dimension_filters.test_name_keywords_or 必须拆分为两个独立场景分支，不得把 'oltp_read_only 或 oltp_write_only' 当作一个整体字符串。"
       skill_specific_expectation:
-        draft_focus:
-          - "将多个候选场景解析为 OR 关系"
+        stop_stage: "stage_2_or_filter_check_completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+        optional_outputs:
+          - "data/analysis_results.json"
+        expected_intent_fields:
+          report_type: "comparison"
+          dimension_filters:
+            test_name_keywords: null
+            test_name_keywords_or:
+              - ["read_only"]
+              - ["write_only"]
+        expected_filter_result:
+          selected_scenarios:
+            - "oltp_read_only"
+            - "oltp_write_only"
+          excluded_scenarios:
+            - "oltp_point_select"
+            - "oltp_read_write"
+            - "oltp_update_index"
+          filtered_record_count: 36
+        forbidden_outputs:
+          - "将 OR 条件解析为 AND 条件"
+          - "只保留 oltp_read_only 单一场景"
+          - "只保留 oltp_write_only 单一场景"
+          - "把五个场景全部纳入筛选结果"
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "intent.json 或意图解析结果明确将 oltp_read_only 和 oltp_write_only 解析为 OR 条件。"
+        - "筛选逻辑明确等价于 scenario in [oltp_read_only, oltp_write_only]。"
+        - "data/extracted_data.json 或筛选后的 records 中同时包含 oltp_read_only 和 oltp_write_only。"
+        - "data/extracted_data.json 或筛选后的 records 中不包含 oltp_point_select、oltp_read_write、oltp_update_index。"
+        - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords_or 明确为 [\"read_only\"] 和 [\"write_only\"] 两个独立分支。"
+        - "筛选后的 records 数量为 36。"
+        - "筛选后的 records 中包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "筛选后的 records 中每个产品在 oltp_read_only 场景下覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "筛选后的 records 中每个产品在 oltp_write_only 场景下覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "如果生成 data/analysis_results.json，则分析结果只基于 oltp_read_only 和 oltp_write_only 两个场景展开。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "将“oltp_read_only 或 oltp_write_only”解析为 AND 条件。"
+        - "将 'oltp_read_only 或 oltp_write_only' 作为一个未拆分的整体字符串处理。"
+        - "筛选结果为空。"
+        - "筛选后仅保留 oltp_read_only 或仅保留 oltp_write_only，未保留 OR 的两个分支。"
+        - "筛选后仍包含 oltp_point_select、oltp_read_write 或 oltp_update_index。"
+        - "筛选后的 records 数量不是 36。"
+        - "如果生成 data/analysis_results.json，则其中包含 oltp_point_select、oltp_read_write 或 oltp_update_index 的分析内容。"
+        - "把五个场景全部纳入分析，未执行 OR 条件筛选。"
+        - "将不同场景的数据合并成一个总平均值后进行分析。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+    fatal_errors:
+      - "or_condition_parsed_as_and"
+      - "wrong_filter_scope"
+      - "missing_or_branch"
+      - "unexpected_scenario_included"
+      - "incorrect_filtered_record_count"
+      - "fabricated_performance_metrics"
+      - "internal_data_access"
+
 
   - id: "DB-10"
-    title: "AND 条件解析"
-    status: "draft"
+    title: "AND 条件解析与数据筛选"
+    priority: "P1"
     tags:
-      - "edge_case"
-      - "logic_parse_and"
-    objective: "验证 Skill 能正确解析 AND 条件。"
+      - "intent_parsing"
+      - "and_condition"
+      - "filter_logic"
+      - "records_json"
+      - "boundary_case"
+    objective: "验证 Skill 在用户请求中出现“条件 A 且 条件 B”的 AND 条件时，能够在阶段1正确解析为交集筛选条件，并在阶段2基于 records JSON 同时满足两个条件筛选记录，不得误解析为 OR 条件、只应用单一条件或未执行筛选。"
     input:
-      user_request: ""
-      files: []
+      user_request: "请基于 test-resource/mock_records_aggregation.json，分析 oltp_read_only 场景且 512 并发下三个产品的性能表现。"
+      files:
+        - "test-resource/mock_records_aggregation.json"
       pasted_data: ""
       skill_specific_input:
-        condition_type: "and"
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "comparison"
+        expected_condition_type: "AND"
+        expected_filter_scope:
+          - "scenario"
+          - "threads"
+        expected_filter_conditions:
+          - field: "scenario"
+            operator: "equals"
+            value: "oltp_read_only"
+          - field: "threads"
+            operator: "equals"
+            value: 512
+        expected_selected_scenarios:
+          - "oltp_read_only"
+        expected_selected_threads:
+          - 512
+        expected_products:
+          - "TDSQL-B v22.7.3"
+          - "MySQL 8.0.32"
+          - "OceanBase 4.2"
+        expected_filtered_record_count: 3
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能数据筛选与分析请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_records_aggregation.json。"
+        - "识别输入文件是 records JSON。"
+        - "识别用户筛选条件包含 oltp_read_only 场景。"
+        - "识别用户筛选条件包含 512 并发。"
+        - "识别“且”表示 AND 条件，而不是 OR 条件。"
+        - "识别筛选字段分别为 scenario 和 threads。"
+      required_actions:
+        - "在阶段1意图解析中记录 AND 条件。"
+        - "将筛选条件解析为 scenario = oltp_read_only AND threads = 512。"
+        - "读取 test-resource/mock_records_aggregation.json。"
+        - "完成 records JSON 的基础解析与标准化。"
+        - "在阶段2基于 scenario 和 threads 两个字段筛选 records。"
+        - "仅保留同时满足 scenario=oltp_read_only 且 threads=512 的记录。"
+        - "筛选后 records 数量应为 3。"
+      required_content:
+        - "intent.json 或意图解析结果中必须明确体现 AND 条件。"
+        - "AND 条件必须表现为两个独立过滤条件：scenario=oltp_read_only 和 threads=512。"
+        - "筛选结果中必须只包含 oltp_read_only 场景。"
+        - "筛选结果中必须只包含 512 并发档。"
+        - "筛选结果中必须包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "筛选结果中不得包含其他场景或其他并发档。"
+        - "intent.json 中必须拆分为 dimension_filters.test_name_keywords 与 results_key_filters.threads 两个独立条件，不得把 'oltp_read_only 场景且 512 并发' 当作一个整体字符串。"
       skill_specific_expectation:
-        draft_focus:
-          - "将组合限定词解析为同一组 AND 条件"
+        stop_stage: "stage_2_and_filter_check_completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+        optional_outputs:
+          - "data/analysis_results.json"
+        expected_intent_fields:
+          report_type: "comparison"
+          dimension_filters:
+            test_name_keywords:
+              - "read_only"
+            test_name_keywords_or: null
+          results_key_filters:
+            threads: "512"
+        expected_filter_result:
+          selected_scenarios:
+            - "oltp_read_only"
+          selected_threads:
+            - 512
+          selected_products:
+            - "TDSQL-B v22.7.3"
+            - "MySQL 8.0.32"
+            - "OceanBase 4.2"
+          filtered_record_count: 3
+        forbidden_outputs:
+          - "将 AND 条件解析为 OR 条件"
+          - "只应用 scenario=oltp_read_only 条件"
+          - "只应用 threads=512 条件"
+          - "把五个场景全部纳入筛选结果"
+          - "把所有并发档全部纳入筛选结果"
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
+      pass_if_all:
+        - "intent.json 或意图解析结果明确将 oltp_read_only 场景和 512 并发解析为 AND 条件。"
+        - "筛选逻辑明确等价于 scenario = oltp_read_only AND threads = 512。"
+        - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords 明确包含 read_only，且 results_key_filters.threads 明确为 512。"
+        - "intent.json 或等价意图解析结果未将 'oltp_read_only 场景且 512 并发' 保存为单个未拆分字符串。"
+        - "data/extracted_data.json 或筛选后的 records 中只包含 oltp_read_only 场景。"
+        - "data/extracted_data.json 或筛选后的 records 中只包含 threads=512 的记录。"
+        - "data/extracted_data.json 或筛选后的 records 中不包含 oltp_point_select、oltp_read_write、oltp_write_only、oltp_update_index。"
+        - "data/extracted_data.json 或筛选后的 records 中不包含 threads=32、64、128、256、1000 的记录。"
+        - "筛选后的 records 数量为 3。"
+        - "筛选后的 records 中包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
+        - "如果生成 data/analysis_results.json，则分析结果只基于 oltp_read_only 场景且 threads=512 的三条记录展开。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "将“oltp_read_only 场景且 512 并发”解析为 OR 条件。"
+        - "将 'oltp_read_only 场景且 512 并发' 作为一个未拆分的整体字符串处理。"
+        - "筛选结果为空。"
+        - "筛选后只应用 scenario=oltp_read_only，导致保留该场景下所有并发档。"
+        - "筛选后只应用 threads=512，导致保留所有场景下的 512 并发档。"
+        - "筛选后仍包含 oltp_point_select、oltp_read_write、oltp_write_only 或 oltp_update_index。"
+        - "筛选后仍包含 threads=32、64、128、256 或 1000 的记录。"
+        - "筛选后的 records 数量不是 3。"
+        - "把五个场景或所有并发档全部纳入分析，未执行 AND 条件筛选。"
+        - "将不同场景或不同并发档的数据合并成一个总平均值后进行分析。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+      rubrics:
+        - "R1"
+        - "R2"
+        - "R3"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/意图解析规范.md"
+        - "db_report_skill/references/数据源接入规范.md"
+    fatal_errors:
+      - "and_condition_parsed_as_or"
+      - "and_values_saved_as_single_string"
+      - "wrong_filter_scope"
+      - "missing_and_condition"
+      - "unexpected_scenario_included"
+      - "unexpected_thread_included"
+      - "incorrect_filtered_record_count"
+      - "fabricated_performance_metrics"
+      - "internal_data_access"
+
+
+
 
   - id: "DB-11"
-    title: "md/docx/html 三格式交付一致性"
-    status: "draft"
+    title: "三格式交付一致性与最小交付标准检查"
+    priority: "P0"
     tags:
-      - "edge_case"
-      - "delivery_consistency"
-    objective: "验证三格式报告均生成且核心内容一致。"
+      - "delivery_quality"
+      - "three_format_delivery"
+      - "minimum_delivery"
+      - "format_consistency"
+      - "end_to_end"
+    objective: "验证 Skill 在正常生成数据库性能报告时，必须同时交付 report.md、report.docx、report.html 三种格式，并保证三格式中的核心性能指标、结论、图表引用和数据来源一致，不得出现模板占位符残留或缺失关键交付物。"
     input:
-      user_request: ""
-      files: []
+      user_request: "请基于 test-resource/mock_tdsqlb_v22_7_2.log 生成一份 single 数据库性能测试报告，并严格输出 report.md、report.docx、report.html 三种格式，同时保留中间产物和图表。"
+      files:
+        - "test-resource/mock_tdsqlb_v22_7_2.log"
       pasted_data: ""
       skill_specific_input:
-        output_formats:
+        expected_input_mode: "local_file"
+        expected_file_type: "log"
+        expected_report_type: "single"
+        expected_output_formats:
+          - "md"
+          - "docx"
+          - "html"
+        required_intermediate_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "data/block_map.md"
+          - "docs/analysis_proposal.md"
+        required_final_outputs:
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        expected_chart_min_count: 11
+    expected_output:
+      task_understanding:
+        - "识别当前任务是数据库性能测试报告生成请求。"
+        - "识别用户提供了本地 log 文件 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "识别报告类型为 single。"
+        - "识别用户明确要求输出 report.md、report.docx、report.html 三种格式。"
+        - "识别本用例重点检查最终交付完整性、三格式一致性和最小交付标准。"
+      required_actions:
+        - "生成 data/intent.json。"
+        - "生成 data/extracted_data.json。"
+        - "生成 data/data_quality_summary.json。"
+        - "生成 data/analysis_results.json。"
+        - "生成 data/insights.json。"
+        - "生成 charts/ 下的 single 报告图表。"
+        - "生成 report.md。"
+        - "生成 report.docx。"
+        - "生成 report.html。"
+        - "生成最小交付检查结果或等价的门控③核查结果。"
+        - "检查三格式报告中的核心 TPS、QPS、P95、P99 指标一致。"
+        - "检查三格式报告中的产品、场景、并发、数据来源一致。"
+        - "检查 report.md 和 report.html 中的图表引用为 charts/ 下的相对路径。"
+        - "检查 report.md、report.html 中不存在模板占位符残留。"
+      required_content:
+        - "report.md、report.docx、report.html 中必须均明确体现产品 TDSQL-B 和版本 v22.7.2。"
+        - "report.md、report.docx、report.html 中必须均说明数据来源为 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "report.md、report.docx、report.html 中必须均包含 TPS、QPS、P95、P99 核心性能指标。"
+        - "report.md、report.docx、report.html 中核心性能指标数值必须一致。"
+        - "report.md、report.docx、report.html 中核心结论必须一致，不得出现互相矛盾的峰值场景、峰值并发或性能结论。"
+        - "report.md 或 report.html 中必须引用 charts/ 下的相对图表路径。"
+        - "report.md 和 report.html 中不得出现 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 等模板占位符残留。"
+      skill_specific_expectation:
+        stop_stage: "gate_3_minimum_delivery_check_completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+          - "最小交付检查结果（或等价的门控③核查结果）"
+        expected_delivery:
+          formats:
+            - "md"
+            - "docx"
+            - "html"
+          minimum_chart_count: 11
+          required_sections:
+            - "测试背景或任务说明"
+            - "数据来源说明"
+            - "核心指标摘要"
+            - "场景级性能分析"
+            - "图表展示"
+            - "洞察与建议"
+            - "结论"
+          consistency_check_fields:
+            - "product"
+            - "scenario"
+            - "threads"
+            - "tps"
+            - "qps"
+            - "p95_ms"
+            - "p99_ms"
+            - "source_info"
+        forbidden_outputs:
+          - "只生成 report.md"
+          - "只生成 report.html"
+          - "只生成 report.docx"
+          - "三格式核心指标不一致"
+          - "模板占位符残留"
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
+    judge:
+      pass_if_all:
+        - "生成 report.md。"
+        - "生成 report.docx。"
+        - "生成 report.html。"
+        - "生成 data/intent.json、data/extracted_data.json、data/data_quality_summary.json、data/analysis_results.json、data/insights.json。"
+        - "charts/ 下至少生成 11 张 single 报告图表。"
+        - "report.md、report.docx、report.html 三种格式中均明确体现产品 TDSQL-B 和版本 v22.7.2。"
+        - "report.md、report.docx、report.html 三种格式中均说明数据来源为 test-resource/mock_tdsqlb_v22_7_2.log。"
+        - "report.md、report.docx、report.html 三种格式中均包含 TPS、QPS、P95、P99 核心性能指标。"
+        - "report.md、report.docx、report.html 三种格式中的核心 TPS、QPS、P95、P99 数值一致。"
+        - "report.md、report.docx、report.html 三种格式中的峰值场景、峰值并发和核心性能结论一致。"
+        - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
+        - "report.md 中不存在 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 占位符残留。"
+        - "report.html 中不存在 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 占位符残留。"
+        - "生成 data/block_map.md、docs/analysis_proposal.md，以及最小交付检查结果或等价的门控③核查结果。"
+        - "报告中的核心性能指标能够追溯到 data/extracted_data.json 或 data/analysis_results.json。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "缺少 report.md、report.docx、report.html 中任意一种格式。"
+        - "缺少 data/intent.json、data/extracted_data.json、data/data_quality_summary.json、data/analysis_results.json、data/insights.json 中任意一个中间产物。"
+        - "charts/ 下 single 报告图表数量少于 11 张。"
+        - "report.md、report.docx、report.html 三格式中的核心 TPS、QPS、P95、P99 数值不一致。"
+        - "report.md、report.docx、report.html 三格式中的峰值场景、峰值并发或核心结论互相矛盾。"
+        - "report.md 或 report.html 未引用 charts/ 下的相对图表路径。"
+        - "report.md 或 report.html 中出现 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 占位符残留。"
+        - "缺少 data/block_map.md、docs/analysis_proposal.md 或最小交付检查结果等任一最小交付标准关键产物。"
+        - "报告中的核心性能指标无法追溯到 data/extracted_data.json 或 data/analysis_results.json。"
+        - "报告声称使用了 test-resource/mock_tdsqlb_v22_7_2.log 之外的数据源。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "阶段3-single性能分析"
+        - "阶段4-图表生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R2"
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/数据源接入规范.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
+    fatal_errors:
+      - "missing_three_format_delivery"
+      - "missing_intermediate_artifacts"
+      - "insufficient_charts"
+      - "three_format_metric_inconsistency"
+      - "contradictory_report_conclusion"
+      - "untraceable_core_metrics"
+      - "template_placeholder_leftover"
+      - "fabricated_performance_metrics"
+      - "internal_data_access"
+
+
+
+
+  - id: "DB-12"
+    title: "L1/L2/L3 洞察分级与位置检查"
+    priority: "P0"
+    tags:
+      - "insight_quality"
+      - "l1_l2_l3"
+      - "evidence_traceability"
+      - "recommendation_boundary"
+      - "end_to_end"
+    objective: "验证 Skill 在生成数据库性能报告时，能够将事实性指标、分析性结论和建议性判断正确区分为 L1、L2、L3 洞察，并保证 L1/L2 有明确数据来源，L3 建议不得冒充确定事实，必须放在建议章节并标注待确认边界。"
+    input:
+      user_request: "请基于 test-resource/mock_iteration_history.json 生成一份 TDSQL-B iteration 历史趋势报告，重点识别版本演进中的性能提升、性能回退和优化建议，并输出 report.md、report.docx、report.html 三种格式。"
+      files:
+        - "test-resource/mock_iteration_history.json"
+      pasted_data: ""
+      skill_specific_input:
+        expected_input_mode: "local_file"
+        expected_file_type: "json"
+        expected_report_type: "iteration"
+        expected_versions:
+          - "TDSQL-B v22.6"
+          - "TDSQL-B v22.7"
+          - "TDSQL-B v22.8"
+          - "TDSQL-B v22.9"
+        expected_insight_levels:
+          - "L1"
+          - "L2"
+          - "L3"
+        required_l1_source:
+          - "data/extracted_data.json"
+        required_l2_source:
+          - "data/analysis_results.json"
+        required_l3_marker: "[待确认]"
+        expected_output_formats:
           - "md"
           - "docx"
           - "html"
     expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
+      task_understanding:
+        - "识别当前任务是数据库性能历史迭代趋势报告生成请求。"
+        - "识别用户提供了本地 JSON 文件 test-resource/mock_iteration_history.json。"
+        - "识别报告类型为 iteration。"
+        - "识别用户关注性能提升、性能回退和优化建议。"
+        - "识别本用例重点检查 L1/L2/L3 洞察分级、来源可追溯性和建议边界。"
+      required_actions:
+        - "读取 test-resource/mock_iteration_history.json。"
+        - "生成 data/intent.json。"
+        - "生成 data/extracted_data.json。"
+        - "生成 data/data_quality_summary.json。"
+        - "生成 data/analysis_results.json。"
+        - "生成 data/insights.json。"
+        - "在 data/insights.json 中为每条洞察标注 level。"
+        - "在 data/insights.json 中为每条洞察标注 source。"
+        - "将原始指标事实归类为 L1。"
+        - "将基于计算、对比或趋势判断得到的结论归类为 L2。"
+        - "将优化建议、原因假设、后续验证建议归类为 L3。"
+        - "在报告中将 L3 内容放入建议、风险或后续验证章节。"
+        - "在报告中对 L3 建议标注 [待确认] 或等价边界提示。"
+        - "生成 report.md、report.docx、report.html 三格式报告。"
+      required_content:
+        - "data/insights.json 中必须包含 L1、L2、L3 三类洞察。"
+        - "L1 洞察必须是可直接从 data/extracted_data.json 追溯的原始指标事实。"
+        - "L2 洞察必须是可从 data/analysis_results.json 追溯的趋势、对比或回退判断。"
+        - "L3 洞察必须是建议、假设或后续验证方向。"
+        - "L3 洞察不得写成确定事实。"
+        - "L3 洞察必须包含 [待确认] 或等价风险边界提示。"
+        - "报告中必须把 L3 内容放在洞察建议、优化建议、风险提示或后续验证章节。"
+        - "报告中的核心 L1/L2 指标和结论必须能追溯到中间产物。"
       skill_specific_expectation:
-        draft_focus:
-          - "生成三格式报告"
-          - "核心结论与关键指标一致"
+        stop_stage: "insight_level_check_completed"
+        expected_outputs:
+          - "data/intent.json"
+          - "data/extracted_data.json"
+          - "data/data_quality_summary.json"
+          - "data/analysis_results.json"
+          - "data/insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
+        expected_insight_schema:
+          required_fields:
+            - "level"
+            - "text"
+            - "source"
+          allowed_levels:
+            - "L1"
+            - "L2"
+            - "L3"
+        expected_level_rules:
+          L1:
+            meaning: "直接事实层，来自原始 records 或 extracted_data。"
+            required_source:
+              - "data/extracted_data.json"
+          L2:
+            meaning: "分析判断层，来自趋势分析、对比计算或回归检测。"
+            required_source:
+              - "data/analysis_results.json"
+          L3:
+            meaning: "建议假设层，来自优化建议、风险提示或后续验证方向。"
+            required_marker: "[待确认]"
+            required_location:
+              - "优化建议"
+              - "风险提示"
+              - "后续验证"
+        forbidden_outputs:
+          - "L1 无 source"
+          - "L2 无 source"
+          - "L3 冒充确定事实"
+          - "L3 缺少 [待确认]"
+          - "L3 出现在核心事实摘要中"
+          - "内部数据库查询结果"
+          - "内部 API 查询结果"
+          - "线上任务系统查询结果"
     judge:
-      pass_if_all: []
-      fail_if_any: []
-    fatal_errors: []
-
-  - id: "DB-12"
-    title: "L1/L2/L3 洞察位置与措辞检查"
-    status: "draft"
-    tags:
-      - "edge_case"
-      - "insight_governance"
-    objective: "验证洞察分级正确，L3 不被写成确定事实。"
-    input:
-      user_request: ""
-      files: []
-      pasted_data: ""
-      skill_specific_input:
-        insight_levels:
-          - "L1"
-          - "L2"
-          - "L3"
-    expected_output:
-      task_understanding: []
-      required_actions: []
-      required_content: []
-      refusal_conditions: []
-      skill_specific_expectation:
-        draft_focus:
-          - "L1/L2 可作为正文事实或统计发现"
-          - "L3 仅作为建议或假设，并标注 [待确认]"
-    judge:
-      pass_if_all: []
-      fail_if_any: []
+      pass_if_all:
+        - "生成 data/insights.json。"
+        - "data/insights.json 中每条 insight 均包含 level、text、source 或等价字段。"
+        - "data/insights.json 中至少包含一条 L1 洞察。"
+        - "data/insights.json 中至少包含一条 L2 洞察。"
+        - "data/insights.json 中至少包含一条 L3 洞察。"
+        - "L1 洞察内容是可直接从 data/extracted_data.json 追溯的原始指标事实。"
+        - "L2 洞察内容是可从 data/analysis_results.json 追溯的趋势、对比或回退判断。"
+        - "L3 洞察内容是建议、假设、风险提示或后续验证方向。"
+        - "L3 洞察包含 [待确认] 或明确的待验证边界说明。"
+        - "L3 洞察未被放入核心事实摘要、核心指标摘要或确定性结论段落。"
+        - "报告中 L3 内容出现在优化建议、风险提示、后续验证或等价章节。"
+        - "报告中关于性能回退的 L2 结论能够追溯到 data/analysis_results.json。"
+        - "报告中关于原始 QPS/P95/P99 数值的 L1 内容能够追溯到 data/extracted_data.json。"
+        - "若 data/insights.json 区分 iteration_insights 与 selection_insights，则 L3 只出现在 selection_insights 或等价建议区，不出现在 iteration_insights。"
+        - "生成 report.md、report.docx、report.html。"
+        - "report.md、report.docx、report.html 三格式中的 L1/L2/L3 洞察分级表达一致。"
+        - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
+      fail_if_any:
+        - "未生成 data/insights.json。"
+        - "data/insights.json 中 insight 缺少 level 字段。"
+        - "data/insights.json 中 insight 缺少 source 字段。"
+        - "data/insights.json 中缺少 L1、L2、L3 任一层级。"
+        - "将原始指标事实标为 L3。"
+        - "将计算得到的趋势或回退判断标为 L1。"
+        - "将优化建议、原因假设或后续验证方向标为 L1 或 L2。"
+        - "L1 洞察无法追溯到 data/extracted_data.json。"
+        - "L2 洞察无法追溯到 data/analysis_results.json。"
+        - "L3 洞察未包含 [待确认] 或待验证边界说明。"
+        - "L3 洞察被写入核心事实摘要、核心指标摘要或确定性结论段落。"
+        - "L3 洞察出现在 iteration_insights、核心趋势结论区或其他确定性分析分组中。"
+        - "L3 洞察把未验证的优化原因写成确定事实。"
+        - "report.md、report.docx、report.html 三格式中的 L1/L2/L3 分级不一致。"
+        - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
+        - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
+    coverage:
+      stages:
+        - "阶段1-输入解析"
+        - "门控①-意图确认"
+        - "阶段2-数据源接入"
+        - "阶段2-数据标准化"
+        - "门控②-数据质量确认"
+        - "阶段3-iteration趋势分析"
+        - "阶段3-L1/L2/L3洞察生成"
+        - "阶段5-三格式报告组装"
+        - "门控③-最小交付检查"
+      rubrics:
+        - "R3"
+        - "R4"
+        - "R5"
+        - "R6"
+      references:
+        - "db_report_skill/SKILL.md"
+        - "db_report_skill/references/分析方法论.md"
+        - "db_report_skill/references/报告类型模板规范.md"
+        - "db_report_skill/references/三格式输出规范.md"
+        - "db_report_skill/references/最小交付标准.md"
     fatal_errors:
-      - "fabricated_metrics"
-      - "speculative_claim_presented_as_fact"
+      - "missing_insights_json"
+      - "missing_insight_level"
+      - "missing_insight_source"
+      - "wrong_insight_level"
+      - "untraceable_l1_insight"
+      - "untraceable_l2_insight"
+      - "l3_without_pending_confirmation"
+      - "l3_presented_as_fact"
+      - "insight_level_inconsistent_across_formats"
+      - "fabricated_performance_metrics"
+      - "internal_data_access"

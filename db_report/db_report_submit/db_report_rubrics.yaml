@@ -51,7 +51,7 @@ rubrics:
       partial_deductions:
         - condition: "未校验文件路径、存在性、非空性或扩展名支持情况。"
           deduction: 4
-        - condition: "未支持 log/json/csv/xlsx/粘贴 JSON 中的一种主要输入类型。"
+        - condition: "未支持当前测试用例所需的主要输入类型，例如 log/json/csv/xlsx 或粘贴 JSON。"
           deduction: 3
         - condition: "未统一输出为 StandardRecords。"
           deduction: 5
@@ -89,7 +89,7 @@ rubrics:
           deduction: 3
         - condition: "覆盖范围不完整但未标注缺失范围。"
           deduction: 2
-        - condition: "门控②展示不完整。"
+        - condition: "门控③未完整展示文件完整性、数据完整性、图表质量、分析质量、排版质量、占位符与一致性中的关键检查结果。"
           deduction: 2
       zero_score_triggers:
         - "在 TPS/QPS/P95 存在空值时仍继续生成正式分析报告。"
