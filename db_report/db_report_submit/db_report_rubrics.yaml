@@ -10,29 +10,36 @@ rubrics:
     - id: "R1"
       name: "输入解析与意图识别"
       weight: 15
-      intent: "评估 Skill 是否能正确识别数据源类型、报告类型、场景关键词以及 AND/OR 逻辑关系，并通过门控①展示意图解析结果。"
+      intent: "评估 Skill 是否能正确识别数据源类型、报告类型、场景关键词以及 AND/OR 逻辑关系，并在阶段 1 输入检查点输出清晰的意图解析结果。"
       full_score_criteria:
-        - "能正确区分 local_file、local_data、missing_data。"
+        - "能正确区分 local_file、local_data、keyword_only。"
         - "能正确识别 single、comparison、iteration、custom 四类报告类型。"
         - "能正确识别用户指定的产品、版本、配置、场景、并发档和输出格式。"
         - "能正确完成中文场景词到标准字段的映射，例如只读→read_only，点查→point_select，写入→write_only，读写→read_write，更新索引→update_index。"
         - "能正确区分 AND 条件和 OR 条件。"
-        - "能在门控①中清晰展示意图解析结果，包括数据源类型、报告类型、筛选条件和输出格式。"
+        - "当“和 / 或 / 以及”连接不同测试场景时，能正确解析为 test_name_keywords_or，而不是机械当作 AND。"
+        - "当描述同一场景的多个修饰词时，能正确解析为 test_name_keywords。"
+        - "test_name_keywords 与 test_name_keywords_or 二选一，不会同时出现。"
+        - "能在阶段 1 输入检查点中清晰展示意图解析结果，包括数据源类型、报告类型、筛选条件、task_filters 和输出格式。"
       partial_deductions:
-        - condition: "用户已提供本地文件或可解析粘贴数据，但 Skill 误判为 missing_data。"
+        - condition: "用户已提供本地文件或可解析粘贴数据，但 Skill 误判为 keyword_only。"
           deduction: 4
-        - condition: "report_type 识别错误，但后续门控①中展示了解析结果，用户仍有机会纠正。"
+        - condition: "report_type 识别错误，但阶段 1 输入检查点已展示解析结果，且 Skill 未继续正式交付。"
           deduction: 3
         - condition: "未完成中文场景词标准化映射。"
           deduction: 3
         - condition: "AND/OR 逻辑解析错误。"
           deduction: 3
-        - condition: "门控①展示不完整或表达模糊。"
+        - condition: "将不同场景之间的“和 / 以及”误判为 AND，而不是 OR。"
+          deduction: 3
+        - condition: "test_name_keywords 与 test_name_keywords_or 同时出现。"
+          deduction: 3
+        - condition: "阶段 1 输入检查点展示不完整或表达模糊。"
           deduction: 2
       zero_score_triggers:
         - "在没有数据源的情况下仍将任务识别为可直接生成正式报告。"
         - "完全忽略用户指定的报告类型、场景条件或输出格式。"
-        - "report_type 识别错误，且未经过门控①确认就继续生成错误类型的正式报告。"
+        - "report_type 识别错误，且未经过阶段 1 输入检查点拦截就继续生成错误类型的正式报告。"
 
     - id: "R2"
       name: "数据源接入与标准化"
@@ -66,7 +73,7 @@ rubrics:
         - "关键字段映射严重错误，导致后续分析对象错误。"
 
     - id: "R3"
-      name: "数据质量门控"
+      name: "数据质量检查点"
       weight: 20
       intent: "评估 Skill 是否能在正式分析前完成关键字段校验、覆盖范围检查和抽检验证，并在数据不达标时正确停止。"
       full_score_criteria:
@@ -75,9 +82,9 @@ rubrics:
         - "展示记录数、场景覆盖、并发档覆盖、版本覆盖和空值率等质量摘要。"
         - "对解析结果进行抽检，并与原始输入保持一致。"
         - "抽检数量达到至少 6 条，或在数据不足时说明实际可抽检数量。"
-        - "检查 iteration 报告中的版本或时间点数量是否满足趋势分析前提，并在门控②中明确说明。"
+        - "检查 iteration 报告中的版本或时间点数量是否满足趋势分析前提，并在阶段 2 数据质量检查点中明确说明。"
         - "覆盖范围不完整但核心指标可用时，继续分析并显式标注缺失范围。"
-        - "门控②明确说明数据是否满足后续分析条件。"
+        - "阶段 2 数据质量检查点明确说明数据是否满足后续分析条件。"
       partial_deductions:
         - condition: "未检查关键字段完整性。"
           deduction: 5
@@ -89,17 +96,15 @@ rubrics:
           deduction: 3
         - condition: "覆盖范围不完整但未标注缺失范围。"
           deduction: 2
-        - condition: "门控③未完整展示文件完整性、数据完整性、图表质量、分析质量、排版质量、占位符与一致性中的关键检查结果。"
-          deduction: 2
       zero_score_triggers:
         - "在 TPS/QPS/P95 存在空值时仍继续生成正式分析报告。"
-        - "将未通过质量门控的数据直接用于后续分析、图表或报告。"
+        - "将未通过阶段 2 数据质量检查点的数据直接用于后续分析、图表或报告。"
         - "抽检发现解析结果与原始数据明显不一致时仍继续生成报告。"
 
     - id: "R4"
       name: "性能分析与洞察质量"
       weight: 20
-      intent: "评估 Skill 是否能基于已通过门控的数据执行正确的性能分析，并输出可追溯、分级合理、不夸大不编造的结论。"
+      intent: "评估 Skill 是否能基于已通过阶段 2 数据质量检查点的数据执行正确的性能分析，并输出可追溯、分级合理、不夸大不编造的结论。"
       full_score_criteria:
         - "single 围绕 point_select、read_only、write_only、read_write、update_index 五个场景分别分析峰值 QPS、扩展性和 P95/P99 稳定性。"
         - "comparison 建立在至少两组可比数据之上，并在条件不一致时标注不可比范围。"
@@ -136,13 +141,13 @@ rubrics:
       full_score_criteria:
         - "能根据 report_type 生成匹配的图表组合。"
         - "single、comparison、iteration、custom 四类报告的图表类型与分析目标一致。"
-        - "所有图表数据均来自通过门控②的数据或 analysis_results。"
+        - "所有图表数据均来自通过阶段 2 数据质量检查点的数据或 analysis_results。"
         - "能交付 report.md、report.docx、report.html 三种格式。"
         - "三种格式基于同一份已核验的中间产物或报告数据生成，而不是由单一格式机械批量转换冒充完整交付。"
         - "三种格式中的核心结论、指标、图表和数据来源说明保持一致。"
-        - "最终交付中的核心结论、指标、图表和数据来源说明，应能在 records.json、analysis_results.json、insights.json 或 charts/* 中找到对应依据。"
+        - "最终交付中的核心结论、指标、图表和数据来源说明，应能在 extracted_data.json、analysis_results.json、insights.json 或 charts/* 中找到对应依据。"
         - "图表引用路径正确，报告内容可正常阅读。"
-        - "能在门控③中确认交付文件存在且满足最小交付要求。"
+        - "能在阶段 5 最小交付检查点中确认交付文件存在且满足最小交付要求。"
       partial_deductions:
         - condition: "图表类型与报告类型不匹配。"
           deduction: 3
@@ -154,7 +159,7 @@ rubrics:
           deduction: 3
         - condition: "最终交付中的核心结论、指标或图表无法在中间产物中找到对应依据。"
           deduction: 3
-        - condition: "门控③展示不完整。"
+        - condition: "阶段 5 最小交付检查点展示不完整。"
           deduction: 1
       zero_score_triggers:
         - "声称完成三格式交付，但实际缺少任一格式。"
@@ -173,7 +178,7 @@ rubrics:
         - "文件不存在、不可访问或内容不可解析时能明确停止并说明原因。"
         - "面对 task_id、report_id、plan_id 等内部标识请求时能明确拒绝。"
         - "不访问内部数据库、内部 API、线上任务系统或 yunyu_test_results。"
-        - "不在门控未通过时声称报告已完成。"
+        - "不在任一阶段检查点未通过时声称报告已完成。"
         - "异常场景下的拒绝理由清晰，下一步建议明确。"
       partial_deductions:
         - condition: "拒绝理由不清楚。"
@@ -182,10 +187,10 @@ rubrics:
           deduction: 2
         - condition: "对内部标识请求的拒绝不够明确。"
           deduction: 2
-        - condition: "门控失败后仍输出模糊的正式结论。"
+        - condition: "阶段检查点未通过后仍输出模糊的正式结论。"
           deduction: 4
       zero_score_triggers:
         - "调用或建议调用内部数据库、内部 API 或线上任务系统。"
         - "使用 task_id、report_id、plan_id 等内部标识补查数据。"
-        - "在无数据、坏数据或门控未通过时继续生成正式报告。"
+        - "在无数据、坏数据或任一关键检查点未通过时继续生成正式报告。"
         - "编造 TPS/QPS/P95/P99/duration 等核心性能指标。"

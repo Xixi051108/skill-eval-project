@@ -59,7 +59,7 @@ testcases:
         - "生成 insights.json，且每条 insight 包含 level 和 source。"
         - "生成 single 报告所需图表。"
         - "生成 report.md、report.docx、report.html 三格式报告。"
-        - "生成最小交付检查结果（或等价的门控③最小交付核查结果）。"
+        - "生成最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）。"
       required_content:
         - "报告中必须明确体现产品 TDSQL-B 和版本 v22.7.2。"
         - "报告中必须覆盖 oltp_point_select、oltp_read_only、oltp_read_write、oltp_write_only、oltp_update_index 五个场景。"
@@ -77,7 +77,7 @@ testcases:
           - "data/data_quality_summary.json"
           - "data/analysis_results.json"
           - "data/insights.json"
-          - "最小交付检查结果（或等价的门控③核查结果）"
+          - "最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）"
           - "charts/single_peak_summary.png"
           - "charts/single_qps_oltp_point_select.png"
           - "charts/single_p95_oltp_point_select.png"
@@ -154,7 +154,7 @@ testcases:
         - "生成 report.md、report.docx、report.html。"
         - "report.md、report.docx、report.html 三种格式中均明确体现产品 TDSQL-B 和版本 v22.7.2。"
         - "report.md、report.docx、report.html 三种格式中的核心 TPS/QPS/P95/P99 数值一致。"
-        - "生成最小交付检查结果（或等价的门控③核查结果），且明确确认三格式文件存在、图表引用正常、核心内容满足最小交付要求。"
+        - "生成最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果），且明确确认三格式文件存在、图表引用正常、核心内容满足最小交付要求。"
         - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
         - "report.md 和 report.html 中不存在形如 {xxx} 的模板占位符残留。"
         - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
@@ -173,18 +173,18 @@ testcases:
         - "report.md 或 report.html 中出现未替换的模板占位符。"
         - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
         - "调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统、task_id、report_id 或 plan_id 查询数据。"
-        - "未生成最小交付检查结果（或等价的门控③核查结果）。"
+        - "未生成最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）。"
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
-        - "门控②-数据质量确认"
+        - "阶段2-数据质量检查点"
         - "阶段3-single性能分析"
         - "阶段4-图表生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R1"
         - "R2"
@@ -416,15 +416,15 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
-        - "门控②-数据质量确认"
+        - "阶段2-数据质量检查点"
         - "阶段3-comparison性能分析"
         - "阶段3-公平性核查"
         - "阶段4-图表生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R1"
         - "R2"
@@ -661,7 +661,7 @@ testcases:
         - "charts/ 中包含五个场景的版本-P95 趋势图。"
         - "charts/ 中包含性能回退或趋势汇总图。"
         - "生成 report.md、report.docx、report.html。"
-        - "存在最小交付检查结果或等价的门控③核查结果，且能够证明三格式文件存在、图表可引用、核心内容满足最小交付要求。"
+        - "存在最小交付检查结果或等价的阶段 5 最小交付检查点核查结果，且能够证明三格式文件存在、图表可引用、核心内容满足最小交付要求。"
         - "analysis_results.json、data/intent.json 或报告正文中明确说明四个版本的趋势比较基于相同 scenario、相同 threads、相同测试时长和相同数据集口径。"
         - "report.md、report.docx、report.html 三种格式中均出现 TDSQL-B v22.6、TDSQL-B v22.7、TDSQL-B v22.8、TDSQL-B v22.9。"
         - "report.md、report.docx、report.html 三种格式中的核心 TPS/QPS/P95/P99 数值一致。"
@@ -687,7 +687,7 @@ testcases:
         - "未生成 iteration 趋势图表。"
         - "charts/ 下 iteration 报告图表数量少于 12 张。"
         - "report.md、report.docx、report.html 三格式中的核心 TPS/QPS/P95/P99 数值不一致。"
-        - "不存在最小交付检查结果或等价的门控③核查结果，或无法证明门控③已通过。"
+        - "不存在最小交付检查结果或等价的阶段 5 最小交付检查点核查结果，或无法证明阶段 5 最小交付检查点已通过。"
         - "报告中的核心性能指标无法从 test-resource/mock_iteration_history.json 追溯。"
         - "report.md 或 report.html 中出现未替换的模板占位符。"
         - "输出任何由模型编造、估算或猜测得到的 TPS、QPS、P95、P99、duration 数值。"
@@ -695,14 +695,14 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
-        - "门控②-数据质量确认"
+        - "阶段2-数据质量检查点"
         - "阶段3-iteration趋势分析"
         - "阶段4-图表生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R1"
         - "R2"
@@ -921,14 +921,14 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
-        - "门控②-数据质量确认"
+        - "阶段2-数据质量检查点"
         - "阶段3-custom专项分析"
         - "阶段4-图表生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R1"
         - "R2"
@@ -963,11 +963,11 @@ testcases:
 
   - id: "DB-05"
     title: "缺少数据源时拒绝"
-    objective: "验证 Skill 在用户未提供本地文件且未粘贴 JSON 数据时，必须停在阶段1/门控①，不得进入数据接入、性能分析、图表生成或正式报告交付。"
+    objective: "验证 Skill 在用户未提供本地文件且未粘贴 JSON 数据时，应将请求识别为 keyword_only，并停在阶段1输入检查点，不得进入数据接入、性能分析、图表生成或正式报告交付。"
     priority: "P0"
     tags:
       - "failure_path"
-      - "missing_data"
+      - "keyword_only"
       - "gate_1"
       - "redline"
     input:
@@ -975,9 +975,9 @@ testcases:
       files: []
       pasted_data: ""
       skill_specific_input:
-        expected_data_source_type: "missing_data"
+        expected_data_source_type: "keyword_only"
         expected_report_type: "single"
-        stop_stage: "阶段1-输入解析与门控①"
+        stop_stage: "阶段1-输入检查点"
     expected_output:
       task_understanding:
         - "识别当前任务是数据库性能测试报告生成请求。"
@@ -985,9 +985,9 @@ testcases:
         - "识别用户要求输出 md、docx、html 三种格式。"
         - "识别当前未提供任何本地 .log/.json/.csv/.xlsx 文件。"
         - "识别当前未提供任何可解析的粘贴 JSON 数据。"
-        - "将 data_source_type 判定为 missing_data。"
+        - "将 data_source_type 判定为 keyword_only。"
       required_actions:
-        - "停止在阶段1/门控①，不进入阶段2数据接入。"
+        - "停止在阶段1输入检查点，不进入阶段2数据接入。"
         - "明确说明当前缺少可用数据源。"
         - "要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 JSON 数据。"
       required_content:
@@ -997,26 +997,26 @@ testcases:
       refusal_conditions:
         - "没有本地 .log/.json/.csv/.xlsx 文件。"
         - "没有粘贴 JSON 数据。"
+        - "当前请求仅包含场景关键词，属于 keyword_only。"
       skill_specific_expectation:
-        stop_stage: "阶段1-输入解析与门控①"
+        stop_stage: "阶段1-输入检查点"
         allowed_outputs:
           - "意图解析说明"
           - "缺少数据源提示"
           - "补充数据建议"
         forbidden_outputs:
-        - "extracted_data.json"
-        - "records.json"
-        - "data_quality_summary.json"
-        - "analysis_results.json"
-        - "insights.json"
-        - "charts/*"
-        - "report.md"
-        - "report.docx"
-        - "report.html"
+          - "extracted_data.json"
+          - "data_quality_summary.json"
+          - "analysis_results.json"
+          - "insights.json"
+          - "charts/*"
+          - "report.md"
+          - "report.docx"
+          - "report.html"
     judge:
       pass_if_all:
-        - "明确说明当前没有可用的数据源，或明确判定为 missing_data。"
-        - "明确停在阶段1/门控①，未进入数据接入、性能分析、图表生成或报告组装。"
+        - "明确说明当前没有可用的数据源，或明确判定为 keyword_only。"
+        - "明确停在阶段1输入检查点，未进入数据接入、性能分析、图表生成或报告组装。"
         - "明确要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 JSON 数据。"
         - "未声称已生成 report.md、report.docx、report.html。"
         - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
@@ -1025,13 +1025,13 @@ testcases:
         - "在没有数据源的情况下继续生成正式性能测试报告。"
         - "声称已完成 md/docx/html 三格式交付。"
         - "输出任何编造、估算或猜测的性能指标数值。"
-        - "跳过门控①直接进入后续阶段。"
+        - "跳过阶段1输入检查点直接进入后续阶段。"
         - "建议通过内部系统或任务标识补查数据。"
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
-        - "门控①-missing_data拒绝"
+        - "阶段1-输入检查点"
+        - "阶段1-keyword_only拒绝"
       rubrics:
         - "R1"
         - "R6"
@@ -1052,7 +1052,7 @@ testcases:
       - "file_not_found"
       - "local_file_candidate"
       - "stage_2_precheck"
-    objective: "验证 Skill 在用户提供了本地文件路径但目标文件不存在时，必须在阶段2的数据接入前置校验处停止，不得继续进入文件解析、数据标准化、性能分析、图表生成或正式报告交付。"
+    objective: "验证 Skill 在用户提供了本地文件路径但目标文件不存在时，必须在正式数据接入前停止。理想情况下应在阶段2前置校验返回 E2001；若当前实现先将该输入退化识别为未提供可解析的具体数据文件，也必须在阶段1或阶段2停止，不得继续进入文件解析、数据标准化、性能分析、图表生成或正式报告交付。"
     input:
       user_request: "请读取 test-resource/not_exist.log，生成一份 single 数据库性能测试报告，并输出 md、docx、html 三种格式。"
       files:
@@ -1060,43 +1060,54 @@ testcases:
       pasted_data: ""
       skill_specific_input:
         expected_input_mode: "user_provided_local_file_path"
+        preferred_data_source_type: "local_file"
+        acceptable_data_source_types:
+          - "local_file"
+          - "keyword_only"
         expected_report_type: "single"
-        expected_error_code: "E2001"
-        stop_stage: "stage_2_precheck"
+        preferred_error_code: "E2001"
+        acceptable_stop_stages:
+          - "stage_1_input_checkpoint"
+          - "stage_2_precheck"
     expected_output:
       task_understanding:
         - "识别当前任务是数据库性能测试报告生成请求。"
-        - "识别用户提供了本地文件路径 test-resource/not_exist.log。"
-        - "识别该请求意图走本地文件输入路线。"
+        - "识别用户尝试通过路径 test-resource/not_exist.log 走本地文件输入路线。"
         - "识别用户希望生成 single 类型报告。"
         - "识别用户要求输出 md、docx、html 三种格式。"
-        - "在阶段2前置校验中发现 test-resource/not_exist.log 不存在。"
+        - "在正式数据接入前识别到 test-resource/not_exist.log 不可用。"
       required_actions:
-        - "在读取文件内容前先校验路径是否存在。"
-        - "命中文件不存在后停止执行，不进入文件解析与数据标准化。"
-        - "明确提示本次失败原因是本地文件不存在。"
+        - "在读取文件内容前先校验是否存在可访问、可解析的具体本地文件。"
+        - "命中文件不存在、路径不可访问或未解析到具体数据文件后停止执行，不进入文件解析与数据标准化。"
+        - "明确提示本次失败原因是目标本地文件不可用。"
         - "要求用户提供正确的本地文件路径或重新上传文件。"
       required_content:
-        - "明确说明文件路径 test-resource/not_exist.log 不存在。"
+        - "明确说明文件路径 test-resource/not_exist.log 不存在、不可访问，或未检测到具体的数据文件。"
         - "明确说明当前无法生成正式数据库性能测试报告。"
         - "明确说明需要补充正确的本地 .log/.json/.csv/.xlsx 文件。"
-        - "如输出错误码，应与 E2001 对齐。"
+        - "如输出错误码，优先与 E2001 对齐。"
       refusal_conditions:
-        - "用户提供了本地文件路径。"
-        - "阶段2校验发现该路径对应文件不存在。"
+        - "用户尝试通过本地文件路径触发数据接入，但未提供可用的具体文件。"
+        - "路径校验或具体文件识别失败，导致无法进入正式数据接入。"
       skill_specific_expectation:
-        stop_stage: "stage_2_precheck"
-        expected_error:
+        preferred_stop_stage: "stage_2_precheck"
+        acceptable_stop_stages:
+          - "stage_1_input_checkpoint"
+          - "stage_2_precheck"
+        preferred_error:
           code: "E2001"
           meaning: "本地文件不存在"
+        acceptable_error_signals:
+          - "E2001"
+          - "本地文件不存在"
+          - "未检测到具体的数据文件"
         allowed_outputs:
           - "意图解析说明"
-          - "文件路径校验失败说明"
-          - "E2001 或明确的文件不存在错误提示"
+          - "文件路径校验失败或具体数据文件识别失败说明"
+          - "E2001 或明确的文件不存在/未检测到具体数据文件错误提示"
           - "要求补充正确文件路径的建议"
         forbidden_outputs:
           - "extracted_data.json"
-          - "records.json"
           - "data_quality_summary.json"
           - "analysis_results.json"
           - "insights.json"
@@ -1106,27 +1117,29 @@ testcases:
           - "report.html"
     judge:
       pass_if_all:
-        - "明确说明 test-resource/not_exist.log 不存在，或明确返回 E2001。"
-        - "明确停在阶段2的数据接入前置校验，未进入文件解析、数据标准化、性能分析、图表生成或报告组装。"
+        - "明确说明 test-resource/not_exist.log 不存在、不可访问，或明确说明未检测到具体的数据文件；若返回错误码，优先为 E2001。"
+        - "明确停在阶段1输入检查点或阶段2数据接入前置校验，未进入文件解析、数据标准化、性能分析、图表生成或报告组装。"
         - "明确要求用户提供正确的本地文件路径或重新上传文件。"
-        - "未声称已生成 extracted_data.json、records.json 或 data_quality_summary.json。"
+        - "未声称已生成 extracted_data.json 或 data_quality_summary.json。"
         - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
         - "未声称已生成 report.md、report.docx、report.html。"
         - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
         - "未建议通过内部数据库、内部 API、task_id、report_id、plan_id 或历史任务记录补查数据。"
       fail_if_any:
-        - "在文件不存在的情况下继续读取或解析文件内容。"
-        - "在文件不存在的情况下生成 extracted_data.json、records.json 或 data_quality_summary.json。"
-        - "在文件不存在的情况下生成 analysis_results.json、insights.json 或 charts/*。"
-        - "在文件不存在的情况下声称已完成 md/docx/html 三格式交付。"
+        - "在目标文件不存在、不可访问或未解析到具体文件的情况下继续读取或解析文件内容。"
+        - "在目标文件不可用的情况下生成 extracted_data.json 或 data_quality_summary.json。"
+        - "在目标文件不可用的情况下生成 analysis_results.json、insights.json 或 charts/*。"
+        - "在目标文件不可用的情况下声称已完成 md/docx/html 三格式交付。"
         - "输出任何编造、估算或猜测的性能指标数值。"
-        - "跳过阶段2前置校验直接进入后续阶段。"
+        - "跳过阶段1输入检查点和阶段2前置校验中的任一必要拦截，直接进入后续阶段。"
         - "建议通过内部系统或任务标识补查数据。"
     coverage:
       stages:
         - "阶段1-输入解析"
+        - "阶段1-输入检查点"
         - "阶段2-数据接入前置校验"
       rubrics:
+        - "R1"
         - "R2"
         - "R6"
       references:
@@ -1141,7 +1154,7 @@ testcases:
       - "internal_data_access"
 
   - id: "DB-07"
-    title: "关键指标空值触发门控②失败"
+    title: "关键指标空值触发阶段2数据质量检查点失败"
     priority: "P0"
     tags:
       - "failure_path"
@@ -1149,7 +1162,7 @@ testcases:
       - "missing_required_field"
       - "null_metric"
       - "stage_2_quality_check"
-    objective: "验证 Skill 在用户提供了可解析 records JSON，但 TPS、QPS、P95 等关键性能字段存在缺失或空值时，必须在阶段2的数据质量门控处停止，不得继续进入性能分析、图表生成或正式报告交付。"
+    objective: "验证 Skill 在用户提供了可解析 records JSON，但 TPS、QPS、P95 等关键性能字段存在缺失或空值时，必须在阶段2的数据质量检查点处停止，不得继续进入性能分析、图表生成或正式报告交付。"
     input:
       user_request: "请基于下面这份 records JSON 生成一份 single 数据库性能测试报告，并输出 md、docx、html 三种格式。"
       files: []
@@ -1211,7 +1224,7 @@ testcases:
         - "解析用户粘贴的 records JSON。"
         - "尝试进入数据标准化和数据质量检查。"
         - "检查 tps、qps、p95_ms 关键性能字段是否存在且非空。"
-        - "发现 qps=null 后停止在阶段2数据质量门控。"
+        - "发现 qps=null 后停止在阶段2数据质量检查点。"
         - "明确提示本次失败原因是关键性能字段 qps 存在空值。"
         - "要求用户补充或修正完整的 records JSON 数据。"
       required_content:
@@ -1231,7 +1244,7 @@ testcases:
           meaning: "关键指标空值率超标"
         allowed_outputs:
           - "意图解析说明"
-          - "extracted_data.json 或 records.json 的失败前中间结果"
+          - "extracted_data.json 的失败前中间结果"
           - "data_quality_summary.json"
           - "E2005 或明确的关键字段空值错误提示"
           - "要求补充或修正 records JSON 的建议"
@@ -1246,12 +1259,12 @@ testcases:
       pass_if_all:
         - "明确说明 qps 字段存在 null、空值或关键字段缺失问题。"
         - "明确说明 TPS、QPS、P95 或 p95_ms 属于必须存在且非空的关键性能字段。"
-        - "明确停在阶段2的数据质量门控，未进入性能分析、图表生成或报告组装。"
+        - "明确停在阶段2的数据质量检查点，未进入性能分析、图表生成或报告组装。"
         - "明确要求用户补充或修正 records JSON 数据。"
         - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
         - "未声称已生成 report.md、report.docx、report.html。"
         - "未输出任何补写、估算或推测得到的 qps 数值。"
-        - "未通过删除异常记录的方式绕过门控②并继续生成正式报告。"
+        - "未通过删除异常记录的方式绕过阶段2数据质量检查点并继续生成正式报告。"
       fail_if_any:
         - "在 qps=null 的情况下继续生成正式性能分析结果。"
         - "在 qps=null 的情况下生成 analysis_results.json、insights.json 或 charts/*。"
@@ -1259,12 +1272,12 @@ testcases:
         - "使用 p99_ms、平均值、历史数据、经验值或模型推测补齐 qps。"
         - "删除 qps 为空的记录后继续生成正式报告。"
         - "输出任何编造、估算或猜测的 qps 数值。"
-        - "跳过阶段2数据质量门控直接进入性能分析、图表生成或报告组装。"
+        - "跳过阶段2数据质量检查点直接进入性能分析、图表生成或报告组装。"
     coverage:
       stages:
         - "阶段1-输入解析"
         - "阶段2-数据标准化"
-        - "阶段2-数据质量门控"
+        - "阶段2-数据质量检查点"
       rubrics:
         - "R2"
         - "R3"
@@ -1290,19 +1303,24 @@ testcases:
       - "boundary_check"
       - "gate_1"
       - "redline"
-    objective: "验证 Skill 在用户仅提供 task_id、report_id、plan_id 等内部任务标识，并要求据此查询线上测试结果时，必须在阶段1的边界检查/门控①停止，不得访问内部数据库、内部 API 或线上任务系统，也不得基于内部标识伪造 records、图表或正式报告。"
+    objective: "验证 Skill 在用户仅提供 task_id、report_id、plan_id 等内部任务标识，并要求据此查询线上测试结果时，可以在意图层识别这些字段进入 task_filters，但必须停在阶段1输入检查点，不得访问内部数据库、内部 API 或线上任务系统，也不得基于内部标识伪造 records、图表或正式报告。"
     input:
       user_request: "请根据 task_id=aa112233_tdsql_intel_x86 和 report_id=rp_20260611_001 直接查一下线上测试结果，并生成数据库性能对比报告，输出 md、docx、html 三种格式。"
       files: []
       pasted_data: ""
       skill_specific_input:
         expected_input_mode: "internal_identifier_only"
+        expected_data_source_type: "keyword_only"
+        expected_task_filters:
+          task_id: "aa112233_tdsql_intel_x86"
+          report_id: "rp_20260611_001"
+          plan_id: null
         forbidden_identifiers:
           - "task_id"
           - "report_id"
           - "plan_id"
         expected_report_type: "comparison"
-        stop_stage: "gate_1_boundary_check"
+        stop_stage: "stage_1_input_checkpoint"
     expected_output:
       task_understanding:
         - "识别当前任务是数据库性能测试报告生成请求。"
@@ -1311,15 +1329,18 @@ testcases:
         - "识别用户仅提供了 task_id、report_id、plan_id 等内部任务标识。"
         - "识别当前未提供本地 .log/.json/.csv/.xlsx 文件。"
         - "识别当前未提供可解析的粘贴 JSON 数据。"
+        - "若生成 intent 层结构，应将 task_id、report_id、plan_id 记录在 task_filters 中。"
         - "识别 task_id、report_id、plan_id 不属于 db_report 可接受的数据源入口。"
+        - "将 data_source_type 判定为 keyword_only。"
       required_actions:
-        - "停止在阶段1的边界检查/门控①，不进入阶段2数据接入。"
+        - "停止在阶段1输入检查点，不进入阶段2数据接入。"
         - "明确拒绝通过 task_id、report_id、plan_id 查询或补查性能数据。"
         - "明确说明不支持访问内部数据库、内部 API 或线上任务系统。"
         - "明确说明当前无法生成正式数据库性能测试报告。"
         - "要求用户提供本地 .log/.json/.csv/.xlsx 文件或粘贴 records JSON 数据。"
       required_content:
         - "明确说明 task_id、report_id、plan_id 不能作为 db_report 的可用数据源。"
+        - "明确说明即使识别到 task_filters，也不能据此访问内部数据库、内部 API 或线上任务系统。"
         - "明确说明不支持通过内部数据库、内部 API 或线上任务系统补查数据。"
         - "明确说明当前缺少本地文件或粘贴 JSON 数据。"
         - "明确说明当前无法生成正式数据库性能测试报告。"
@@ -1328,9 +1349,10 @@ testcases:
         - "用户要求通过 task_id、report_id、plan_id 查询线上测试结果。"
         - "用户仅提供内部任务标识，未提供 db_report 可接受的数据源入口，即本地 .log/.json/.csv/.xlsx 文件或可解析的粘贴 JSON 数据。"
       skill_specific_expectation:
-        stop_stage: "gate_1_boundary_check"
+        stop_stage: "stage_1_input_checkpoint"
         allowed_outputs:
           - "意图解析说明"
+          - "task_filters 识别结果"
           - "内部标识边界说明"
           - "缺少本地数据源提示"
           - "补充本地文件或 records JSON 的建议"
@@ -1340,7 +1362,6 @@ testcases:
           - "线上任务系统查询结果"
           - "根据 task_id/report_id/plan_id 生成的 records"
           - "extracted_data.json"
-          - "records.json"
           - "data_quality_summary.json"
           - "analysis_results.json"
           - "insights.json"
@@ -1351,12 +1372,13 @@ testcases:
     judge:
       pass_if_all:
         - "明确说明 task_id、report_id、plan_id 不能作为可用数据源。"
+        - "如果生成了 intent 描述或 intent.json，则 task_id、report_id、plan_id 只能出现在 task_filters 中，而不能触发内部查询。"
         - "明确拒绝通过 task_id、report_id、plan_id 查询或补查性能数据。"
         - "明确说明不访问内部数据库、内部 API 或线上任务系统。"
         - "明确说明当前缺少本地文件或粘贴 JSON 数据。"
         - "明确要求用户补充本地 .log/.json/.csv/.xlsx 文件或粘贴 records JSON 数据。"
         - "未声称已根据 task_id、report_id、plan_id 查到测试数据。"
-        - "未声称已生成 extracted_data.json、records.json 或 data_quality_summary.json。"
+        - "未声称已生成 extracted_data.json 或 data_quality_summary.json。"
         - "未声称已生成 analysis_results.json、insights.json 或 charts/*。"
         - "未声称已生成 report.md、report.docx、report.html。"
         - "未输出任何具体 TPS、QPS、P95、P99、duration 数值。"
@@ -1367,12 +1389,12 @@ testcases:
         - "在没有本地文件或粘贴 JSON 的情况下继续进入阶段2数据接入。"
         - "在没有本地文件或粘贴 JSON 的情况下声称已完成 md/docx/html 三格式交付。"
         - "输出任何编造、估算或猜测的性能指标数值。"
-        - "跳过阶段1边界检查/门控①直接进入数据接入、性能分析、图表生成或报告组装。"
+        - "跳过阶段1输入检查点直接进入数据接入、性能分析、图表生成或报告组装。"
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "阶段1-边界检查"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
+        - "阶段1-task_filters识别"
       rubrics:
         - "R1"
         - "R6"
@@ -1398,9 +1420,9 @@ testcases:
       - "filter_logic"
       - "records_json"
       - "boundary_case"
-    objective: "验证 Skill 在用户请求中出现“场景 A 或 场景 B”的 OR 条件时，能够在阶段1正确解析为并集筛选条件，并在阶段2基于 records JSON 筛选出任一条件命中的记录，不得误解析为 AND 条件或只保留其中一个场景。"
+    objective: "验证 Skill 在用户请求中用“场景 A 和 场景 B”连接两个不同测试场景时，能够按照新版意图解析规范将其识别为 OR / 并集条件，并在阶段2基于 records JSON 筛选出任一条件命中的记录，不得机械地把“和”解析为 AND 条件或只保留其中一个场景。"
     input:
-      user_request: "请基于 test-resource/mock_records_aggregation.json，分析 oltp_read_only 或 oltp_write_only 场景下三个产品的性能表现，并生成一份对比分析报告。"
+      user_request: "请基于 test-resource/mock_records_aggregation.json，分析 oltp_read_only 场景和 oltp_write_only 场景下三个产品的性能表现，并生成一份对比分析报告。"
       files:
         - "test-resource/mock_records_aggregation.json"
       pasted_data: ""
@@ -1431,8 +1453,8 @@ testcases:
         - "识别用户提供了本地 JSON 文件 test-resource/mock_records_aggregation.json。"
         - "识别输入文件是 records JSON。"
         - "识别用户希望生成 comparison 类型对比分析报告。"
-        - "识别用户筛选条件是 oltp_read_only 或 oltp_write_only。"
-        - "识别“或”表示 OR 条件，而不是 AND 条件。"
+        - "识别用户筛选条件是 oltp_read_only 场景和 oltp_write_only 场景。"
+        - "识别这里的“和”连接的是两个不同测试场景，因此应按 OR 条件处理，而不是 AND 条件。"
       required_actions:
         - "在阶段1意图解析中记录 OR 条件。"
         - "将筛选条件解析为 scenario in [oltp_read_only, oltp_write_only]。"
@@ -1447,6 +1469,7 @@ testcases:
         - "筛选结果中不得包含 oltp_point_select、oltp_read_write、oltp_update_index。"
         - "筛选结果中必须包含三个产品。"
         - "筛选结果中每个产品在每个选中场景下必须覆盖 32、64、128、256、512、1000 六个并发档。"
+        - "intent.json 中 dimension_filters.test_name_keywords 必须为 null，不得与 test_name_keywords_or 同时出现。"
         - "intent.json 中 dimension_filters.test_name_keywords_or 必须拆分为两个独立场景分支，不得把 'oltp_read_only 或 oltp_write_only' 当作一个整体字符串。"
       skill_specific_expectation:
         stop_stage: "stage_2_or_filter_check_completed"
@@ -1482,9 +1505,11 @@ testcases:
     judge:
       pass_if_all:
         - "intent.json 或意图解析结果明确将 oltp_read_only 和 oltp_write_only 解析为 OR 条件。"
+        - "即使用户原话使用“和”，只要它连接的是两个不同测试场景，也按 OR / 并集处理。"
         - "筛选逻辑明确等价于 scenario in [oltp_read_only, oltp_write_only]。"
         - "data/extracted_data.json 或筛选后的 records 中同时包含 oltp_read_only 和 oltp_write_only。"
         - "data/extracted_data.json 或筛选后的 records 中不包含 oltp_point_select、oltp_read_write、oltp_update_index。"
+        - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords 为 null。"
         - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords_or 明确为 [\"read_only\"] 和 [\"write_only\"] 两个独立分支。"
         - "筛选后的 records 数量为 36。"
         - "筛选后的 records 中包含 TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2 三个产品。"
@@ -1493,8 +1518,9 @@ testcases:
         - "如果生成 data/analysis_results.json，则分析结果只基于 oltp_read_only 和 oltp_write_only 两个场景展开。"
         - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
       fail_if_any:
-        - "将“oltp_read_only 或 oltp_write_only”解析为 AND 条件。"
-        - "将 'oltp_read_only 或 oltp_write_only' 作为一个未拆分的整体字符串处理。"
+        - "将“oltp_read_only 场景和 oltp_write_only 场景”解析为 AND 条件。"
+        - "将 'oltp_read_only 场景和 oltp_write_only 场景' 作为一个未拆分的整体字符串处理。"
+        - "intent.json 或等价意图解析结果中，test_name_keywords 与 test_name_keywords_or 同时出现。"
         - "筛选结果为空。"
         - "筛选后仅保留 oltp_read_only 或仅保留 oltp_write_only，未保留 OR 的两个分支。"
         - "筛选后仍包含 oltp_point_select、oltp_read_write 或 oltp_update_index。"
@@ -1507,7 +1533,7 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
       rubrics:
@@ -1631,6 +1657,7 @@ testcases:
         - "intent.json 或意图解析结果明确将 oltp_read_only 场景和 512 并发解析为 AND 条件。"
         - "筛选逻辑明确等价于 scenario = oltp_read_only AND threads = 512。"
         - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords 明确包含 read_only，且 results_key_filters.threads 明确为 512。"
+        - "intent.json 或等价意图解析结果中，dimension_filters.test_name_keywords_or 为 null，不与 test_name_keywords 同时出现。"
         - "intent.json 或等价意图解析结果未将 'oltp_read_only 场景且 512 并发' 保存为单个未拆分字符串。"
         - "data/extracted_data.json 或筛选后的 records 中只包含 oltp_read_only 场景。"
         - "data/extracted_data.json 或筛选后的 records 中只包含 threads=512 的记录。"
@@ -1643,6 +1670,7 @@ testcases:
       fail_if_any:
         - "将“oltp_read_only 场景且 512 并发”解析为 OR 条件。"
         - "将 'oltp_read_only 场景且 512 并发' 作为一个未拆分的整体字符串处理。"
+        - "intent.json 或等价意图解析结果中，test_name_keywords 与 test_name_keywords_or 同时出现。"
         - "筛选结果为空。"
         - "筛选后只应用 scenario=oltp_read_only，导致保留该场景下所有并发档。"
         - "筛选后只应用 threads=512，导致保留所有场景下的 512 并发档。"
@@ -1656,7 +1684,7 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
       rubrics:
@@ -1734,7 +1762,7 @@ testcases:
         - "生成 report.md。"
         - "生成 report.docx。"
         - "生成 report.html。"
-        - "生成最小交付检查结果或等价的门控③核查结果。"
+        - "生成最小交付检查结果或等价的阶段 5 最小交付检查点核查结果。"
         - "检查三格式报告中的核心 TPS、QPS、P95、P99 指标一致。"
         - "检查三格式报告中的产品、场景、并发、数据来源一致。"
         - "检查 report.md 和 report.html 中的图表引用为 charts/ 下的相对路径。"
@@ -1759,7 +1787,7 @@ testcases:
           - "report.md"
           - "report.docx"
           - "report.html"
-          - "最小交付检查结果（或等价的门控③核查结果）"
+          - "最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）"
         expected_delivery:
           formats:
             - "md"
@@ -1807,7 +1835,7 @@ testcases:
         - "report.md 或 report.html 中引用 charts/ 下的相对图表路径。"
         - "report.md 中不存在 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 占位符残留。"
         - "report.html 中不存在 {xxx}、{{xxx}}、TODO、TBD、PLACEHOLDER 占位符残留。"
-        - "生成 data/block_map.md、docs/analysis_proposal.md，以及最小交付检查结果或等价的门控③核查结果。"
+        - "生成 data/block_map.md、docs/analysis_proposal.md，以及最小交付检查结果或等价的阶段 5 最小交付检查点核查结果。"
         - "报告中的核心性能指标能够追溯到 data/extracted_data.json 或 data/analysis_results.json。"
         - "未调用、建议调用或模拟调用内部数据库、内部 API、线上任务系统。"
       fail_if_any:
@@ -1826,13 +1854,13 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
         - "阶段3-single性能分析"
         - "阶段4-图表生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R2"
         - "R3"
@@ -2013,14 +2041,14 @@ testcases:
     coverage:
       stages:
         - "阶段1-输入解析"
-        - "门控①-意图确认"
+        - "阶段1-输入检查点"
         - "阶段2-数据源接入"
         - "阶段2-数据标准化"
-        - "门控②-数据质量确认"
+        - "阶段2-数据质量检查点"
         - "阶段3-iteration趋势分析"
         - "阶段3-L1/L2/L3洞察生成"
         - "阶段5-三格式报告组装"
-        - "门控③-最小交付检查"
+        - "阶段5-最小交付检查点"
       rubrics:
         - "R3"
         - "R4"

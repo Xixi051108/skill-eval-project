@@ -14,26 +14,27 @@
 - 本地 `.xlsx` 文件
 - 用户粘贴的标准 `records JSON`
 - 用户粘贴的原始测试行 JSON
-- 未提供本地文件或可解析粘贴 JSON 的 `missing_data` 请求
+- 未提供本地文件或可解析粘贴 JSON 的 `keyword_only` 请求
 
 ## 3. Output Contract
 
 按执行阶段，Skill 的关键输出应包括：
 
 - 阶段 1 输出 `intent.json`
-- 阶段 2 输出标准化 `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）和 `data_quality_summary.json`
+- 阶段 2 输出标准化 `extracted_data.json`
+- 阶段 2 可额外输出 `data_quality_summary.json` 作为评测侧观察产物
 - 阶段 3 输出 `analysis_results.json` 和 `insights.json`
 - 阶段 4 输出 `charts/*` 图表文件
-- 阶段 5 输出 `report.md`、`report.docx`、`report.html` 和最小交付检查结果（或等价的门控③核查结果）
+- 阶段 5 输出 `report.md`、`report.docx`、`report.html` 和最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）
 
 ## 4. Tool Or Data Routing
 
 在进入正式分析前，Skill 应先判断输入属于哪一类，并决定对应处理路径。
 
-- 先识别输入属于 `local_file`、`local_data` 或 `missing_data`
+- 先识别输入属于 `local_file`、`local_data` 或 `keyword_only`
 - `local_file` 按文件类型分流到 `log/json/csv/xlsx` 解析流程
 - `local_data` 进入粘贴 JSON 解析流程
-- 缺少可用数据源时识别为 `missing_data`，在门控①处停止，不进入阶段 2 数据接入
+- 缺少可用数据源时识别为 `keyword_only`，在阶段 1 输入检查点停止，不进入阶段 2 数据接入
 - 根据关键词或用户需求识别 `report_type` 为 `single`、`comparison`、`iteration` 或 `custom`
 
 ## 5. Execution Stages
@@ -49,22 +50,22 @@
 - `report_type`
 - `test_name_keywords` 或 `test_name_keywords_or`
 
-门控①：意图确认
+阶段 1 输入检查点
 
-目的：在进入数据接入前，让用户确认 Skill 对数据源、报告类型、筛选条件和输出格式的理解是否正确。
+目的：在进入数据接入前，确认 Skill 已正确识别数据源类型、报告类型、筛选条件和输出格式；若识别为 `keyword_only` 或仅存在内部标识请求，应在此停止并要求补充可用数据源。
 
 ### 阶段2：数据接入
 
-目的：读取本地 `log/json/csv/xlsx` 或用户粘贴 JSON，并转换为标准 `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）。
+目的：读取本地 `log/json/csv/xlsx` 或用户粘贴 JSON，并转换为标准 `extracted_data.json`。
 
 关键输出：
 
-- `extracted_data.json`（或等价的 `records.json` / `StandardRecords`）
+- `extracted_data.json`
 - `meta`
 - `records`
-- `data_quality_summary`
+- `data_quality_summary`（评测侧可观察产物，可与 Skill 的质量检查结果等价）
 
-门控②：数据确认
+阶段 2 数据质量检查点
 
 目的：确认数据记录数、字段完整性、空值率、抽检结果和覆盖范围是否满足分析要求。
 
@@ -116,9 +117,9 @@
 - `report.md`
 - `report.docx`
 - `report.html`
-- 最小交付检查结果（或等价的门控③核查结果）
+- 最小交付检查结果（或等价的阶段 5 最小交付检查点核查结果）
 
-门控③：交付确认
+阶段 5 最小交付检查点
 
 目的：检查三格式文件是否存在、内容是否一致、图表是否引用正确、报告是否满足最小交付要求。
 
@@ -131,7 +132,7 @@
 - JSON 无法解析或无法标准化为 `records` 结构时，必须停止
 - `TPS / QPS / P95` 存在空值时，必须停止正式报告生成
 - 用户仅提供 `task_id`、`report_id`、`plan_id` 等内部标识时，必须拒绝并说明不支持内部查数
-- 任一门控未通过时，不得进入下一阶段
+- 任一检查点未通过时，不得进入下一阶段
 
 ## 7. Logic Chain 的评估价值
 
@@ -139,5 +140,5 @@
 
 - 可以作为 `ideal_state` 和 `testcases` 的上游依据
 - 可以帮助判断每个测试用例究竟在测哪一个阶段
-- 可以辅助检查是否覆盖了意图解析、数据接入、质量门控、分析、交付五个主要阶段
-- 可以帮助识别红线是否出现在某个具体门控之前或之后
+- 可以辅助检查是否覆盖了意图解析、数据接入、数据质量检查、分析、交付五个主要阶段
+- 可以帮助识别红线是否出现在某个具体检查点之前或之后
