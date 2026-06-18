@@ -1,0 +1,81 @@
+﻿intent.json ������: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\intent.json
+{
+  "data_source_type": "local_file",
+  "data_source_value": "D:\\����\\���ܹ���+Skill+����ר���\\db_report\\test-resource\\mock_iteration_history.json",
+  "report_type": "iteration",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "test_name_keywords_or": null,
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": null,
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": {
+    "version_range": [],
+    "regression_threshold_pct": 5
+  },
+  "custom_config": null,
+  "other_info": null
+}
+extracted_data.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\extracted_data.json��120 ����¼��
+   ��Ʒ: ['TDSQL-B v22.6', 'TDSQL-B v22.7', 'TDSQL-B v22.8', 'TDSQL-B v22.9']
+   ����: ['oltp_point_select', 'oltp_read_only', 'oltp_read_write', 'oltp_write_only', 'oltp_update_index']
+   ������: [32, 64, 128, 256, 512, 1000]
+
+=== ������ɣ�report_type=iteration��===
+analysis_results.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\analysis_results.json
+insights.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\insights.json
+��������: 32
+
+���� 12 ��ͼ���report_type=iteration��
+   - iter_cumulative.png
+   - iter_regression.png
+   - iter_trend_p95_oltp_point_select.png
+   - iter_trend_p95_oltp_read_only.png
+   - iter_trend_p95_oltp_read_write.png
+   - iter_trend_p95_oltp_update_index.png
+   - iter_trend_p95_oltp_write_only.png
+   - iter_trend_qps_oltp_point_select.png
+   - iter_trend_qps_oltp_read_only.png
+   - iter_trend_qps_oltp_read_write.png
+   - iter_trend_qps_oltp_update_index.png
+   - iter_trend_qps_oltp_write_only.png
+Markdown: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\report.md
+Word:     D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\report.docx
+HTML:     D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\report.html
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\parse_intent.py --text ����� test-resource/mock_iteration_history.json ����һ�� TDSQL-B ��ʷ�����������Ʊ��棬���� v22.6��v22.7��v22.8��v22.9 �ĸ��汾����� OLTP �����µ����ܱ仯������� report.md��report.docx��report.html ���ָ�ʽ�� --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\intent.json
+
+��ͼ���������
+  data_source_type: local_file
+  report_type:      iteration
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\data_source_adapter.py --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\intent.json --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\extracted_data.json
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\analyze.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\extracted_data.json --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\intent.json --out-analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\analysis_results.json --out-insights D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\insights.json
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\generate_charts.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\extracted_data.json --analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\analysis_results.json --charts-dir D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\charts --report-type iteration
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\render_all.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\extracted_data.json --analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\analysis_results.json --insights D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\insights.json --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03\data\intent.json --out-dir D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03 --charts-dir-rel charts
+
+��ˮ�����
+   ����λ��: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-03/
+     - report.md
+     - report.docx
+     - report.html
+     - charts/  (12 ��ͼ)
+     - data/    (4 ���м����)
+

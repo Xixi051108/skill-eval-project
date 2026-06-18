@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-detect_input.py — 自动识别用户输入的数据源类型
+detect_input.py — 自动识别用户输入的数据源类型（仅文本和本地文件）。
 
 用法：
     from detect_input import detect_data_source
     src = detect_data_source(user_input_text)
-    # src = {"type": "local_file"|"local_data"|"missing_data", "value": ...}
+    # src = {"type": "local_file"|"local_data"|"keyword_only", "value": ...}
 """
 import json
 import os
@@ -13,26 +13,21 @@ import re
 from typing import Dict, Optional
 
 
-FILE_EXT_PATTERN = re.compile(r'([A-Za-z0-9_\-./\u4e00-\u9fa5]+?\.(?:log|xlsx|json|csv))', re.IGNORECASE)
-JSON_BLOB = re.compile(r'\{[^{}]*"(meta|records|test_name|results|dimension)"[^{}]*\}', re.DOTALL)
+FILE_EXT_PATTERN = re.compile(r'([A-Za-z0-9_\-./\u4e00-\u9fa5]+?\.(?:log|xlsx|xls|json|csv|txt))', re.IGNORECASE)
+JSON_BLOB = re.compile(r'\{[^{}]*"(test_name|results|product|scenario|threads|tps|qps)"[^{}]*\}', re.DOTALL)
 
 
 def detect_data_source(text: str) -> Dict[str, Optional[str]]:
-    """根据用户输入文本判定数据源类型。
-
-    返回 {"type": ..., "value": ..., "extras": [...]}
-    """
+    """根据用户输入文本判定数据源类型。只支持本地文件和粘贴数据。"""
     if not text:
-        return {"type": "missing_data", "value": None}
+        return {"type": "keyword_only", "value": None}
 
-    # 1) 本地文件路径（绝对或相对）
+    # 1) 本地文件路径
     file_matches = FILE_EXT_PATTERN.findall(text)
-    # 同时尝试相对当前工作目录与脚本所在仓库根目录
     cwd = os.getcwd()
-    skill_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     existing = []
     for fp in file_matches:
-        for base in (None, cwd, skill_root):
+        for base in (None, cwd):
             cand = fp if base is None else os.path.join(base, fp)
             if os.path.exists(cand):
                 existing.append(os.path.abspath(cand))
@@ -44,10 +39,9 @@ def detect_data_source(text: str) -> Dict[str, Optional[str]]:
             "extras": existing[1:] if len(existing) > 1 else [],
         }
 
-    # 2) 内嵌 JSON 数据（粘贴的标准 records 或原始测试行）
+    # 2) 内嵌 JSON 数据（用户直接粘贴）
     json_match = JSON_BLOB.search(text)
     if json_match:
-        # 尝试找到完整 JSON 对象（简化处理：从第一个 { 找到匹配的 }）
         start = json_match.start()
         depth = 0
         end = start
@@ -66,8 +60,8 @@ def detect_data_source(text: str) -> Dict[str, Optional[str]]:
         except json.JSONDecodeError:
             pass
 
-    # 3) 默认缺少可用本地数据源
-    return {"type": "missing_data", "value": None}
+    # 3) 默认关键词
+    return {"type": "keyword_only", "value": None}
 
 
 def main():

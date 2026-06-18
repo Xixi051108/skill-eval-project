@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高并发 专项报告</title>
+
+<style>
+  body { font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; color: #333; }
+  h1 { text-align: center; font-size: 2em; margin-bottom: 4px; }
+  h1 + p { text-align: center; color: #666; font-size: 1.1em; }
+  h2 { border-bottom: 2px solid #1f77b4; padding-bottom: 6px; margin-top: 32px; }
+  h3 { margin-top: 24px; color: #1f77b4; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th { background: #D9E2F3; padding: 8px 12px; text-align: left; border: 1px solid #bbb; }
+  td { padding: 6px 12px; border: 1px solid #ddd; }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .cover { text-align: center; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 24px; }
+  .cover .meta { color: #888; margin-top: 8px; }
+  .toc { background: #f5f5f5; padding: 16px 24px; border-radius: 6px; margin: 16px 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: #1f77b4; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+  .caption { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 16px; }
+  .insight { padding: 10px 16px; margin: 8px 0; border-left: 4px solid #1f77b4; background: #f0f5ff; }
+  .insight.L1 { border-left-color: #2ca02c; background: #f0fff0; }
+  .insight.L2 { border-left-color: #ff7f0e; background: #fff8f0; }
+  .insight.L3 { border-left-color: #9467bd; background: #f8f0ff; }
+  .insight .level { font-weight: bold; margin-right: 8px; }
+  ul.bullet { padding-left: 20px; }
+  ul.bullet li { margin: 4px 0; }
+</style>
+
+</head>
+<body>
+
+<div class="cover">
+  <h1>高并发 专项报告</h1>
+  <p>数据库性能客制化分析</p>
+  <p class="meta">日期：2026-06-16 &nbsp;|&nbsp; 版本：v1.0</p>
+</div>
+
+<div class="toc">
+  <h3>目录</h3>
+  <ul>
+    <li><a href="#ch1">第 1 章 分析目标</a></li><li><a href="#ch2">第 2 章 深度分析</a></li><li><a href="#ch3">第 3 章 结论与建议</a></li>
+  </ul>
+</div>
+
+<div class="section"><h2 id="ch1">第 1 章 分析目标</h2>
+<h3 id="ch1_1">1.1 分析说明</h3>
+<p>分析高并发场景下的性能瓶颈和极限 QPS</p>
+<h3 id="ch1_2">1.2 数据范围</h3>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>产品</td><td>TDSQL-B v22.7.3、MySQL 8.0.32、OceanBase 4.2</td></tr><tr><td>场景</td><td>点查、只读、混合读写、写入、索引更新</td></tr><tr><td>记录数</td><td>90 条</td></tr><tr><td>数据来源</td><td>test-resource/mock_records_aggregation.json</td></tr></tbody></table></div><div class="section"><h2 id="ch2">第 2 章 深度分析</h2>
+<h3 id="ch2_1">2.1 高并发 分桶分析</h3>
+<p>按 高并发 分桶后，各桶平均性能如下：</p>
+<table><thead><tr><th>分桶</th><th>平均 QPS</th><th>平均 P95 (ms)</th><th>样本数</th></tr></thead><tbody><tr><td>高并发 (≥256)</td><td>44,619</td><td>146.93</td><td>45</td></tr><tr><td>中低并发 (<256)</td><td>20,605</td><td>26.67</td><td>45</td></tr></tbody></table>
+<img src="charts/custom_main.png" alt="高并发 维度与平均 QPS">
+<p class="caption">高并发 维度与平均 QPS</p>
+<img src="charts/custom_compare.png" alt="高并发 QPS vs P95 对比">
+<p class="caption">高并发 QPS vs P95 对比</p>
+<div class="insight L1"><span class="level">[L1]</span>TDSQL-B v22.7.3 峰值 QPS 最高出现在 oltp_point_select（89,929 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>TDSQL-B v22.7.3 峰值 QPS 最低出现在 oltp_update_index（14,747 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_point_select 并发扩展率 +334.0%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_only 并发扩展率 +323.6%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_write 并发扩展率 +324.0%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_write_only 并发扩展率 +325.0%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_update_index 并发扩展率 +326.6%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>MySQL 8.0.32 峰值 QPS 最高出现在 oltp_point_select（71,646 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>MySQL 8.0.32 峰值 QPS 最低出现在 oltp_update_index（12,010 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_point_select 并发扩展率 +318.9%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_only 并发扩展率 +330.2%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_write 并发扩展率 +329.9%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_write_only 并发扩展率 +326.1%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_update_index 并发扩展率 +328.2%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>OceanBase 4.2 峰值 QPS 最高出现在 oltp_point_select（79,642 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>OceanBase 4.2 峰值 QPS 最低出现在 oltp_update_index（13,058 @ 512 并发）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_point_select 并发扩展率 +331.6%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_only 并发扩展率 +325.3%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_read_write 并发扩展率 +330.6%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_write_only 并发扩展率 +328.3%（32→1000 threads）</div>
+<div class="insight L1"><span class="level">[L1]</span>oltp_update_index 并发扩展率 +326.4%（32→1000 threads）</div>
+<div class="insight L2"><span class="level">[L2]</span>高并发段平均 QPS=44,619，中低并发段平均 QPS=20,605</div></div><div class="section"><h2 id="ch3">第 3 章 结论与建议</h2>
+<h3 id="ch3_1">3.1 核心发现</h3>
+<div class="insight L2"><span class="level">[L2]</span>高并发段平均 QPS=44,619，中低并发段平均 QPS=20,605</div>
+<h3 id="ch3_2">3.2 建议与后续</h3>
+<ul class="bullet"><li>本报告聚焦 高并发 维度，建议结合实际业务场景做进一步验证。</li><li>如需扩展分析维度，可在门控①阶段补充需求。</li><li>数据可能存在采集条件差异，请在结论中标注不确定性。</li></ul></div>
+
+</body>
+</html>

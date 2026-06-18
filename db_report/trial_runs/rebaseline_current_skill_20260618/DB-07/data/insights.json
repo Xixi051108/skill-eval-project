@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "level": "L1",
+      "text": "TDSQL-B v22.7.3 峰值 QPS 最高出现在 oltp_read_only（12,536 @ 32 并发）",
+      "source": "single_product.TDSQL-B v22.7.3.peak_summary",
+      "scenario": "oltp_read_only"
+    },
+    {
+      "level": "L1",
+      "text": "TDSQL-B v22.7.3 峰值 QPS 最低出现在 oltp_read_only（12,536 @ 32 并发）",
+      "source": "single_product.TDSQL-B v22.7.3.peak_summary",
+      "scenario": "oltp_read_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_read_only 并发扩展率 -87.1%（32→64 threads）",
+      "source": "single_product.TDSQL-B v22.7.3.scalability.oltp_read_only",
+      "scenario": "oltp_read_only"
+    }
+  ],
+  "report_type": "single"
+}

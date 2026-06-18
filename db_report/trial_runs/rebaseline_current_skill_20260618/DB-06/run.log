@@ -1,0 +1,53 @@
+﻿intent.json ������: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\intent.json
+{
+  "data_source_type": "keyword_only",
+  "data_source_value": null,
+  "report_type": "single",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "test_name_keywords_or": null,
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": null,
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": null,
+  "custom_config": null,
+  "other_info": null
+}
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\parse_intent.py --text ����� test-resource/not_exists.log �������ݿ����ܲ��Ա��棬����� md��docx��html ���ָ�ʽ�� --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\intent.json
+
+��ͼ���������
+  data_source_type: keyword_only
+  report_type:      single
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\data_source_adapter.py --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\intent.json --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\extracted_data.json
+
+Traceback (most recent call last):
+  File "D:\����\db_report_skill\scripts\data_source_adapter.py", line 361, in <module>
+    main()
+  File "D:\����\db_report_skill\scripts\data_source_adapter.py", line 347, in main
+    extracted = load_records(intent)
+  File "D:\����\db_report_skill\scripts\data_source_adapter.py", line 292, in load_records
+    raise RuntimeError(
+RuntimeError: δ��⵽����������ļ������ṩ���¸�ʽ֮һ��
+  - sysbench .log ��־�ļ�·��
+  - .xlsx Excel �ļ�·��
+  - .json �����ļ�·��
+  - .csv �����ļ�·��
+  - ֱ��ճ�� JSON ����
+����ʧ��: D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\data_source_adapter.py --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\intent.json --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-06\data\extracted_data.json
+

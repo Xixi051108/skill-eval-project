@@ -1,0 +1,38 @@
+﻿extracted_data.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\extracted_data.json��2 ����¼��
+   ��Ʒ: ['TDSQL-B v22.7.3']
+   ����: ['oltp_read_only']
+   ������: [32, 64]
+
+=== ������ɣ�report_type=single��===
+analysis_results.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\analysis_results.json
+insights.json �ѱ���: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\insights.json
+��������: 3
+
+���� 3 ��ͼ���report_type=single��
+   - single_p95_oltp_read_only.png
+   - single_peak_summary.png
+   - single_qps_oltp_read_only.png
+Markdown: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\report.md
+Word:     D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\report.docx
+HTML:     D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\report.html
+
+��ͼ���������
+  data_source_type: local_data
+  report_type:      single
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\data_source_adapter.py --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\intent.json --out D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\extracted_data.json
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\analyze.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\extracted_data.json --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\intent.json --out-analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\analysis_results.json --out-insights D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\insights.json
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\generate_charts.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\extracted_data.json --analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\analysis_results.json --charts-dir D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\charts --report-type single
+
+> D:\index\envs\pylesson\python.exe D:\����\db_report_skill\scripts\render_all.py --extracted D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\extracted_data.json --analysis D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\analysis_results.json --insights D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\insights.json --intent D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07\data\intent.json --out-dir D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07 --charts-dir-rel charts
+
+��ˮ�����
+   ����λ��: D:\����\���ܹ���+Skill+����ר���\db_report\trial_runs\rebaseline_current_skill_20260618\DB-07/
+     - report.md
+     - report.docx
+     - report.html
+     - charts/  (3 ��ͼ)
+     - data/    (4 ���м����)
+

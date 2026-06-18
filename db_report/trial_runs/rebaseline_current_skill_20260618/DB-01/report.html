@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库性能测试报告</title>
+
+<style>
+  body { font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; color: #333; }
+  h1 { text-align: center; font-size: 2em; margin-bottom: 4px; }
+  h1 + p { text-align: center; color: #666; font-size: 1.1em; }
+  h2 { border-bottom: 2px solid #1f77b4; padding-bottom: 6px; margin-top: 32px; }
+  h3 { margin-top: 24px; color: #1f77b4; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th { background: #D9E2F3; padding: 8px 12px; text-align: left; border: 1px solid #bbb; }
+  td { padding: 6px 12px; border: 1px solid #ddd; }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .cover { text-align: center; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 24px; }
+  .cover .meta { color: #888; margin-top: 8px; }
+  .toc { background: #f5f5f5; padding: 16px 24px; border-radius: 6px; margin: 16px 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: #1f77b4; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+  .caption { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 16px; }
+  .insight { padding: 10px 16px; margin: 8px 0; border-left: 4px solid #1f77b4; background: #f0f5ff; }
+  .insight.L1 { border-left-color: #2ca02c; background: #f0fff0; }
+  .insight.L2 { border-left-color: #ff7f0e; background: #fff8f0; }
+  .insight.L3 { border-left-color: #9467bd; background: #f8f0ff; }
+  .insight .level { font-weight: bold; margin-right: 8px; }
+  ul.bullet { padding-left: 20px; }
+  ul.bullet li { margin: 4px 0; }
+</style>
+
+</head>
+<body>
+
+<div class="cover">
+  <h1>数据库性能测试报告</h1>
+  <p>sysbench sysbench OLTP 测试</p>
+  <p class="meta">日期：2026-06-16 &nbsp;|&nbsp; 版本：v1.0</p>
+</div>
+
+<div class="toc">
+  <h3>目录</h3>
+  <ul>
+    <li><a href="#ch1">第 1 章 测试结论</a></li><li><a href="#ch2">第 2 章 测试环境</a></li><li><a href="#ch3">第 3 章 全量测试数据</a></li><li><a href="#ch4">第 4 章 性能分析</a></li><li><a href="#ch5">第 5 章 优化建议</a></li>
+  </ul>
+</div>
+
+<div class="section"><h2 id="ch1">第 1 章 测试结论</h2>
+<h3 id="ch1_1">1.1 测试结论摘要</h3>
+<p>sysbench 在 sysbench 5 个 OLTP 场景下完成测试，覆盖并发档 [32, 64, 128, 256, 512, 1000]。峰值 QPS 最高出现在 点查（78,231 @ 512 并发），最低出现在 索引更新（13,250 @ 512 并发）。</p>
+<h3 id="ch1_2">1.2 关键性能数字</h3>
+<table><thead><tr><th>场景</th><th>峰值并发</th><th>峰值 QPS</th><th>P95 (ms)</th></tr></thead><tbody><tr><td>点查</td><td>512</td><td>78,231</td><td>8.90</td></tr><tr><td>只读</td><td>512</td><td>47,323</td><td>158.40</td></tr><tr><td>写入</td><td>512</td><td>60,362</td><td>32.50</td></tr><tr><td>混合读写</td><td>512</td><td>43,606</td><td>248.20</td></tr><tr><td>索引更新</td><td>512</td><td>13,250</td><td>42.80</td></tr></tbody></table>
+<h3 id="ch1_3">1.3 核心结论</h3>
+<img src="charts/single_peak_summary.png" alt="sysbench 场景峰值汇总">
+<p class="caption">sysbench 场景峰值汇总</p>
+<div class="insight L1"><span class="level">[L1]</span>sysbench 在 sysbench 5 个 OLTP 场景下完成测试，覆盖并发档 [32, 64, 128, 256, 512, 1000]。峰值 QPS 最高出现在 点查（78,231 @ 512 并发），最低出现在 索引更新（13,250 @ 512 并发）。</div></div><div class="section"><h2 id="ch2">第 2 章 测试环境</h2>
+<h3 id="ch2_1">2.1 数据库配置</h3>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>产品</td><td>sysbench</td></tr><tr><td>DB 端点</td><td>TDSQL-B-v22.7.2</td></tr><tr><td>数据集</td><td>16 tables × 1000000 rows</td></tr><tr><td>单测时长</td><td>2026s</td></tr></tbody></table>
+<h3 id="ch2_2">2.2 测试方法</h3>
+<table><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>测试工具</td><td>sysbench</td></tr><tr><td>测试场景</td><td>点查、只读、写入、混合读写、索引更新</td></tr><tr><td>并发档</td><td>[32, 64, 128, 256, 512, 1000]</td></tr></tbody></table>
+<h3 id="ch2_3">2.3 数据质量</h3>
+<table><thead><tr><th>检查项</th><th>结果</th></tr></thead><tbody><tr><td>总记录数</td><td>30 条</td></tr><tr><td>TPS / QPS / P95 有效率</td><td>100%</td></tr><tr><td>数据来源</td><td>D:\桌面\性能工程+Skill+评估专项考题\db_report\test-resource\mock_tdsqlb_v22_7_2.log</td></tr></tbody></table></div><div class="section"><h2 id="ch3">第 3 章 全量测试数据</h2>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody><tr><td>点查</td><td>32</td><td>18,420.50</td><td>18,420.50</td><td>2.10</td><td>3.40</td></tr><tr><td>点查</td><td>64</td><td>32,150.80</td><td>32,150.80</td><td>2.40</td><td>3.90</td></tr><tr><td>点查</td><td>128</td><td>58,320.40</td><td>58,320.40</td><td>2.85</td><td>4.60</td></tr><tr><td>点查</td><td>256</td><td>72,450.10</td><td>72,450.10</td><td>4.80</td><td>8.20</td></tr><tr><td>点查</td><td>512</td><td>78,230.60</td><td>78,230.60</td><td>8.90</td><td>15.40</td></tr><tr><td>点查</td><td>1000</td><td>75,100.20</td><td>75,100.20</td><td>18.20</td><td>32.10</td></tr><tr><td>只读</td><td>32</td><td>820.30</td><td>11,484.20</td><td>42.10</td><td>58.30</td></tr><tr><td>只读</td><td>64</td><td>1,480.50</td><td>20,727.00</td><td>46.50</td><td>64.20</td></tr><tr><td>只读</td><td>128</td><td>2,410.80</td><td>33,751.20</td><td>58.90</td><td>82.40</td></tr><tr><td>只读</td><td>256</td><td>3,120.40</td><td>43,685.60</td><td>85.30</td><td>120.80</td></tr><tr><td>只读</td><td>512</td><td>3,380.20</td><td>47,322.80</td><td>158.40</td><td>224.50</td></tr><tr><td>只读</td><td>1000</td><td>3,220.60</td><td>45,088.40</td><td>320.10</td><td>458.20</td></tr><tr><td>写入</td><td>32</td><td>4,820.10</td><td>14,460.30</td><td>8.40</td><td>14.20</td></tr><tr><td>写入</td><td>64</td><td>8,650.40</td><td>25,951.20</td><td>9.80</td><td>16.50</td></tr><tr><td>写入</td><td>128</td><td>14,820.60</td><td>44,461.80</td><td>12.40</td><td>21.30</td></tr><tr><td>写入</td><td>256</td><td>18,950.20</td><td>56,850.60</td><td>18.20</td><td>32.40</td></tr><tr><td>写入</td><td>512</td><td>20,120.80</td><td>60,362.40</td><td>32.50</td><td>58.20</td></tr><tr><td>写入</td><td>1000</td><td>19,580.40</td><td>58,741.20</td><td>68.40</td><td>124.30</td></tr><tr><td>混合读写</td><td>32</td><td>520.40</td><td>10,408.00</td><td>72.30</td><td>98.50</td></tr><tr><td>混合读写</td><td>64</td><td>940.20</td><td>18,804.00</td><td>78.50</td><td>110.20</td></tr><tr><td>混合读写</td><td>128</td><td>1,560.80</td><td>31,216.00</td><td>92.10</td><td>132.40</td></tr><tr><td>混合读写</td><td>256</td><td>2,010.50</td><td>40,210.00</td><td>138.40</td><td>198.30</td></tr><tr><td>混合读写</td><td>512</td><td>2,180.30</td><td>43,606.00</td><td>248.20</td><td>358.10</td></tr><tr><td>混合读写</td><td>1000</td><td>2,050.80</td><td>41,016.00</td><td>512.30</td><td>748.40</td></tr><tr><td>索引更新</td><td>32</td><td>3,120.50</td><td>3,120.50</td><td>12.80</td><td>20.40</td></tr><tr><td>索引更新</td><td>64</td><td>5,640.20</td><td>5,640.20</td><td>14.20</td><td>23.10</td></tr><tr><td>索引更新</td><td>128</td><td>9,820.40</td><td>9,820.40</td><td>17.50</td><td>29.80</td></tr><tr><td>索引更新</td><td>256</td><td>12,480.80</td><td>12,480.80</td><td>24.60</td><td>42.30</td></tr><tr><td>索引更新</td><td>512</td><td>13,250.40</td><td>13,250.40</td><td>42.80</td><td>72.50</td></tr><tr><td>索引更新</td><td>1000</td><td>12,820.10</td><td>12,820.10</td><td>88.40</td><td>152.30</td></tr></tbody></table></div><div class="section"><h2 id="ch4">第 4 章 性能分析</h2>
+<h3 id="ch4_1_1">4.1.1 点查并发扩展</h3>
+<img src="charts/single_qps_oltp_point_select.png" alt="点查 并发-QPS 曲线">
+<p class="caption">点查 并发-QPS 曲线</p>
+<img src="charts/single_p95_oltp_point_select.png" alt="点查 并发-P95 曲线">
+<p class="caption">点查 并发-P95 曲线</p>
+<h3 id="ch4_1_2">4.1.2 只读并发扩展</h3>
+<img src="charts/single_qps_oltp_read_only.png" alt="只读 并发-QPS 曲线">
+<p class="caption">只读 并发-QPS 曲线</p>
+<img src="charts/single_p95_oltp_read_only.png" alt="只读 并发-P95 曲线">
+<p class="caption">只读 并发-P95 曲线</p>
+<h3 id="ch4_1_3">4.1.3 写入并发扩展</h3>
+<img src="charts/single_qps_oltp_write_only.png" alt="写入 并发-QPS 曲线">
+<p class="caption">写入 并发-QPS 曲线</p>
+<img src="charts/single_p95_oltp_write_only.png" alt="写入 并发-P95 曲线">
+<p class="caption">写入 并发-P95 曲线</p>
+<h3 id="ch4_1_4">4.1.4 混合读写并发扩展</h3>
+<img src="charts/single_qps_oltp_read_write.png" alt="混合读写 并发-QPS 曲线">
+<p class="caption">混合读写 并发-QPS 曲线</p>
+<img src="charts/single_p95_oltp_read_write.png" alt="混合读写 并发-P95 曲线">
+<p class="caption">混合读写 并发-P95 曲线</p>
+<h3 id="ch4_1_5">4.1.5 索引更新并发扩展</h3>
+<img src="charts/single_qps_oltp_update_index.png" alt="索引更新 并发-QPS 曲线">
+<p class="caption">索引更新 并发-QPS 曲线</p>
+<img src="charts/single_p95_oltp_update_index.png" alt="索引更新 并发-P95 曲线">
+<p class="caption">索引更新 并发-P95 曲线</p></div><div class="section"><h2 id="ch5">第 5 章 优化建议</h2>
+<h3 id="ch5_1">5.1 调优最佳实践</h3>
+<ul class="bullet"><li>峰值 QPS 出现在 点查 @ 512 并发，建议生产连接池上限 768。</li><li>Buffer Pool 建议设为内存的 70%~75%。</li><li>回归测试保持 sysbench 参数 `--db-ps-mode=auto --skip_trx=off --rand-type=uniform`。</li></ul>
+<h3 id="ch5_2">5.2 测试边界</h3>
+<ul class="bullet"><li>仅覆盖 sysbench 5 个 OLTP 场景。</li><li>未覆盖 OLAP / 复杂 JOIN / 大字段场景。</li><li>单数据集，未测试更大规模数据下的衰减。</li></ul></div>
+
+</body>
+</html>

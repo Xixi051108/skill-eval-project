@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "products": [
+      "TDSQL-B v22.7.3"
+    ],
+    "scenarios": [
+      "oltp_read_only"
+    ],
+    "concurrencies": [
+      32,
+      64
+    ],
+    "test_env": {},
+    "log_meta": [],
+    "source_info": {
+      "type": "local_data",
+      "value": "local_data",
+      "rows_fetched": 2
+    },
+    "concurrencies_by_product_scenario": {
+      "TDSQL-B v22.7.3": {
+        "oltp_read_only": [
+          32,
+          64
+        ]
+      }
+    }
+  },
+  "records": [
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_read_only",
+      "threads": 32,
+      "tps": 895.4,
+      "qps": 12535.6,
+      "p95_ms": 39.2,
+      "p99_ms": 54.8
+    },
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_read_only",
+      "threads": 64,
+      "tps": 1620.8,
+      "qps": 1620.8,
+      "p95_ms": 43.1,
+      "p99_ms": 60.2
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "data_source_type": "local_file",
+  "data_source_value": "D:\\桌面\\性能工程+Skill+评估专项考题\\db_report\\test-resource\\mock_records_aggregation.json",
+  "report_type": "single",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "test_name_keywords_or": null,
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": "512",
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": null,
+  "custom_config": null,
+  "other_info": null
+}

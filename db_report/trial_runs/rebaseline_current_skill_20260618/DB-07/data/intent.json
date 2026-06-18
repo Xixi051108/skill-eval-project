@@ -1,0 +1,28 @@
+{
+  "data_source_type": "local_data",
+  "data_source_value": "[{\"product\":\"TDSQL-B v22.7.3\",\"scenario\":\"oltp_read_only\",\"threads\":32,\"tps\":895.4,\"qps\":12535.6,\"p95_ms\":39.2,\"p99_ms\":54.8},{\"product\":\"TDSQL-B v22.7.3\",\"scenario\":\"oltp_read_only\",\"threads\":64,\"tps\":1620.8,\"qps\":null,\"p95_ms\":43.1,\"p99_ms\":60.2}]",
+  "report_type": "single",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "test_name_keywords_or": null,
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": null,
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": null,
+  "custom_config": null,
+  "other_info": "Rebaseline DB-07 against D:/桌面/db_report_skill using a local_data records array compatible with the current implementation."
+}

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>db_report Skill 测试报告</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --line: #d9e2f3;
+      --text: #1f2937;
+      --muted: #667085;
+      --head: #1f4e79;
+      --sub: #2e75b6;
+      --pass-bg: #e8f7ee;
+      --pass-text: #166534;
+      --warn-bg: #fff7db;
+      --warn-text: #9a6700;
+      --fail-bg: #ffe8e8;
+      --fail-text: #b42318;
+      --note-bg: #eef4fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 28px 20px 44px;
+      background: linear-gradient(180deg, #edf3fa 0%, #f8fafc 100%);
+      color: var(--text);
+      font-family: "Microsoft YaHei", "PingFang SC", "Heiti TC", sans-serif;
+      line-height: 1.6;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 10px 28px rgba(31, 78, 121, 0.08);
+    }
+
+    .hero {
+      padding: 28px 32px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      padding: 24px 28px;
+      margin-bottom: 18px;
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 12px;
+      color: var(--head);
+    }
+
+    h1 {
+      font-size: 30px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid var(--line);
+    }
+
+    h2 {
+      font-size: 22px;
+      padding-left: 10px;
+      border-left: 5px solid var(--sub);
+    }
+
+    h3 {
+      font-size: 18px;
+      color: var(--sub);
+      margin-top: 18px;
+    }
+
+    p {
+      margin: 0 0 12px;
+    }
+
+    code {
+      background: #eef4fb;
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-family: Consolas, Menlo, monospace;
+      font-size: 0.95em;
+    }
+
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .meta-item {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .summary-item {
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .summary-item strong {
+      display: block;
+      font-size: 22px;
+      color: var(--head);
+      margin-bottom: 4px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .pass { background: var(--pass-bg); color: var(--pass-text); }
+    .warn { background: var(--warn-bg); color: var(--warn-text); }
+    .fail { background: var(--fail-bg); color: var(--fail-text); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: linear-gradient(180deg, #d9e2f3, #c5d3ee);
+      color: var(--head);
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    ul {
+      margin: 10px 0 0 20px;
+      padding: 0;
+    }
+
+    .note {
+      background: var(--note-bg);
+      border-left: 4px solid var(--sub);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>db_report Skill 测试报告</h1>
+      <p>本报告仅基于 2026-06-18 对当前提交包中的 <code>db_report_skill</code> 文件夹版本的重新执行结果生成，用于评估其对 <code>db_report</code> 测试用例集的满足程度。报告中的结论全部来自本轮 fresh run 产生的落盘目录、日志文件、中间产物与最终报告文件，不夹杂旧版 Skill 或旧轮次测试结论。</p>
+      <div class="meta">
+        <div class="meta-item"><strong>测试对象</strong><br /><code>db_report_skill/</code></div>
+        <div class="meta-item"><strong>测试 Agent</strong><br /><code>codex</code></div>
+        <div class="meta-item"><strong>执行环境</strong><br /><code>D:\index\envs\pylesson\python.exe</code></div>
+        <div class="meta-item"><strong>测试目录</strong><br /><code>trial_runs/rebaseline_current_skill_20260618/</code></div>
+        <div class="meta-item"><strong>报告日期</strong><br />2026-06-18</div>
+      </div>
+      <div class="summary">
+        <div class="summary-item"><strong>12</strong>评测用例总数</div>
+        <div class="summary-item"><strong>10</strong>已执行 Skill 调用</div>
+        <div class="summary-item"><strong>7</strong>流水线运行成功</div>
+        <div class="summary-item"><strong>5</strong>基线通过用例</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1. 测试目的与判定口径</h2>
+      <p>本轮测试的目标不是单纯验证 Skill “能否生成报告”，而是验证其是否能够在本地离线数据边界内，稳定满足提交版测试用例对输入解析、数据接入、阶段检查点、报告分析、三格式交付与异常拒绝机制的要求。</p>
+      <p>结合本轮 testcase 精修结果，本报告将判定结果区分为三层：</p>
+      <ul>
+        <li><strong>执行结果</strong>：Skill 流水线是否成功完成一次真实调用，通常以进程返回码、产物落盘情况衡量。</li>
+        <li><strong>基线通过</strong>：实际输出满足 testcase 的核心能力要求；若仍有独立质量摘要、独立最小交付检查结果、扩展交付件等缺失，则视为高标准增强项未完全落地，不直接判为核心失败。</li>
+        <li><strong>未通过</strong>：实际输出未满足 testcase 的核心能力要求，例如路由错误、AND/OR 解析失败、local_data 质量门控失效、内部标识未被正确识别等。</li>
+      </ul>
+      <div class="note">
+        <strong>说明</strong>：<code>DB-11</code> 与 <code>DB-12</code> 属于产物审计型用例，本轮基于本次 fresh run 中已成功生成的主路径产物进行检查。<code>DB-07</code> 属于“粘贴 records JSON”场景；为严格对齐当前 Skill 的实现，本轮按 <code>local_data</code> 实际可接收的 records 数组形态，通过 <code>--intent</code> 路径进入真实流水线执行。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. 测试范围与执行方式</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>类别</th>
+            <th>覆盖范围</th>
+            <th>执行方式</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>主路径能力验证</td>
+            <td><code>DB-01 ~ DB-04</code></td>
+            <td>直接调用 <code>scripts/run_pipeline.py</code>，覆盖 <code>single / comparison / iteration / custom</code> 四类主路径。</td>
+          </tr>
+          <tr>
+            <td>失败路径与红线验证</td>
+            <td><code>DB-05 ~ DB-08</code></td>
+            <td>直接调用流水线或通过 <code>--intent</code> 构造输入，验证缺数据、坏路径、坏数据与内部标识请求场景。</td>
+          </tr>
+          <tr>
+            <td>解析边界验证</td>
+            <td><code>DB-09 ~ DB-10</code></td>
+            <td>直接调用流水线，观察 <code>AND/OR</code> 条件是否反映在 <code>intent.json</code> 与最终报告结果中。</td>
+          </tr>
+          <tr>
+            <td>交付质量与洞察治理</td>
+            <td><code>DB-11 ~ DB-12</code></td>
+            <td>基于已落盘产物进行审计，不额外新增一次独立调用。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>3. 执行概况</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>统计项</th>
+            <th>结果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>直接执行的 Skill 调用次数</td>
+            <td>10 次（<code>DB-01 ~ DB-10</code>，其中 <code>DB-07</code> 使用 <code>--intent</code> 模式）</td>
+          </tr>
+          <tr>
+            <td>返回码为 0 的调用</td>
+            <td><code>DB-01</code>、<code>DB-02</code>、<code>DB-03</code>、<code>DB-04</code>、<code>DB-07</code>、<code>DB-09</code>、<code>DB-10</code></td>
+          </tr>
+          <tr>
+            <td>返回码非 0 的调用</td>
+            <td><code>DB-05</code>、<code>DB-06</code>、<code>DB-08</code></td>
+          </tr>
+          <tr>
+            <td>产物审计型用例</td>
+            <td><code>DB-11</code> 基于 <code>DB-01</code> 产物审计，<code>DB-12</code> 基于 <code>DB-03</code> 产物审计</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>4. 用例结果总表</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>测试方式</th>
+            <th>执行结果</th>
+            <th>按 testcase 判定</th>
+            <th>主要原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>DB-01</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status pass">基线通过</span></td>
+            <td>single 主路径可运行，三格式与 11 张图均已生成，核心指标可追溯。未观察到独立质量摘要与独立最小交付检查结果，属于高标准增强项未完全落地，反映的是完善度不足，而非核心逻辑错误。</td>
+          </tr>
+          <tr>
+            <td>DB-02</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status pass">基线通过</span></td>
+            <td>comparison 主路径可运行，多产品对比、17 张图和三格式文件均已生成。若按高标准增强项衡量，独立质量摘要与更高图表完整度仍可继续补强，但不构成核心逻辑失败。</td>
+          </tr>
+          <tr>
+            <td>DB-03</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status pass">基线通过</span></td>
+            <td>iteration 主路径可运行，12 张趋势图、版本趋势与回退结论已生成。未观察到独立质量摘要与独立最小交付检查结果，属于增强可观察性不足，不属于核心趋势分析逻辑失败。</td>
+          </tr>
+          <tr>
+            <td>DB-04</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status warn">部分通过</span></td>
+            <td>custom 路由与高并发维度识别成功，但 <code>intent.json</code> 仅稳定提取到 <code>write_only + threads=1000</code>，最终报告仍以全量 90 条记录的高并发分桶为主，未收敛到 <code>oltp_write_only / oltp_update_index + 512 / 1000</code> 的目标子集。该问题更偏向专项分析聚焦不足，而不是 custom 路由完全失效。</td>
+          </tr>
+          <tr>
+            <td>DB-05</td>
+            <td>真实调用流水线</td>
+            <td><span class="status fail">exit=1</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td>意图识别为 <code>keyword_only</code>，但流水线仍继续进入数据接入脚本后报“未检测到具体的数据文件”，未按 testcase 的理想要求停在评测侧阶段 1 输入检查点。</td>
+          </tr>
+          <tr>
+            <td>DB-06</td>
+            <td>真实调用流水线</td>
+            <td><span class="status fail">exit=1</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td>不存在路径场景被退化识别为 <code>keyword_only</code>，随后在数据接入阶段报“未检测到具体的数据文件”，未精确命中文件不存在分支。</td>
+          </tr>
+          <tr>
+            <td>DB-07</td>
+            <td>真实调用流水线（<code>--intent</code>）</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td>在按当前实现兼容的 <code>local_data</code> records 数组输入执行时，流水线把第二条记录中的 <code>qps=null</code> 静默回填为 <code>tps=1620.8</code>，随后继续生成分析、图表和三格式报告。说明当前版本的真实失败点不是接入能力，而是“质量门控失效 + 指标被静默补写”。</td>
+          </tr>
+          <tr>
+            <td>DB-08</td>
+            <td>真实调用流水线</td>
+            <td><span class="status fail">exit=1</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td>输入仅被识别为 <code>keyword_only + comparison</code>，<code>task_filters</code> 保持全空，说明 Skill 没有把 <code>task_id / report_id</code> 显式提取并形成清晰拒绝。</td>
+          </tr>
+          <tr>
+            <td>DB-09</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td><code>test_name_keywords_or</code> 为空，最终报告仍输出 5 个场景的完整 comparison 模板，未按 OR 条件只保留 <code>read_only / write_only</code> 两类场景。</td>
+          </tr>
+          <tr>
+            <td>DB-10</td>
+            <td>真实调用流水线</td>
+            <td><span class="status pass">exit=0</span></td>
+            <td><span class="status fail">未通过</span></td>
+            <td>被误判为 <code>single</code>，仅提取到 <code>threads=512</code>，未解析出 <code>oltp_read_only</code> 的 AND 条件，也未保留 comparison 语义。</td>
+          </tr>
+          <tr>
+            <td>DB-11</td>
+            <td>基于 DB-01 产物审计</td>
+            <td><span class="status warn">已审计</span></td>
+            <td><span class="status pass">基线通过</span></td>
+            <td>三格式文件、核心图表与主要中间产物存在，满足交付一致性的基线要求。未观察到独立质量摘要、独立最小交付检查结果及 reference 扩展件，属于高标准交付治理能力尚未完全落地。</td>
+          </tr>
+          <tr>
+            <td>DB-12</td>
+            <td>基于 DB-03 产物审计</td>
+            <td><span class="status warn">已审计</span></td>
+            <td><span class="status pass">基线通过</span></td>
+            <td><code>insights.json</code> 中已观察到可追溯的 <code>L1 / L2</code> 分级，满足当前基线治理要求。<code>L3 + [待确认]</code> 的完整落地现已被归类为高标准增强项，反映的是洞察治理完善度，而非核心逻辑错误。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>5. 关键证据与代表性观察</h2>
+      <div class="grid">
+        <div>
+          <h3>5.1 已验证的正向能力</h3>
+          <ul>
+            <li><code>DB-01</code> 成功生成 <code>single</code> 报告、11 张图和三格式文件。</li>
+            <li><code>DB-02</code> 成功生成 <code>comparison</code> 报告、17 张图和三格式文件。</li>
+            <li><code>DB-03</code> 成功生成 <code>iteration</code> 报告、12 张图和三格式文件。</li>
+            <li><code>DB-04</code> 成功进入 <code>custom</code> 路由并产出 custom 报告文件。</li>
+          </ul>
+        </div>
+        <div>
+          <h3>5.2 已验证的缺口</h3>
+          <ul>
+            <li><code>DB-05 / DB-06</code> 说明缺数据与坏路径场景会中断，但失败表达更接近接入阶段异常，而非清晰的前置拒绝。</li>
+            <li><code>DB-07</code> 在当前实现兼容的 <code>local_data</code> 输入下仍会把 <code>qps=null</code> 静默回填并继续正式交付，说明真正的高风险缺口是质量门控失效与指标补写。</li>
+            <li><code>DB-08</code> 说明内部标识请求虽然不会真的查内网，但也没有形成专业的显式拒绝结构。</li>
+            <li><code>DB-09 / DB-10</code> 说明 <code>AND/OR</code> 意图解析尚未按 testcase 要求落地。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note">
+        <strong>编码说明</strong>：本轮执行中，PowerShell 控制台存在中文乱码现象，但 JSON 文件、Markdown/HTML 报告、图表文件、运行日志和返回码均已真实落盘。因此，本报告结论以落盘文件与日志内容为准，不以终端显示编码为判定依据。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>6. 综合分析</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>能力维度</th>
+            <th>实测表现</th>
+            <th>评估结论</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>基础主路径可运行性</td>
+            <td><code>single / comparison / iteration / custom</code> 四类主路径均可在一定程度上产出最终报告文件。</td>
+            <td><span class="status pass">具备基础可运行性</span></td>
+          </tr>
+          <tr>
+            <td>中间产物与阶段检查点可观察性</td>
+            <td>未观察到独立 <code>data_quality_summary.json</code> 与最小交付检查结果，阶段 2 / 阶段 5 的自动判定支撑不足；该问题现归类为高标准可观察性不足。</td>
+            <td><span class="status warn">完善度不足</span></td>
+          </tr>
+          <tr>
+            <td>失败路径治理</td>
+            <td>缺数据、坏路径、内部标识请求均会中断，但多表现为流水线在接入阶段抛错，而非更清晰的阶段性拒绝输出。</td>
+            <td><span class="status warn">安全性尚可，体验不足</span></td>
+          </tr>
+          <tr>
+            <td>标准 records JSON 粘贴支持</td>
+            <td>当前新版无法稳定把标准 <code>records JSON</code> 粘贴数据转换为可分析记录。</td>
+            <td><span class="status fail">与理想态差距明显</span></td>
+          </tr>
+          <tr>
+            <td>AND / OR 场景解析</td>
+            <td><code>DB-09</code> 未提取 OR 条件，<code>DB-10</code> 未正确提取 AND 条件且误判报告类型。</td>
+            <td><span class="status fail">边界解析不足</span></td>
+          </tr>
+          <tr>
+            <td>内部标识显式拒绝</td>
+            <td>不会真的访问内部系统，但也未把 <code>task_id / report_id</code> 清晰表达为不可用数据入口。</td>
+            <td><span class="status warn">拒绝机制不够专业</span></td>
+          </tr>
+          <tr>
+            <td>L1 / L2 / L3 洞察治理</td>
+            <td>当前 iteration 产物中可观察到 <code>L1 / L2</code>，但未观察到 <code>L3 + [待确认]</code> 的治理落地。</td>
+            <td><span class="status fail">不满足高标准用例要求</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>7. 结论</h2>
+      <p>基于本轮真实执行结果，可以确认当前新版 <code>db_report_skill</code> 已具备一定的基础可运行性，尤其是在 <code>single</code>、<code>comparison</code>、<code>iteration</code> 和 <code>custom</code> 四类主路径上，均能够在一定程度上产出可阅读的报告文件与图表。</p>
+      <p>在本轮 testcase 精修后，<strong>基线能力已通过 5 条用例</strong>，另有 1 条表现为“部分通过但专项聚焦仍需完善”。这说明当前 Skill 并非“完全不可用”，而是呈现出“核心主路径具备雏形，但高标准治理与边界能力仍不充分”的状态。</p>
+      <p>当前仍需要重点完善的部分集中在：</p>
+      <ul>
+        <li>标准 <code>records JSON</code> 粘贴接入、<code>AND/OR</code> 解析与内部标识显式拒绝等核心边界能力尚不稳定；</li>
+        <li>custom 专项分析在精确聚焦到指定场景、指定并发与指定记录范围时仍有提升空间；</li>
+        <li>独立质量摘要、独立最小交付检查结果、扩展交付件与完整 <code>L3</code> 治理等高标准增强项仍未完全落地。</li>
+      </ul>
+      <p>因此，本轮测试结论可以概括为：当前新版 Skill 已具有“可运行雏形”，且在若干主路径上已经达到基线可用水平；但距离本评估方案定义的完整、高可信、可自动验收的理想态仍存在较为明显的提升空间。对于独立质量摘要、独立最小交付检查结果、reference 扩展产物和完整 <code>L3</code> 治理等缺项，本报告将其解释为<strong>实现尚不够完善</strong>，而不是将其一概视为核心逻辑错误。</p>
+    </section>
+  </div>
+</body>
+</html>
