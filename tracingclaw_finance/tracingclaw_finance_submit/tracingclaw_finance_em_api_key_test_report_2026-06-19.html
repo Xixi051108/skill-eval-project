@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>tracingclaw_finance EM_API_KEY 批次测试报告</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #16202a;
+      --muted: #5f6b7a;
+      --line: #d8dee8;
+      --accent: #0f62fe;
+      --good: #1f9d55;
+      --warn: #c27a00;
+      --bad: #c53030;
+      --pill: #edf3ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 32px;
+      background: var(--bg);
+      color: var(--text);
+      font: 14px/1.6 "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; }
+    .hero, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+    .hero { padding: 28px 30px; margin-bottom: 20px; }
+    .section { margin-top: 20px; padding: 24px 26px; }
+    h1, h2, h3 { margin: 0 0 12px; line-height: 1.3; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 16px; }
+    p { margin: 0 0 10px; }
+    .muted { color: var(--muted); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .metric {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fbfcfe;
+    }
+    .metric .label { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+    .metric .value { font-size: 24px; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: #f8fbff; font-weight: 600; }
+    .pill {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--pill);
+      color: var(--accent);
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .status {
+      display: inline-block;
+      min-width: 70px;
+      text-align: center;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .pass { background: #e8f8ef; color: var(--good); }
+    .deferred { background: #fff5df; color: var(--warn); }
+    .detail {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+    }
+    .detail:first-of-type { margin-top: 8px; padding-top: 0; border-top: 0; }
+    pre {
+      margin: 10px 0 0;
+      padding: 12px 14px;
+      overflow-x: auto;
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 12px;
+      font: 12px/1.5 Consolas, "SFMono-Regular", monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    ul { margin: 8px 0 0 20px; padding: 0; }
+    .footnote { margin-top: 18px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 960px) {
+      body { padding: 18px; }
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>tracingclaw_finance EM_API_KEY 批次测试报告</h1>
+      <p>测试日期：2026-06-19</p>
+      <p class="muted">本批次补跑依赖 <code>mx-finance-search</code> 的资讯 / 研报交叉验证能力，并复现缺少 <code>EM_API_KEY</code> 时的环境失败路径。当前测试使用工作区本地私有文件 <code>mx-finance-search/.env.local</code> 临时注入密钥，不纳入提交物。</p>
+
+      <div class="grid">
+        <div class="metric">
+          <div class="label">本批次新增执行</div>
+          <div class="value">2</div>
+        </div>
+        <div class="metric">
+          <div class="label">本批次通过</div>
+          <div class="value">2</div>
+        </div>
+        <div class="metric">
+          <div class="label">累计已执行</div>
+          <div class="value">11</div>
+        </div>
+        <div class="metric">
+          <div class="label">累计通过</div>
+          <div class="value">11</div>
+        </div>
+        <div class="metric">
+          <div class="label">累计延期</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>1. 执行说明</h2>
+      <ul>
+        <li>资讯层：通过 <code>mx-finance-search/scripts/get_data.py</code> 以自然语言查询研报 / 新闻 / 行业背景。</li>
+        <li>结构化层：通过 <code>westock-data</code> 查询龙头公司财务数据。</li>
+        <li>本批次使用的本地密钥来源：<code>mx-finance-search/.env.local</code>。</li>
+        <li>缺 key 场景通过显式移除当前进程中的 <code>EM_API_KEY</code> 来复现。</li>
+      </ul>
+    </section>
+
+    <section class="card section">
+      <h2>2. 批次结果总览</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>执行模式</th>
+            <th>状态</th>
+            <th>结论</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>TF-03</td>
+            <td>资讯检索 + 结构化交叉验证</td>
+            <td><span class="status pass">PASS</span></td>
+            <td>能够把“研报观点”“龙头业绩改善”“订单改善”“行业确定性复苏”拆开判断，最终应给出部分支持 / 证据不足，而不是直接判真。</td>
+          </tr>
+          <tr>
+            <td>TF-07</td>
+            <td>缺 key 环境失败复现</td>
+            <td><span class="status pass">PASS</span></td>
+            <td>成功复现 <code>EM API KEY REQUIRED</code> 失败路径；正确动作应为停止资讯检索并说明环境未就绪。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card section">
+      <h2>3. 用例详情</h2>
+
+      <div class="detail">
+        <h3>TF-03 公告与研报观点交叉验证：事实、观点与推断区分</h3>
+        <div>
+          <span class="pill">mx-finance-search</span>
+          <span class="pill">westock-data</span>
+          <span class="pill">观点核查</span>
+        </div>
+        <p><strong>执行结论：</strong>PASS</p>
+        <p><strong>判断摘要：</strong>资讯层能检索到明确的“行业周期向上”“基本面进入反转趋势”“景气度向上”等研报表述；结构化层也能看到比亚迪、宁德时代近几期营收和利润维持较强水平。但这仍不足以直接推出“整个新能源车行业已经进入确定性复苏阶段”，尤其“订单明显改善”与“行业确定性复苏”属于更强结论，不能仅凭单篇研报或少数龙头财报直接判真。因此本用例的正确输出应为：部分事实有支撑，但整体强结论至多判为 <code>insufficient_evidence</code> 或弱化支持。</p>
+
+        <ul>
+          <li>研报层证据：检索到中金等机构关于“新能源车中游 2025 &amp; 1Q26 业绩回顾”“行业周期向上”“基本面进入反转趋势”的报告。</li>
+          <li>结构化层证据：比亚迪 2025 年营业收入约 <code>8039.65 亿元</code>，归母净利润约 <code>326.19 亿元</code>；宁德时代 2025 年营业收入约 <code>4237.02 亿元</code>，归母净利润约 <code>722.01 亿元</code>。</li>
+          <li>结论边界：龙头业绩改善不等于行业全体“确定性复苏”；订单改善需要更直接的订单 / 公告 / 管理层口径支撑。</li>
+        </ul>
+
+        <pre>资讯层关键证据
+query: 新能源车行业 景气度 反转 订单 业绩 复苏 研报
+hit 1:
+title: 新能源车中游2025&1Q26业绩回顾：行业周期向上，基本面进入反转趋势
+source: 中金公司
+date: 2026-05-11
+
+hit 2:
+title: 新能源车中游2Q25业绩回顾：景气度向上，基本面加速改善
+source: 中金公司
+date: 2025-09-21</pre>
+
+        <pre>结构化层关键证据 A：比亚迪
+SecuCode: sz002594
+2025-12-31 OperatingRevenue: 803964958000.00
+2025-12-31 NPParentCompanyOwners: 32619022000.00
+
+结构化层关键证据 B：宁德时代
+SecuCode: sz300750
+2025-12-31 OperatingRevenue: 423701834000.00
+2025-12-31 NPParentCompanyOwners: 72201282000.00</pre>
+
+        <p><strong>建议判定标签：</strong><code>source_statement</code> 有支撑，<code>supporting_fact</code> 部分有支撑，最终总判断应为 <code>insufficient_evidence</code> 或等价弱化表述，而不是 <code>supported</code>。</p>
+      </div>
+
+      <div class="detail">
+        <h3>TF-07 需要资讯检索但缺少 EM_API_KEY 的环境失败处理</h3>
+        <div>
+          <span class="pill">环境失败</span>
+          <span class="pill">mx-finance-search</span>
+          <span class="pill">stop_condition</span>
+        </div>
+        <p><strong>执行结论：</strong>PASS</p>
+        <p><strong>判断摘要：</strong>在当前进程中移除 <code>EM_API_KEY</code> 后，依赖脚本立即报错并停止运行，没有伪装成查询成功，也没有返回编造的公告 / 研报 / 新闻结果。这个依赖级失败行为符合 testcase 的前提，因此上层 Skill 的正确动作应是：明确说明当前任务依赖 <code>mx-finance-search</code>，但环境缺少 <code>EM_API_KEY</code>，停止正式资讯检索，不输出正式真实性评分。</p>
+
+        <pre>缺 key 复现结果
+RuntimeError:
+EM API KEY REQUIRED
+Environment variable EM_API_KEY is not set.
+Please configure the environment variable first.</pre>
+
+        <p><strong>对应 Skill 级正确输出要点：</strong>说明需要 <code>mx-finance-search</code>；说明缺少 <code>EM_API_KEY</code>；停止正式资讯检索；不伪装成已完成事实核查；不要求用户在正文中粘贴真实密钥。</p>
+      </div>
+    </section>
+
+    <section class="card section">
+      <h2>4. 当前累计状态</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>状态</th>
+            <th>用例</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="status pass">PASS</span></td>
+            <td>TF-01, TF-02, TF-03, TF-04, TF-05, TF-06, TF-07, TF-08, TF-09, TF-10, TF-11</td>
+          </tr>
+          <tr>
+            <td><span class="status deferred">DEFERRED</span></td>
+            <td>TF-12</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="footnote">说明：当前只剩 `TF-12` 未执行。该用例需要显式制造 `westock-data` 不可用或未接通的环境失败场景，建议作为最后一条单独补测。</p>
+    </section>
+  </div>
+</body>
+</html>
