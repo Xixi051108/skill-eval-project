@@ -55,6 +55,22 @@ db_report/
 - 测试用例集：每个 Skill 不少于 5 条用例，覆盖核心路径和失败路径。
 - Meta-Testcase 自检方案：说明如何检查自己编写的测试用例是否覆盖全面、评分清晰、反例有效。
 
+## 当前提交位置
+
+当前 `db_report` 的提交版材料位于：
+
+- `db_report_submit/`
+
+当前提交目录下的核心文件包括：
+
+- `db_report_submit/README.md`
+- `db_report_submit/db_report_logic_chain.md`
+- `db_report_submit/db_report_ideal_state.md`
+- `db_report_submit/db_report_rubrics.yaml`
+- `db_report_submit/db_report_testcases.yaml`
+- `db_report_submit/db_report_meta_testcases.md`
+- `db_report_submit/db_report_test_report.html`
+
 ## 注意事项
 
 - 不要引导学生使用内部数据库、内部 API 或任务标识查询数据。

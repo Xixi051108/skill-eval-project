@@ -1,0 +1,487 @@
+coverage_matrix:
+  skill_name: "db_report"
+  purpose: >
+    记录 db_report 测试用例集对报告类型、输入方式、执行阶段、Rubrics 维度、
+    成功路径、失败路径、边界场景和红线场景的覆盖关系，用于证明测试集覆盖充分、
+    结构清晰、可追溯。
+
+  axes:
+    report_types:
+      - "single"
+      - "comparison"
+      - "iteration"
+      - "custom"
+
+    input_modes:
+      - "local_file_log"
+      - "local_file_json"
+      - "local_data"
+      - "keyword_only"
+      - "invalid_file_path"
+      - "internal_identifier_only"
+
+    execution_stages:
+      - "stage_1_intent_parsing"
+      - "stage_2_data_ingestion"
+      - "stage_2_quality_check"
+      - "stage_3_analysis"
+      - "stage_4_chart_generation"
+      - "stage_5_delivery"
+      - "stage_5_min_delivery_check"
+
+    rubric_dimensions:
+      - "R1_input_parsing"
+      - "R2_data_ingestion"
+      - "R3_data_quality_gate"
+      - "R4_analysis_and_insights"
+      - "R5_charts_and_delivery"
+      - "R6_redline_and_refusal"
+
+    path_types:
+      - "happy_path"
+      - "failure_path"
+      - "edge_case"
+      - "delivery_governance"
+      - "redline"
+
+  mappings:
+    - testcase_id: "DB-01"
+      title: "本地 log 单次报告"
+      report_type: "single"
+      input_mode: "local_file_log"
+      path_type: "happy_path"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_2_quality_check"
+        - "stage_3_analysis"
+        - "stage_4_chart_generation"
+        - "stage_5_delivery"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R3_data_quality_gate"
+        - "R4_analysis_and_insights"
+        - "R5_charts_and_delivery"
+      key_coverage:
+        - "local_file 识别"
+        - "sysbench log 解析"
+        - "single 报告"
+        - "五场景独立分析"
+        - "11 张图表"
+        - "md/docx/html 三格式交付"
+
+    - testcase_id: "DB-02"
+      title: "records JSON 对比报告"
+      report_type: "comparison"
+      input_mode: "local_file_json"
+      path_type: "happy_path"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_2_quality_check"
+        - "stage_3_analysis"
+        - "stage_4_chart_generation"
+        - "stage_5_delivery"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R3_data_quality_gate"
+        - "R4_analysis_and_insights"
+        - "R5_charts_and_delivery"
+      key_coverage:
+        - "records JSON 接入"
+        - "comparison 报告"
+        - "多产品或多版本对比"
+        - "公平性提示"
+        - "分场景对比"
+        - "对比图表与三格式交付"
+
+    - testcase_id: "DB-03"
+      title: "iteration 历史趋势"
+      report_type: "iteration"
+      input_mode: "local_file_json"
+      path_type: "happy_path"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_2_quality_check"
+        - "stage_3_analysis"
+        - "stage_4_chart_generation"
+        - "stage_5_delivery"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R3_data_quality_gate"
+        - "R4_analysis_and_insights"
+        - "R5_charts_and_delivery"
+      key_coverage:
+        - "iteration 报告"
+        - "多版本趋势"
+        - "累计变化"
+        - "回归点检测"
+        - "趋势图表"
+        - "三格式交付"
+
+    - testcase_id: "DB-04"
+      title: "custom 专项分析"
+      report_type: "custom"
+      input_mode: "local_file_json"
+      path_type: "happy_path"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_2_quality_check"
+        - "stage_3_analysis"
+        - "stage_4_chart_generation"
+        - "stage_5_delivery"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R4_analysis_and_insights"
+        - "R5_charts_and_delivery"
+      key_coverage:
+        - "custom 报告"
+        - "专项问题识别"
+        - "focus_dimension 分析"
+        - "高并发瓶颈分析"
+        - "假设与不确定性披露"
+        - "专项图表"
+
+    - testcase_id: "DB-05"
+      title: "缺少数据源时拒绝"
+      report_type: "single"
+      input_mode: "keyword_only"
+      path_type: "failure_path"
+      stages:
+        - "stage_1_intent_parsing"
+      rubrics:
+        - "R1_input_parsing"
+        - "R6_redline_and_refusal"
+      key_coverage:
+        - "keyword_only 识别"
+        - "缺少本地文件或粘贴 JSON"
+        - "阶段 1 输入检查点停止"
+        - "不得生成正式报告"
+        - "不得编造性能指标"
+
+    - testcase_id: "DB-06"
+      title: "文件不存在"
+      report_type: "single"
+      input_mode: "invalid_file_path"
+      path_type: "failure_path"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R6_redline_and_refusal"
+      key_coverage:
+        - "本地文件路径输入"
+        - "文件存在性校验"
+        - "路径不可访问时停止"
+        - "不得进入正式分析"
+        - "不得生成正式报告"
+
+    - testcase_id: "DB-07"
+      title: "关键字段缺失或空值"
+      report_type: "single"
+      input_mode: "local_data"
+      path_type: "failure_path"
+      stages:
+        - "stage_2_data_ingestion"
+        - "stage_2_quality_check"
+      rubrics:
+        - "R2_data_ingestion"
+        - "R3_data_quality_gate"
+        - "R6_redline_and_refusal"
+      key_coverage:
+        - "local_data 接入"
+        - "TPS/QPS/P95 空值检查"
+        - "阶段 2 数据质量检查点阻断"
+        - "不得静默补写指标"
+        - "不得继续生成正式报告"
+
+    - testcase_id: "DB-08"
+      title: "禁止内部 task_id/report_id 查询"
+      report_type: "comparison"
+      input_mode: "internal_identifier_only"
+      path_type: "redline"
+      stages:
+        - "stage_1_intent_parsing"
+      rubrics:
+        - "R1_input_parsing"
+        - "R6_redline_and_refusal"
+      key_coverage:
+        - "task_id/report_id/plan_id 识别"
+        - "内部标识只能留痕"
+        - "不得作为数据源"
+        - "不得调用内部数据库或内部 API"
+        - "不得补查或伪造数据"
+
+    - testcase_id: "DB-09"
+      title: "OR 条件解析"
+      report_type: "comparison"
+      input_mode: "local_file_json"
+      path_type: "edge_case"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_3_analysis"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R4_analysis_and_insights"
+      key_coverage:
+        - "不同场景由 和/或/以及 连接"
+        - "test_name_keywords_or"
+        - "OR 条件不能误判为 AND"
+        - "筛选结果不得被错误拉空"
+        - "只分析目标场景集合"
+
+    - testcase_id: "DB-10"
+      title: "AND 条件解析"
+      report_type: "comparison"
+      input_mode: "local_file_json"
+      path_type: "edge_case"
+      stages:
+        - "stage_1_intent_parsing"
+        - "stage_2_data_ingestion"
+        - "stage_3_analysis"
+      rubrics:
+        - "R1_input_parsing"
+        - "R2_data_ingestion"
+        - "R4_analysis_and_insights"
+      key_coverage:
+        - "同一场景多个修饰词"
+        - "test_name_keywords"
+        - "AND 条件不能误判为 OR"
+        - "集中式性能 + read_only"
+        - "目标子集筛选"
+
+    - testcase_id: "DB-11"
+      title: "三格式交付一致性 / 最小交付检查"
+      report_type: "single"
+      input_mode: "local_file_log"
+      path_type: "delivery_governance"
+      stages:
+        - "stage_5_delivery"
+        - "stage_5_min_delivery_check"
+      rubrics:
+        - "R3_data_quality_gate"
+        - "R5_charts_and_delivery"
+      key_coverage:
+        - "report.md"
+        - "report.docx"
+        - "report.html"
+        - "三格式核心指标一致"
+        - "图表引用可追溯"
+        - "无模板占位符残留"
+        - "最小交付检查"
+
+    - testcase_id: "DB-12"
+      title: "L1/L2/L3 洞察分级检查"
+      report_type: "iteration"
+      input_mode: "local_file_json"
+      path_type: "delivery_governance"
+      stages:
+        - "stage_3_analysis"
+        - "stage_5_delivery"
+      rubrics:
+        - "R4_analysis_and_insights"
+      key_coverage:
+        - "insights.json"
+        - "每条 insight 包含 level"
+        - "每条 insight 包含 source"
+        - "L1/L2 可写入正文"
+        - "L3 只能出现在建议类章节"
+        - "L3 必须标注待确认"
+        - "不得把推测写成事实"
+
+  coverage_summary:
+    testcase_count: 12
+
+    path_type_coverage:
+      happy_path:
+        count: 4
+        cases:
+          - "DB-01"
+          - "DB-02"
+          - "DB-03"
+          - "DB-04"
+      failure_path:
+        count: 4
+        cases:
+          - "DB-05"
+          - "DB-06"
+          - "DB-07"
+          - "DB-08"
+      edge_case:
+        count: 2
+        cases:
+          - "DB-09"
+          - "DB-10"
+      delivery_governance:
+        count: 2
+        cases:
+          - "DB-11"
+          - "DB-12"
+      redline:
+        count: 1
+        cases:
+          - "DB-08"
+
+    report_type_coverage:
+      single:
+        - "DB-01"
+        - "DB-05"
+        - "DB-06"
+        - "DB-07"
+        - "DB-11"
+      comparison:
+        - "DB-02"
+        - "DB-08"
+        - "DB-09"
+        - "DB-10"
+      iteration:
+        - "DB-03"
+        - "DB-12"
+      custom:
+        - "DB-04"
+
+    input_mode_coverage:
+      local_file_log:
+        - "DB-01"
+        - "DB-11"
+      local_file_json:
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-09"
+        - "DB-10"
+        - "DB-12"
+      local_data:
+        - "DB-07"
+      keyword_only:
+        - "DB-05"
+      invalid_file_path:
+        - "DB-06"
+      internal_identifier_only:
+        - "DB-08"
+
+    stage_coverage:
+      stage_1_intent_parsing:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-05"
+        - "DB-06"
+        - "DB-08"
+        - "DB-09"
+        - "DB-10"
+      stage_2_data_ingestion:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-06"
+        - "DB-07"
+        - "DB-09"
+        - "DB-10"
+      stage_2_quality_check:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-07"
+      stage_3_analysis:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-09"
+        - "DB-10"
+        - "DB-12"
+      stage_4_chart_generation:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+      stage_5_delivery:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-11"
+        - "DB-12"
+      stage_5_min_delivery_check:
+        - "DB-11"
+
+    rubric_coverage:
+      R1_input_parsing:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-05"
+        - "DB-06"
+        - "DB-08"
+        - "DB-09"
+        - "DB-10"
+      R2_data_ingestion:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-06"
+        - "DB-07"
+        - "DB-09"
+        - "DB-10"
+      R3_data_quality_gate:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-07"
+        - "DB-11"
+      R4_analysis_and_insights:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-09"
+        - "DB-10"
+        - "DB-12"
+      R5_charts_and_delivery:
+        - "DB-01"
+        - "DB-02"
+        - "DB-03"
+        - "DB-04"
+        - "DB-11"
+      R6_redline_and_refusal:
+        - "DB-05"
+        - "DB-06"
+        - "DB-07"
+        - "DB-08"
+
+    risk_coverage:
+      fabricated_metrics:
+        - "DB-01"
+        - "DB-05"
+        - "DB-07"
+        - "DB-08"
+      missing_data_source:
+        - "DB-05"
+      invalid_file_path:
+        - "DB-06"
+      null_core_metrics:
+        - "DB-07"
+      internal_data_access:
+        - "DB-08"
+      and_or_misparse:
+        - "DB-09"
+        - "DB-10"
+      delivery_inconsistency:
+        - "DB-11"
+      insight_misclassification:
+        - "DB-12"

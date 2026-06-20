@@ -12,3 +12,6 @@ __pycache__/
 
 # Office temporary lock files
 ~$*.docx
+
+# Local environment secrets
+.env.local

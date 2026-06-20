@@ -13,6 +13,7 @@
 | `db_report_ideal_state.md` | Markdown | 理想态、能力边界、禁止行为、异常处理 |
 | `db_report_rubrics.yaml` | YAML | 100 分制评分规则 |
 | `db_report_testcases.yaml` | YAML | 核心测试用例集 |
+| `db_report_coverage_matrix.yaml` | YAML | 测试覆盖矩阵与覆盖汇总 |
 | `db_report_meta_testcases.md` | Markdown | 测试集自检与元测试设计 |
 | `db_report_test_report.html` | HTML | 基于真实运行结果的测试报告 |
 

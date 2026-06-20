@@ -23,17 +23,17 @@ rubrics:
         - "能在阶段 1 输入检查点中清晰展示意图解析结果，包括数据源类型、报告类型、筛选条件、task_filters 和输出格式。"
       partial_deductions:
         - condition: "用户已提供本地文件或可解析粘贴数据，但 Skill 误判为 keyword_only。"
-          deduction: 4
+          deduction: 3
         - condition: "report_type 识别错误，但阶段 1 输入检查点已展示解析结果，且 Skill 未继续正式交付。"
-          deduction: 3
+          deduction: 2
         - condition: "未完成中文场景词标准化映射。"
-          deduction: 3
+          deduction: 2
         - condition: "AND/OR 逻辑解析错误。"
-          deduction: 3
+          deduction: 2
         - condition: "将不同场景之间的“和 / 以及”误判为 AND，而不是 OR。"
-          deduction: 3
+          deduction: 2
         - condition: "test_name_keywords 与 test_name_keywords_or 同时出现。"
-          deduction: 3
+          deduction: 2
         - condition: "阶段 1 输入检查点展示不完整或表达模糊。"
           deduction: 2
       zero_score_triggers:
@@ -89,11 +89,11 @@ rubrics:
         - condition: "未检查关键字段完整性。"
           deduction: 5
         - condition: "未展示空值率、覆盖范围或记录数等质量摘要。"
-          deduction: 4
+          deduction: 5
         - condition: "未做抽检或抽检结果不可追溯。"
           deduction: 4
         - condition: "未检查 iteration 的版本或时间点数量是否满足趋势分析前提。"
-          deduction: 3
+          deduction: 4
         - condition: "覆盖范围不完整但未标注缺失范围。"
           deduction: 2
       zero_score_triggers:

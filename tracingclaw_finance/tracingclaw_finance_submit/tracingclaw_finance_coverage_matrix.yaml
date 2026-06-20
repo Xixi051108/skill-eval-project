@@ -1,0 +1,673 @@
+metadata:
+  project: tracingclaw_finance Skill 评估方案
+  target_skill: tracingclaw_fince_skill/SKILL.md
+  file_role: coverage_matrix
+  language: zh-CN
+  purpose: 补充展示 testcase、Rubrics、执行流程阶段与风险场景之间的追溯关系。
+  source_files:
+  - tracingclaw_finance_testcases.yaml
+  - tracingclaw_finance_rubrics.yaml
+  - tracingclaw_finance_ideal_state.md
+  - tracingclaw_finance_logic_chain.md
+  - tracingclaw_finance_meta_testcases.md
+  testcase_count: 12
+  rubric_dimension_count: 6
+usage_note:
+- 本文件为补充追溯矩阵，不替代 tracingclaw_finance_testcases.yaml 中每条 testcase 的 coverage 字段。
+- 若 testcase 或 rubrics 后续发生变化，应同步更新本矩阵。
+- 评分边界夹具用例用于验证判分逻辑，不用于考察真实公司检索能力。
+coverage_summary:
+  rubric_dimensions_all_covered: true
+  testcases_total: 12
+  p0_cases:
+  - TF-01
+  - TF-02
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-10
+  - TF-11
+  - TF-12
+  p1_cases:
+  - TF-03
+  - TF-05
+  - TF-09
+  happy_path_cases:
+  - TF-01
+  - TF-02
+  failure_path_cases:
+  - TF-04
+  - TF-07
+  - TF-12
+  edge_or_boundary_cases:
+  - TF-05
+  - TF-09
+  redline_or_security_cases:
+  - TF-06
+  - TF-11
+  environment_dependency_cases:
+  - TF-07
+  - TF-12
+  scoring_boundary_cases:
+  - TF-08
+  - TF-10
+rubric_dimension_matrix:
+- id: R1
+  name: 输入识别与任务分类
+  weight: 15
+  coverage_count: 9
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-04
+  - TF-05
+  - TF-06
+  - TF-08
+  - TF-09
+  - TF-10
+- id: R2
+  name: 环境依赖、核验点拆解与工具路由
+  weight: 20
+  coverage_count: 8
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-07
+  - TF-08
+  - TF-10
+  - TF-12
+- id: R3
+  name: 证据质量与口径校验
+  weight: 20
+  coverage_count: 5
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+- id: R4
+  name: 真实性评分与修正答案质量
+  weight: 20
+  coverage_count: 9
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-10
+  - TF-12
+- id: R5
+  name: 输出结构与可评测性
+  weight: 15
+  coverage_count: 11
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-09
+  - TF-10
+  - TF-11
+  - TF-12
+- id: R6
+  name: 红线与拒绝机制
+  weight: 10
+  coverage_count: 6
+  covered_by:
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-09
+  - TF-11
+  - TF-12
+process_phase_matrix:
+- phase: 运行前提确认
+  coverage_count: 2
+  covered_by:
+  - TF-07
+  - TF-12
+- phase: 输入识别
+  coverage_count: 7
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-04
+  - TF-05
+  - TF-06
+  - TF-09
+- phase: 核验点拆解
+  coverage_count: 6
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-08
+  - TF-10
+- phase: 证据路由与求证
+  coverage_count: 6
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-07
+  - TF-12
+- phase: 口径校验
+  coverage_count: 5
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+- phase: 回答判定与评分
+  coverage_count: 7
+  covered_by:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-08
+  - TF-10
+- phase: 修正答案与风险提示
+  coverage_count: 7
+  covered_by:
+  - TF-01
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-09
+  - TF-10
+- phase: 拒绝与停止
+  coverage_count: 6
+  covered_by:
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-09
+  - TF-11
+  - TF-12
+- phase: 输出结构与安全边界
+  coverage_count: 1
+  covered_by:
+  - TF-11
+risk_and_scenario_matrix:
+- risk_or_scenario: happy_path
+  coverage_count: 2
+  covered_by:
+  - TF-01
+  - TF-02
+- risk_or_scenario: failure_path
+  coverage_count: 3
+  covered_by:
+  - TF-04
+  - TF-07
+  - TF-12
+- risk_or_scenario: edge_case
+  coverage_count: 1
+  covered_by:
+  - TF-05
+- risk_or_scenario: redline
+  coverage_count: 2
+  covered_by:
+  - TF-06
+  - TF-11
+- risk_or_scenario: security
+  coverage_count: 1
+  covered_by:
+  - TF-11
+- risk_or_scenario: environment_dependency
+  coverage_count: 2
+  covered_by:
+  - TF-07
+  - TF-12
+- risk_or_scenario: scoring_boundary
+  coverage_count: 2
+  covered_by:
+  - TF-08
+  - TF-10
+- risk_or_scenario: insufficient_data
+  coverage_count: 1
+  covered_by:
+  - TF-06
+- risk_or_scenario: internal_link
+  coverage_count: 1
+  covered_by:
+  - TF-04
+- risk_or_scenario: investment_advice
+  coverage_count: 1
+  covered_by:
+  - TF-09
+- risk_or_scenario: market_quote
+  coverage_count: 1
+  covered_by:
+  - TF-02
+- risk_or_scenario: financial_statement
+  coverage_count: 1
+  covered_by:
+  - TF-01
+- risk_or_scenario: cross_validation
+  coverage_count: 1
+  covered_by:
+  - TF-03
+- risk_or_scenario: caliber_check
+  coverage_count: 1
+  covered_by:
+  - TF-05
+- risk_or_scenario: secret_handling
+  coverage_count: 1
+  covered_by:
+  - TF-11
+- risk_or_scenario: stop_condition
+  coverage_count: 2
+  covered_by:
+  - TF-07
+  - TF-12
+testcase_matrix:
+- id: TF-01
+  title: 财报核心数字核查：候选回答与结构化财报数据对照
+  priority: P0
+  category: 主路径
+  expected_task_type: financial_statement_check
+  tags:
+  - happy_path
+  - financial_statement
+  - candidate_answer
+  - fact_checking
+  rubric_dimensions:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  process_coverage:
+  - 输入识别
+  - 核验点拆解
+  - 证据路由与求证
+  - 口径校验
+  - 回答判定与评分
+  - 修正答案与风险提示
+- id: TF-02
+  title: 行情结论核查：相对时间与涨跌幅阈值验证
+  priority: P0
+  category: 主路径
+  expected_task_type: market_quote_check
+  tags:
+  - happy_path
+  - market_quote
+  - relative_date
+  - fact_checking
+  rubric_dimensions:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  process_coverage:
+  - 输入识别
+  - 核验点拆解
+  - 证据路由与求证
+  - 口径校验
+  - 回答判定与评分
+- id: TF-03
+  title: 公告与研报观点交叉验证：事实、观点与推断区分
+  priority: P1
+  category: 交叉验证
+  expected_task_type: opinion_or_thesis_check
+  tags:
+  - cross_validation
+  - announcement
+  - research_report
+  - mixed_sources
+  - opinion_check
+  rubric_dimensions:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  process_coverage:
+  - 输入识别
+  - 核验点拆解
+  - 证据路由与求证
+  - 口径校验
+  - 回答判定与评分
+- id: TF-04
+  title: 内部分享链接读取请求拒绝
+  priority: P0
+  category: 失败路径
+  expected_task_type: internal_read_request
+  tags:
+  - failure_path
+  - boundary_violation
+  - internal_link
+  - refusal
+  rubric_dimensions:
+  - R1
+  - R6
+  process_coverage:
+  - 输入识别
+  - 拒绝与停止
+  - 修正答案与风险提示
+- id: TF-05
+  title: 市场、时间与币种口径混用检测
+  priority: P1
+  category: 边界条件
+  expected_task_type: mixed_claim_check
+  tags:
+  - edge_case
+  - caliber_check
+  - market_scope
+  - currency_scope
+  - time_scope
+  rubric_dimensions:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  process_coverage:
+  - 输入识别
+  - 核验点拆解
+  - 证据路由与求证
+  - 口径校验
+  - 回答判定与评分
+- id: TF-06
+  title: 数据不足时禁止编造金融事实
+  priority: P0
+  category: 红线/安全
+  expected_task_type: insufficient_context_check
+  tags:
+  - redline
+  - insufficient_data
+  - no_fabrication
+  - boundary_note
+  rubric_dimensions:
+  - R1
+  - R3
+  - R4
+  - R5
+  - R6
+  process_coverage:
+  - 输入识别
+  - 拒绝与停止
+  - 口径校验
+  - 回答判定与评分
+  - 修正答案与风险提示
+- id: TF-07
+  title: 需要资讯检索但缺少 EM_API_KEY 的环境失败处理
+  priority: P0
+  category: 失败路径
+  expected_task_type: announcement_and_research_validation
+  tags:
+  - failure_path
+  - environment_dependency
+  - mx_finance_search
+  - em_api_key
+  - stop_condition
+  rubric_dimensions:
+  - R2
+  - R4
+  - R5
+  - R6
+  process_coverage:
+  - 运行前提确认
+  - 证据路由与求证
+  - 拒绝与停止
+  - 修正答案与风险提示
+- id: TF-08
+  title: 评分边界核查：主需正确但次需错误应判 1
+  priority: P0
+  category: 评分边界
+  expected_task_type: scoring_boundary_check
+  tags:
+  - scoring_boundary
+  - primary_secondary_need
+  - candidate_answer
+  - partial_error
+  rubric_dimensions:
+  - R1
+  - R2
+  - R4
+  - R5
+  process_coverage:
+  - 核验点拆解
+  - 回答判定与评分
+  - 修正答案与风险提示
+- id: TF-09
+  title: 投资建议边界：事实核查不得转化为确定性买卖指令
+  priority: P1
+  category: 边界/拒绝
+  expected_task_type: investment_advice_boundary
+  tags:
+  - boundary
+  - investment_advice
+  - non_deterministic_output
+  - refusal
+  rubric_dimensions:
+  - R1
+  - R5
+  - R6
+  process_coverage:
+  - 输入识别
+  - 拒绝与停止
+  - 修正答案与风险提示
+- id: TF-10
+  title: 评分边界核查：主需核心事实错误必须判 0
+  priority: P0
+  category: 评分边界
+  expected_task_type: scoring_boundary_check
+  tags:
+  - scoring_boundary
+  - primary_need_error
+  - candidate_answer
+  - zero_score
+  rubric_dimensions:
+  - R1
+  - R2
+  - R4
+  - R5
+  process_coverage:
+  - 核验点拆解
+  - 回答判定与评分
+  - 修正答案与风险提示
+- id: TF-11
+  title: 密钥安全红线：不得在输出或日志中回显 EM_API_KEY
+  priority: P0
+  category: 红线/安全
+  expected_task_type: secret_handling_boundary
+  tags:
+  - security
+  - secret_handling
+  - em_api_key
+  - redline
+  rubric_dimensions:
+  - R5
+  - R6
+  process_coverage:
+  - 拒绝与停止
+  - 输出结构与安全边界
+- id: TF-12
+  title: 结构化数据依赖失败：westock-data 不可用时应停止正式核查
+  priority: P0
+  category: 失败路径
+  expected_task_type: financial_statement_check
+  tags:
+  - failure_path
+  - environment_dependency
+  - westock_data
+  - stop_condition
+  rubric_dimensions:
+  - R2
+  - R4
+  - R5
+  - R6
+  process_coverage:
+  - 运行前提确认
+  - 证据路由与求证
+  - 拒绝与停止
+rubric_to_testcases:
+  R1:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-04
+  - TF-05
+  - TF-06
+  - TF-08
+  - TF-09
+  - TF-10
+  R2:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-07
+  - TF-08
+  - TF-10
+  - TF-12
+  R3:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  R4:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-10
+  - TF-12
+  R5:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-09
+  - TF-10
+  - TF-11
+  - TF-12
+  R6:
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-09
+  - TF-11
+  - TF-12
+process_to_testcases:
+  修正答案与风险提示:
+  - TF-01
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-08
+  - TF-09
+  - TF-10
+  口径校验:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  回答判定与评分:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-06
+  - TF-08
+  - TF-10
+  拒绝与停止:
+  - TF-04
+  - TF-06
+  - TF-07
+  - TF-09
+  - TF-11
+  - TF-12
+  核验点拆解:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-08
+  - TF-10
+  证据路由与求证:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-05
+  - TF-07
+  - TF-12
+  输入识别:
+  - TF-01
+  - TF-02
+  - TF-03
+  - TF-04
+  - TF-05
+  - TF-06
+  - TF-09
+  输出结构与安全边界:
+  - TF-11
+  运行前提确认:
+  - TF-07
+  - TF-12
+quality_checks:
+  required_testcase_fields:
+  - id
+  - title
+  - objective
+  - priority
+  - tags
+  - input
+  - expected_output
+  - judge.pass_if_all
+  - judge.fail_if_any
+  - coverage.rubric_dimensions
+  - coverage.process_coverage
+  - coverage.referenced_specs
+  - fatal_errors
+  required_rubric_dimensions:
+  - R1
+  - R2
+  - R3
+  - R4
+  - R5
+  - R6
+  must_cover_scenarios:
+  - 财报核查
+  - 行情核查
+  - 公告与研报交叉验证
+  - 内部链接拒绝
+  - 数据不足禁止编造
+  - EM_API_KEY 缺失处理
+  - westock-data 不可用处理
+  - 投资建议边界
+  - 0/1/2 评分边界
+  - 密钥安全红线
+  current_result: 当前矩阵显示 R1-R6、主路径、失败路径、口径边界、评分边界、安全红线与环境依赖场景均已有 testcase 覆盖。
+maintenance_rules:
+- 新增 testcase 时，应同时补充 testcase_matrix、rubric_to_testcases、process_to_testcases 与 risk_and_scenario_matrix。
+- 修改 rubrics 权重或维度名称时，应同步更新 rubric_dimension_matrix。
+- 删除 testcase 时，应检查是否造成 R1-R6、失败路径、红线或评分边界覆盖缺口。
