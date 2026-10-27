@@ -1,0 +1,38 @@
+{
+  "kind": "live_dependency_probe",
+  "results": [
+    {
+      "dependency": "westock",
+      "command": [
+        "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+        "E:\\项目\\skill性能评估考题\\性能工程+Skill+评估专项考题\\tracingclaw_finance\\westock-data\\scripts\\index.js",
+        "finance",
+        "hk00700",
+        "--num",
+        "8"
+      ],
+      "at": "2026-10-23T13:23:51.120683+00:00",
+      "is_agent_test": false,
+      "status": "REVIEW",
+      "exit_code": 0,
+      "reason": "dependency returned; source/time/currency require review",
+      "seconds": 1.219
+    },
+    {
+      "dependency": "search",
+      "command": [
+        "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+        "E:\\项目\\skill性能评估考题\\性能工程+Skill+评估专项考题\\tracingclaw_finance\\mx-finance-search\\scripts\\get_data.py",
+        "腾讯控股 2024 年全年 营收 年报",
+        "--no-save"
+      ],
+      "at": "2026-10-23T13:23:52.346090+00:00",
+      "is_agent_test": false,
+      "status": "REVIEW",
+      "exit_code": 0,
+      "reason": "dependency returned; source/time/currency require review",
+      "seconds": 2.859
+    }
+  ],
+  "note": "真实依赖调用可用性记录；不能替代Agent验真测试或独立真值核验。"
+}

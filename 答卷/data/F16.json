@@ -1,0 +1,35 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "quote",
+      "symbol": "hk00700",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "HK",
+        "symbol": "hk00700",
+        "market": "HK",
+        "currency": "HKD",
+        "trade_date": "2026-06-19",
+        "last": 500,
+        "source_kind": "synthetic_fixture"
+      }
+    },
+    {
+      "tool": "westock-data",
+      "command": "quote",
+      "symbol": "usTCEHY",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "ADR",
+        "symbol": "usTCEHY",
+        "market": "US",
+        "currency": "USD",
+        "trade_date": "2026-06-19",
+        "last": 60,
+        "source_kind": "synthetic_fixture"
+      }
+    }
+  ],
+  "canary": null
+}

@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "value": {
+    "meta": {
+      "products": [
+        "ExampleDB"
+      ],
+      "scenarios": [
+        "oltp_point_select"
+      ],
+      "concurrencies": [
+        64
+      ],
+      "test_env": {},
+      "log_meta": [],
+      "source_info": {
+        "type": "local_data",
+        "value": "E:\\项目\\skill性能评估考题\\答卷\\data\\zero.json",
+        "rows_fetched": 1
+      }
+    },
+    "records": [
+      {
+        "product": "ExampleDB",
+        "scenario": "oltp_point_select",
+        "threads": 64,
+        "tps": 34925.66,
+        "qps": 34925.66,
+        "p95_ms": 1.39,
+        "p99_ms": 2.0
+      }
+    ]
+  }
+}

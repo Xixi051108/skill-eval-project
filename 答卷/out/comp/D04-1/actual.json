@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "value": {
+    "focus_dimension": "通用",
+    "buckets": [
+      {
+        "label": "TDSQL-B v22.7.3",
+        "avg_qps": 36261.30466666666,
+        "avg_p95_ms": 86.79766666666667,
+        "sample_size": 30
+      },
+      {
+        "label": "MySQL 8.0.32",
+        "avg_qps": 29085.801,
+        "avg_p95_ms": 86.92066666666666,
+        "sample_size": 30
+      },
+      {
+        "label": "OceanBase 4.2",
+        "avg_qps": 32488.25633333333,
+        "avg_p95_ms": 86.68166666666666,
+        "sample_size": 30
+      }
+    ],
+    "main_finding": "已按产品分桶输出平均 QPS / P95，详见分析章节。"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "输入应停止处理",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "质量校验失败（E2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，QPS 空值率为 50%。[Skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 QPS 后重新提交。",
+      "expected": "拒绝或要求修正数据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "应准确定位空 QPS 而非其他解析故障",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "质量校验失败（e2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，qps 空值率为 50%。[skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 qps 后重新提交。",
+      "expected": [
+        "qps",
+        "空值",
+        "null"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "停止后不得生成正式报告",
+      "dimension": "R6",
+      "passed": true,
+      "actual": [],
+      "expected": [],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "明确引导补充/修正本地数据",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "质量校验失败（E2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，QPS 空值率为 50%。[Skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 QPS 后重新提交。",
+      "expected": "可操作的下一步",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "usage": {
+    "input_tokens": 133005,
+    "cached_input_tokens": 96640,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 2426,
+    "reasoning_output_tokens": 416
+  },
+  "semantic_review": "PENDING: native answer and execution trace need review",
+  "id": "D07",
+  "title": "标准粘贴 JSON 的空值门控",
+  "priority": "P0",
+  "run": "D07-1",
+  "seconds": 89.282,
+  "repeat": 1
+}

@@ -1,0 +1,18 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "fund",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "FUND",
+        "symbol": "EX001",
+        "date": "2026-06-18",
+        "net_flow_cny": 10000000,
+        "source_kind": "synthetic_fixture"
+      }
+    }
+  ],
+  "canary": null
+}

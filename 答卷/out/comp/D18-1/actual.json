@@ -1,0 +1,4 @@
+{
+  "ok": false,
+  "error": "RuntimeError: 未检测到具体的数据文件。请提供以下格式之一：\n  - sysbench .log 日志文件路径\n  - .xlsx Excel 文件路径\n  - .json 数据文件路径\n  - .csv 数据文件路径\n  - 直接粘贴 JSON 数据"
+}

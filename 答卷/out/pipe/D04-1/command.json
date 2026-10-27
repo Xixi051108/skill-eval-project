@@ -1,0 +1,8 @@
+[
+  "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "E:\\项目\\skill性能评估考题\\答卷\\sut\\db\\scripts\\run_pipeline.py",
+  "--text",
+  "请读取 data/compare.json，生成 custom 专项报告。仅分析三个产品在 oltp_write_only、oltp_update_index 两场景和 512、1000 并发下的 QPS、P95、P99，逐产品逐场景列出数据并给出有依据的产品选择建议。",
+  "--out",
+  "E:\\项目\\skill性能评估考题\\答卷\\out\\pipe\\D04-1\\work\\artifacts"
+]

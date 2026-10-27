@@ -1,0 +1,22 @@
+{
+  "responses": [
+    {
+      "tool": "mx-finance-search",
+      "command": "search",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "NOTICE-DONE",
+        "symbol": "EX001",
+        "title": "示例科技回购完成公告",
+        "publication_date": "2026-06-18",
+        "event_status": "completed",
+        "source_kind": "synthetic_announcement",
+        "url": "https://example.invalid/notice/done",
+        "body": "示例科技 EX001 公告：本次股份回购已于2026年6月18日全部完成，实际执行数量符合已披露的回购计划。本公告明确确认本次回购完成。",
+        "fixture_note": "合成公告全文，仅用于受控测试。"
+      }
+    }
+  ],
+  "canary": null
+}

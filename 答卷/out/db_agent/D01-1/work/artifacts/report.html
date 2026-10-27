@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>single 单次性能测试报告</title><style>
+body{font-family:'Microsoft YaHei','PingFang SC','Heiti TC','Hiragino Sans GB','STHeiti','Arial Unicode MS',sans-serif;max-width:1100px;margin:auto;padding:28px;color:#243447;line-height:1.7}
+h1{color:#1f4e79;border-bottom:2px solid #1f4e79;padding-bottom:8px}h2{color:#2e75b6;border-left:4px solid #2e75b6;padding-left:12px}h3{color:#4a6d8c}
+.table-wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;margin:16px 0;font-size:14px}th{background:linear-gradient(#D9E2F3,#C5D3EE);color:#1f4e79}td,th{border:1px solid #ccd6e0;padding:8px;text-align:left}tbody tr:nth-child(even){background:#F8FAFC}
+img{max-width:100%;height:auto}figure{margin:24px 0;text-align:center}figcaption{color:#666;font-style:italic}.insight{padding:12px 18px;margin:16px 0;overflow-wrap:anywhere}.L1{background:#E7F5FF;border-left:4px solid #1971C2}.L2{background:#FFF9DB;border-left:4px solid #F08C00}.L3{background:#FFE3E3;border-left:4px solid #C92A2A}nav{padding:16px;background:#F8FAFC}a{color:#1f4e79}
+</style></head><body><header><h1>single 单次性能测试报告</h1><p>TDSQL-B-v22.7.2 sysbench OLTP 测试</p><p>日期：2026-06-19 | 版本：v1.0</p></header>
+<nav aria-label="目录"><h2>目录</h2><ul><li><a href="#ch1">第 1 章 测试结论</a></li><li><a href="#ch2">第 2 章 测试环境</a></li><li><a href="#ch3">第 3 章 全量测试数据</a></li><li><a href="#ch4">第 4 章 性能分析</a></li><li><a href="#ch5">第 5 章 优化建议</a></li><li><a href="#ch6">第 6 章 附录</a></li></ul></nav>
+<section><h1 id="ch1">第 1 章 测试结论</h1>
+
+<h2 id="ch1_1">1.1 测试结论摘要</h2>
+<p>TDSQL-B-v22.7.2 在 2026-06-10 14:00:00 开始的 sysbench OLTP 测试中，覆盖 5 个独立场景及 6 个并发档（32, 64, 128, 256, 512, 1000），共 30 条记录。原日志标注 Duration: 300s；本报告将其保留为单项测试时长，不将其当作整份日志总耗时。所有场景的已测峰值均出现在 512 并发。各场景独立分析，不合并均值。</p>
+<h2 id="ch1_2">1.2 关键性能数字</h2>
+<div class="table-wrap"><table><thead><tr><th>场景</th><th>峰值并发</th><th>峰值 TPS</th><th>峰值 QPS</th><th>P95@峰值 (ms)</th><th>P99@峰值 (ms)</th></tr></thead><tbody><tr><td>点查</td><td>512</td><td>78,230.60</td><td>78,230.60</td><td>8.90</td><td>15.40</td></tr><tr><td>只读</td><td>512</td><td>3,380.20</td><td>47,322.80</td><td>158.40</td><td>224.50</td></tr><tr><td>写入</td><td>512</td><td>20,120.80</td><td>60,362.40</td><td>32.50</td><td>58.20</td></tr><tr><td>混合读写</td><td>512</td><td>2,180.30</td><td>43,606.00</td><td>248.20</td><td>358.10</td></tr><tr><td>索引更新</td><td>512</td><td>13,250.40</td><td>13,250.40</td><td>42.80</td><td>72.50</td></tr></tbody></table></div>
+<h2 id="ch1_3">1.3 核心结论</h2>
+<figure><img src="charts/single_peak_summary.png" alt="TDSQL-B-v22.7.2 各独立场景的峰值 QPS；柱上标签四舍五入，精确数值见表"><figcaption>图：TDSQL-B-v22.7.2 各独立场景的峰值 QPS；柱上标签四舍五入，精确数值见表</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_point_select</strong><p>点查（oltp_point_select）：32→1,000 并发，QPS 从 18,420.50 升至峰值 78,230.60（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 75,100.20，相对峰值 -4.00%。</p></aside>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_only</strong><p>只读（oltp_read_only）：32→1,000 并发，QPS 从 11,484.20 升至峰值 47,322.80（峰值/起点 4.12 倍，512 并发）；最高并发 QPS 为 45,088.40，相对峰值 -4.72%。</p></aside>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_write_only</strong><p>写入（oltp_write_only）：32→1,000 并发，QPS 从 14,460.30 升至峰值 60,362.40（峰值/起点 4.17 倍，512 并发）；最高并发 QPS 为 58,741.20，相对峰值 -2.69%。</p></aside>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_write</strong><p>混合读写（oltp_read_write）：32→1,000 并发，QPS 从 10,408.00 升至峰值 43,606.00（峰值/起点 4.19 倍，512 并发）；最高并发 QPS 为 41,016.00，相对峰值 -5.94%。</p></aside>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_update_index</strong><p>索引更新（oltp_update_index）：32→1,000 并发，QPS 从 3,120.50 升至峰值 13,250.40（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 12,820.10，相对峰值 -3.25%。</p></aside>
+</section>
+<section><h1 id="ch2">第 2 章 测试环境</h1>
+
+<h2 id="ch2_1">2.1 数据库配置</h2>
+<div class="table-wrap"><table><thead><tr><th>项</th><th>源日志值</th></tr></thead><tbody><tr><td>产品及版本</td><td>TDSQL-B-v22.7.2</td></tr><tr><td>测试起始时间</td><td>2026-06-10 14:00:00</td></tr><tr><td>DB 端点</td><td>10.0.0.11:3306</td></tr><tr><td>数据集</td><td>tables=16, table_size=1000000, prepare=true</td></tr><tr><td>测试时长</td><td>300s（Duration: 300s）</td></tr><tr><td>报告生成时间</td><td>2026-06-19T16:00:00+08:00（任务固定时间）</td></tr></tbody></table></div>
+<h2 id="ch2_2">2.2 硬件环境</h2>
+<p>源日志未提供 CPU、内存、存储、网络、操作系统以及数据库运行参数；上述信息均记为未提供，不能据此判断硬件容量或资源瓶颈。</p>
+<h2 id="ch2_3">2.3 测试方法</h2>
+<p>工具为 sysbench，工具版本未提供。并发档完整保留为 [32, 64, 128, 256, 512, 1000]，日志统一标注测试时长 300s。TPS 为事务每秒，QPS 为查询每秒，P95/P99 分别为第 95/99 百分位延迟（ms）。</p>
+<div class="table-wrap"><table><thead><tr><th>场景字段</th><th>说明</th></tr></thead><tbody><tr><td>oltp_point_select</td><td>点查</td></tr><tr><td>oltp_read_only</td><td>只读</td></tr><tr><td>oltp_write_only</td><td>写入</td></tr><tr><td>oltp_read_write</td><td>混合读写</td></tr><tr><td>oltp_update_index</td><td>索引更新</td></tr></tbody></table></div>
+<p>各场景具有不同事务组成，不能据场景间 QPS 大小直接判定业务优劣。源文件是汇总日志，没有提供完整 sysbench 命令、预热规则和重复测试轮次。</p>
+<h2 id="ch2_4">2.4 数据质量与公平性</h2>
+<div class="table-wrap"><table><thead><tr><th>检查项</th><th>结果</th></tr></thead><tbody><tr><td>记录数与覆盖</td><td>1 产品 × 5 场景 × 6 并发档 = 30 条；无重复、无缺档</td></tr><tr><td>TPS / QPS / P95 / P99 空值率</td><td>0% / 0% / 0% / 0%</td></tr><tr><td>原始指标核对</td><td>30 条 × 4 项指标逐项核对一致，保留两位小数</td></tr><tr><td>数据来源</td><td>data/single.log</td></tr><tr><td>数据集与时长</td><td>单一日志头，全场景使用同一数据集和 Duration 标注</td></tr><tr><td>公平性范围</td><td>单产品报告；无跨产品公平性结论；硬件环境未提供（WEAK）</td></tr></tbody></table></div>
+<p>测试时区未在日志注明，保留原始时间，不进行时区换算。记录中的时刻为源日志逐项标记，不推算实际结束时间或整轮总耗时。</p>
+</section>
+<section><h1 id="ch3">第 3 章 全量测试数据</h1>
+<p>产品：TDSQL-B-v22.7.2。每条记录的测试时长均保留为日志头标注的 300s。以下为全部 30 条记录；TPS/QPS 保留两位小数与千分位，P95/P99 单位为 ms。</p>
+<div class="table-wrap"><table><thead><tr><th>场景</th><th>并发</th><th>原始时刻</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody><tr><td>oltp_point_select</td><td>32</td><td>14:00:00</td><td>18,420.50</td><td>18,420.50</td><td>2.10</td><td>3.40</td></tr><tr><td>oltp_point_select</td><td>64</td><td>14:05:00</td><td>32,150.80</td><td>32,150.80</td><td>2.40</td><td>3.90</td></tr><tr><td>oltp_point_select</td><td>128</td><td>14:10:00</td><td>58,320.40</td><td>58,320.40</td><td>2.85</td><td>4.60</td></tr><tr><td>oltp_point_select</td><td>256</td><td>14:15:00</td><td>72,450.10</td><td>72,450.10</td><td>4.80</td><td>8.20</td></tr><tr><td>oltp_point_select</td><td>512</td><td>14:20:00</td><td>78,230.60</td><td>78,230.60</td><td>8.90</td><td>15.40</td></tr><tr><td>oltp_point_select</td><td>1,000</td><td>14:25:00</td><td>75,100.20</td><td>75,100.20</td><td>18.20</td><td>32.10</td></tr><tr><td>oltp_read_only</td><td>32</td><td>14:30:00</td><td>820.30</td><td>11,484.20</td><td>42.10</td><td>58.30</td></tr><tr><td>oltp_read_only</td><td>64</td><td>14:35:00</td><td>1,480.50</td><td>20,727.00</td><td>46.50</td><td>64.20</td></tr><tr><td>oltp_read_only</td><td>128</td><td>14:40:00</td><td>2,410.80</td><td>33,751.20</td><td>58.90</td><td>82.40</td></tr><tr><td>oltp_read_only</td><td>256</td><td>14:45:00</td><td>3,120.40</td><td>43,685.60</td><td>85.30</td><td>120.80</td></tr><tr><td>oltp_read_only</td><td>512</td><td>14:50:00</td><td>3,380.20</td><td>47,322.80</td><td>158.40</td><td>224.50</td></tr><tr><td>oltp_read_only</td><td>1,000</td><td>14:55:00</td><td>3,220.60</td><td>45,088.40</td><td>320.10</td><td>458.20</td></tr><tr><td>oltp_write_only</td><td>32</td><td>15:30:00</td><td>4,820.10</td><td>14,460.30</td><td>8.40</td><td>14.20</td></tr><tr><td>oltp_write_only</td><td>64</td><td>15:35:00</td><td>8,650.40</td><td>25,951.20</td><td>9.80</td><td>16.50</td></tr><tr><td>oltp_write_only</td><td>128</td><td>15:40:00</td><td>14,820.60</td><td>44,461.80</td><td>12.40</td><td>21.30</td></tr><tr><td>oltp_write_only</td><td>256</td><td>15:45:00</td><td>18,950.20</td><td>56,850.60</td><td>18.20</td><td>32.40</td></tr><tr><td>oltp_write_only</td><td>512</td><td>15:50:00</td><td>20,120.80</td><td>60,362.40</td><td>32.50</td><td>58.20</td></tr><tr><td>oltp_write_only</td><td>1,000</td><td>15:55:00</td><td>19,580.40</td><td>58,741.20</td><td>68.40</td><td>124.30</td></tr><tr><td>oltp_read_write</td><td>32</td><td>15:00:00</td><td>520.40</td><td>10,408.00</td><td>72.30</td><td>98.50</td></tr><tr><td>oltp_read_write</td><td>64</td><td>15:05:00</td><td>940.20</td><td>18,804.00</td><td>78.50</td><td>110.20</td></tr><tr><td>oltp_read_write</td><td>128</td><td>15:10:00</td><td>1,560.80</td><td>31,216.00</td><td>92.10</td><td>132.40</td></tr><tr><td>oltp_read_write</td><td>256</td><td>15:15:00</td><td>2,010.50</td><td>40,210.00</td><td>138.40</td><td>198.30</td></tr><tr><td>oltp_read_write</td><td>512</td><td>15:20:00</td><td>2,180.30</td><td>43,606.00</td><td>248.20</td><td>358.10</td></tr><tr><td>oltp_read_write</td><td>1,000</td><td>15:25:00</td><td>2,050.80</td><td>41,016.00</td><td>512.30</td><td>748.40</td></tr><tr><td>oltp_update_index</td><td>32</td><td>16:00:00</td><td>3,120.50</td><td>3,120.50</td><td>12.80</td><td>20.40</td></tr><tr><td>oltp_update_index</td><td>64</td><td>16:05:00</td><td>5,640.20</td><td>5,640.20</td><td>14.20</td><td>23.10</td></tr><tr><td>oltp_update_index</td><td>128</td><td>16:10:00</td><td>9,820.40</td><td>9,820.40</td><td>17.50</td><td>29.80</td></tr><tr><td>oltp_update_index</td><td>256</td><td>16:15:00</td><td>12,480.80</td><td>12,480.80</td><td>24.60</td><td>42.30</td></tr><tr><td>oltp_update_index</td><td>512</td><td>16:20:00</td><td>13,250.40</td><td>13,250.40</td><td>42.80</td><td>72.50</td></tr><tr><td>oltp_update_index</td><td>1,000</td><td>16:25:00</td><td>12,820.10</td><td>12,820.10</td><td>88.40</td><td>152.30</td></tr></tbody></table></div>
+</section>
+<section><h1 id="ch4">第 4 章 性能分析</h1>
+<figure><img src="charts/single_scale.png" alt="TDSQL-B-v22.7.2 各场景独立 QPS 曲线（不作均值或综合评分）"><figcaption>图：TDSQL-B-v22.7.2 各场景独立 QPS 曲线（不作均值或综合评分）</figcaption></figure>
+<h2 id="ch4_1">4.1 点查（oltp_point_select）</h2>
+<figure><img src="charts/single_qps_oltp_point_select.png" alt="点查 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：点查 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<figure><img src="charts/single_p95_oltp_point_select.png" alt="点查 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：点查 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_point_select</strong><p>点查（oltp_point_select）：32→1,000 并发，QPS 从 18,420.50 升至峰值 78,230.60（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 75,100.20，相对峰值 -4.00%。</p></aside>
+<p>延迟稳定性：从 32 到 1,000 并发，P95 2.10→18.20 ms，P99 3.40→32.10 ms；最高并发的 P95 为峰值 QPS 档位的 2.04 倍。未提供延迟 SLA，故不判定达标与否。</p>
+<h2 id="ch4_2">4.2 只读（oltp_read_only）</h2>
+<figure><img src="charts/single_qps_oltp_read_only.png" alt="只读 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：只读 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<figure><img src="charts/single_p95_oltp_read_only.png" alt="只读 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：只读 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_only</strong><p>只读（oltp_read_only）：32→1,000 并发，QPS 从 11,484.20 升至峰值 47,322.80（峰值/起点 4.12 倍，512 并发）；最高并发 QPS 为 45,088.40，相对峰值 -4.72%。</p></aside>
+<p>延迟稳定性：从 32 到 1,000 并发，P95 42.10→320.10 ms，P99 58.30→458.20 ms；最高并发的 P95 为峰值 QPS 档位的 2.02 倍。未提供延迟 SLA，故不判定达标与否。</p>
+<h2 id="ch4_3">4.3 写入（oltp_write_only）</h2>
+<figure><img src="charts/single_qps_oltp_write_only.png" alt="写入 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：写入 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<figure><img src="charts/single_p95_oltp_write_only.png" alt="写入 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：写入 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_write_only</strong><p>写入（oltp_write_only）：32→1,000 并发，QPS 从 14,460.30 升至峰值 60,362.40（峰值/起点 4.17 倍，512 并发）；最高并发 QPS 为 58,741.20，相对峰值 -2.69%。</p></aside>
+<p>延迟稳定性：从 32 到 1,000 并发，P95 8.40→68.40 ms，P99 14.20→124.30 ms；最高并发的 P95 为峰值 QPS 档位的 2.10 倍。未提供延迟 SLA，故不判定达标与否。</p>
+<h2 id="ch4_4">4.4 混合读写（oltp_read_write）</h2>
+<figure><img src="charts/single_qps_oltp_read_write.png" alt="混合读写 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：混合读写 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<figure><img src="charts/single_p95_oltp_read_write.png" alt="混合读写 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：混合读写 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_write</strong><p>混合读写（oltp_read_write）：32→1,000 并发，QPS 从 10,408.00 升至峰值 43,606.00（峰值/起点 4.19 倍，512 并发）；最高并发 QPS 为 41,016.00，相对峰值 -5.94%。</p></aside>
+<aside class="insight L2"><strong>L2 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_write</strong><p>混合读写在 512 并发后出现已测档位的性能拐点：1,000 并发 QPS 较峰值下降 5.94%（超过 5% 判据）。该发现不代表已定位瓶颈原因。</p></aside>
+<p>延迟稳定性：从 32 到 1,000 并发，P95 72.30→512.30 ms，P99 98.50→748.40 ms；最高并发的 P95 为峰值 QPS 档位的 2.06 倍。未提供延迟 SLA，故不判定达标与否。</p>
+<h2 id="ch4_5">4.5 索引更新（oltp_update_index）</h2>
+<figure><img src="charts/single_qps_oltp_update_index.png" alt="索引更新 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：索引更新 并发-QPS 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<figure><img src="charts/single_p95_oltp_update_index.png" alt="索引更新 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档"><figcaption>图：索引更新 并发-P95 曲线；横轴为以 2 为底的对数刻度，覆盖全部并发档</figcaption></figure>
+<aside class="insight L1"><strong>L1 | 数据来源：analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_update_index</strong><p>索引更新（oltp_update_index）：32→1,000 并发，QPS 从 3,120.50 升至峰值 13,250.40（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 12,820.10，相对峰值 -3.25%。</p></aside>
+<p>延迟稳定性：从 32 到 1,000 并发，P95 12.80→88.40 ms，P99 20.40→152.30 ms；最高并发的 P95 为峰值 QPS 档位的 2.07 倍。未提供延迟 SLA，故不判定达标与否。</p>
+</section>
+<section><h1 id="ch5">第 5 章 优化建议</h1>
+
+<h2 id="ch5_1">5.1 后续验证与调优建议</h2>
+<p>全部场景的已测 QPS 峰值位于 512 并发。建议在该档位附近补充测试并发点，并结合业务延迟目标选择并发上限；本次数据不足以直接给出生产连接池上限。</p>
+<p>建议在保持现有数据集与时长一致的条件下重复测试，并同步记录 CPU、内存、磁盘、锁等待及缓存命中数据，再判断吞吐回落原因。没有资源观测数据，不给出具体 Buffer Pool 比例或未经验证的数据库参数。</p>
+<h2 id="ch5_2">5.2 测试边界</h2>
+<p>仅覆盖本日志的 TDSQL-B-v22.7.2、单一数据集、5 个场景和 6 个并发档。未提供重复测试、误差范围、资源监控或线上业务验证数据；结论仅描述已测档位。</p>
+<p>本报告不补造缺失数据，不由尾延迟变化推断具体瓶颈，也不把单次基准结果外推为生产容量或持续稳定性保证。</p>
+</section>
+<section><h1 id="ch6">第 6 章 附录</h1>
+
+<h2 id="ch6_a">6.1 附录 A：sysbench 命令与原始头部</h2>
+<p>完整 sysbench 命令未提供。下表逐行保留原始日志头，不据汇总信息拼造执行命令。</p>
+<div class="table-wrap"><table><thead><tr><th>原始头部行</th></tr></thead><tbody><tr><td>Sysbench oltp Test</td></tr><tr><td>Time: 2026-06-10 14:00:00</td></tr><tr><td>DB: TDSQL-B-v22.7.2 host=10.0.0.11:3306</td></tr><tr><td>Data: tables=16, table_size=1000000, prepare=true</td></tr><tr><td>Threads: 32 64 128 256 512 1000</td></tr><tr><td>Duration: 300s</td></tr></tbody></table></div>
+<h2 id="ch6_b">6.2 附录 B：来源与复核方法</h2>
+<div class="table-wrap"><table><thead><tr><th>项</th><th>值</th></tr></thead><tbody><tr><td>原始文件</td><td>data/single.log</td></tr><tr><td>SHA-256</td><td>68ca345e661ff759202571c9f87d2f7f817523b8a762db5ee874b7edf2443ea5</td></tr><tr><td>标准化数据</td><td>data/extracted_data.json（相对报告目录）</td></tr><tr><td>分析与洞察</td><td>data/analysis_results.json；data/insights.json</td></tr><tr><td>图表</td><td>charts/，共 12 张</td></tr><tr><td>逐条来源</td><td>标准化 records 中的 source_line 和 sample_time 对应原日志行号与时刻</td></tr></tbody></table></div>
+<p>计算方法：各场景独立取 max(QPS) 为已测峰值；扩展倍数 = 峰值 QPS / 最低并发 QPS；最高并发相对峰值变化 = (最高并发 QPS / 峰值 QPS − 1) × 100%。只有峰值出现在最高并发之前且最高并发 QPS 低于峰值的 95% 时标注 L2 拐点。</p>
+<p>L1 表示 Python 计算的客观事实，L2 表示统计发现。报告未加入 L3 原因推测。所有原始性能数据均来自原日志，补充环境信息明确注明未提供。</p>
+</section></body></html>

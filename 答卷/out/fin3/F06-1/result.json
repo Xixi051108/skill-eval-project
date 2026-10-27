@@ -1,0 +1,304 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "结构化响应为对象",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "dict",
+      "expected": "dict",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 action",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 label",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 score",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 facts",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 answer",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 missing",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 conflict",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "响应字段 secondary_label",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "动作字段是合法归一化值",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "verify",
+      "expected": "约定枚举",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "断言状态正确",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "contradicted",
+      "expected": "contradicted",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "真实性分数正确且未知不当作错误",
+      "dimension": "R4",
+      "passed": true,
+      "actual": 0,
+      "expected": 0,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "停止/澄清/答复行为符合意图",
+      "dimension": "R1",
+      "passed": true,
+      "actual": "verify",
+      "expected": "verify",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "实际调用 westock-data",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "mx-finance-search",
+        "westock-data"
+      ],
+      "expected": "westock-data",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "westock-data取得可定位证据",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "westock-data"
+      ],
+      "expected": "成功证据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实字段格式可判定",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "name/value/evidence_id",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立真值 change_pct",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 3.0,
+      "expected": 3.0,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "change_pct对应实际取得的证据",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "Q6",
+      "expected": "实际工具返回中的 evidence_id",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立真值 trade_date",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "2026-06-19",
+      "expected": "2026-06-19",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "trade_date对应实际取得的证据",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "Q6",
+      "expected": "实际工具返回中的 evidence_id",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 change_pct有真实证据引用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "Q6",
+      "expected": "实际工具证据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 change_pct忠实于其引用证据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 3.0,
+      "expected": 3.0,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 trade_date有真实证据引用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "Q6",
+      "expected": "实际工具证据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 trade_date忠实于其引用证据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "2026-06-19",
+      "expected": "2026-06-19",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 currency有真实证据引用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "Q6",
+      "expected": "实际工具证据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实 currency忠实于其引用证据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "CNY",
+      "expected": "CNY",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "有面向用户的解释与修正答案",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "至少15字符",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "F06",
+  "title": "涨幅超过3的阈值3.0",
+  "priority": "P0",
+  "seconds": 42.578,
+  "usage": {
+    "input_tokens": 64226,
+    "cached_input_tokens": 46976,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 417,
+    "reasoning_output_tokens": 0
+  },
+  "actual_label": "contradicted",
+  "actual_score": 0,
+  "source_run": "E:\\项目\\skill性能评估考题\\答卷\\out\\finance2\\F06-1",
+  "semantic_review": "PENDING: independent free-text review",
+  "run": "F06-1",
+  "repeat": 1
+}

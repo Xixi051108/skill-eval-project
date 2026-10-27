@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "输入应停止处理",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "RuntimeError: 本地文件不存在: E:\\项目\\skill性能评估考题\\答卷\\data\\not_found.log",
+      "expected": "拒绝或要求修正数据",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "id": "D06",
+  "title": "文件不存在",
+  "priority": "P0",
+  "run": "D06-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "value": {
+    "passed": false,
+    "issues": [
+      "并发档不一致：TDSQL-B v22.7.3=[32, 64, 128, 256, 512, 1000] vs OceanBase 4.2=[32, 64, 128, 256, 512]"
+    ],
+    "concurrencies": {
+      "TDSQL-B v22.7.3": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "MySQL 8.0.32": [
+        32,
+        64,
+        128,
+        256,
+        512,
+        1000
+      ],
+      "OceanBase 4.2": [
+        32,
+        64,
+        128,
+        256,
+        512
+      ]
+    },
+    "scenarios": {
+      "TDSQL-B v22.7.3": [
+        "oltp_point_select",
+        "oltp_read_only",
+        "oltp_read_write",
+        "oltp_update_index",
+        "oltp_write_only"
+      ],
+      "MySQL 8.0.32": [
+        "oltp_point_select",
+        "oltp_read_only",
+        "oltp_read_write",
+        "oltp_update_index",
+        "oltp_write_only"
+      ],
+      "OceanBase 4.2": [
+        "oltp_point_select",
+        "oltp_read_only",
+        "oltp_read_write",
+        "oltp_update_index",
+        "oltp_write_only"
+      ]
+    }
+  }
+}

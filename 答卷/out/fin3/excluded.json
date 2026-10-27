@@ -1,0 +1,94 @@
+[
+  {
+    "source": "答卷\\out\\finance\\F05-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance\\F06-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance\\F07-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance\\F09-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F10-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F11-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F12-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F13-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F14-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F15-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F16-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F17-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F18-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F19-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F20-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F21-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance\\F22-1",
+    "reason": "missing completed response/request/fixture/skill"
+  },
+  {
+    "source": "答卷\\out\\finance2\\F09-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance2\\F10-1",
+    "reason": "tool fixture differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance2\\F18-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance2\\F20-1",
+    "reason": "user request differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance3\\F09-1",
+    "reason": "tool fixture differs from current version"
+  },
+  {
+    "source": "答卷\\out\\finance3\\F20-1",
+    "reason": "tool fixture differs from current version"
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "report_type": "single",
+  "single_product_insights": {
+    "TDSQL-B-v22.7.2": [
+      {
+        "level": "L1",
+        "scenario": "oltp_point_select",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_point_select",
+        "text": "点查（oltp_point_select）：32→1,000 并发，QPS 从 18,420.50 升至峰值 78,230.60（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 75,100.20，相对峰值 -4.00%。"
+      },
+      {
+        "level": "L1",
+        "scenario": "oltp_read_only",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_only",
+        "text": "只读（oltp_read_only）：32→1,000 并发，QPS 从 11,484.20 升至峰值 47,322.80（峰值/起点 4.12 倍，512 并发）；最高并发 QPS 为 45,088.40，相对峰值 -4.72%。"
+      },
+      {
+        "level": "L1",
+        "scenario": "oltp_write_only",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_write_only",
+        "text": "写入（oltp_write_only）：32→1,000 并发，QPS 从 14,460.30 升至峰值 60,362.40（峰值/起点 4.17 倍，512 并发）；最高并发 QPS 为 58,741.20，相对峰值 -2.69%。"
+      },
+      {
+        "level": "L1",
+        "scenario": "oltp_read_write",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_write",
+        "text": "混合读写（oltp_read_write）：32→1,000 并发，QPS 从 10,408.00 升至峰值 43,606.00（峰值/起点 4.19 倍，512 并发）；最高并发 QPS 为 41,016.00，相对峰值 -5.94%。"
+      },
+      {
+        "level": "L2",
+        "scenario": "oltp_read_write",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_read_write",
+        "text": "混合读写在 512 并发后出现已测档位的性能拐点：1,000 并发 QPS 较峰值下降 5.94%（超过 5% 判据）。该发现不代表已定位瓶颈原因。"
+      },
+      {
+        "level": "L1",
+        "scenario": "oltp_update_index",
+        "source": "analysis_results.single_product.TDSQL-B-v22.7.2.scenario_stats.oltp_update_index",
+        "text": "索引更新（oltp_update_index）：32→1,000 并发，QPS 从 3,120.50 升至峰值 13,250.40（峰值/起点 4.25 倍，512 并发）；最高并发 QPS 为 12,820.10，相对峰值 -3.25%。"
+      }
+    ]
+  },
+  "selection_insights": []
+}

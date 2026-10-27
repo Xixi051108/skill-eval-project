@@ -1,0 +1,17 @@
+{
+  "action": "verify",
+  "label": "contradicted",
+  "score": 0,
+  "facts": [
+    {"name": "hk00700_price", "value": 500, "evidence_id": "HK"},
+    {"name": "currency", "value": "HKD", "evidence_id": "HK"},
+    {"name": "trade_date", "value": "2026-06-19", "evidence_id": "HK"},
+    {"name": "usTCEHY_price", "value": 60, "evidence_id": "ADR"},
+    {"name": "currency", "value": "USD", "evidence_id": "ADR"},
+    {"name": "trade_date", "value": "2026-06-19", "evidence_id": "ADR"}
+  ],
+  "secondary_label": "证券代码、市场及币种错配",
+  "conflict": false,
+  "missing": ["具体报价时间、延时状态及是否为收盘价未提供", "资讯搜索未命中，缺少独立交叉验证"],
+  "answer": "结论：候选回答错误，评分0分。实际执行行情查询后，证据HK显示，hk00700在2026-06-19的last为500港元；证据ADR显示，usTCEHY的last为60美元。候选回答把美国市场证券的美元报价用作港股港元报价，核心标的及币种均不一致。两份行情属于不同证券，不构成同一标的的数据源冲突。\n口径风险：本轮数据来自受控测试替身，非真实联网行情；工具未说明具体报价时间及收盘状态，不能称为当日收盘价。补充资讯搜索未命中。\n修正答案：按本轮工具返回的数据，腾讯港股hk00700在2026-06-19的最新价字段为500港元；60是usTCEHY的美元报价，不能作为腾讯港股价格。"
+}

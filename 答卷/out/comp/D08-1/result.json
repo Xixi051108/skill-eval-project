@@ -1,0 +1,54 @@
+{
+  "status": "FAIL",
+  "score": 0.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": false,
+      "actual": "RuntimeError: 未能从数据中解析出有效记录: local_data",
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "D08",
+  "title": "有效标准粘贴 JSON 配对正例",
+  "priority": "P0",
+  "run": "D08-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

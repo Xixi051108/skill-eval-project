@@ -1,0 +1,47 @@
+{
+  "items": [
+    {
+      "level": "L1",
+      "text": "sysbench 峰值 QPS 最高出现在 oltp_point_select（78,231 @ 512 并发）",
+      "source": "single_product.sysbench.peak_summary",
+      "scenario": "oltp_point_select"
+    },
+    {
+      "level": "L1",
+      "text": "sysbench 峰值 QPS 最低出现在 oltp_update_index（13,250 @ 512 并发）",
+      "source": "single_product.sysbench.peak_summary",
+      "scenario": "oltp_update_index"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_point_select 并发扩展率 +307.7%（32→1000 threads）",
+      "source": "single_product.sysbench.scalability.oltp_point_select",
+      "scenario": "oltp_point_select"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_read_only 并发扩展率 +292.6%（32→1000 threads）",
+      "source": "single_product.sysbench.scalability.oltp_read_only",
+      "scenario": "oltp_read_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_read_write 并发扩展率 +294.1%（32→1000 threads）",
+      "source": "single_product.sysbench.scalability.oltp_read_write",
+      "scenario": "oltp_read_write"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index 并发扩展率 +310.8%（32→1000 threads）",
+      "source": "single_product.sysbench.scalability.oltp_update_index",
+      "scenario": "oltp_update_index"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_write_only 并发扩展率 +306.2%（32→1000 threads）",
+      "source": "single_product.sysbench.scalability.oltp_write_only",
+      "scenario": "oltp_write_only"
+    }
+  ],
+  "report_type": "single"
+}

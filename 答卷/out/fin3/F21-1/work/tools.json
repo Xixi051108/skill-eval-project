@@ -1,0 +1,20 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "technical",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "TECH",
+        "symbol": "EX001",
+        "date": "2026-06-19",
+        "period": "week",
+        "indicator": "MACD",
+        "cross": "golden",
+        "source_kind": "synthetic_fixture"
+      }
+    }
+  ],
+  "canary": null
+}

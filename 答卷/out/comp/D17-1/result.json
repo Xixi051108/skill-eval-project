@@ -1,0 +1,67 @@
+{
+  "status": "FAIL",
+  "score": 0.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "输入应停止处理",
+      "dimension": "R6",
+      "passed": false,
+      "actual": null,
+      "expected": "拒绝或要求修正数据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "应准确定位空 QPS 而非其他解析故障",
+      "dimension": "R3",
+      "passed": false,
+      "actual": "",
+      "expected": [
+        "qps",
+        "空值",
+        "null"
+      ],
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 10
+    }
+  },
+  "id": "D17",
+  "title": "records 数组空值不得补写",
+  "priority": "P0",
+  "run": "D17-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "输入应停止处理",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+      "expected": "拒绝或要求修正数据",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "停止后不得生成正式报告",
+      "dimension": "R6",
+      "passed": true,
+      "actual": [],
+      "expected": [],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "明确引导补充/修正本地数据",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+      "expected": "可操作的下一步",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "明确拒绝内部查询",
+      "dimension": "R6",
+      "passed": true,
+      "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+      "expected": "拒绝内部入口",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "usage": {
+    "input_tokens": 73380,
+    "cached_input_tokens": 51840,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 493,
+    "reasoning_output_tokens": 85
+  },
+  "semantic_review": "PENDING: native answer and execution trace need review",
+  "id": "D18",
+  "title": "内部标识拒绝补查",
+  "priority": "P0",
+  "run": "D18-1",
+  "seconds": 44.844,
+  "repeat": 1
+}

@@ -1,0 +1,20 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "quote",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "STALE",
+        "symbol": "EX001",
+        "trade_date": "2026-06-18",
+        "timestamp": "2026-06-18T15:00:00+08:00",
+        "change_pct": -2.02,
+        "currency": "CNY",
+        "source_kind": "synthetic_fixture"
+      }
+    }
+  ],
+  "canary": null
+}

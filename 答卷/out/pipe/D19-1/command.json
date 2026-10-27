@@ -1,0 +1,8 @@
+[
+  "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "E:\\项目\\skill性能评估考题\\答卷\\sut\\db\\scripts\\run_pipeline.py",
+  "--text",
+  "请基于 data/single.log 按 Skill 及其所有 references 生成完整 single 报告，并逐项核验最小交付标准。",
+  "--out",
+  "E:\\项目\\skill性能评估考题\\答卷\\out\\pipe\\D19-1\\work\\artifacts"
+]

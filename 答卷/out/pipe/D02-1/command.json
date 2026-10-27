@@ -1,0 +1,8 @@
+[
+  "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "E:\\项目\\skill性能评估考题\\答卷\\sut\\db\\scripts\\run_pipeline.py",
+  "--text",
+  "请读取 data/compare.json，生成三个产品的 comparison 报告，按五个场景独立比较，标注公平性限制。",
+  "--out",
+  "E:\\项目\\skill性能评估考题\\答卷\\out\\pipe\\D02-1\\work\\artifacts"
+]

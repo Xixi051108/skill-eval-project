@@ -1,0 +1,14 @@
+{
+  "status": "NOT_RUN",
+  "reason": "Stopped after runtime failure: Agent runtime exit=1; see stderr.txt/events.jsonl",
+  "checks": [],
+  "dimensions": {},
+  "score": null,
+  "fatal": false,
+  "id": "F22",
+  "title": "资金流日期不能混用",
+  "priority": "P0",
+  "run": "F22-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

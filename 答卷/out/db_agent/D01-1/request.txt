@@ -1,0 +1,7 @@
+你正在执行一个 Skill 用户任务。当前目录是本次任务工作区。先读取 skill/SKILL.md，并遵守其中工作流。仅访问当前工作区及提供的Python运行时，不读取父目录或其他测试材料，不修改 skill 源码。不要创建子Agent。
+本次任务的固定当前时间：2026-06-19T16:00:00+08:00。该时间是相对日期的唯一锚点。
+如Python命令不可用，可使用以下运行时：C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe。
+数据库脚本统一使用上述Python运行时，依赖由测试环境提供，不安装依赖。报告写入 artifacts/。最终返回用户答复，不更改测试输入。
+
+用户请求：
+请读取 data/single.log，生成 single 性能报告，保留源数据中的产品、测试时长与全部性能指标。

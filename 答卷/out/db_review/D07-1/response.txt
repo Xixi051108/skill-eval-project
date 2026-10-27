@@ -1,0 +1,5 @@
+质量校验失败（E2005），未生成正式 single 报告。
+
+第 2 条记录（64 并发）的 `qps` 为 `null`，QPS 空值率为 50%。[Skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。
+
+[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 QPS 后重新提交。

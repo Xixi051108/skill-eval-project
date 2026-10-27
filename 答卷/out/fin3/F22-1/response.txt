@@ -1,0 +1,29 @@
+{
+  "action": "verify",
+  "label": "insufficient_evidence",
+  "score": null,
+  "facts": [
+    {
+      "name": "trade_date",
+      "value": "2026-06-18",
+      "evidence_id": "FUND"
+    },
+    {
+      "name": "net_flow_cny",
+      "value": 10000000,
+      "evidence_id": "FUND"
+    },
+    {
+      "name": "currency",
+      "value": "CNY",
+      "evidence_id": "FUND"
+    }
+  ],
+  "secondary_label": "资金数据日期不匹配",
+  "conflict": false,
+  "missing": [
+    "EX001 在 2026-06-19 的主力资金净流入数据",
+    "返回字段 net_flow_cny 是否属于主力资金口径的说明"
+  ],
+  "answer": "结论：无法确认该说法，证据不足，暂不评分。\n\n核查明细：westock-data fund EX001 返回净流入 10000000 元，即人民币 1000 万元，但数据日期为 2026-06-18（证据 FUND）。补充资讯检索返回 not_found，未取得目标日期的证据。\n\n口径风险：前一日数据不能代替 6 月 19 日数据；返回字段也未明确标注“主力资金”。数据来自本轮受控测试替身。\n\n修正答案：目前仅查到 EX001 在 2026-06-18 的资金净流入为 1000 万元，无法确认其在 2026-06-19 主力资金净流入 1000 万元。"
+}

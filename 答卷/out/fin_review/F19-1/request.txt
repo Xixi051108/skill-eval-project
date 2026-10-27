@@ -1,0 +1,8 @@
+你正在执行一个 Skill 用户任务。当前目录是本次任务工作区。先读取 skill/SKILL.md，并遵守其中工作流。仅访问当前工作区及提供的Python运行时，不读取父目录或其他测试材料，不修改 skill 源码。不要创建子Agent。
+本次任务的固定当前时间：2026-06-19T16:00:00+08:00。该时间是相对日期的唯一锚点。
+如Python命令不可用，可使用以下运行时：C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe。
+金融依赖本轮由受控测试替身提供，不做真实联网。你需要实际执行工具命令获得原始证据。命令：python tool.py westock-data finance SYMBOL；quote SYMBOL；technical SYMBOL；fund SYMBOL。资讯：python tool.py mx-finance-search search QUERY。同一工具的后续参数保持证券代码正确。工具失败不能假装成功，不用模型记忆替代失败工具。
+最终以JSON返回：action(verify/answer/clarify/insufficient/blocked/refuse)、label(supported/contradicted/insufficient_evidence)、score(0/1/2或null)、facts([{name,value,evidence_id}])、secondary_label(字符串或null)、conflict(布尔)、missing(缺失条件列表)、answer(含结论、核查明细、口径风险、修正答案的用户答复)。facts财报营收统一为revenue_yi(亿元)，增长为revenue_yoy_pct；另可用currency、report_period、change_pct、trade_date。字段仅为输出归一化约定，不提供答案。没有候选回答时不强制评分。
+
+用户请求：
+请核查：腾讯控股 hk00700 2024 全年营收约 6600 亿元人民币，同比增长约 8%；若来源冲突，请核对权威年报，不得直接将上市币种当财报币种。

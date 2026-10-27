@@ -1,0 +1,76 @@
+intent.json 已生成: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\intent.json
+{
+  "data_source_type": "local_file",
+  "data_source_value": "E:\\项目\\skill性能评估考题\\答卷\\out\\pipe\\D19-1\\work\\data\\single.log",
+  "report_type": "single",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "test_name_keywords_or": null,
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": null,
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": null,
+  "custom_config": null,
+  "other_info": null
+}
+extracted_data.json 已保存: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\extracted_data.json（30 条记录）
+   产品: ['sysbench']
+   场景: ['oltp_point_select', 'oltp_read_only', 'oltp_read_write', 'oltp_update_index', 'oltp_write_only']
+   并发档: [32, 64, 128, 256, 512, 1000]
+
+=== 分析完成（report_type=single）===
+analysis_results.json 已保存: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\analysis_results.json
+insights.json 已保存: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\insights.json
+洞察数量: 7
+
+生成 11 张图表（report_type=single）
+   - single_p95_oltp_point_select.png
+   - single_p95_oltp_read_only.png
+   - single_p95_oltp_read_write.png
+   - single_p95_oltp_update_index.png
+   - single_p95_oltp_write_only.png
+   - single_peak_summary.png
+   - single_qps_oltp_point_select.png
+   - single_qps_oltp_read_only.png
+   - single_qps_oltp_read_write.png
+   - single_qps_oltp_update_index.png
+   - single_qps_oltp_write_only.png
+Markdown: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\report.md
+Word:     E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\report.docx
+HTML:     E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\report.html
+
+> C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe E:\项目\skill性能评估考题\答卷\sut\db\scripts\parse_intent.py --text 请基于 data/single.log 按 Skill 及其所有 references 生成完整 single 报告，并逐项核验最小交付标准。 --out E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\intent.json
+
+意图解析结果：
+  data_source_type: local_file
+  report_type:      single
+
+> C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe E:\项目\skill性能评估考题\答卷\sut\db\scripts\data_source_adapter.py --intent E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\intent.json --out E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\extracted_data.json
+
+> C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe E:\项目\skill性能评估考题\答卷\sut\db\scripts\analyze.py --extracted E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\extracted_data.json --intent E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\intent.json --out-analysis E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\analysis_results.json --out-insights E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\insights.json
+
+> C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe E:\项目\skill性能评估考题\答卷\sut\db\scripts\generate_charts.py --extracted E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\extracted_data.json --analysis E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\analysis_results.json --charts-dir E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\charts --report-type single
+
+> C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe E:\项目\skill性能评估考题\答卷\sut\db\scripts\render_all.py --extracted E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\extracted_data.json --analysis E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\analysis_results.json --insights E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\insights.json --intent E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts\data\intent.json --out-dir E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts --charts-dir-rel charts
+
+流水线完成
+   报告位于: E:\项目\skill性能评估考题\答卷\out\pipe\D19-1\work\artifacts/
+     - report.md
+     - report.docx
+     - report.html
+     - charts/  (11 张图)
+     - data/    (4 份中间产物)

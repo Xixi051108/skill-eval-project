@@ -1,0 +1,73 @@
+{
+  "status": "FAIL",
+  "score": 57.14,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "场景并集解析正确",
+      "dimension": "R1",
+      "passed": false,
+      "actual": {
+        "test_name_keywords": [],
+        "test_name_keywords_or": null,
+        "tool_name": null,
+        "tool_version_keywords": [],
+        "component_name": null,
+        "component_version": null
+      },
+      "expected": [
+        "read_only",
+        "write_only"
+      ],
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "D21",
+  "title": "标准英文字段两个场景取并集",
+  "priority": "P0",
+  "run": "D21-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

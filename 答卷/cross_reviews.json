@@ -1,0 +1,26 @@
+[
+  {
+    "run": "F01-1",
+    "response_sha256": "4662cc7f6575f4113b39e6ed0717a32e31ec790328fca1ac3e94b57ee960a700",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "TENCENT-2024回执为660257百万元CNY、同比约8%；答复换算6602.57亿元并说明受控快照和搜索未命中，未假称交叉验证。"
+  },
+  {
+    "run": "F06-1",
+    "response_sha256": "98677b6892a55eb186985282be20a94f129a78da5f14bd48148c830f7dccabee",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "实际Q6回执3.0%，答复正确判严格超过不成立并给0分；缺currency不影响无量纲比例。conflict=true似指候选与证据相矛盾，公开约定未定义该布尔语义，记为歧义而不判业务错。"
+  },
+  {
+    "run": "F08-1",
+    "response_sha256": "104cf8d8e5d37e294cd136648c83bb7df9ee1f1230f7b1990f78006db08235d2",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "STALE只返回6月18日-2.02%；答复没有用旧下跌否定6月19日上涨断言，保持证据不足和null分数。"
+  }
+]

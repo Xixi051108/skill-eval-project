@@ -1,0 +1,15 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "finance",
+      "symbol": "hk00700",
+      "status": "unavailable",
+      "payload": {
+        "symbol": "hk00700",
+        "error": "dependency unavailable"
+      }
+    }
+  ],
+  "canary": null
+}

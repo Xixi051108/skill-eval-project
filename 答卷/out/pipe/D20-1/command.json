@@ -1,0 +1,8 @@
+[
+  "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "E:\\项目\\skill性能评估考题\\答卷\\sut\\db\\scripts\\run_pipeline.py",
+  "--text",
+  "请读取 data/single.log 生成 single 报告；核对 MD、DOCX、HTML 的原始指标、产品和 300 秒测试时长一致。",
+  "--out",
+  "E:\\项目\\skill性能评估考题\\答卷\\out\\pipe\\D20-1\\work\\artifacts"
+]

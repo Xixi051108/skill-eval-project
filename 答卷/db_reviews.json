@@ -1,0 +1,26 @@
+[
+  {
+    "run": "D05-1",
+    "response_sha256": "8bce9ee7c83725b2c26d9aab405dd9451ddcd73a634ad85ec97847d6d3625210",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "已读Skill并执行意图解析；答复要求本地文件或JSON数据，工作区只生成intent，没有正式报告或编造指标。"
+  },
+  {
+    "run": "D07-1",
+    "response_sha256": "3d6227481976bac3c93c0e502485d24cde1bc897ea168ac96764e78d1eab3e19",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "轨迹先识别标准粘贴JSON，再直接调用quality_check检查完整records；真实E2005、QPS空值率50%，没有用适配器补值，也没有改Skill，最终给出缺失位置与补充方式。"
+  },
+  {
+    "run": "D18-1",
+    "response_sha256": "32d0c9e4dfbb612cbdc5feed1095b897b8f3f8150c9f43fdfab36eb024b9cbbf",
+    "reviewer": "本会话助手（非独立人评）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "读取Skill与规范，实际detect_input得到keyword_only；没有内部查询命令，答复明确不支持且引导本地数据，未生成正式报告。"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "official_tencent": {
+    "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800667.pdf",
+    "release": "https://static.www.tencent.com/uploads/2025/03/19/81cb1f36bec218d27d6e0b24eec012b6.pdf",
+    "published": "2025-04-08",
+    "verified_in_audit": "2026-10-23",
+    "revenue_million_cny": 660257,
+    "release_yoy_pct_rounded": 8,
+    "source_capture": "人工整理字段与URL；未将工具返回当作独立真值"
+  },
+  "synthetic": {
+    "symbols": [
+      "EX001"
+    ],
+    "urls": "example.invalid 为保留的无效域名",
+    "purpose": "控制变量、故障注入、阈值和评分边界；非真实交易数据"
+  },
+  "guidance": [
+    "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+    "https://learn.chatgpt.com/docs/non-interactive-mode"
+  ]
+}

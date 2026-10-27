@@ -1,0 +1,30 @@
+{
+  "status": "stopped",
+  "stage": 2,
+  "code": "E2005",
+  "report_type": "single",
+  "current_time": "2026-06-19T16:00:00+08:00",
+  "records": 2,
+  "null_counts": {
+    "tps": 0,
+    "qps": 1,
+    "p95_ms": 0
+  },
+  "null_rates": {
+    "tps": 0.0,
+    "qps": 0.5,
+    "p95_ms": 0.0
+  },
+  "invalid_records": [
+    {
+      "json_path": "records[1].qps",
+      "product": "ExampleDB",
+      "scenario": "oltp_point_select",
+      "threads": 64,
+      "value": null
+    }
+  ],
+  "reason": "数据空值率超标 — TPS=0/2, QPS=1/2, P95=0/2",
+  "required_action": "补充 64 并发记录的真实 QPS 后重新提交。",
+  "formal_reports_generated": false
+}

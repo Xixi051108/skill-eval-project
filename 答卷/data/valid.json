@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "products": [
+      "ExampleDB"
+    ],
+    "scenarios": [
+      "oltp_point_select"
+    ],
+    "concurrencies": [
+      32,
+      64
+    ],
+    "source_info": {
+      "type": "fixture",
+      "value": "valid.json"
+    }
+  },
+  "records": [
+    {
+      "product": "ExampleDB",
+      "scenario": "oltp_point_select",
+      "threads": 32,
+      "tps": 19494.95,
+      "qps": 19494.95,
+      "p95_ms": 1.14,
+      "p99_ms": 1.64,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    },
+    {
+      "product": "ExampleDB",
+      "scenario": "oltp_point_select",
+      "threads": 64,
+      "tps": 34925.66,
+      "qps": 34925.66,
+      "p95_ms": 1.39,
+      "p99_ms": 2.0,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    }
+  ]
+}

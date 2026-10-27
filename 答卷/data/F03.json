@@ -1,0 +1,24 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "finance",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "EX-2024",
+        "tool": "westock-data",
+        "command": "finance",
+        "symbol": "EX001",
+        "report_period": "2024-12-31",
+        "currency": "CNY",
+        "unit": "yi",
+        "revenue": 100,
+        "revenue_yoy_pct": 8,
+        "source_kind": "synthetic_fixture",
+        "segments": []
+      }
+    }
+  ],
+  "canary": null
+}

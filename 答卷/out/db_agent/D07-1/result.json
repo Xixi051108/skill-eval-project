@@ -1,0 +1,14 @@
+{
+  "status": "NOT_RUN",
+  "reason": "Stopped after runtime failure: Agent runtime timeout; see events.jsonl and stderr.txt",
+  "checks": [],
+  "dimensions": {},
+  "score": null,
+  "fatal": false,
+  "id": "D07",
+  "title": "标准粘贴 JSON 的空值门控",
+  "priority": "P0",
+  "run": "D07-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

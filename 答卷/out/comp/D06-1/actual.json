@@ -1,0 +1,4 @@
+{
+  "ok": false,
+  "error": "RuntimeError: 本地文件不存在: E:\\项目\\skill性能评估考题\\答卷\\data\\not_found.log"
+}

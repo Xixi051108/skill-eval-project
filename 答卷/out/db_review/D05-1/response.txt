@@ -1,0 +1,3 @@
+已识别为只读场景（`read_only`）的单次性能报告。当前未提供数据，按 Skill 要求暂停生成，不能推测或编造指标。
+
+请提供本地 `.log`、`.xlsx`、`.json`、`.csv` 文件路径，或直接粘贴 JSON 性能数据。解析结果已保存至 `artifacts/intent.json`。

@@ -1,0 +1,31 @@
+{
+  "action": "verify",
+  "label": "supported",
+  "score": 2,
+  "facts": [
+    {
+      "name": "symbol",
+      "value": "EX001",
+      "evidence_id": "NOTICE-DONE"
+    },
+    {
+      "name": "publication_date",
+      "value": "2026-06-18",
+      "evidence_id": "NOTICE-DONE"
+    },
+    {
+      "name": "repurchase_status",
+      "value": "completed",
+      "evidence_id": "NOTICE-DONE"
+    },
+    {
+      "name": "completion_date",
+      "value": "2026-06-18",
+      "evidence_id": "NOTICE-DONE"
+    }
+  ],
+  "secondary_label": null,
+  "conflict": false,
+  "missing": [],
+  "answer": "结论：候选回答“公告确认已经完成”获证据支持，评分2分。\n核查明细：资讯工具返回《示例科技回购完成公告》（NOTICE-DONE），公告日期为2026-06-18，正文明确表示本次股份回购已于当日全部完成，早于核查截止时间2026-06-19 16:00（北京时间）。\n口径风险：证据为受控测试提供的合成公告，非真实联网公告；行情工具未匹配到数据，未用于支持结论。\n修正答案：截至2026-06-19，示例科技EX001公告确认本次回购已于2026-06-18全部完成。"
+}

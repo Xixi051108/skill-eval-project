@@ -1,0 +1,29 @@
+{
+  "action": "verify",
+  "label": "insufficient_evidence",
+  "score": 0,
+  "facts": [
+    {
+      "name": "symbol",
+      "value": "EX001",
+      "evidence_id": "NOTICE-PLAN"
+    },
+    {
+      "name": "publication_date",
+      "value": "2026-06-18",
+      "evidence_id": "NOTICE-PLAN"
+    },
+    {
+      "name": "event_status",
+      "value": "planned",
+      "evidence_id": "NOTICE-PLAN"
+    }
+  ],
+  "secondary_label": "将回购计划误判为全部完成",
+  "conflict": false,
+  "missing": [
+    "截至2026-06-19 16:00（北京时间）的回购完成或实施结果公告",
+    "实际回购数量、金额及其是否满足计划完成条件"
+  ],
+  "answer": "结论：现有证据不足以支持“已全部完成”，候选回答评为0分。\n核查明细：公告搜索两次均返回2026-06-18《示例科技回购计划公告》（NOTICE-PLAN），状态为planned（计划中），未返回完成公告；westock-data财报查询返回not_found，不能作为核实成功的证据。\n口径风险：回购计划公告不等于完成公告，也不能仅凭未查到完成公告断言尚未完成。返回来源标注为合成公告，本次仅据受控工具证据判断。\n修正答案：截至2026-06-19 16:00（北京时间），可查证据仅确认EX001已公告回购计划，尚无法确认是否已全部完成。"
+}

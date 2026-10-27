@@ -1,0 +1,26 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "finance",
+      "symbol": "hk00700",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "TENCENT-2024",
+        "tool": "westock-data",
+        "command": "finance",
+        "symbol": "hk00700",
+        "report_period": "2024-12-31",
+        "currency": "CNY",
+        "unit": "million",
+        "revenue": 660257,
+        "revenue_yoy_pct": 8,
+        "yoy_precision": "official release rounded integer",
+        "source_url": "https://www.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800667.pdf",
+        "source_kind": "official_annual_report",
+        "note": "受控测试快照，根据官方年报人工整理；不是本次联网 westock-data 调用结果。"
+      }
+    }
+  ],
+  "canary": null
+}

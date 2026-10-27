@@ -1,0 +1,69 @@
+{
+  "status": "FAIL",
+  "score": 50.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "两版本只能做差异说明",
+      "dimension": "R4",
+      "passed": false,
+      "actual": [
+        "version_order",
+        "trend",
+        "cumulative_change",
+        "regression_points",
+        "regression_threshold_pct"
+      ],
+      "expected": "明确限制且不宣称长期趋势",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "D14",
+  "title": "版本不足不产生趋势断言",
+  "priority": "P0",
+  "run": "D14-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

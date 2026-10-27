@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "reason": "Agent runtime timeout; see events.jsonl and stderr.txt",
+  "checks": [],
+  "dimensions": {},
+  "score": null,
+  "fatal": false,
+  "id": "D01",
+  "title": "日志原始元数据与指标",
+  "priority": "P0",
+  "run": "D01-1",
+  "seconds": 360.109,
+  "repeat": 1
+}

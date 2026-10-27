@@ -1,0 +1,15 @@
+{
+  "responses": [
+    {
+      "tool": "mx-finance-search",
+      "command": "search",
+      "symbol": "EX001",
+      "status": "missing_key",
+      "payload": {
+        "symbol": "EX001",
+        "error": "EM_API_KEY is not configured"
+      }
+    }
+  ],
+  "canary": null
+}

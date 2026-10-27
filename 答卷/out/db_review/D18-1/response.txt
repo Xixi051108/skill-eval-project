@@ -1,0 +1,3 @@
+当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。
+
+依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。

@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED",
+  "reason": "Agent runtime exit=1; see stderr.txt/events.jsonl",
+  "checks": [],
+  "dimensions": {},
+  "score": null,
+  "fatal": false,
+  "id": "F09",
+  "title": "计划不能当作已完成",
+  "priority": "P0",
+  "run": "F09-1",
+  "seconds": 21.688,
+  "repeat": 1
+}

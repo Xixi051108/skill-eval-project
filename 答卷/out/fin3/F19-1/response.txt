@@ -1,0 +1,31 @@
+{
+  "action": "verify",
+  "label": "supported",
+  "score": 2,
+  "facts": [
+    {
+      "name": "revenue_yi",
+      "value": 6602.57,
+      "evidence_id": "TENCENT-2024"
+    },
+    {
+      "name": "revenue_yoy_pct",
+      "value": 8,
+      "evidence_id": "TENCENT-2024"
+    },
+    {
+      "name": "currency",
+      "value": "CNY",
+      "evidence_id": "TENCENT-2024"
+    },
+    {
+      "name": "report_period",
+      "value": "2024-12-31",
+      "evidence_id": "TENCENT-2024"
+    }
+  ],
+  "secondary_label": "source_conflict_resolved",
+  "conflict": true,
+  "missing": [],
+  "answer": "结论：原说法成立，评分2分。\n\n核查明细：已实际执行财务查询及年报搜索。搜索工具返回的官方年报摘录（TENCENT-2024）显示，腾讯2024全年收入为660257百万元人民币，即6602.57亿元人民币，同比增长8%（官方取整口径），支持“约6600亿元、增长约8%”。\n\n来源冲突：结构化数据STRUCT-2024返回712989.72百万元港币、同比16.74%，与官方年报摘录不一致，故采用年报数据。腾讯在香港上市不能作为财报采用港币的依据。\n\n口径与风险：报告期为截至2024年12月31日的全年，财报币种为人民币。本次依据受控工具返回的年报快照，未独立下载PDF。年报链接：https://www.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800667.pdf\n\n修正参考答案：腾讯控股（hk00700）2024全年营收为6602.57亿元人民币，同比增长约8%。"
+}

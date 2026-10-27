@@ -1,0 +1,92 @@
+{
+  "type": "object",
+  "properties": {
+    "action": {
+      "type": "string",
+      "enum": [
+        "verify",
+        "answer",
+        "clarify",
+        "insufficient",
+        "blocked",
+        "refuse"
+      ]
+    },
+    "label": {
+      "type": "string",
+      "enum": [
+        "supported",
+        "contradicted",
+        "insufficient_evidence"
+      ]
+    },
+    "score": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "enum": [
+        0,
+        1,
+        2,
+        null
+      ]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": [
+              "number",
+              "string",
+              "null"
+            ]
+          },
+          "evidence_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value",
+          "evidence_id"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "secondary_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "conflict": {
+      "type": "boolean"
+    },
+    "missing": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "answer": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "action",
+    "label",
+    "score",
+    "facts",
+    "secondary_label",
+    "conflict",
+    "missing",
+    "answer"
+  ],
+  "additionalProperties": false
+}

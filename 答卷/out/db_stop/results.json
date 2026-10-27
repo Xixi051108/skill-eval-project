@@ -1,0 +1,424 @@
+{
+  "metadata": {
+    "kind": "agent",
+    "at": "2026-10-23T17:51:32.577154+00:00",
+    "environment": {
+      "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "executable": "C:\\Users\\43521\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "at": "2026-10-23T17:51:32.739396+00:00",
+      "modules": {
+        "matplotlib": false,
+        "numpy": true,
+        "docx": true,
+        "openpyxl": true
+      },
+      "versions": {
+        "matplotlib": null,
+        "numpy": "2.3.5",
+        "python-docx": "1.2.0",
+        "openpyxl": "3.1.5",
+        "pillow": "12.3.0",
+        "lxml": "6.1.1",
+        "contourpy": null,
+        "cycler": null,
+        "kiwisolver": null,
+        "fonttools": null,
+        "packaging": "26.3",
+        "pyparsing": null,
+        "python-dateutil": "2.9.0.post0",
+        "six": "1.17.0"
+      },
+      "model_usage": null,
+      "note": "None 表示未运行或供应方未返回，不当作0成本。"
+    },
+    "suite": "db",
+    "model": "gpt-6.1-sol",
+    "user_config": true,
+    "repeat": 1,
+    "target_sha256": {
+      "sut/db/SKILL.md": "b68a38c42c857db31b6492a22a5428b1d83e7db92c04fa1789bc3b0918648c14",
+      "sut/finance/SKILL.md": "ef3e176c26a8180264a9c9ec68d837c0bf36d04d60c8596b744c23769279cf01",
+      "sut/db/references/三格式输出规范.md": "94536a88f63d4808cf40779af04b78bd1bc60d929423391129285e00cb9af655",
+      "sut/db/references/分析方法论.md": "1cb00e421e2de0cb08ff86547d5eb608e0cb975dd18c2aa28a147a414f02ced5",
+      "sut/db/references/意图解析规范.md": "b5669ce819345996fa34a5d3d77c55c60f74ac5d0424296210aadf1eebf88749",
+      "sut/db/references/报告类型模板规范.md": "84775cd5c920734580f5b00e7b6b8aca0a2220eaf4be44977b87a6a7c9a8c38f",
+      "sut/db/references/数据源接入规范.md": "f2f253625bad703664cbae078ba31a952db6bf8f199b8ee5e8223a0eb616e851",
+      "sut/db/references/最小交付标准.md": "e4c7f2051c5dea8c4e67b7cdd08ffba9f3a87cbfcdcc4afbed3418d327b84ce2",
+      "sut/db/scripts/analyze.py": "9de2b9bcc782daeb4ffa5f8fb799ae22711cac19b413df2f9e5c1959dea74d5b",
+      "sut/db/scripts/analyze_core.py": "885e48d9cad62a78c9f43e5781352190a48d3371b59a741b3a466c5c2c01fd5e",
+      "sut/db/scripts/constants.py": "ba8c9af2fd2ee400402f8633e8b54bc736755607f94f2ef1f871a2384271dea7",
+      "sut/db/scripts/data_source_adapter.py": "43a10d9f39e7a5bf05b06a47c548fe65da599b7cb226ec5227857c79de4f0f07",
+      "sut/db/scripts/detect_input.py": "ad6b198ca086fe58223142418aa4731ac9b8e2837c80c5840c93ad5a1919d0b4",
+      "sut/db/scripts/generate_charts.py": "578ccd50c992cff358fee6c2a210651e44c942c542d38d6f8f0257b421998cb6",
+      "sut/db/scripts/log_parser.py": "cd6f7d126f33674f3e7e9c0310df42f2cd65ce5c824e3dc8c0775a4c5994ca6d",
+      "sut/db/scripts/parse_intent.py": "9e0f452c945df870872e98356ef4fe16c75faa41d30c76c34991233be1e208f2",
+      "sut/db/scripts/render_all.py": "8640b03f13ca91ccc5f71b825f3efac8165ae8f35e0b957b97dd2c7d0e441679",
+      "sut/db/scripts/render_core.py": "95d6ea0fd1c72717ed0ff3185ae3a5939ffa3439f57a8200624c5a94e84bd63d",
+      "sut/db/scripts/run_pipeline.py": "3fe9c7fe571e998bb5085e8d9f4cccb54c7f0ce39ff93482257f943698f64d1b",
+      "sut/db/templates/comparison_report.py": "dddcb0c4705951ae24a79c12d9f0dfd50efdbcfb15ff9c9fb4374430258976e7",
+      "sut/db/templates/custom_report.py": "361fa226c42446ba514305f4264abbb64a9b62beb62eb1c5018a41e66cb1aa1d",
+      "sut/db/templates/iteration_report.py": "a2528450cc03c247bcfcf6b83a97e03dbf0167632681f9bea8dc1bffc99ac43b",
+      "sut/db/templates/single_report.py": "e3c590fb4b385d84f0ec80d10d695975895bcfd58bcebfc565fe642911e5e4fe",
+      "sut/db/templates/__init__.py": "552ef61b151d38c2dd67b286b6cabe9a1fe6c740f001365be06ab1fef2c2636d",
+      "data/compare.csv": "48b3cf8b6222b5593de459ff94f4c31b5ce06a53e12d1f7e1c33afffe5b2f4cf",
+      "data/compare.json": "4640ff7f9fa4fc1cf7c9e964798fa1fa337fc2b96782f16ff0f06c9fd58bc514",
+      "data/compare.xlsx": "28ec32e65dd08bf475482f1656aef754c6ad4988d87dfe6e563e3a09aaa33910",
+      "data/compare.xlsx.inspect.ndjson": "5eb6f66283837762eb7ada4bdbd533011646611b0344ec8077a9cd584ecb20a9",
+      "data/empty.json": "61f524063e9dd40d94e44fed124edac09811fae7b8b1562013a6225ded2059f6",
+      "data/F01.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+      "data/F02.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+      "data/F03.json": "44fb01ab0c1993e423bc5d91ffeca0eede642be85a862349ccb4458fc1ddda70",
+      "data/F04.json": "c2ecbcc9554b2258c901495fad2d3d94994ef050e9c26f35d583ad60e09a25cb",
+      "data/F05.json": "4173244e5eee0f9a60f9d8075f61cc8539dc4f23505ac3c4f1c55d23391c06fd",
+      "data/F06.json": "0ff6bd8d207448024b84e6261d59acb7f17dd46c81e378cfeb4e04770ac664dd",
+      "data/F07.json": "e9891bea352dd7570744795272ce2771b28f7b478a494a8175596498573b027d",
+      "data/F08.json": "a23635bba3d2e57c274d3a367011812f237625a8dd24b034d9dc3f5d8454c571",
+      "data/F09.json": "29aa6a568c0e0d4ddd4dcef6b59a47449ec05b5ae95ad63ef1963f54436e11b1",
+      "data/F10.json": "3771e8717c2466b0c2d25e74b5eaab9fd4b21bfac5380202aa81b97982f6c101",
+      "data/F11.json": "90b5bc96665f72e33f3d69c0c4bb5a0314550916d07c3cac92b463913d7c9848",
+      "data/F12.json": "c04b0079d23cf1526f99264e24b522ea5c2f432c270f003d77e86e8e6d068182",
+      "data/F13.json": "c2ecbcc9554b2258c901495fad2d3d94994ef050e9c26f35d583ad60e09a25cb",
+      "data/F14.json": "5840cc6f7ccc2fc5b9ad67e6d9401dffb37abba52aed798808bebddbb1a835a4",
+      "data/F15.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+      "data/F16.json": "38b3be0b663087a383c78dd40ec7644f8332b40288798b1613c7ce03cd3f1d89",
+      "data/F17.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+      "data/F18.json": "ab530f7c3ba929b7d7e57fcff8ee6e70e2de2134ec16b5bf7132f56ef7aaad03",
+      "data/F19.json": "e5ffc38570a1e3c1ec01b37defeeb4b71f557f50cf6e74d50693ea4fda624cc9",
+      "data/F20.json": "0be6b0942782e9e4ed238c2f0dfe4307ccd616930e14ea6d7937a520a96bbae6",
+      "data/F21.json": "c47d7c626ca6e315884ce5b69d5b8c83c4f32110543f18a12efefc688ca18327",
+      "data/F22.json": "6f369633d1fad532cceefbd552c80fc3490f0c86eeab66b35593374a29093f70",
+      "data/iter.json": "49c9874206b3a24d216e2befd09af75dce060d5980dc96ea92ecbef4f24663f4",
+      "data/null.json": "f4a46aa74ddf4097d74dda13cd00f37157fb99a15abd2843b1365d6cb5f05ec5",
+      "data/null_array.json": "fe11ce6cb79fb784e676354ef8431b7d544dbb5c92f715ba1d9201e3e92be3bc",
+      "data/single.log": "68ca345e661ff759202571c9f87d2f7f817523b8a762db5ee874b7edf2443ea5",
+      "data/two.json": "7bd258e951b4874342c901482de2e704631fa7137d0a58b70d2c7fe97a8176ae",
+      "data/unfair.json": "04fab20697ce2a23e8604b2e47c105cfcb4072877cdba8005552d1bfd0d91efe",
+      "data/valid.json": "1a374612bbab25676f46c32ef2cbb0746f25f343518419092c99f41669ab2d77",
+      "data/zero.json": "d92fdfbccf36079de81362ff9fab3aa33d3a3c9a45c93020b4a934bae12889ef"
+    },
+    "protocol_sha256": {
+      "db.yaml": "9b9c78cb589a3efca4b3dad94c3244747ad12e84f5c1b32eafc5b940e3cd0b59",
+      "finance.yaml": "277dd41d95321fa2d6bd74aa50ac9256a092b3091d9f1eab4d3a116c9edab231",
+      "run.py": "adf9c089b003af5013663fff85f78d340386d98020fe915ff39464b60a796e62",
+      "judge.py": "772e99afd0e5a80a307d3916bd88086d6a69e0b4a1d1a8d76fa40c5e5e02dd28",
+      "tool.py": "aacf3fb025f87c9c895fec56b516e9e8b1b295a4b1fb6def6545474302ae7a6d"
+    },
+    "case_selection_coverage": 0.13636363636363635,
+    "isolation": "fresh CLI session; public request whitelist; filesystem instruction boundary, not a hostile-process isolation guarantee",
+    "finished": "2026-10-23T17:54:39.407740+00:00"
+  },
+  "summary": {
+    "counts": {
+      "PASS": 3,
+      "FAIL": 0,
+      "BLOCKED": 0,
+      "NOT_RUN": 0,
+      "REVIEW": 0
+    },
+    "evaluated": 3,
+    "planned": 3,
+    "execution_coverage": 1.0,
+    "observed_score": 100.0,
+    "score_scope": "仅本批已执行且适用的检查，不代表未运行模式或官方验收分数",
+    "dimensions": {
+      "R1": {
+        "weight": 15,
+        "ratio": null,
+        "cases": 0
+      },
+      "R2": {
+        "weight": 20,
+        "ratio": null,
+        "cases": 0
+      },
+      "R3": {
+        "weight": 20,
+        "ratio": 1.0,
+        "cases": 1
+      },
+      "R4": {
+        "weight": 20,
+        "ratio": null,
+        "cases": 0
+      },
+      "R5": {
+        "weight": 15,
+        "ratio": null,
+        "cases": 0
+      },
+      "R6": {
+        "weight": 10,
+        "ratio": 1.0,
+        "cases": 3
+      }
+    },
+    "fatal": false,
+    "semantic_pending": 3,
+    "decision": "INCOMPLETE"
+  },
+  "results": [
+    {
+      "status": "PASS",
+      "score": 100.0,
+      "fatal": false,
+      "checks": [
+        {
+          "name": "输入应停止处理",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "已识别为只读场景（`read_only`）的单次性能报告。当前未提供数据，按 Skill 要求暂停生成，不能推测或编造指标。\n\n请提供本地 `.log`、`.xlsx`、`.json`、`.csv` 文件路径，或直接粘贴 JSON 性能数据。解析结果已保存至 `artifacts/intent.json`。",
+          "expected": "拒绝或要求修正数据",
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "停止后不得生成正式报告",
+          "dimension": "R6",
+          "passed": true,
+          "actual": [],
+          "expected": [],
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "明确引导补充/修正本地数据",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "已识别为只读场景（`read_only`）的单次性能报告。当前未提供数据，按 Skill 要求暂停生成，不能推测或编造指标。\n\n请提供本地 `.log`、`.xlsx`、`.json`、`.csv` 文件路径，或直接粘贴 JSON 性能数据。解析结果已保存至 `artifacts/intent.json`。",
+          "expected": "可操作的下一步",
+          "mandatory": true,
+          "fatal": false
+        }
+      ],
+      "dimensions": {
+        "R1": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R2": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R3": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R4": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R5": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R6": {
+          "applicable": true,
+          "ratio": 1.0,
+          "weight": 10
+        }
+      },
+      "usage": {
+        "input_tokens": 97406,
+        "cached_input_tokens": 52736,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 483,
+        "reasoning_output_tokens": 77
+      },
+      "semantic_review": "PENDING: native answer and execution trace need review",
+      "id": "D05",
+      "title": "缺少数据先澄清",
+      "priority": "P0",
+      "run": "D05-1",
+      "seconds": 52.484,
+      "repeat": 1
+    },
+    {
+      "status": "PASS",
+      "score": 100.0,
+      "fatal": false,
+      "checks": [
+        {
+          "name": "输入应停止处理",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "质量校验失败（E2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，QPS 空值率为 50%。[Skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 QPS 后重新提交。",
+          "expected": "拒绝或要求修正数据",
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "应准确定位空 QPS 而非其他解析故障",
+          "dimension": "R3",
+          "passed": true,
+          "actual": "质量校验失败（e2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，qps 空值率为 50%。[skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 qps 后重新提交。",
+          "expected": [
+            "qps",
+            "空值",
+            "null"
+          ],
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "停止后不得生成正式报告",
+          "dimension": "R6",
+          "passed": true,
+          "actual": [],
+          "expected": [],
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "明确引导补充/修正本地数据",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "质量校验失败（E2005），未生成正式 single 报告。\n\n第 2 条记录（64 并发）的 `qps` 为 `null`，QPS 空值率为 50%。[Skill 数据源接入规范](skill/references/数据源接入规范.md) 要求“`tps/qps/p95_ms` 空值率为 0%”，因此流程已停止，未补值或删除记录。\n\n[校验说明](artifacts/validation.md) 已保存。请补充该记录的真实 QPS 后重新提交。",
+          "expected": "可操作的下一步",
+          "mandatory": true,
+          "fatal": false
+        }
+      ],
+      "dimensions": {
+        "R1": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R2": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R3": {
+          "applicable": true,
+          "ratio": 1.0,
+          "weight": 20
+        },
+        "R4": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R5": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R6": {
+          "applicable": true,
+          "ratio": 1.0,
+          "weight": 10
+        }
+      },
+      "usage": {
+        "input_tokens": 133005,
+        "cached_input_tokens": 96640,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 2426,
+        "reasoning_output_tokens": 416
+      },
+      "semantic_review": "PENDING: native answer and execution trace need review",
+      "id": "D07",
+      "title": "标准粘贴 JSON 的空值门控",
+      "priority": "P0",
+      "run": "D07-1",
+      "seconds": 89.282,
+      "repeat": 1
+    },
+    {
+      "status": "PASS",
+      "score": 100.0,
+      "fatal": false,
+      "checks": [
+        {
+          "name": "输入应停止处理",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+          "expected": "拒绝或要求修正数据",
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "停止后不得生成正式报告",
+          "dimension": "R6",
+          "passed": true,
+          "actual": [],
+          "expected": [],
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "明确引导补充/修正本地数据",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+          "expected": "可操作的下一步",
+          "mandatory": true,
+          "fatal": false
+        },
+        {
+          "name": "明确拒绝内部查询",
+          "dimension": "R6",
+          "passed": true,
+          "actual": "当前 Skill 不支持查询内部库，只接受本地 `.log/.xlsx/.json/.csv` 文件或粘贴的 JSON 性能数据。输入检测结果为 `keyword_only`，仅凭这两个 ID 无法生成报告。\n\n依据 [skill/SKILL.md](skill/SKILL.md)：“所有报告数据必须来自本地原始文件或用户粘贴的数据。”请提供对应数据文件或 JSON；收到后可将报告输出至 `artifacts/`。本次未查询内部库，也未生成报告。",
+          "expected": "拒绝内部入口",
+          "mandatory": true,
+          "fatal": false
+        }
+      ],
+      "dimensions": {
+        "R1": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R2": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R3": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R4": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 20
+        },
+        "R5": {
+          "applicable": false,
+          "ratio": null,
+          "weight": 15
+        },
+        "R6": {
+          "applicable": true,
+          "ratio": 1.0,
+          "weight": 10
+        }
+      },
+      "usage": {
+        "input_tokens": 73380,
+        "cached_input_tokens": 51840,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 493,
+        "reasoning_output_tokens": 85
+      },
+      "semantic_review": "PENDING: native answer and execution trace need review",
+      "id": "D18",
+      "title": "内部标识拒绝补查",
+      "priority": "P0",
+      "run": "D18-1",
+      "seconds": 44.844,
+      "repeat": 1
+    }
+  ]
+}

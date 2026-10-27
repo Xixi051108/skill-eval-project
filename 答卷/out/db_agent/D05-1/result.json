@@ -1,0 +1,14 @@
+{
+  "status": "NOT_RUN",
+  "reason": "Stopped after runtime failure: Agent runtime timeout; see events.jsonl and stderr.txt",
+  "checks": [],
+  "dimensions": {},
+  "score": null,
+  "fatal": false,
+  "id": "D05",
+  "title": "缺少数据先澄清",
+  "priority": "P0",
+  "run": "D05-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

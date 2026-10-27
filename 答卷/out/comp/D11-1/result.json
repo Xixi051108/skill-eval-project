@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "记录身份及全部核心数值符合输入",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 90,
+      "expected": 90,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "D11",
+  "title": "CSV 与 JSON 输入等价",
+  "priority": "P0",
+  "run": "D11-1",
+  "seconds": 0.0,
+  "repeat": 1
+}

@@ -1,0 +1,1401 @@
+{
+  "status": "PASS",
+  "at": "2026-10-23T18:07:14.134515+00:00",
+  "checks": [
+    {
+      "name": "frozen inputs and evaluator",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "Python syntax",
+      "passed": true,
+      "detail": 7
+    },
+    {
+      "name": "original Skill files byte identical",
+      "passed": true,
+      "detail": 24
+    },
+    {
+      "name": "original submission db_report_submit/db_report_coverage_matrix.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_ideal_state.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_logic_chain.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_meta_testcases.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_rubrics.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_test_report.html",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/db_report_testcases.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission db_report_submit/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/README.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_coverage_matrix.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_full_test_report_2026-06-19.html",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_ideal_state.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_logic_chain.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_meta_testcases.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_rubrics.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submission tracingclaw_finance_submit/tracingclaw_finance_testcases.yaml",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original submitted files matched",
+      "passed": true,
+      "detail": 16
+    },
+    {
+      "name": "local link README.md -> 结果.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link README.md -> 评估.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link README.md -> 学习.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link README.md -> 复盘.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> 复盘.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/check_final/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/cal2/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/comp/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/pipe/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/db_review/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/db_agent/D01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/fin_review/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/fin_review/repeats.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/cross_review/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/live3/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/fin3/excluded.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> 评估.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> sources.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> 变更.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> 学习.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/live3/westock.stdout.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/live3/search.stdout.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/live2/results.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link 结果.md -> out/cross/report.md",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F01-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F02-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F02-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F03-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F03-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F04-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F04-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F05-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F07-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F09-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F10-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F11-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F11-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F12-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F12-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F13-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F13-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F14-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F14-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F15-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F15-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F16-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F16-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F17-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F17-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F18-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F19-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F19-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F20-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F21-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F21-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F22-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin3\\report.md -> F22-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F01-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross_review\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_stop\\report.md -> D05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_stop\\report.md -> D07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_stop\\report.md -> D18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F01-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F02-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F02-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F03-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F03-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F04-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F04-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F05-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F07-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F09-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F10-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F11-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F11-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F12-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F12-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F13-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F13-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F14-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F14-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F15-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F15-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F16-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F16-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F17-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F17-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F18-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F19-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F19-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F20-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F21-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F21-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F22-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\fin_review\\report.md -> F22-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance4\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance4\\report.md -> F10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance4\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F01-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross3\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_agent\\report.md -> D01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_agent\\report.md -> D05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_agent\\report.md -> D07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_agent\\report.md -> D18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F06-2/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F06-2/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F08-2/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\repeat\\report.md -> F08-2/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D05-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D07-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\db_review\\report.md -> D18-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance3\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance3\\report.md -> F18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance3\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D02-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D03-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D04-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D11-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D12-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D13-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D14-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D15-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D16-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D17-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D21-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\comp\\report.md -> D22-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F01-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F06-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\cross\\report.md -> F08-1/response.txt",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F02-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F03-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F04-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F08-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F11-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F12-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F13-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F14-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F15-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F16-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F17-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F19-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F21-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance\\report.md -> F22-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D01-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D02-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D03-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D04-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D19-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\pipe\\report.md -> D20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F05-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F06-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F07-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F09-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F10-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F11-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F12-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F13-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F14-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F15-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F16-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F17-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F18-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F19-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F20-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F21-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "local link out\\finance2\\report.md -> F22-1/result.json",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F01-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F02-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F03-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F04-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F05-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F06-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F07-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F08-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F09-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F10-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F11-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F12-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F13-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F14-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F15-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F16-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F17-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F18-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F19-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F20-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F21-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F22-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F06-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F06-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F08-2",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash fin3/F08-3",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash db_stop/D05-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash db_stop/D07-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash db_stop/D18-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash cross3/F01-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash cross3/F06-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "review response hash cross3/F08-1",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "semantic reviews identify LLM",
+      "passed": true,
+      "detail": 32
+    },
+    {
+      "name": "no current real credential values in packaged files",
+      "passed": true,
+      "detail": {
+        "scanned_files": 1635,
+        "hits": 0
+      }
+    },
+    {
+      "name": "no junction/runtime/bytecode in package",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "archive relative paths below 200 characters",
+      "passed": true,
+      "detail": 77
+    }
+  ],
+  "local_links": 222,
+  "note": "No Git repository at workspace root. Diff audit uses original submission bytes, original Skill bytes, frozen evaluator hashes, and new file inventory. No visual QA of report layout claimed."
+}

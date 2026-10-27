@@ -1,0 +1,23 @@
+{
+  "responses": [
+    {
+      "tool": "westock-data",
+      "command": "quote",
+      "symbol": "EX001",
+      "status": "ok",
+      "payload": {
+        "evidence_id": "Q5",
+        "symbol": "EX001",
+        "market": "A-share",
+        "currency": "CNY",
+        "trade_date": "2026-06-19",
+        "timestamp": "2026-06-19T15:00:00+08:00",
+        "change_pct": 2.99,
+        "price_basis": "close",
+        "adjustment": "none",
+        "source_kind": "synthetic_fixture"
+      }
+    }
+  ],
+  "canary": null
+}

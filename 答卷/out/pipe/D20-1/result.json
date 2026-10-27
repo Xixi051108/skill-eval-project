@@ -1,0 +1,246 @@
+{
+  "status": "FAIL",
+  "score": 77.92,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/intent.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/intent.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/extracted_data.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/extracted_data.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/analysis_results.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/analysis_results.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/insights.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/insights.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/block_map.md",
+      "dimension": "R5",
+      "passed": false,
+      "actual": "data/block_map.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 docs/analysis_proposal.md",
+      "dimension": "R5",
+      "passed": false,
+      "actual": "docs/analysis_proposal.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.docx",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.docx",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.html",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.html",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "图表达到 reference 基线",
+      "dimension": "R5",
+      "passed": true,
+      "actual": 11,
+      "expected": 11,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "Markdown 图表均指向有效相对路径",
+      "dimension": "R5",
+      "passed": true,
+      "actual": [
+        "charts/single_peak_summary.png",
+        "charts/single_qps_oltp_point_select.png",
+        "charts/single_p95_oltp_point_select.png",
+        "charts/single_qps_oltp_read_only.png",
+        "charts/single_p95_oltp_read_only.png",
+        "charts/single_qps_oltp_write_only.png",
+        "charts/single_p95_oltp_write_only.png",
+        "charts/single_qps_oltp_read_write.png",
+        "charts/single_p95_oltp_read_write.png",
+        "charts/single_qps_oltp_update_index.png",
+        "charts/single_p95_oltp_update_index.png"
+      ],
+      "expected": "有效相对路径",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md时长符合原始日志",
+      "dimension": "R3",
+      "passed": false,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html时长符合原始日志",
+      "dimension": "R3",
+      "passed": false,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx时长符合原始日志",
+      "dimension": "R3",
+      "passed": false,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md逐行符合原始数据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 30,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html逐行符合原始数据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 30,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx逐行符合原始数据",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 30,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 0.5,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 0.8571428571428571,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 10
+    }
+  },
+  "id": "D20",
+  "title": "三格式数值一致且符合原始数据",
+  "priority": "P0",
+  "run": "D20-1",
+  "seconds": 3.828,
+  "repeat": 1
+}
