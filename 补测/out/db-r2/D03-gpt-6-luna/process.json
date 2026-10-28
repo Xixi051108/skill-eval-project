@@ -1,0 +1,34 @@
+{
+  "command_count": 11,
+  "observations": [
+    {
+      "step": "read_skill",
+      "command_index": 0,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw skill/SKILL.md; rg --files'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 1,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw skill/references/意图解析规范.md; Get-Content -Raw skill/references/数据源接入规范.md; Get-Content -Raw skill/references/分析方法论.md; Get-Content -Raw skill/references/报告类型模板规范.md; Get-Content -Raw skill/references/三格式输出规范.md; Get-Content -Raw skill/references/最小交付标准.md; Get-Content -Raw data/iter.json; Get-Content -Raw skill/templates/iteration_report.py'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 2,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw skill/references/报告类型模板规范.md; Get-Content -Raw skill/references/三格式输出规范.md; Get-Content -Raw skill/references/最小交付标准.md; Get-Content -Raw skill/scripts/analyze_core.py; Get-Content -Raw skill/scripts/run_pipeline.py'"
+    },
+    {
+      "step": "pipeline_request",
+      "command_index": 2,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -Raw skill/references/报告类型模板规范.md; Get-Content -Raw skill/references/三格式输出规范.md; Get-Content -Raw skill/references/最小交付标准.md; Get-Content -Raw skill/scripts/analyze_core.py; Get-Content -Raw skill/scripts/run_pipeline.py'"
+    },
+    {
+      "step": "pipeline_request",
+      "command_index": 4,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"New-Item -ItemType Directory -Force artifacts | Out-Null; @'\nimport json\nfrom pathlib import Path\nintent = {\n  'data_source_type':'local_file',\n  'data_source_value':str(Path('data/iter.json').resolve()),\n  'report_type':'iteration',\n  'dimension_filters':{'test_name_keywords':[],'tool_version_keywords':[]},\n  'iteration_config':{'version_range':['TDSQL-B v22.6','TDSQL-B v22.7','TDSQL-B v22.8','TDSQL-B v22.9'],'regression_threshold_pct':5},\n  'other_info':None\n}\nPath('artifacts/intent.json').write_text(json.dumps(intent,ensure_ascii=False,indent=2),encoding='utf-8')\n'@ | & 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' -; & 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' skill/scripts/run_pipeline.py --intent artifacts/intent.json --out artifacts\""
+    }
+  ],
+  "skill_bytes_unchanged": true,
+  "input_bytes_unchanged": true,
+  "skill_read_observed": true,
+  "note": "命令匹配是可观察线索，动态读取与阶段顺序另行复核；不宣称强物理隔离。"
+}

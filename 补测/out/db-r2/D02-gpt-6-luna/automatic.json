@@ -1,0 +1,252 @@
+{
+  "status": "REVIEW",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "记录身份及全部核心数值符合输入",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 90,
+      "expected": 90,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/intent.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/intent.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/extracted_data.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/extracted_data.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/analysis_results.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/analysis_results.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/insights.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/insights.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/block_map.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/block_map.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 docs/analysis_proposal.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "docs/analysis_proposal.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.docx",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.docx",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.html",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.html",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "图表达到 reference 基线",
+      "dimension": "R5",
+      "passed": true,
+      "actual": 32,
+      "expected": 20,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "Markdown 图表均指向有效相对路径",
+      "dimension": "R5",
+      "passed": true,
+      "actual": [
+        "charts/comparison_peak_oltp_point_select.png",
+        "charts/comparison_qps_oltp_point_select.png",
+        "charts/comparison_p95_oltp_point_select.png",
+        "charts/comparison_peak_oltp_read_only.png",
+        "charts/comparison_qps_oltp_read_only.png",
+        "charts/comparison_p95_oltp_read_only.png",
+        "charts/comparison_peak_oltp_read_write.png",
+        "charts/comparison_qps_oltp_read_write.png",
+        "charts/comparison_p95_oltp_read_write.png",
+        "charts/comparison_peak_oltp_write_only.png",
+        "charts/comparison_qps_oltp_write_only.png",
+        "charts/comparison_p95_oltp_write_only.png",
+        "charts/comparison_peak_oltp_update_index.png",
+        "charts/comparison_qps_oltp_update_index.png",
+        "charts/comparison_p95_oltp_update_index.png",
+        "charts/comparison_radar.png",
+        "charts/comparison_ladder.png",
+        "charts/product_1_oltp_point_select.png",
+        "charts/product_1_oltp_read_only.png",
+        "charts/product_1_oltp_read_write.png",
+        "charts/product_1_oltp_write_only.png",
+        "charts/product_1_oltp_update_index.png",
+        "charts/product_2_oltp_point_select.png",
+        "charts/product_2_oltp_read_only.png",
+        "charts/product_2_oltp_read_write.png",
+        "charts/product_2_oltp_write_only.png",
+        "charts/product_2_oltp_update_index.png",
+        "charts/product_3_oltp_point_select.png",
+        "charts/product_3_oltp_read_only.png",
+        "charts/product_3_oltp_read_write.png",
+        "charts/product_3_oltp_write_only.png",
+        "charts/product_3_oltp_update_index.png"
+      ],
+      "expected": "有效相对路径",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "PENDING: 解释、来源支持、限制和过程另行复核",
+  "id": "D02",
+  "model": "gpt-6-luna",
+  "suite": "db",
+  "run": "D02-gpt-6-luna",
+  "seconds": 203.969,
+  "usage": {
+    "input_tokens": 721344,
+    "cached_input_tokens": 621696,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 12946,
+    "reasoning_output_tokens": 3145
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "906eb22ee569c94b8dee8dc85e6355e336eb999cca4f8f9aa4939ced652ea823",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true
+}

@@ -1,0 +1,9 @@
+已生成三个产品的 comparison 报告，包含五个场景独立分析、90 条完整数据和 20 张图表：
+
+- [Markdown](artifacts/report.md)
+- [Word](artifacts/report.docx)
+- [HTML](artifacts/report.html)
+
+报告已明确硬件、配置及重复测试证据不足的公平性限制，结论仅适用于所提供数据。
+
+48 项交付核查通过；原始输入和 Skill 源码均未修改。

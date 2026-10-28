@@ -1,0 +1,13 @@
+{
+  "single_qps_oltp_point_select.png": [],
+  "single_p95_oltp_point_select.png": [],
+  "single_qps_oltp_read_only.png": [],
+  "single_p95_oltp_read_only.png": [],
+  "single_qps_oltp_read_write.png": [],
+  "single_p95_oltp_read_write.png": [],
+  "single_qps_oltp_update_index.png": [],
+  "single_p95_oltp_update_index.png": [],
+  "single_qps_oltp_write_only.png": [],
+  "single_p95_oltp_write_only.png": [],
+  "single_peak_summary.png": []
+}

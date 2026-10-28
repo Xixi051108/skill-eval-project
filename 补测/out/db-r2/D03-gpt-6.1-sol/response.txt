@@ -1,0 +1,11 @@
+已生成历史趋势报告，按来源顺序 v22.6 → v22.7 → v22.8 → v22.9 计算。
+
+v22.8 → v22.9 有 3 项峰值 QPS 回退超过 5%：
+
+- 只读：下降 21.02%
+- 混合读写：下降 6.75%
+- 写入：下降 5.16%
+
+报告：[Markdown](artifacts/report.md) · [Word](artifacts/report.docx) · [HTML](artifacts/report.html)
+
+包含 17 张图，26 项交付核查通过。原始数据和 Skill 源码未修改。

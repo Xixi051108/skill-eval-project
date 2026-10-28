@@ -1,0 +1,107 @@
+{
+  "version": "supplement-1",
+  "at": "2026-10-27T08:52:39.520326+00:00",
+  "models": [
+    "gpt-6.1-sol",
+    "gpt-6-luna"
+  ],
+  "suite": "finance",
+  "effort": "medium",
+  "timeout": 240,
+  "cases": [
+    "F01",
+    "F02",
+    "F15"
+  ],
+  "original_manifest_sha256": "21b36f49d21be3cb97a8267e9cb3048e71a2d889f28cb22026abb146fbb2ed7e",
+  "supplement_sha256": {
+    "gateway.py": "55373444d232b35b8f79ece2b76bb24ec90093912a95b673a7d59a133e03e806",
+    "runner.py": "6752aa52f0bf55921598001b66fda8a814c80be81e8b2cfa0005c84d81382672",
+    "test_runner.py": "67b8133fb3d9b6f4ee3b61df998b0a46cb2a101c7bc609b147d29a24a26cdc22",
+    "tool.py": "19e6784dc6511e7b8e3baa264d98d063944f6cd6be8855a5fde8508122ce9a24"
+  },
+  "data_skill_sha256": {
+    "sut/db/SKILL.md": "b68a38c42c857db31b6492a22a5428b1d83e7db92c04fa1789bc3b0918648c14",
+    "sut/finance/SKILL.md": "ef3e176c26a8180264a9c9ec68d837c0bf36d04d60c8596b744c23769279cf01",
+    "sut/db/references/三格式输出规范.md": "94536a88f63d4808cf40779af04b78bd1bc60d929423391129285e00cb9af655",
+    "sut/db/references/分析方法论.md": "1cb00e421e2de0cb08ff86547d5eb608e0cb975dd18c2aa28a147a414f02ced5",
+    "sut/db/references/意图解析规范.md": "b5669ce819345996fa34a5d3d77c55c60f74ac5d0424296210aadf1eebf88749",
+    "sut/db/references/报告类型模板规范.md": "84775cd5c920734580f5b00e7b6b8aca0a2220eaf4be44977b87a6a7c9a8c38f",
+    "sut/db/references/数据源接入规范.md": "f2f253625bad703664cbae078ba31a952db6bf8f199b8ee5e8223a0eb616e851",
+    "sut/db/references/最小交付标准.md": "e4c7f2051c5dea8c4e67b7cdd08ffba9f3a87cbfcdcc4afbed3418d327b84ce2",
+    "sut/db/scripts/analyze.py": "9de2b9bcc782daeb4ffa5f8fb799ae22711cac19b413df2f9e5c1959dea74d5b",
+    "sut/db/scripts/analyze_core.py": "885e48d9cad62a78c9f43e5781352190a48d3371b59a741b3a466c5c2c01fd5e",
+    "sut/db/scripts/constants.py": "ba8c9af2fd2ee400402f8633e8b54bc736755607f94f2ef1f871a2384271dea7",
+    "sut/db/scripts/data_source_adapter.py": "43a10d9f39e7a5bf05b06a47c548fe65da599b7cb226ec5227857c79de4f0f07",
+    "sut/db/scripts/detect_input.py": "ad6b198ca086fe58223142418aa4731ac9b8e2837c80c5840c93ad5a1919d0b4",
+    "sut/db/scripts/generate_charts.py": "578ccd50c992cff358fee6c2a210651e44c942c542d38d6f8f0257b421998cb6",
+    "sut/db/scripts/log_parser.py": "cd6f7d126f33674f3e7e9c0310df42f2cd65ce5c824e3dc8c0775a4c5994ca6d",
+    "sut/db/scripts/parse_intent.py": "9e0f452c945df870872e98356ef4fe16c75faa41d30c76c34991233be1e208f2",
+    "sut/db/scripts/render_all.py": "8640b03f13ca91ccc5f71b825f3efac8165ae8f35e0b957b97dd2c7d0e441679",
+    "sut/db/scripts/render_core.py": "95d6ea0fd1c72717ed0ff3185ae3a5939ffa3439f57a8200624c5a94e84bd63d",
+    "sut/db/scripts/run_pipeline.py": "3fe9c7fe571e998bb5085e8d9f4cccb54c7f0ce39ff93482257f943698f64d1b",
+    "sut/db/templates/comparison_report.py": "dddcb0c4705951ae24a79c12d9f0dfd50efdbcfb15ff9c9fb4374430258976e7",
+    "sut/db/templates/custom_report.py": "361fa226c42446ba514305f4264abbb64a9b62beb62eb1c5018a41e66cb1aa1d",
+    "sut/db/templates/iteration_report.py": "a2528450cc03c247bcfcf6b83a97e03dbf0167632681f9bea8dc1bffc99ac43b",
+    "sut/db/templates/single_report.py": "e3c590fb4b385d84f0ec80d10d695975895bcfd58bcebfc565fe642911e5e4fe",
+    "sut/db/templates/__init__.py": "552ef61b151d38c2dd67b286b6cabe9a1fe6c740f001365be06ab1fef2c2636d",
+    "data/compare.csv": "48b3cf8b6222b5593de459ff94f4c31b5ce06a53e12d1f7e1c33afffe5b2f4cf",
+    "data/compare.json": "4640ff7f9fa4fc1cf7c9e964798fa1fa337fc2b96782f16ff0f06c9fd58bc514",
+    "data/compare.xlsx": "28ec32e65dd08bf475482f1656aef754c6ad4988d87dfe6e563e3a09aaa33910",
+    "data/compare.xlsx.inspect.ndjson": "5eb6f66283837762eb7ada4bdbd533011646611b0344ec8077a9cd584ecb20a9",
+    "data/empty.json": "61f524063e9dd40d94e44fed124edac09811fae7b8b1562013a6225ded2059f6",
+    "data/F01.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+    "data/F02.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+    "data/F03.json": "44fb01ab0c1993e423bc5d91ffeca0eede642be85a862349ccb4458fc1ddda70",
+    "data/F04.json": "c2ecbcc9554b2258c901495fad2d3d94994ef050e9c26f35d583ad60e09a25cb",
+    "data/F05.json": "4173244e5eee0f9a60f9d8075f61cc8539dc4f23505ac3c4f1c55d23391c06fd",
+    "data/F06.json": "0ff6bd8d207448024b84e6261d59acb7f17dd46c81e378cfeb4e04770ac664dd",
+    "data/F07.json": "e9891bea352dd7570744795272ce2771b28f7b478a494a8175596498573b027d",
+    "data/F08.json": "a23635bba3d2e57c274d3a367011812f237625a8dd24b034d9dc3f5d8454c571",
+    "data/F09.json": "29aa6a568c0e0d4ddd4dcef6b59a47449ec05b5ae95ad63ef1963f54436e11b1",
+    "data/F10.json": "3771e8717c2466b0c2d25e74b5eaab9fd4b21bfac5380202aa81b97982f6c101",
+    "data/F11.json": "90b5bc96665f72e33f3d69c0c4bb5a0314550916d07c3cac92b463913d7c9848",
+    "data/F12.json": "c04b0079d23cf1526f99264e24b522ea5c2f432c270f003d77e86e8e6d068182",
+    "data/F13.json": "c2ecbcc9554b2258c901495fad2d3d94994ef050e9c26f35d583ad60e09a25cb",
+    "data/F14.json": "5840cc6f7ccc2fc5b9ad67e6d9401dffb37abba52aed798808bebddbb1a835a4",
+    "data/F15.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+    "data/F16.json": "38b3be0b663087a383c78dd40ec7644f8332b40288798b1613c7ce03cd3f1d89",
+    "data/F17.json": "f54aca6d7e3f098a0ea56a4e7872565d63e6a0fc94c0c34852ee43c72ad3c88c",
+    "data/F18.json": "ab530f7c3ba929b7d7e57fcff8ee6e70e2de2134ec16b5bf7132f56ef7aaad03",
+    "data/F19.json": "e5ffc38570a1e3c1ec01b37defeeb4b71f557f50cf6e74d50693ea4fda624cc9",
+    "data/F20.json": "0be6b0942782e9e4ed238c2f0dfe4307ccd616930e14ea6d7937a520a96bbae6",
+    "data/F21.json": "c47d7c626ca6e315884ce5b69d5b8c83c4f32110543f18a12efefc688ca18327",
+    "data/F22.json": "6f369633d1fad532cceefbd552c80fc3490f0c86eeab66b35593374a29093f70",
+    "data/iter.json": "49c9874206b3a24d216e2befd09af75dce060d5980dc96ea92ecbef4f24663f4",
+    "data/null.json": "f4a46aa74ddf4097d74dda13cd00f37157fb99a15abd2843b1365d6cb5f05ec5",
+    "data/null_array.json": "fe11ce6cb79fb784e676354ef8431b7d544dbb5c92f715ba1d9201e3e92be3bc",
+    "data/single.log": "68ca345e661ff759202571c9f87d2f7f817523b8a762db5ee874b7edf2443ea5",
+    "data/two.json": "7bd258e951b4874342c901482de2e704631fa7137d0a58b70d2c7fe97a8176ae",
+    "data/unfair.json": "04fab20697ce2a23e8604b2e47c105cfcb4072877cdba8005552d1bfd0d91efe",
+    "data/valid.json": "1a374612bbab25676f46c32ef2cbb0746f25f343518419092c99f41669ab2d77",
+    "data/zero.json": "d92fdfbccf36079de81362ff9fab3aa33d3a3c9a45c93020b4a934bae12889ef"
+  },
+  "finance_truth": {
+    "official_tencent": {
+      "url": "https://www.hkexnews.hk/listedco/listconews/sehk/2025/0408/2025040800667.pdf",
+      "release": "https://static.www.tencent.com/uploads/2025/03/19/81cb1f36bec218d27d6e0b24eec012b6.pdf",
+      "published": "2025-04-08",
+      "verified_in_audit": "2026-10-23",
+      "revenue_million_cny": 660257,
+      "release_yoy_pct_rounded": 8,
+      "source_capture": "人工整理字段与URL；未将工具返回当作独立真值"
+    },
+    "synthetic": {
+      "symbols": [
+        "EX001"
+      ],
+      "urls": "example.invalid 为保留的无效域名",
+      "purpose": "控制变量、故障注入、阈值和评分边界；非真实交易数据"
+    },
+    "guidance": [
+      "https://developers.openai.com/api/docs/guides/evaluation-best-practices",
+      "https://learn.chatgpt.com/docs/non-interactive-mode"
+    ]
+  },
+  "contract": "独立真实金融取证；营收绝对容差3亿元、同比0.5个百分点；双方工具必须实际调用并成功；正文支持另复核。数据库沿用原Judge并增加输入/Skill字节检查。"
+}

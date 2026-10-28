@@ -1,0 +1,388 @@
+{
+  "status": "FAIL",
+  "score": 72.92,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "专项12条目标记录可核验",
+      "dimension": "R1",
+      "passed": false,
+      "actual": null,
+      "expected": [
+        {
+          "product": "TDSQL-B v22.7.3",
+          "scenario": "oltp_write_only",
+          "threads": 512,
+          "tps": 22391.81,
+          "qps": 67175.43,
+          "p95_ms": 36.92,
+          "p99_ms": 51.88,
+          "task_id": "aa112233_tdsql_intel_x86",
+          "start_time": "2026-06-11 09:30:00"
+        },
+        {
+          "product": "TDSQL-B v22.7.3",
+          "scenario": "oltp_write_only",
+          "threads": 1000,
+          "tps": 20713.72,
+          "qps": 62141.15,
+          "p95_ms": 73.08,
+          "p99_ms": 102.59,
+          "task_id": "aa112233_tdsql_intel_x86",
+          "start_time": "2026-06-11 09:30:00"
+        },
+        {
+          "product": "TDSQL-B v22.7.3",
+          "scenario": "oltp_update_index",
+          "threads": 512,
+          "tps": 14746.99,
+          "qps": 14746.99,
+          "p95_ms": 50.85,
+          "p99_ms": 71.63,
+          "task_id": "aa112233_tdsql_intel_x86",
+          "start_time": "2026-06-11 09:30:00"
+        },
+        {
+          "product": "TDSQL-B v22.7.3",
+          "scenario": "oltp_update_index",
+          "threads": 1000,
+          "tps": 13965.57,
+          "qps": 13965.57,
+          "p95_ms": 100.99,
+          "p99_ms": 137.41,
+          "task_id": "aa112233_tdsql_intel_x86",
+          "start_time": "2026-06-11 09:30:00"
+        },
+        {
+          "product": "MySQL 8.0.32",
+          "scenario": "oltp_write_only",
+          "threads": 512,
+          "tps": 17417.06,
+          "qps": 52251.17,
+          "p95_ms": 36.16,
+          "p99_ms": 51.07,
+          "task_id": "bb445566_mysql_intel_x86",
+          "start_time": "2026-06-11 13:30:00"
+        },
+        {
+          "product": "MySQL 8.0.32",
+          "scenario": "oltp_write_only",
+          "threads": 1000,
+          "tps": 16471.39,
+          "qps": 49414.16,
+          "p95_ms": 73.64,
+          "p99_ms": 100.31,
+          "task_id": "bb445566_mysql_intel_x86",
+          "start_time": "2026-06-11 13:30:00"
+        },
+        {
+          "product": "MySQL 8.0.32",
+          "scenario": "oltp_update_index",
+          "threads": 512,
+          "tps": 12009.86,
+          "qps": 12009.86,
+          "p95_ms": 50.95,
+          "p99_ms": 72.89,
+          "task_id": "bb445566_mysql_intel_x86",
+          "start_time": "2026-06-11 13:30:00"
+        },
+        {
+          "product": "MySQL 8.0.32",
+          "scenario": "oltp_update_index",
+          "threads": 1000,
+          "tps": 11356.38,
+          "qps": 11356.38,
+          "p95_ms": 103.42,
+          "p99_ms": 148.48,
+          "task_id": "bb445566_mysql_intel_x86",
+          "start_time": "2026-06-11 13:30:00"
+        },
+        {
+          "product": "OceanBase 4.2",
+          "scenario": "oltp_write_only",
+          "threads": 512,
+          "tps": 20142.74,
+          "qps": 60428.22,
+          "p95_ms": 36.55,
+          "p99_ms": 51.93,
+          "task_id": "cc778899_ob_intel_x86",
+          "start_time": "2026-06-11 17:30:00"
+        },
+        {
+          "product": "OceanBase 4.2",
+          "scenario": "oltp_write_only",
+          "threads": 1000,
+          "tps": 18810.26,
+          "qps": 56430.79,
+          "p95_ms": 72.95,
+          "p99_ms": 100.08,
+          "task_id": "cc778899_ob_intel_x86",
+          "start_time": "2026-06-11 17:30:00"
+        },
+        {
+          "product": "OceanBase 4.2",
+          "scenario": "oltp_update_index",
+          "threads": 512,
+          "tps": 13057.94,
+          "qps": 13057.94,
+          "p95_ms": 51.43,
+          "p99_ms": 70.27,
+          "task_id": "cc778899_ob_intel_x86",
+          "start_time": "2026-06-11 17:30:00"
+        },
+        {
+          "product": "OceanBase 4.2",
+          "scenario": "oltp_update_index",
+          "threads": 1000,
+          "tps": 12325.56,
+          "qps": 12325.56,
+          "p95_ms": 100.69,
+          "p99_ms": 140.96,
+          "task_id": "cc778899_ob_intel_x86",
+          "start_time": "2026-06-11 17:30:00"
+        }
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "专项输出包含 P99 分析",
+      "dimension": "R4",
+      "passed": true,
+      "actual": [
+        "focus_dimension",
+        "buckets",
+        "changes",
+        "main_finding"
+      ],
+      "expected": "P99",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "专项产品选型有明确依据",
+      "dimension": "R4",
+      "passed": false,
+      "actual": "TDSQL-B 四个组合 QPS 最高；全部产品在两个场景从 512 到 1000 并发时 QPS 下降、P95/P99 上升。",
+      "expected": "逐产品有依据的选择建议",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/intent.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/intent.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/extracted_data.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/extracted_data.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/analysis_results.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/analysis_results.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/insights.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/insights.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/block_map.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/block_map.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 docs/analysis_proposal.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "docs/analysis_proposal.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.docx",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.docx",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.html",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.html",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "图表达到 reference 基线",
+      "dimension": "R5",
+      "passed": true,
+      "actual": 3,
+      "expected": 3,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "Markdown 图表均指向有效相对路径",
+      "dimension": "R5",
+      "passed": true,
+      "actual": [
+        "charts/qps.png",
+        "charts/p95_ms.png",
+        "charts/p99_ms.png"
+      ],
+      "expected": "有效相对路径",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "正式报告包含用户要求的P99",
+      "dimension": "R4",
+      "passed": true,
+      "actual": null,
+      "expected": "三格式均含P99",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 0.6666666666666666,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "PENDING: 解释、来源支持、限制和过程另行复核",
+  "id": "D04",
+  "model": "gpt-6.1-sol",
+  "suite": "db",
+  "run": "D04-gpt-6.1-sol",
+  "seconds": 304.985,
+  "usage": {
+    "input_tokens": 463265,
+    "cached_input_tokens": 399872,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10909,
+    "reasoning_output_tokens": 352
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "0f98cd0e90534da9474599b130a7b5643374ac69b0de2ecadbafcb73f49ecb55",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true
+}

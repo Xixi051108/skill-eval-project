@@ -1,0 +1,73 @@
+{
+  "single_product_insights": {
+    "TDSQL-B v22.7.3": [
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3，oltp_write_only：并发 512→1,000，QPS 67,175.43→62,141.15（-7.49%）；P95 36.92→73.08 ms（+97.94%）；P99 51.88→102.59 ms（+97.74%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3，oltp_update_index：并发 512→1,000，QPS 14,746.99→13,965.57（-5.30%）；P95 50.85→100.99 ms（+98.60%）；P99 71.63→137.41 ms（+91.83%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_update_index"
+      }
+    ],
+    "MySQL 8.0.32": [
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32，oltp_write_only：并发 512→1,000，QPS 52,251.17→49,414.16（-5.43%）；P95 36.16→73.64 ms（+103.65%）；P99 51.07→100.31 ms（+96.42%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32，oltp_update_index：并发 512→1,000，QPS 12,009.86→11,356.38（-5.44%）；P95 50.95→103.42 ms（+102.98%）；P99 72.89→148.48 ms（+103.70%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_update_index"
+      }
+    ],
+    "OceanBase 4.2": [
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2，oltp_write_only：并发 512→1,000，QPS 60,428.22→56,430.79（-6.62%）；P95 36.55→72.95 ms（+99.59%）；P99 51.93→100.08 ms（+92.72%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2，oltp_update_index：并发 512→1,000，QPS 13,057.94→12,325.56（-5.61%）；P95 51.43→100.69 ms（+95.78%）；P99 70.27→140.96 ms（+100.60%）。",
+        "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+        "scenario": "oltp_update_index"
+      }
+    ]
+  },
+  "custom_insights": [
+    {
+      "level": "L1",
+      "text": "oltp_write_only，并发 512：QPS 最高为 TDSQL-B v22.7.3（67,175.43）；P95 最低为 MySQL 8.0.32（36.16 ms）；P99 最低为 MySQL 8.0.32（51.07 ms）。 TDSQL-B 相对 MySQL 8.0.32 的 QPS 高 28.56%；OceanBase 4.2 的 QPS 高 11.17%。",
+      "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+      "scenario": "oltp_write_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_write_only，并发 1,000：QPS 最高为 TDSQL-B v22.7.3（62,141.15）；P95 最低为 OceanBase 4.2（72.95 ms）；P99 最低为 OceanBase 4.2（100.08 ms）。 TDSQL-B 相对 MySQL 8.0.32 的 QPS 高 25.76%；OceanBase 4.2 的 QPS 高 10.12%。",
+      "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+      "scenario": "oltp_write_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index，并发 512：QPS 最高为 TDSQL-B v22.7.3（14,746.99）；P95 最低为 TDSQL-B v22.7.3（50.85 ms）；P99 最低为 OceanBase 4.2（70.27 ms）。 TDSQL-B 相对 MySQL 8.0.32 的 QPS 高 22.79%；OceanBase 4.2 的 QPS 高 12.94%。",
+      "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+      "scenario": "oltp_update_index"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index，并发 1,000：QPS 最高为 TDSQL-B v22.7.3（13,965.57）；P95 最低为 OceanBase 4.2（100.69 ms）；P99 最低为 TDSQL-B v22.7.3（137.41 ms）。 TDSQL-B 相对 MySQL 8.0.32 的 QPS 高 22.98%；OceanBase 4.2 的 QPS 高 13.31%。",
+      "source": "data/extracted_data.json：按产品、场景、并发精确筛选",
+      "scenario": "oltp_update_index"
+    }
+  ],
+  "selection_insights": []
+}

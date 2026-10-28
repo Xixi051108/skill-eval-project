@@ -1,0 +1,324 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据库版本迭代演进报告</title><style>body{font-family:'Microsoft YaHei','PingFang SC','Heiti TC','Hiragino Sans GB','STHeiti','Arial Unicode MS',sans-serif;max-width:1100px;margin:auto;padding:24px;color:#333}h1{color:#1f4e79;border-bottom:2px solid}h2{color:#2e75b6;border-left:4px solid;padding-left:10px}h3{color:#4a6d8c}table{border-collapse:collapse;width:100%;margin:16px 0}td,th{border:1px solid #ccc;padding:7px}th{background:linear-gradient(#D9E2F3,#C5D3EE);color:#1F4E79}tr:nth-child(even){background:#F8FAFC}img{max-width:100%}.caption{text-align:center;color:#666;font-style:italic}.insight{padding:12px;margin:12px 0;border-left:4px solid}.L1{background:#E7F5FF;border-color:#1971C2}.L2{background:#FFF9DB;border-color:#F08C00}.L3{background:#FFE3E3;border-color:#C92A2A}</style></head><body>
+<h1>数据库版本迭代演进报告</h1><p>TDSQL-B v22.6 → TDSQL-B v22.9 共 4 个版本</p><p>日期：2026-06-19；报告版本：v1.0</p><nav class="toc"><h2>目录</h2><ul>
+<li><a href="#ch1">第 1 章 演进结论</a></li>
+<li><a href="#ch1_1">1.1 演进摘要</a></li>
+<li><a href="#ch1_2">1.2 累计变化</a></li>
+<li><a href="#ch1_3">1.3 关键发现</a></li>
+<li><a href="#ch2">第 2 章 版本清单与环境</a></li>
+<li><a href="#ch2_1">2.1 版本清单</a></li>
+<li><a href="#ch2_2">2.2 硬件环境</a></li>
+<li><a href="#ch2_3">2.3 测试方法</a></li>
+<li><a href="#ch2_4">2.4 数据质量与公平性</a></li>
+<li><a href="#ch3">第 3 章 全版本性能数据</a></li>
+<li><a href="#ch3_1">3.1 TDSQL-B v22.6</a></li>
+<li><a href="#ch3_2">3.2 TDSQL-B v22.7</a></li>
+<li><a href="#ch3_3">3.3 TDSQL-B v22.8</a></li>
+<li><a href="#ch3_4">3.4 TDSQL-B v22.9</a></li>
+<li><a href="#ch4">第 4 章 演进分析</a></li>
+<li><a href="#ch4_1">4.1 点查（oltp_point_select）</a></li>
+<li><a href="#ch4_2">4.2 只读（oltp_read_only）</a></li>
+<li><a href="#ch4_3">4.3 混合读写（oltp_read_write）</a></li>
+<li><a href="#ch4_4">4.4 写入（oltp_write_only）</a></li>
+<li><a href="#ch4_5">4.5 索引更新（oltp_update_index）</a></li>
+<li><a href="#ch4_cum">4.6 累计变化与综合趋势</a></li>
+<li><a href="#ch4_reg">4.7 回退点详细分析</a></li>
+<li><a href="#ch5">第 5 章 优化建议</a></li>
+<li><a href="#ch5_1">5.1 持续优化方向</a></li>
+<li><a href="#ch5_2">5.2 回退修复建议</a></li>
+<li><a href="#ch5_3">5.3 测试边界</a></li>
+<li><a href="#ch6">第 6 章 附录</a></li>
+<li><a href="#ch6_1">6.1 原始数据与可追溯性</a></li>
+<li><a href="#ch6_2">6.2 测试命令与缺失信息</a></li>
+</ul></nav>
+<h1 id="ch1">第 1 章 演进结论</h1>
+<h2 id="ch1_1">1.1 演进摘要</h2>
+<p>本报告覆盖 4 个版本（TDSQL-B v22.6 → TDSQL-B v22.9）的 5 个 sysbench 场景峰值 QPS 演进。已检出 3 个性能回归点。</p>
+<h2 id="ch1_2">1.2 累计变化</h2>
+<table><thead><tr><th>场景</th><th>首版 (TDSQL-B v22.6)</th><th>末版 (TDSQL-B v22.9)</th><th>累计变化</th></tr></thead><tbody>
+<tr><td>点查</td><td>79,275</td><td>87,703</td><td>+10.6%</td></tr>
+<tr><td>只读</td><td>45,756</td><td>40,809</td><td>-10.8%</td></tr>
+<tr><td>写入</td><td>59,855</td><td>62,966</td><td>+5.2%</td></tr>
+<tr><td>混合读写</td><td>42,302</td><td>41,136</td><td>-2.8%</td></tr>
+<tr><td>索引更新</td><td>13,267</td><td>13,761</td><td>+3.7%</td></tr>
+</tbody></table>
+<h2 id="ch1_3">1.3 关键发现</h2>
+<div class="insight L1">✅ L1 确定性结论 | 数据来源：analysis_results.iteration.trend.oltp_point_select<p>点查（oltp_point_select）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 79,274.90 → 87,702.72，累计 +10.63%。</p></div>
+<div class="insight L1">✅ L1 确定性结论 | 数据来源：analysis_results.iteration.trend.oltp_read_only<p>只读（oltp_read_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 45,755.56 → 40,809.21，累计 -10.81%。</p></div>
+<div class="insight L1">✅ L1 确定性结论 | 数据来源：analysis_results.iteration.trend.oltp_read_write<p>混合读写（oltp_read_write）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 42,301.62 → 41,135.99，累计 -2.76%。</p></div>
+<div class="insight L1">✅ L1 确定性结论 | 数据来源：analysis_results.iteration.trend.oltp_write_only<p>写入（oltp_write_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 59,854.62 → 62,966.27，累计 +5.20%。</p></div>
+<div class="insight L1">✅ L1 确定性结论 | 数据来源：analysis_results.iteration.trend.oltp_update_index<p>索引更新（oltp_update_index）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 13,266.57 → 13,760.60，累计 +3.72%。</p></div>
+<div class="insight L2">📊 L2 统计性发现 | 数据来源：analysis_results.iteration.regression_points<p>回退：TDSQL-B v22.8 → TDSQL-B v22.9，只读峰值 QPS 下降 21.02%（严格超过 5%）。</p></div>
+<h1 id="ch2">第 2 章 版本清单与环境</h1>
+<h2 id="ch2_1">2.1 版本清单</h2>
+<table><thead><tr><th>版本</th><th>测试时间</th><th>任务 ID</th><th>数据集</th><th>时长（秒）</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>2026-03-15 10:00:00</td><td>v226_aaa1111_tdsql_intel_x86</td><td>tables=16, table_size=1000000</td><td>300</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>2026-04-20 10:00:00</td><td>v227_bbb2222_tdsql_intel_x86</td><td>tables=16, table_size=1000000</td><td>300</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>2026-05-18 10:00:00</td><td>v228_ccc3333_tdsql_intel_x86</td><td>tables=16, table_size=1000000</td><td>300</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>2026-06-10 10:00:00</td><td>v229_ddd4444_tdsql_intel_x86</td><td>tables=16, table_size=1000000</td><td>300</td></tr>
+</tbody></table>
+<h2 id="ch2_2">2.2 硬件环境</h2>
+<table><thead><tr><th>项目</th><th>来源配置</th></tr></thead><tbody>
+<tr><td>CPU</td><td>Intel(R) Xeon(R) Gold 6133 @ 2.50GHz, 64 cores</td></tr>
+<tr><td>Memory</td><td>256GB DDR4</td></tr>
+<tr><td>Disk</td><td>NVMe SSD 3.84TB</td></tr>
+<tr><td>Network</td><td>25Gbps</td></tr>
+<tr><td>OS</td><td>TencentOS Server 3.1</td></tr>
+<tr><td>sysbench_version</td><td>1.0.20</td></tr>
+</tbody></table>
+<p>硬件仅提供共享 test_env，缺少逐版本环境快照；配置、缓存状态及重复运行信息未提供。</p>
+<h2 id="ch2_3">2.3 测试方法</h2>
+<p>使用 sysbench 1.0.20。按来源 meta.products 列表顺序分析：TDSQL-B v22.6 → TDSQL-B v22.7 → TDSQL-B v22.8 → TDSQL-B v22.9。各场景独立，不合并均值。扫描全部并发档 32, 64, 128, 256, 512, 1000 的 QPS 最大值作为版本峰值。相邻变化率=(当前峰值−前版峰值)/前版峰值×100%；累计变化率=(末版峰值−首版峰值)/首版峰值×100%。仅未舍入变化率 &lt; -5% 标记回退，恰好 -5% 不标记。P95 越低越好，按同场景同并发档分别比较，不用于吞吐回退判定。</p>
+<h2 id="ch2_4">2.4 数据质量与公平性</h2>
+<p>共 120 条记录 = 4 版本 × 5 场景 × 6 并发档；键唯一且网格完整，TPS/QPS/P95/P99 空值率均为 0%。数据集均为 tables=16, table_size=1000000，时长均为 300 秒。公平性：并发档和场景逐项对齐，无 STRONG 警告；硬件一致性仅依据共享元数据，未经逐版本独立验证。实际读取 data/iter.json；输入中的旧 source_info 路径仅保留为来源声明，未访问。</p>
+<h1 id="ch3">第 3 章 全版本性能数据</h1>
+<h2 id="ch3_1">3.1 TDSQL-B v22.6</h2>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody>
+<tr><td>oltp_point_select</td><td>32</td><td>17,628.37</td><td>17,628.37</td><td>1.34</td><td>1.93</td></tr>
+<tr><td>oltp_point_select</td><td>64</td><td>30,815.12</td><td>30,815.12</td><td>1.60</td><td>2.32</td></tr>
+<tr><td>oltp_point_select</td><td>128</td><td>57,083.63</td><td>57,083.63</td><td>2.92</td><td>4.13</td></tr>
+<tr><td>oltp_point_select</td><td>256</td><td>73,536.85</td><td>73,536.85</td><td>4.79</td><td>6.74</td></tr>
+<tr><td>oltp_point_select</td><td>512</td><td>79,274.90</td><td>79,274.90</td><td>9.18</td><td>13.36</td></tr>
+<tr><td>oltp_point_select</td><td>1000</td><td>74,446.31</td><td>74,446.31</td><td>18.32</td><td>25.75</td></tr>
+<tr><td>oltp_read_only</td><td>32</td><td>718.49</td><td>10,058.87</td><td>27.04</td><td>38.77</td></tr>
+<tr><td>oltp_read_only</td><td>64</td><td>1,278.67</td><td>17,901.44</td><td>33.62</td><td>49.08</td></tr>
+<tr><td>oltp_read_only</td><td>128</td><td>2,342.26</td><td>32,791.62</td><td>60.48</td><td>86.87</td></tr>
+<tr><td>oltp_read_only</td><td>256</td><td>3,013.92</td><td>42,194.87</td><td>99.92</td><td>139.53</td></tr>
+<tr><td>oltp_read_only</td><td>512</td><td>3,268.25</td><td>45,755.56</td><td>186.43</td><td>268.72</td></tr>
+<tr><td>oltp_read_only</td><td>1000</td><td>3,087.52</td><td>43,225.22</td><td>380.23</td><td>550.72</td></tr>
+<tr><td>oltp_read_write</td><td>32</td><td>465.41</td><td>9,308.17</td><td>43.01</td><td>62.39</td></tr>
+<tr><td>oltp_read_write</td><td>64</td><td>836.89</td><td>16,737.90</td><td>51.79</td><td>73.84</td></tr>
+<tr><td>oltp_read_write</td><td>128</td><td>1,504.83</td><td>30,096.57</td><td>94.02</td><td>133.04</td></tr>
+<tr><td>oltp_read_write</td><td>256</td><td>1,968.30</td><td>39,366.02</td><td>154.34</td><td>220.67</td></tr>
+<tr><td>oltp_read_write</td><td>512</td><td>2,115.08</td><td>42,301.62</td><td>293.50</td><td>427.59</td></tr>
+<tr><td>oltp_read_write</td><td>1000</td><td>2,013.94</td><td>40,278.84</td><td>586.37</td><td>842.32</td></tr>
+<tr><td>oltp_write_only</td><td>32</td><td>4,487.17</td><td>13,461.52</td><td>5.75</td><td>8.17</td></tr>
+<tr><td>oltp_write_only</td><td>64</td><td>7,878.05</td><td>23,634.16</td><td>7.06</td><td>9.90</td></tr>
+<tr><td>oltp_write_only</td><td>128</td><td>14,373.67</td><td>43,121.01</td><td>12.85</td><td>17.93</td></tr>
+<tr><td>oltp_write_only</td><td>256</td><td>18,800.21</td><td>56,400.62</td><td>21.06</td><td>29.75</td></tr>
+<tr><td>oltp_write_only</td><td>512</td><td>19,951.54</td><td>59,854.62</td><td>39.96</td><td>58.32</td></tr>
+<tr><td>oltp_write_only</td><td>1000</td><td>18,944.61</td><td>56,833.83</td><td>79.33</td><td>112.49</td></tr>
+<tr><td>oltp_update_index</td><td>32</td><td>2,942.85</td><td>2,942.85</td><td>8.19</td><td>11.34</td></tr>
+<tr><td>oltp_update_index</td><td>64</td><td>5,187.32</td><td>5,187.32</td><td>9.97</td><td>14.51</td></tr>
+<tr><td>oltp_update_index</td><td>128</td><td>9,515.00</td><td>9,515.00</td><td>18.06</td><td>25.63</td></tr>
+<tr><td>oltp_update_index</td><td>256</td><td>12,462.94</td><td>12,462.94</td><td>29.85</td><td>43.34</td></tr>
+<tr><td>oltp_update_index</td><td>512</td><td>13,266.57</td><td>13,266.57</td><td>55.54</td><td>79.49</td></tr>
+<tr><td>oltp_update_index</td><td>1000</td><td>12,636.91</td><td>12,636.91</td><td>113.47</td><td>162.73</td></tr>
+</tbody></table>
+<img src="charts/iter_version_1.png" alt="TDSQL-B v22.6 五场景曲线；每条线保留全部并发档，不计算跨场景均值"><p class="caption">图：TDSQL-B v22.6 五场景曲线；每条线保留全部并发档，不计算跨场景均值</p>
+<h2 id="ch3_2">3.2 TDSQL-B v22.7</h2>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody>
+<tr><td>oltp_point_select</td><td>32</td><td>18,064.61</td><td>18,064.61</td><td>1.28</td><td>1.80</td></tr>
+<tr><td>oltp_point_select</td><td>64</td><td>32,377.42</td><td>32,377.42</td><td>1.59</td><td>2.27</td></tr>
+<tr><td>oltp_point_select</td><td>128</td><td>58,056.90</td><td>58,056.90</td><td>2.81</td><td>3.88</td></tr>
+<tr><td>oltp_point_select</td><td>256</td><td>75,162.40</td><td>75,162.40</td><td>4.76</td><td>6.60</td></tr>
+<tr><td>oltp_point_select</td><td>512</td><td>81,115.42</td><td>81,115.42</td><td>8.92</td><td>12.72</td></tr>
+<tr><td>oltp_point_select</td><td>1000</td><td>76,253.00</td><td>76,253.00</td><td>17.57</td><td>24.33</td></tr>
+<tr><td>oltp_read_only</td><td>32</td><td>748.60</td><td>10,480.46</td><td>26.83</td><td>39.01</td></tr>
+<tr><td>oltp_read_only</td><td>64</td><td>1,322.32</td><td>18,512.42</td><td>32.51</td><td>45.87</td></tr>
+<tr><td>oltp_read_only</td><td>128</td><td>2,409.57</td><td>33,733.97</td><td>58.02</td><td>83.84</td></tr>
+<tr><td>oltp_read_only</td><td>256</td><td>3,134.89</td><td>43,888.40</td><td>97.91</td><td>142.78</td></tr>
+<tr><td>oltp_read_only</td><td>512</td><td>3,374.46</td><td>47,242.42</td><td>181.61</td><td>255.29</td></tr>
+<tr><td>oltp_read_only</td><td>1000</td><td>3,183.87</td><td>44,574.18</td><td>365.06</td><td>525.26</td></tr>
+<tr><td>oltp_read_write</td><td>32</td><td>486.14</td><td>9,722.74</td><td>41.79</td><td>60.87</td></tr>
+<tr><td>oltp_read_write</td><td>64</td><td>853.95</td><td>17,078.97</td><td>50.60</td><td>73.27</td></tr>
+<tr><td>oltp_read_write</td><td>128</td><td>1,575.63</td><td>31,512.56</td><td>91.27</td><td>130.37</td></tr>
+<tr><td>oltp_read_write</td><td>256</td><td>2,042.85</td><td>40,857.05</td><td>150.43</td><td>217.83</td></tr>
+<tr><td>oltp_read_write</td><td>512</td><td>2,177.73</td><td>43,554.54</td><td>289.61</td><td>421.37</td></tr>
+<tr><td>oltp_read_write</td><td>1000</td><td>2,080.48</td><td>41,609.52</td><td>579.38</td><td>805.00</td></tr>
+<tr><td>oltp_write_only</td><td>32</td><td>4,626.78</td><td>13,880.35</td><td>5.55</td><td>7.92</td></tr>
+<tr><td>oltp_write_only</td><td>64</td><td>8,188.91</td><td>24,566.74</td><td>6.80</td><td>9.44</td></tr>
+<tr><td>oltp_write_only</td><td>128</td><td>14,945.44</td><td>44,836.32</td><td>12.44</td><td>17.55</td></tr>
+<tr><td>oltp_write_only</td><td>256</td><td>19,176.81</td><td>57,530.44</td><td>20.75</td><td>29.50</td></tr>
+<tr><td>oltp_write_only</td><td>512</td><td>20,613.50</td><td>61,840.49</td><td>37.93</td><td>53.20</td></tr>
+<tr><td>oltp_write_only</td><td>1000</td><td>19,714.04</td><td>59,142.11</td><td>77.81</td><td>109.11</td></tr>
+<tr><td>oltp_update_index</td><td>32</td><td>3,055.66</td><td>3,055.66</td><td>7.91</td><td>11.43</td></tr>
+<tr><td>oltp_update_index</td><td>64</td><td>5,383.67</td><td>5,383.67</td><td>9.73</td><td>14.01</td></tr>
+<tr><td>oltp_update_index</td><td>128</td><td>9,907.56</td><td>9,907.56</td><td>17.75</td><td>25.36</td></tr>
+<tr><td>oltp_update_index</td><td>256</td><td>12,652.28</td><td>12,652.28</td><td>29.03</td><td>40.46</td></tr>
+<tr><td>oltp_update_index</td><td>512</td><td>13,741.51</td><td>13,741.51</td><td>54.79</td><td>76.47</td></tr>
+<tr><td>oltp_update_index</td><td>1000</td><td>12,881.73</td><td>12,881.73</td><td>107.21</td><td>151.85</td></tr>
+</tbody></table>
+<img src="charts/iter_version_2.png" alt="TDSQL-B v22.7 五场景曲线；每条线保留全部并发档，不计算跨场景均值"><p class="caption">图：TDSQL-B v22.7 五场景曲线；每条线保留全部并发档，不计算跨场景均值</p>
+<h2 id="ch3_3">3.3 TDSQL-B v22.8</h2>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody>
+<tr><td>oltp_point_select</td><td>32</td><td>18,278.75</td><td>18,278.75</td><td>1.25</td><td>1.82</td></tr>
+<tr><td>oltp_point_select</td><td>64</td><td>32,471.90</td><td>32,471.90</td><td>1.51</td><td>2.14</td></tr>
+<tr><td>oltp_point_select</td><td>128</td><td>59,541.51</td><td>59,541.51</td><td>2.77</td><td>4.03</td></tr>
+<tr><td>oltp_point_select</td><td>256</td><td>77,231.84</td><td>77,231.84</td><td>4.61</td><td>6.65</td></tr>
+<tr><td>oltp_point_select</td><td>512</td><td>82,654.44</td><td>82,654.44</td><td>8.78</td><td>12.16</td></tr>
+<tr><td>oltp_point_select</td><td>1000</td><td>77,888.12</td><td>77,888.12</td><td>17.35</td><td>25.11</td></tr>
+<tr><td>oltp_read_only</td><td>32</td><td>804.32</td><td>11,260.52</td><td>22.05</td><td>31.86</td></tr>
+<tr><td>oltp_read_only</td><td>64</td><td>1,433.34</td><td>20,066.75</td><td>27.33</td><td>37.96</td></tr>
+<tr><td>oltp_read_only</td><td>128</td><td>2,604.44</td><td>36,462.14</td><td>50.03</td><td>69.94</td></tr>
+<tr><td>oltp_read_only</td><td>256</td><td>3,381.02</td><td>47,334.30</td><td>81.91</td><td>115.92</td></tr>
+<tr><td>oltp_read_only</td><td>512</td><td>3,690.88</td><td>51,672.30</td><td>155.23</td><td>215.10</td></tr>
+<tr><td>oltp_read_only</td><td>1000</td><td>3,478.38</td><td>48,697.36</td><td>310.82</td><td>446.60</td></tr>
+<tr><td>oltp_read_write</td><td>32</td><td>483.85</td><td>9,677.09</td><td>40.93</td><td>56.73</td></tr>
+<tr><td>oltp_read_write</td><td>64</td><td>858.63</td><td>17,172.54</td><td>50.61</td><td>70.07</td></tr>
+<tr><td>oltp_read_write</td><td>128</td><td>1,567.80</td><td>31,355.96</td><td>91.05</td><td>128.98</td></tr>
+<tr><td>oltp_read_write</td><td>256</td><td>2,052.64</td><td>41,052.79</td><td>149.21</td><td>217.22</td></tr>
+<tr><td>oltp_read_write</td><td>512</td><td>2,205.74</td><td>44,114.88</td><td>284.58</td><td>414.81</td></tr>
+<tr><td>oltp_read_write</td><td>1000</td><td>2,057.24</td><td>41,144.71</td><td>569.96</td><td>787.83</td></tr>
+<tr><td>oltp_write_only</td><td>32</td><td>4,924.53</td><td>14,773.59</td><td>5.33</td><td>7.69</td></tr>
+<tr><td>oltp_write_only</td><td>64</td><td>8,612.52</td><td>25,837.55</td><td>6.47</td><td>9.31</td></tr>
+<tr><td>oltp_write_only</td><td>128</td><td>15,793.29</td><td>47,379.86</td><td>11.67</td><td>16.56</td></tr>
+<tr><td>oltp_write_only</td><td>256</td><td>20,569.11</td><td>61,707.32</td><td>19.19</td><td>27.70</td></tr>
+<tr><td>oltp_write_only</td><td>512</td><td>22,130.10</td><td>66,390.29</td><td>35.96</td><td>50.50</td></tr>
+<tr><td>oltp_write_only</td><td>1000</td><td>20,981.14</td><td>62,943.41</td><td>71.55</td><td>102.35</td></tr>
+<tr><td>oltp_update_index</td><td>32</td><td>3,162.88</td><td>3,162.88</td><td>7.57</td><td>10.88</td></tr>
+<tr><td>oltp_update_index</td><td>64</td><td>5,590.94</td><td>5,590.94</td><td>9.46</td><td>13.22</td></tr>
+<tr><td>oltp_update_index</td><td>128</td><td>10,021.03</td><td>10,021.03</td><td>17.07</td><td>23.65</td></tr>
+<tr><td>oltp_update_index</td><td>256</td><td>13,054.96</td><td>13,054.96</td><td>27.62</td><td>40.00</td></tr>
+<tr><td>oltp_update_index</td><td>512</td><td>14,097.23</td><td>14,097.23</td><td>51.91</td><td>73.63</td></tr>
+<tr><td>oltp_update_index</td><td>1000</td><td>13,385.93</td><td>13,385.93</td><td>106.30</td><td>147.12</td></tr>
+</tbody></table>
+<img src="charts/iter_version_3.png" alt="TDSQL-B v22.8 五场景曲线；每条线保留全部并发档，不计算跨场景均值"><p class="caption">图：TDSQL-B v22.8 五场景曲线；每条线保留全部并发档，不计算跨场景均值</p>
+<h2 id="ch3_4">3.4 TDSQL-B v22.9</h2>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 (ms)</th><th>P99 (ms)</th></tr></thead><tbody>
+<tr><td>oltp_point_select</td><td>32</td><td>19,477.53</td><td>19,477.53</td><td>1.20</td><td>1.74</td></tr>
+<tr><td>oltp_point_select</td><td>64</td><td>34,652.67</td><td>34,652.67</td><td>1.47</td><td>2.04</td></tr>
+<tr><td>oltp_point_select</td><td>128</td><td>62,245.67</td><td>62,245.67</td><td>2.68</td><td>3.91</td></tr>
+<tr><td>oltp_point_select</td><td>256</td><td>81,897.04</td><td>81,897.04</td><td>4.33</td><td>6.22</td></tr>
+<tr><td>oltp_point_select</td><td>512</td><td>87,702.72</td><td>87,702.72</td><td>8.33</td><td>11.65</td></tr>
+<tr><td>oltp_point_select</td><td>1000</td><td>82,704.64</td><td>82,704.64</td><td>16.50</td><td>22.95</td></tr>
+<tr><td>oltp_read_only</td><td>32</td><td>654.62</td><td>9,164.69</td><td>39.52</td><td>56.30</td></tr>
+<tr><td>oltp_read_only</td><td>64</td><td>1,147.24</td><td>16,061.39</td><td>48.65</td><td>68.73</td></tr>
+<tr><td>oltp_read_only</td><td>128</td><td>2,113.90</td><td>29,594.62</td><td>87.69</td><td>125.15</td></tr>
+<tr><td>oltp_read_only</td><td>256</td><td>2,758.31</td><td>38,616.39</td><td>144.59</td><td>206.78</td></tr>
+<tr><td>oltp_read_only</td><td>512</td><td>2,914.94</td><td>40,809.21</td><td>272.82</td><td>384.13</td></tr>
+<tr><td>oltp_read_only</td><td>1000</td><td>2,786.76</td><td>39,014.59</td><td>540.16</td><td>777.03</td></tr>
+<tr><td>oltp_read_write</td><td>32</td><td>456.53</td><td>9,130.60</td><td>49.18</td><td>70.22</td></tr>
+<tr><td>oltp_read_write</td><td>64</td><td>816.50</td><td>16,329.99</td><td>59.42</td><td>83.45</td></tr>
+<tr><td>oltp_read_write</td><td>128</td><td>1,481.51</td><td>29,630.27</td><td>108.45</td><td>158.14</td></tr>
+<tr><td>oltp_read_write</td><td>256</td><td>1,931.98</td><td>38,639.70</td><td>179.01</td><td>260.67</td></tr>
+<tr><td>oltp_read_write</td><td>512</td><td>2,056.80</td><td>41,135.99</td><td>338.00</td><td>468.87</td></tr>
+<tr><td>oltp_read_write</td><td>1000</td><td>1,949.90</td><td>38,998.02</td><td>675.91</td><td>977.81</td></tr>
+<tr><td>oltp_write_only</td><td>32</td><td>4,693.13</td><td>14,079.39</td><td>5.53</td><td>7.80</td></tr>
+<tr><td>oltp_write_only</td><td>64</td><td>8,288.54</td><td>24,865.62</td><td>6.78</td><td>9.59</td></tr>
+<tr><td>oltp_write_only</td><td>128</td><td>14,948.16</td><td>44,844.48</td><td>12.39</td><td>17.36</td></tr>
+<tr><td>oltp_write_only</td><td>256</td><td>19,674.20</td><td>59,022.59</td><td>20.14</td><td>28.16</td></tr>
+<tr><td>oltp_write_only</td><td>512</td><td>20,988.76</td><td>62,966.27</td><td>37.80</td><td>54.46</td></tr>
+<tr><td>oltp_write_only</td><td>1000</td><td>19,608.74</td><td>58,826.22</td><td>75.03</td><td>105.88</td></tr>
+<tr><td>oltp_update_index</td><td>32</td><td>3,056.06</td><td>3,056.06</td><td>7.98</td><td>11.41</td></tr>
+<tr><td>oltp_update_index</td><td>64</td><td>5,398.79</td><td>5,398.79</td><td>9.70</td><td>13.88</td></tr>
+<tr><td>oltp_update_index</td><td>128</td><td>9,872.49</td><td>9,872.49</td><td>17.50</td><td>25.44</td></tr>
+<tr><td>oltp_update_index</td><td>256</td><td>12,662.35</td><td>12,662.35</td><td>28.58</td><td>40.07</td></tr>
+<tr><td>oltp_update_index</td><td>512</td><td>13,760.60</td><td>13,760.60</td><td>54.57</td><td>77.84</td></tr>
+<tr><td>oltp_update_index</td><td>1000</td><td>12,893.17</td><td>12,893.17</td><td>107.85</td><td>151.63</td></tr>
+</tbody></table>
+<img src="charts/iter_version_4.png" alt="TDSQL-B v22.9 五场景曲线；每条线保留全部并发档，不计算跨场景均值"><p class="caption">图：TDSQL-B v22.9 五场景曲线；每条线保留全部并发档，不计算跨场景均值</p>
+<h1 id="ch4">第 4 章 演进分析</h1>
+<h2 id="ch4_1">4.1 点查（oltp_point_select）</h2>
+<p>点查（oltp_point_select）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 79,274.90 → 87,702.72，累计 +10.63%。</p>
+<table><thead><tr><th>版本</th><th>峰值 QPS</th><th>峰值并发</th><th>相邻变化</th><th>标记</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>79,274.90</td><td>512</td><td>-</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>81,115.42</td><td>512</td><td>+2.32%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>82,654.44</td><td>512</td><td>+1.90%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>87,702.72</td><td>512</td><td>+6.11%</td><td>-</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_qps_oltp_point_select.png" alt="点查版本峰值趋势，版本顺序与来源一致"><p class="caption">图：点查版本峰值趋势，版本顺序与来源一致</p>
+<table><thead><tr><th>并发</th><th>v22.6</th><th>v22.7</th><th>v22.8</th><th>v22.9</th></tr></thead><tbody>
+<tr><td>32</td><td>1.34</td><td>1.28</td><td>1.25</td><td>1.20</td></tr>
+<tr><td>64</td><td>1.60</td><td>1.59</td><td>1.51</td><td>1.47</td></tr>
+<tr><td>128</td><td>2.92</td><td>2.81</td><td>2.77</td><td>2.68</td></tr>
+<tr><td>256</td><td>4.79</td><td>4.76</td><td>4.61</td><td>4.33</td></tr>
+<tr><td>512</td><td>9.18</td><td>8.92</td><td>8.78</td><td>8.33</td></tr>
+<tr><td>1000</td><td>18.32</td><td>17.57</td><td>17.35</td><td>16.50</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_p95_oltp_point_select.png" alt="点查 P95（毫秒）；六条线分别对应固定并发档，越低越好"><p class="caption">图：点查 P95（毫秒）；六条线分别对应固定并发档，越低越好</p>
+<h2 id="ch4_2">4.2 只读（oltp_read_only）</h2>
+<p>只读（oltp_read_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 45,755.56 → 40,809.21，累计 -10.81%。</p>
+<table><thead><tr><th>版本</th><th>峰值 QPS</th><th>峰值并发</th><th>相邻变化</th><th>标记</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>45,755.56</td><td>512</td><td>-</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>47,242.42</td><td>512</td><td>+3.25%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>51,672.30</td><td>512</td><td>+9.38%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>40,809.21</td><td>512</td><td>-21.02%</td><td>回退</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_qps_oltp_read_only.png" alt="只读版本峰值趋势，版本顺序与来源一致"><p class="caption">图：只读版本峰值趋势，版本顺序与来源一致</p>
+<table><thead><tr><th>并发</th><th>v22.6</th><th>v22.7</th><th>v22.8</th><th>v22.9</th></tr></thead><tbody>
+<tr><td>32</td><td>27.04</td><td>26.83</td><td>22.05</td><td>39.52</td></tr>
+<tr><td>64</td><td>33.62</td><td>32.51</td><td>27.33</td><td>48.65</td></tr>
+<tr><td>128</td><td>60.48</td><td>58.02</td><td>50.03</td><td>87.69</td></tr>
+<tr><td>256</td><td>99.92</td><td>97.91</td><td>81.91</td><td>144.59</td></tr>
+<tr><td>512</td><td>186.43</td><td>181.61</td><td>155.23</td><td>272.82</td></tr>
+<tr><td>1000</td><td>380.23</td><td>365.06</td><td>310.82</td><td>540.16</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_p95_oltp_read_only.png" alt="只读 P95（毫秒）；六条线分别对应固定并发档，越低越好"><p class="caption">图：只读 P95（毫秒）；六条线分别对应固定并发档，越低越好</p>
+<h2 id="ch4_3">4.3 混合读写（oltp_read_write）</h2>
+<p>混合读写（oltp_read_write）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 42,301.62 → 41,135.99，累计 -2.76%。</p>
+<table><thead><tr><th>版本</th><th>峰值 QPS</th><th>峰值并发</th><th>相邻变化</th><th>标记</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>42,301.62</td><td>512</td><td>-</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>43,554.54</td><td>512</td><td>+2.96%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>44,114.88</td><td>512</td><td>+1.29%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>41,135.99</td><td>512</td><td>-6.75%</td><td>回退</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_qps_oltp_read_write.png" alt="混合读写版本峰值趋势，版本顺序与来源一致"><p class="caption">图：混合读写版本峰值趋势，版本顺序与来源一致</p>
+<table><thead><tr><th>并发</th><th>v22.6</th><th>v22.7</th><th>v22.8</th><th>v22.9</th></tr></thead><tbody>
+<tr><td>32</td><td>43.01</td><td>41.79</td><td>40.93</td><td>49.18</td></tr>
+<tr><td>64</td><td>51.79</td><td>50.60</td><td>50.61</td><td>59.42</td></tr>
+<tr><td>128</td><td>94.02</td><td>91.27</td><td>91.05</td><td>108.45</td></tr>
+<tr><td>256</td><td>154.34</td><td>150.43</td><td>149.21</td><td>179.01</td></tr>
+<tr><td>512</td><td>293.50</td><td>289.61</td><td>284.58</td><td>338.00</td></tr>
+<tr><td>1000</td><td>586.37</td><td>579.38</td><td>569.96</td><td>675.91</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_p95_oltp_read_write.png" alt="混合读写 P95（毫秒）；六条线分别对应固定并发档，越低越好"><p class="caption">图：混合读写 P95（毫秒）；六条线分别对应固定并发档，越低越好</p>
+<h2 id="ch4_4">4.4 写入（oltp_write_only）</h2>
+<p>写入（oltp_write_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 59,854.62 → 62,966.27，累计 +5.20%。</p>
+<table><thead><tr><th>版本</th><th>峰值 QPS</th><th>峰值并发</th><th>相邻变化</th><th>标记</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>59,854.62</td><td>512</td><td>-</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>61,840.49</td><td>512</td><td>+3.32%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>66,390.29</td><td>512</td><td>+7.36%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>62,966.27</td><td>512</td><td>-5.16%</td><td>回退</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_qps_oltp_write_only.png" alt="写入版本峰值趋势，版本顺序与来源一致"><p class="caption">图：写入版本峰值趋势，版本顺序与来源一致</p>
+<table><thead><tr><th>并发</th><th>v22.6</th><th>v22.7</th><th>v22.8</th><th>v22.9</th></tr></thead><tbody>
+<tr><td>32</td><td>5.75</td><td>5.55</td><td>5.33</td><td>5.53</td></tr>
+<tr><td>64</td><td>7.06</td><td>6.80</td><td>6.47</td><td>6.78</td></tr>
+<tr><td>128</td><td>12.85</td><td>12.44</td><td>11.67</td><td>12.39</td></tr>
+<tr><td>256</td><td>21.06</td><td>20.75</td><td>19.19</td><td>20.14</td></tr>
+<tr><td>512</td><td>39.96</td><td>37.93</td><td>35.96</td><td>37.80</td></tr>
+<tr><td>1000</td><td>79.33</td><td>77.81</td><td>71.55</td><td>75.03</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_p95_oltp_write_only.png" alt="写入 P95（毫秒）；六条线分别对应固定并发档，越低越好"><p class="caption">图：写入 P95（毫秒）；六条线分别对应固定并发档，越低越好</p>
+<h2 id="ch4_5">4.5 索引更新（oltp_update_index）</h2>
+<p>索引更新（oltp_update_index）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 13,266.57 → 13,760.60，累计 +3.72%。</p>
+<table><thead><tr><th>版本</th><th>峰值 QPS</th><th>峰值并发</th><th>相邻变化</th><th>标记</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.6</td><td>13,266.57</td><td>512</td><td>-</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.7</td><td>13,741.51</td><td>512</td><td>+3.58%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>14,097.23</td><td>512</td><td>+2.59%</td><td>-</td></tr>
+<tr><td>TDSQL-B v22.9</td><td>13,760.60</td><td>512</td><td>-2.39%</td><td>-</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_qps_oltp_update_index.png" alt="索引更新版本峰值趋势，版本顺序与来源一致"><p class="caption">图：索引更新版本峰值趋势，版本顺序与来源一致</p>
+<table><thead><tr><th>并发</th><th>v22.6</th><th>v22.7</th><th>v22.8</th><th>v22.9</th></tr></thead><tbody>
+<tr><td>32</td><td>8.19</td><td>7.91</td><td>7.57</td><td>7.98</td></tr>
+<tr><td>64</td><td>9.97</td><td>9.73</td><td>9.46</td><td>9.70</td></tr>
+<tr><td>128</td><td>18.06</td><td>17.75</td><td>17.07</td><td>17.50</td></tr>
+<tr><td>256</td><td>29.85</td><td>29.03</td><td>27.62</td><td>28.58</td></tr>
+<tr><td>512</td><td>55.54</td><td>54.79</td><td>51.91</td><td>54.57</td></tr>
+<tr><td>1000</td><td>113.47</td><td>107.21</td><td>106.30</td><td>107.85</td></tr>
+</tbody></table>
+<img src="charts/iter_trend_p95_oltp_update_index.png" alt="索引更新 P95（毫秒）；六条线分别对应固定并发档，越低越好"><p class="caption">图：索引更新 P95（毫秒）；六条线分别对应固定并发档，越低越好</p>
+<h2 id="ch4_cum">4.6 累计变化与综合趋势</h2>
+<img src="charts/iter_cumulative.png" alt="每根柱代表单独场景的首末版峰值变化"><p class="caption">图：每根柱代表单独场景的首末版峰值变化</p>
+<img src="charts/iter_summary.png" alt="每个场景分别以首版为 100 归一化，不形成综合评分"><p class="caption">图：每个场景分别以首版为 100 归一化，不形成综合评分</p>
+<h2 id="ch4_reg">4.7 回退点详细分析</h2>
+<table><thead><tr><th>前版本</th><th>当前版本</th><th>场景</th><th>前版峰值 QPS</th><th>当前峰值 QPS</th><th>相邻变化</th></tr></thead><tbody>
+<tr><td>TDSQL-B v22.8</td><td>TDSQL-B v22.9</td><td>oltp_read_only</td><td>51,672.30</td><td>40,809.21</td><td>-21.02%</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>TDSQL-B v22.9</td><td>oltp_read_write</td><td>44,114.88</td><td>41,135.99</td><td>-6.75%</td></tr>
+<tr><td>TDSQL-B v22.8</td><td>TDSQL-B v22.9</td><td>oltp_write_only</td><td>66,390.29</td><td>62,966.27</td><td>-5.16%</td></tr>
+</tbody></table>
+<img src="charts/iter_regression.png" alt="全部相邻版本变化；红圈为严格低于 -5% 的回退点"><p class="caption">图：全部相邻版本变化；红圈为严格低于 -5% 的回退点</p>
+<p>未提供版本变更说明或回退原因，因此不作原因归因。</p>
+<h1 id="ch5">第 5 章 优化建议</h1>
+<h2 id="ch5_1">5.1 持续优化方向</h2>
+<p>保留各场景和并发档的独立基线；在相同环境重复测试，确认累计变化可复现，并同步跟踪 P95/P99，避免只依据峰值选择版本。</p>
+<h2 id="ch5_2">5.2 回退修复建议</h2>
+<p>优先复测峰值跌幅最大的回退场景，并在相同数据集、硬件、并发档和测试时长下核对前后版本变更。采集执行计划、资源使用和等待信息后再判断原因。已检测回退并不等同于已确认故障根因。</p>
+<h2 id="ch5_3">5.3 测试边界</h2>
+<p>仅使用所给 120 条记录；无重复样本、误差区间、逐版本硬件快照、数据库详细参数和缓存状态，不能推断统计显著性或生产表现。回退只依据每场景版本峰值 QPS，不涵盖固定并发吞吐或延迟劣化；后两者请结合全量数据判断。报告时间以用户给定 2026-06-19T16:00:00+08:00 为准。</p>
+<h1 id="ch6">第 6 章 附录</h1>
+<h2 id="ch6_1">6.1 原始数据与可追溯性</h2>
+<p>唯一实际输入：data/iter.json。SHA-256：49c9874206b3a24d216e2befd09af75dce060d5980dc96ea92ecbef4f24663f4。标准化数据及来源旧声明见 data/extracted_data.json；精确计算结果见 data/analysis_results.json；质量检查见 data/quality.json。</p>
+<h2 id="ch6_2">6.2 测试命令与缺失信息</h2>
+<p>输入仅提供 sysbench 版本、数据集和运行时长，未提供完整原始命令、连接参数、预热方式及运行次数，故不补写可执行命令。</p>
+</body></html>

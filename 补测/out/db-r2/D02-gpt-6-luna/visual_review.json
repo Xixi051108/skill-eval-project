@@ -1,0 +1,13 @@
+{
+  "method": "LLM_visual_inspection",
+  "reviewer": "Codex（LLM）",
+  "sampled_images": 3,
+  "total_images": 32,
+  "decision": "FAIL",
+  "notes": "实际查看三个PNG：comparison_p95_oltp_point_select和comparison_ladder中文正常；product_1_oltp_point_select标题及X轴中文为缺字方框。与最终答复的中文字体限制及生成警告对应。C7中文标题/可读性未满足；仅抽看3张，不代表其余29张逐图验收。",
+  "sha256": {
+    "comparison_p95_oltp_point_select.png": "03a329142153ae9f34e0c23f3361885b5860450f2fbf546838382007f55f1a72",
+    "comparison_ladder.png": "638f622d0df2cadcd4e130f85a467a0a800f075dd8107002dea187eef6bfbdcd",
+    "product_1_oltp_point_select.png": "ee1bc3a6abe21c209869817414d5833e3b6bfcbfb91fd12effa266496e871de6"
+  }
+}

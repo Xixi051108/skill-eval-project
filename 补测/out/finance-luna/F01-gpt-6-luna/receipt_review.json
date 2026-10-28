@@ -1,0 +1,27 @@
+{
+  "method": "deterministic_inverse_windows_newline_translation",
+  "receipts": [
+    {
+      "evidence_id": "LIVE-001",
+      "file": "tool-001.stdout.txt",
+      "file_sha256": "e0fb5f58cadf7ca76f0a3f3bb591dc4a80007fb305b0a2d14f8ce0c4f936c85b",
+      "recorded_text_sha256": "0bcb5a4e045eb8b1ad62da247c81bd43fc5b46706afba3cbc2c8baf19b24c623",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-002",
+      "file": "tool-002.stdout.txt",
+      "file_sha256": "6b4bf8847bfbc0f792837a3fa24a51551f8e0d1685086539085273366657286d",
+      "recorded_text_sha256": "b27aee4e282a3da2cf133d10b3796e84eb81c0581075ac8c220d239d91254124",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-003",
+      "file": "tool-003.stdout.txt",
+      "file_sha256": "e234eb4191fc85a191b75b90b6c30ffca85a0df1fabc8a1d6856b84ae17361a4",
+      "recorded_text_sha256": "ade5347e8aa1b34e68642910dbc46acb1926cadf072c148132f6e4fe011efdfa",
+      "matches_after_reversing_windows_write_translation": true
+    }
+  ],
+  "note": "运行时write_text默认转换换行；还原一层写入转换后校验原文本哈希。保留原文件与原回执，不改模型输出或成绩。"
+}

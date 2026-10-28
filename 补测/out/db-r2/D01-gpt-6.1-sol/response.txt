@@ -1,0 +1,5 @@
+已生成 single 性能报告：[Markdown](artifacts/report.md)、[Word](artifacts/report.docx)、[HTML](artifacts/report.html)。
+
+完整保留产品 **TDSQL-B-v22.7.2**、测试时长 **300s**，以及全部 30 条记录的 TPS、QPS、P95、P99；附 11 张图表，数值已逐条核对。
+
+源日志与 Skill 源码未修改。[核查结果](artifacts/validation.md)。

@@ -1,0 +1,24 @@
+{
+  "command_count": 14,
+  "observations": [
+    {
+      "step": "read_skill",
+      "command_index": 0,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath skill/SKILL.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 2,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-ChildItem -LiteralPath skill/references; Get-Content -LiteralPath skill/references/意图解析规范.md,skill/references/数据源接入规范.md,skill/references/分析方法论.md,skill/references/报告类型模板规范.md,skill/references/三格式输出规范.md,skill/references/最小交付标准.md'"
+    },
+    {
+      "step": "pipeline_request",
+      "command_index": 3,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath skill/scripts/run_pipeline.py,skill/scripts/analyze.py,skill/templates/iteration_report.py'"
+    }
+  ],
+  "skill_bytes_unchanged": true,
+  "input_bytes_unchanged": true,
+  "skill_read_observed": true,
+  "note": "命令匹配是可观察线索，动态读取与阶段顺序另行复核；不宣称强物理隔离。"
+}

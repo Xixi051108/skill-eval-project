@@ -1,0 +1,34 @@
+{
+  "command_count": 9,
+  "observations": [
+    {
+      "step": "read_skill",
+      "command_index": 1,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content skill/SKILL.md; Get-Content dependencies/westock-data/SKILL.md; Get-Content dependencies/mx-finance-search/SKILL.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 2,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content dependencies/westock-data/references/commands.md; Get-Content dependencies/westock-data/references/ai_usage_guide.md; Get-Content dependencies/westock-data/references/routing-guide.md'"
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 5,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py westock-data finance hk00700 --num 8\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 7,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command '$raw = & '\"'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py westock-data finance hk00700 --type zhsy --num 8; \"'$obj = $raw | ConvertFrom-Json; $obj.content -split \"`n\" | Where-Object { $_ -match '\"'\"'^'\"\\\\| 2024-12-31 \\\\|' }\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 8,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py mx-finance-search search 腾讯控股 2024 年度业绩 年度收入 营业收入 2025年3月19日 --no-save\""
+    }
+  ],
+  "skill_bytes_unchanged": true,
+  "input_bytes_unchanged": true,
+  "skill_read_observed": true,
+  "note": "命令匹配是可观察线索，动态读取与阶段顺序另行复核；不宣称强物理隔离。"
+}

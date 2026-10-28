@@ -1,0 +1,31 @@
+{
+  "method": "deterministic_header_mapping",
+  "source": "答卷\\data\\single.log",
+  "sha256": {
+    "E:\\项目\\skill性能评估考题\\补测\\audit.py": "e9575263ca67745380846de4306640f510cf798665b4aa1879f04499e3e827e8",
+    "答卷\\data\\single.log": "68ca345e661ff759202571c9f87d2f7f817523b8a762db5ee874b7edf2443ea5",
+    "补测\\out\\db-r2\\D01-gpt-6-luna\\work\\artifacts\\single\\report.md": "45bc182518c3f2963e785cb9e4a3ce3262701c11ec5c62523ab71223f3b8de05",
+    "补测\\out\\db-r2\\D01-gpt-6-luna\\work\\artifacts\\single\\report.html": "63f0fc7943573c452092530b615a9268e24a0774cf897c6189d901dac08229ee",
+    "补测\\out\\db-r2\\D01-gpt-6-luna\\work\\artifacts\\single\\report.docx": "9ee8f17c48293d7655943dafd4c0057d163c570eb613d0940c2670008f028878"
+  },
+  "scope": "D01三格式的场景、并发、TPS、QPS、P95、P99逐行核验；不代表全部交付规范通过",
+  "formats": {
+    "md": {
+      "matched": true,
+      "actual_rows": 30,
+      "expected_rows": 30
+    },
+    "html": {
+      "matched": true,
+      "actual_rows": 30,
+      "expected_rows": 30
+    },
+    "docx": {
+      "matched": true,
+      "actual_rows": 30,
+      "expected_rows": 30
+    }
+  },
+  "all_matched": true,
+  "note": "独立补充审计，不覆盖automatic.json/result.json；冻结裁判只接受六列，可能漏读额外列。"
+}

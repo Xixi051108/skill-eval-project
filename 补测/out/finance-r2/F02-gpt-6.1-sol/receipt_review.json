@@ -1,0 +1,41 @@
+{
+  "method": "deterministic_inverse_windows_newline_translation",
+  "receipts": [
+    {
+      "evidence_id": "LIVE-001",
+      "file": "tool-001.stdout.txt",
+      "file_sha256": "e0fb5f58cadf7ca76f0a3f3bb591dc4a80007fb305b0a2d14f8ce0c4f936c85b",
+      "recorded_text_sha256": "0bcb5a4e045eb8b1ad62da247c81bd43fc5b46706afba3cbc2c8baf19b24c623",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-002",
+      "file": "tool-002.stdout.txt",
+      "file_sha256": "bb9d1dec9682fccd15eb59b4748f3eea10cffcc0abeb34707c81d60d71716eac",
+      "recorded_text_sha256": "7e6e0e619013d298299674e22517ff2f170392e7e2d8359014133a1c7b3f4729",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-003",
+      "file": "tool-003.stdout.txt",
+      "file_sha256": "dfe571c3a87e29afd99b14dca1d251be16909ca3a07a1b46a6888de0777ff153",
+      "recorded_text_sha256": "c4348a3891b0eb25345aaab87cf1187b0d33bc9dec7bb28ac6136ea17d6513ec",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-004",
+      "file": "tool-004.stdout.txt",
+      "file_sha256": "d2289e860d5aa6f70d9c2abe6309bf3e0f63fb226e85ca4d4adbda1671dc1867",
+      "recorded_text_sha256": "d0528e79d46903086c7234d13e65246a35d4c9494aaa016b4ea32b91ac1313f5",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-005",
+      "file": "tool-005.stdout.txt",
+      "file_sha256": "776196340b3cb3f00c06689f59b7240c6d5934777fa7e96eab92b8dd8549e27b",
+      "recorded_text_sha256": "474335b383c1bcf0200ee611b0c62715552749a111613f92575a4ce616d6f7be",
+      "matches_after_reversing_windows_write_translation": true
+    }
+  ],
+  "note": "运行时write_text默认转换换行；还原一层写入转换后校验原文本哈希。保留原文件与原回执，不改模型输出或成绩。"
+}

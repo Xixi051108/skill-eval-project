@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "products": [
+      "TDSQL-B v22.7.3",
+      "MySQL 8.0.32",
+      "OceanBase 4.2"
+    ],
+    "scenarios": [
+      "oltp_write_only",
+      "oltp_update_index"
+    ],
+    "concurrencies": [
+      512,
+      1000
+    ],
+    "test_env": {
+      "CPU": "Intel(R) Xeon(R) Gold 6133 @ 2.50GHz, 64 cores",
+      "Memory": "256GB DDR4",
+      "Disk": "NVMe SSD 3.84TB",
+      "Network": "25Gbps",
+      "OS": "TencentOS Server 3.1",
+      "sysbench_version": "1.0.20"
+    },
+    "log_meta": [
+      {
+        "product": "TDSQL-B v22.7.3",
+        "engine": "sysbench",
+        "start_time": "2026-06-11 09:30:00",
+        "data_config": "tables=16, table_size=1000000",
+        "duration_sec": 300,
+        "task_id": "aa112233_tdsql_intel_x86"
+      },
+      {
+        "product": "MySQL 8.0.32",
+        "engine": "sysbench",
+        "start_time": "2026-06-11 13:30:00",
+        "data_config": "tables=16, table_size=1000000",
+        "duration_sec": 300,
+        "task_id": "bb445566_mysql_intel_x86"
+      },
+      {
+        "product": "OceanBase 4.2",
+        "engine": "sysbench",
+        "start_time": "2026-06-11 17:30:00",
+        "data_config": "tables=16, table_size=1000000",
+        "duration_sec": 300,
+        "task_id": "cc778899_ob_intel_x86"
+      }
+    ],
+    "source_info": {
+      "type": "local_file",
+      "value": "data/compare.json",
+      "rows_fetched": 12,
+      "reachable": true
+    }
+  },
+  "records": [
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_write_only",
+      "threads": 512,
+      "tps": 22391.81,
+      "qps": 67175.43,
+      "p95_ms": 36.92,
+      "p99_ms": 51.88,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    },
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_write_only",
+      "threads": 1000,
+      "tps": 20713.72,
+      "qps": 62141.15,
+      "p95_ms": 73.08,
+      "p99_ms": 102.59,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    },
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_update_index",
+      "threads": 512,
+      "tps": 14746.99,
+      "qps": 14746.99,
+      "p95_ms": 50.85,
+      "p99_ms": 71.63,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    },
+    {
+      "product": "TDSQL-B v22.7.3",
+      "scenario": "oltp_update_index",
+      "threads": 1000,
+      "tps": 13965.57,
+      "qps": 13965.57,
+      "p95_ms": 100.99,
+      "p99_ms": 137.41,
+      "task_id": "aa112233_tdsql_intel_x86",
+      "start_time": "2026-06-11 09:30:00"
+    },
+    {
+      "product": "MySQL 8.0.32",
+      "scenario": "oltp_write_only",
+      "threads": 512,
+      "tps": 17417.06,
+      "qps": 52251.17,
+      "p95_ms": 36.16,
+      "p99_ms": 51.07,
+      "task_id": "bb445566_mysql_intel_x86",
+      "start_time": "2026-06-11 13:30:00"
+    },
+    {
+      "product": "MySQL 8.0.32",
+      "scenario": "oltp_write_only",
+      "threads": 1000,
+      "tps": 16471.39,
+      "qps": 49414.16,
+      "p95_ms": 73.64,
+      "p99_ms": 100.31,
+      "task_id": "bb445566_mysql_intel_x86",
+      "start_time": "2026-06-11 13:30:00"
+    },
+    {
+      "product": "MySQL 8.0.32",
+      "scenario": "oltp_update_index",
+      "threads": 512,
+      "tps": 12009.86,
+      "qps": 12009.86,
+      "p95_ms": 50.95,
+      "p99_ms": 72.89,
+      "task_id": "bb445566_mysql_intel_x86",
+      "start_time": "2026-06-11 13:30:00"
+    },
+    {
+      "product": "MySQL 8.0.32",
+      "scenario": "oltp_update_index",
+      "threads": 1000,
+      "tps": 11356.38,
+      "qps": 11356.38,
+      "p95_ms": 103.42,
+      "p99_ms": 148.48,
+      "task_id": "bb445566_mysql_intel_x86",
+      "start_time": "2026-06-11 13:30:00"
+    },
+    {
+      "product": "OceanBase 4.2",
+      "scenario": "oltp_write_only",
+      "threads": 512,
+      "tps": 20142.74,
+      "qps": 60428.22,
+      "p95_ms": 36.55,
+      "p99_ms": 51.93,
+      "task_id": "cc778899_ob_intel_x86",
+      "start_time": "2026-06-11 17:30:00"
+    },
+    {
+      "product": "OceanBase 4.2",
+      "scenario": "oltp_write_only",
+      "threads": 1000,
+      "tps": 18810.26,
+      "qps": 56430.79,
+      "p95_ms": 72.95,
+      "p99_ms": 100.08,
+      "task_id": "cc778899_ob_intel_x86",
+      "start_time": "2026-06-11 17:30:00"
+    },
+    {
+      "product": "OceanBase 4.2",
+      "scenario": "oltp_update_index",
+      "threads": 512,
+      "tps": 13057.94,
+      "qps": 13057.94,
+      "p95_ms": 51.43,
+      "p99_ms": 70.27,
+      "task_id": "cc778899_ob_intel_x86",
+      "start_time": "2026-06-11 17:30:00"
+    },
+    {
+      "product": "OceanBase 4.2",
+      "scenario": "oltp_update_index",
+      "threads": 1000,
+      "tps": 12325.56,
+      "qps": 12325.56,
+      "p95_ms": 100.69,
+      "p99_ms": 140.96,
+      "task_id": "cc778899_ob_intel_x86",
+      "start_time": "2026-06-11 17:30:00"
+    }
+  ]
+}

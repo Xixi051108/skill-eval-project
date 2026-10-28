@@ -1,0 +1,39 @@
+{
+  "records": 12,
+  "tps_null_rate": 0.0,
+  "qps_null_rate": 0.0,
+  "p95_null_rate": 0.0,
+  "p99_null_rate": 0.0,
+  "concurrencies_by_product_scenario": {
+    "TDSQL-B v22.7.3": {
+      "oltp_write_only": [
+        512,
+        1000
+      ],
+      "oltp_update_index": [
+        512,
+        1000
+      ]
+    },
+    "MySQL 8.0.32": {
+      "oltp_write_only": [
+        512,
+        1000
+      ],
+      "oltp_update_index": [
+        512,
+        1000
+      ]
+    },
+    "OceanBase 4.2": {
+      "oltp_write_only": [
+        512,
+        1000
+      ],
+      "oltp_update_index": [
+        512,
+        1000
+      ]
+    }
+  }
+}

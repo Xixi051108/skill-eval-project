@@ -1,0 +1,11 @@
+{
+  "id": "F15",
+  "model": "gpt-6-luna",
+  "suite": "finance",
+  "run": "F15-gpt-6-luna",
+  "status": "NOT_RUN",
+  "score": null,
+  "seconds": 0,
+  "final_response": false,
+  "reason": "Agent未完成回合，详见events/stderr: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 7:29 PM. | You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 7:29 PM."
+}

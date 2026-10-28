@@ -1,0 +1,48 @@
+{
+  "method": "deterministic_inverse_windows_newline_translation",
+  "receipts": [
+    {
+      "evidence_id": "LIVE-001",
+      "file": "tool-001.stdout.txt",
+      "file_sha256": "e0fb5f58cadf7ca76f0a3f3bb591dc4a80007fb305b0a2d14f8ce0c4f936c85b",
+      "recorded_text_sha256": "0bcb5a4e045eb8b1ad62da247c81bd43fc5b46706afba3cbc2c8baf19b24c623",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-002",
+      "file": "tool-002.stdout.txt",
+      "file_sha256": "e5d5c80daca8c065c541ec4bd075295f5de437913230cd6ad5a0d952557e39a1",
+      "recorded_text_sha256": "89d89708fcfdc64062f18275d8a03a13d065a19a0a46da19187a155516ea1ed8",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-003",
+      "file": "tool-003.stdout.txt",
+      "file_sha256": "290b077a0607e6163659f65ba549fb0eab8183c6e83047ef7c510144119e4009",
+      "recorded_text_sha256": "42ee5b33abe8b527ce4a7e1f6002687888fd2d2d1ead1462afed31de65f91186",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-004",
+      "file": "tool-004.stdout.txt",
+      "file_sha256": "53da9efd1cc1c8b317a9090e7a2a2eb69dc266d4cf7f4993c3a20a473220977e",
+      "recorded_text_sha256": "4e73cddbbca41d8187df8ada7d6874cb262f1ec1e33054f3d9f98b137fdcc536",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-005",
+      "file": "tool-005.stdout.txt",
+      "file_sha256": "91ead7877097bef1013083bd48e28da95c0cdb6ca567aa4b918ae2723e9a87f0",
+      "recorded_text_sha256": "0fedbf1df2d915e05526f04b394fa18c8d2b882aa9ef61f1f4cc2f41aae881fd",
+      "matches_after_reversing_windows_write_translation": true
+    },
+    {
+      "evidence_id": "LIVE-006",
+      "file": "tool-006.stdout.txt",
+      "file_sha256": "a37cd493285d95d529d567e10004e0750d7f58c0441068ce55e8e52d3f14e556",
+      "recorded_text_sha256": "09631fb1b0059363ce2fd8faf32a4b93d69082babb77a2f14b8c7c5b910589d9",
+      "matches_after_reversing_windows_write_translation": true
+    }
+  ],
+  "note": "运行时write_text默认转换换行；还原一层写入转换后校验原文本哈希。保留原文件与原回执，不改模型输出或成绩。"
+}

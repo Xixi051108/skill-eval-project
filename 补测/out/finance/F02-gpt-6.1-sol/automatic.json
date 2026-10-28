@@ -1,0 +1,19 @@
+{
+  "status": "BLOCKED",
+  "score": null,
+  "checks": [],
+  "dimensions": {},
+  "fatal": false,
+  "reason": "Agent未完成回合，详见events/stderr: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 7:29 PM. | You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 7:29 PM.",
+  "id": "F02",
+  "model": "gpt-6.1-sol",
+  "suite": "finance",
+  "run": "F02-gpt-6.1-sol",
+  "seconds": 33.422,
+  "usage": null,
+  "monetary_cost": null,
+  "prompt_sha256": "2450a2815a0fe2d08d22f3d43b69e6068690a12cecd7012e5b1c01ee226eb387",
+  "final_response": false,
+  "tool_calls": 0,
+  "skill_read_observed": true
+}

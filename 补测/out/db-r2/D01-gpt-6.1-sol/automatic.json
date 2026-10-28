@@ -1,0 +1,307 @@
+{
+  "status": "FAIL",
+  "score": 89.74,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "时长必须等于原始 Duration",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 300,
+      "expected": 300,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "数据库产品不能是测试工具",
+      "dimension": "R3",
+      "passed": true,
+      "actual": [
+        "TDSQL-B-v22.7.2"
+      ],
+      "expected": [
+        "TDSQL-B-v22.7.2"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "全部原始性能数据保持不变",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 30,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/intent.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/intent.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/extracted_data.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/extracted_data.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/analysis_results.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/analysis_results.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/insights.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/insights.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/block_map.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/block_map.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 docs/analysis_proposal.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "docs/analysis_proposal.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.docx",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.docx",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.html",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.html",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "图表达到 reference 基线",
+      "dimension": "R5",
+      "passed": true,
+      "actual": 11,
+      "expected": 11,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "Markdown 图表均指向有效相对路径",
+      "dimension": "R5",
+      "passed": true,
+      "actual": [
+        "charts/single_peak_summary.png",
+        "charts/single_qps_oltp_point_select.png",
+        "charts/single_qps_oltp_read_only.png",
+        "charts/single_qps_oltp_read_write.png",
+        "charts/single_qps_oltp_update_index.png",
+        "charts/single_qps_oltp_write_only.png",
+        "charts/single_p95_oltp_point_select.png",
+        "charts/single_p95_oltp_read_only.png",
+        "charts/single_p95_oltp_read_write.png",
+        "charts/single_p95_oltp_update_index.png",
+        "charts/single_p95_oltp_write_only.png"
+      ],
+      "expected": "有效相对路径",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md时长符合原始日志",
+      "dimension": "R3",
+      "passed": true,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html时长符合原始日志",
+      "dimension": "R3",
+      "passed": true,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx时长符合原始日志",
+      "dimension": "R3",
+      "passed": true,
+      "actual": null,
+      "expected": "300秒",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md逐行符合原始数据",
+      "dimension": "R3",
+      "passed": false,
+      "actual": 0,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html逐行符合原始数据",
+      "dimension": "R3",
+      "passed": false,
+      "actual": 0,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx逐行符合原始数据",
+      "dimension": "R3",
+      "passed": false,
+      "actual": 0,
+      "expected": 30,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 0.6666666666666666,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "PENDING: 解释、来源支持、限制和过程另行复核",
+  "id": "D01",
+  "model": "gpt-6.1-sol",
+  "suite": "db",
+  "run": "D01-gpt-6.1-sol",
+  "seconds": 222.25,
+  "usage": {
+    "input_tokens": 455059,
+    "cached_input_tokens": 388864,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 8758,
+    "reasoning_output_tokens": 405
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "edc66b1eadddf0731d23f239a6bbb0252e6357a59d878086235b9d0338915f70",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true
+}

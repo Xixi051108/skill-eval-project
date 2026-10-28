@@ -1,0 +1,28 @@
+# 最小交付核查
+
+- ✅ A intent：JSON 已重新解析
+- ✅ A extracted_data：JSON 已重新解析
+- ✅ A analysis_results：JSON 已重新解析
+- ✅ A insights：JSON 已重新解析
+- ✅ A data/block_map.md：文件存在
+- ✅ A docs/analysis_proposal.md：文件存在
+- ✅ A report.md：21715 bytes
+- ✅ A report.docx：1119693 bytes
+- ✅ A report.html：34283 bytes
+- ✅ A6/C1-C6 charts：5 峰值 + 5 P95 + 累计 + 回退 + 归一化 + 4 版本曲线
+- ✅ C7/C8 chart text：17 图标题中文；标题、轴标签、刻度、图例包围盒检测均无交叠
+- ✅ B1/B2/B5/B6：完整唯一 4×5×6 网格；逐项验证必需指标为正有限数
+- ✅ B3 full tables：4 张全量表各 30 条，保留原始两位小数
+- ✅ B4 source equality：全部 120 条与原始记录逐字段一致，覆盖要求的 6 条抽检
+- ✅ B7 source：实际路径、记录数、SHA-256 已记录
+- ✅ D1-D3 insight：无 L3；第 1 章 6 条结论，5 条累计变化及 1 条回退
+- ✅ D4/D8 fairness：数据集、时长一致；逐版本硬件证据不足已披露
+- ✅ D5/D7 scope：五场景独立分析；六档并发全保留
+- ✅ E1 Markdown：章 #、节 ##；表含分隔行；17 个相对图片链接存在
+- ✅ E2.1 fonts：检查全部 1218 个 run
+- ✅ E2.2 headers：全部 18 张表表头
+- ✅ E2.3 images：DOCX 图片数量 17
+- ✅ E3 HTML：head/CSS/TOC/font fallback/17 图片路径
+- ✅ F1 placeholders：Markdown 与 HTML 占位符扫描为空
+- ✅ F3 three formats：20 个场景版本峰值跨三格式核对，按两位小数与千分位展示
+- ✅ source untouched：skill 全部文件及原始 data/iter.json SHA-256 前后相同

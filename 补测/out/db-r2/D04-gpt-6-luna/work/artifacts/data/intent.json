@@ -1,0 +1,36 @@
+{
+  "data_source_type": "local_file",
+  "data_source_value": "data/compare.json",
+  "report_type": "custom",
+  "dimension_filters": {
+    "test_name_keywords_or": [
+      [
+        "write_only"
+      ],
+      [
+        "update_index"
+      ]
+    ]
+  },
+  "results_key_filters": {
+    "threads": "512,1000"
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": null,
+  "custom_config": {
+    "focus_dimension": "自定义",
+    "dimensions": [
+      "product",
+      "scenario",
+      "threads"
+    ],
+    "extra_questions": [
+      "仅分析三个产品在 oltp_write_only、oltp_update_index 两场景和 512、1000 并发下的 QPS、P95、P99，并逐产品逐场景给出有依据的产品选择建议。"
+    ]
+  },
+  "other_info": "专项范围严格限制为上述 12 条记录。"
+}

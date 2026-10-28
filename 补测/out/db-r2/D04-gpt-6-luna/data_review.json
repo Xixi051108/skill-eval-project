@@ -1,0 +1,20 @@
+{
+  "method": "independent_original_D04_scope",
+  "expected_rows": 12,
+  "actual_rows": 12,
+  "matched": true,
+  "scope": {
+    "scenarios": [
+      "oltp_write_only",
+      "oltp_update_index"
+    ],
+    "threads": [
+      512,
+      1000
+    ]
+  },
+  "sha256": {
+    "答卷\\data\\compare.json": "4640ff7f9fa4fc1cf7c9e964798fa1fa337fc2b96782f16ff0f06c9fd58bc514",
+    "补测\\out\\db-r2\\D04-gpt-6-luna\\work\\artifacts\\data\\extracted_data.json": "5811deecbb5b84969c7e7e24bce926ed7aa06b6e468699b63805610c46b8dcc8"
+  }
+}

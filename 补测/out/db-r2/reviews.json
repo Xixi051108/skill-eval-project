@@ -1,0 +1,66 @@
+[
+  {
+    "run": "D01-gpt-6.1-sol",
+    "response_sha256": "6c468c9076e5c0afc120fda88f19d17de5fff918c314ee2338ade1dbcadd1287",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "复核范围为解释、数据引用和可观察过程，自动FAIL保留。实际读取Skill、六份references和源码；随后运行artifacts/build.py，动态读取原日志并从DB/Duration纠正工作数据元信息，原Skill及输入字节未改。产出三格式及11张图；单独table_review.json按显式表头定位列，核对三格式各30行/120个性能数值全匹配。冻结Judge的固定六列读取器无法识别新增记录时间列，导致三项行检查误报，不能据此认定三格式数值错误。最终答复的产品/300s/30条/11图均有产物支持；报告明确未提供硬件，不作资源瓶颈因果断言。生成脚本在运行中补偿原解析缺陷，只证明此Agent加Skill组合的任务行为，不证明原解析器已修复；分析方案在脚本后部落盘，不能反推此前已经单独审议方案。未做Word分页及浏览器视觉验收。LLM语义复核PASS，最终仍FAIL。"
+  },
+  {
+    "run": "D02-gpt-6.1-sol",
+    "response_sha256": "70d4b38a8c5f16e7a37847b53705310055ed882476ce74d5486923b161992adc",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "实际轨迹先读取Skill和原输入，再读取六份references/模板/源码，运行artifacts/build.py；中间两次命令报错后修正自身生成脚本，最后退出码0，未修改冻结Skill或输入。独立Judge核对90条输入记录身份及全部核心数值、必需中间文件、三格式、20图与相对图片路径通过。读取最终报告核心结论与公平性说明：五场景分开，标注硬件独立性/配置/重复轮次缺失，结论限定于提供数据，未把90条数据说成真实重新执行的数据库压测。90条=3产品×5场景×6并发，不是重复采样。Agent自述48项通过是自身检查，不等于独立裁判48项；测试方法将产品间相对差称同比用词不严谨，应称相对差异，但未改变数值结论。本复核未新增全90行最终三格式的独立格式解析，也未做Word分页/浏览器视觉验收，PASS仅对应本批公开合同及上述有限语义核验。LLM复核PASS。"
+  },
+  {
+    "run": "D03-gpt-6.1-sol",
+    "response_sha256": "10c2737278714e03fdb03d4da7203531d7f5f58cd2a1c2924a4ca3ed1b0d98e8",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "轨迹读取原Skill、输入和对应references后执行自身build.py，生成三格式及17图。最初两次运行失败后修正生成脚本，最后退出0；Skill和附件字节保持不变。原Judge独立计算来源版本顺序及相邻峰值下降严格超过5%的回退集合，均匹配；离线data_review另核对全部120条身份与四指标匹配。报告正文给出v22.6至v22.9顺序、三处v22.8到v22.9回退（21.02%、6.75%、5.16%），与最终答复一致；披露共享环境无法独立证明硬件一致，未宣称重新压测或生产因果诊断。26项是Agent自身检查数，不计作新增独立测试数；未做完整三格式视觉验收。LLM复核PASS。"
+  },
+  {
+    "run": "D04-gpt-6.1-sol",
+    "response_sha256": "41d710d7f633ab8bc6e458682894037a9c93c1f2743f844bdc044baa929cb88f",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "语义复核PASS但自动FAIL保留。原用户要求仅两场景512/1000并发共12条。离线data_review按原用户范围从compare.json独立筛选，extracted.records及analysis.custom.buckets均与12条目标记录身份和四指标一致；报告第3章含逐产品QPS/P95/P99，第4.1节含按吞吐及尾延迟权衡的逐场景建议，且披露单次样本、共享环境和未知SLA限制。原Judge仅读取custom.selected_records/focused_records与recommendation/selection，没有读取合法buckets和正文建议，导致两项自动失败；不能据此说业务遗漏目标12条或没有选择建议。Skill/references未强制这几个私有JSON键，属于裁判适配局限，仍保留原成绩并需新版本校准。实际运行自身生成脚本并有三格式及图表，不证明原custom组件已修复；未全面视觉验收。"
+  },
+  {
+    "run": "D01-gpt-6-luna",
+    "response_sha256": "b5f98bc14a087bc84f27645ac5e19bfef6899e96bdf873dad6fa5c7bfb07089a",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "语义复核PASS但自动FAIL保留。Agent将报告和中间数据放在artifacts/single/，原补测Judge固定定位artifacts/data，因找不到标准路径提前返回FAIL；这说明输出根目录约定/产物发现不一致，不是没有报告。在实际目录进行离线data_review及table_review，30条提取记录与三格式各30行/120指标均匹配原日志；三种报告及11张图真实存在，产品与300秒时长正确，原Skill与输入字节未改。公开prompt仅要求写入artifacts/，未明确禁止其下子目录，不把此失败直接称为业务能力错误。当前报告保留原自动状态，不用重新定位后的局部审计宣称完整规范通过。未进行Word分页/浏览器视觉检查；本轮只评已生成产物，不是重做数据库压测。"
+  },
+  {
+    "run": "D02-gpt-6-luna",
+    "response_sha256": "c9c6039b2a7baf36a4c6d991237bf96478805830c9432e526f6ef0fab81a5ba3",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "FAIL",
+    "notes": "自动检查REVIEW/100，但语义复核FAIL。三格式、32图与90条提取记录存在，离线data_review的身份/四指标全匹配；报告按五场景分开并显著披露STRONG公平性限制。轨迹实际执行run_pipeline.py，随后运行complete_report.py补报告；原Skill及输入未改。独立查看3张实际PNG，comparison的两张中文正常，但product_1_oltp_point_select标题及X轴出现中文缺字方框，visual_review.json绑定文件哈希；最终答复也承认字体限制。原references要求中文图表，披露问题不等于交付完成，故复核FAIL，保留automatic原100分。未将缺字放大成所有32图均不可读，也未进行全量视觉检查。LLM复核。"
+  },
+  {
+    "run": "D03-gpt-6-luna",
+    "response_sha256": "71cdb8c65c47fe7a8c44798ec46310afd7eb6ae42ec8882e6c014754716e4600",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "轨迹实际读取Skill及阶段references，构造iteration意图后执行原run_pipeline.py；随后修改自身产物中的日期、来源和共享环境说明，未改原Skill或附件。原Judge独立确认版本顺序和三处严格超过5%回退，离线data_review确认120条提取数据身份/四指标匹配。最终答复的3个回退（21.02%、6.75%、5.16%）和12图有产物支持；报告明示来源为data/iter.json，环境说明来自共享元数据。报告表格对部分TPS/QPS按整数展示，本批未新增全120行三格式精度核验；也未独立覆盖全部参考规范及视觉要求，PASS仅代表本补测执行检查与有限语义复核，不是正式全规范验收。LLM复核PASS。"
+  },
+  {
+    "run": "D04-gpt-6-luna",
+    "response_sha256": "0842e60abda7b9b469fb04bad06bc8f070ff7a7418c827f1c13d6ac3ae235a7e",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "FAIL",
+    "notes": "保留自动FAIL并补充原因分类。离线data_review按原用户指定两场景/两并发核对，extracted.records全部12条身份与四指标匹配。正式报告第3章有逐产品QPS/P95/P99，第4.2节有按吞吐/尾延迟权衡的建议；analysis.custom仅含sample_size/main_finding，没有selected_records/focused_records、recommendation/selection或P99字段，因此原Judge三个自动失败不能都解释成正文缺失；部分属于中间字段适配局限。正式报告两个场景分别重复使用第3章标题，章节组织有问题；第4.2节首条相对第二名约11.0%与原值计算约11.17%不一致，应校正且不应以模型自检替代。抽看custom_oltp_write_only图的中文和三个指标可读，不代表所有图与三格式完整验收。已有局部正确证据不能改写当前FAIL；未修复被测报告。LLM复核FAIL。"
+  }
+]

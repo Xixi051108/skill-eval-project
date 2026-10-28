@@ -1,0 +1,133 @@
+{
+  "single_product_insights": {
+    "TDSQL-B v22.7.3": [
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3 在 oltp_point_select 的采样峰值 QPS 为 89,928.71（512 并发），32→峰值扩展 4.61x；1,000 并发比峰值下降 5.93%，P95 从峰值处 7.95 升至 15.62 ms。",
+        "source": "data/compare.json records: product=TDSQL-B v22.7.3, scenario=oltp_point_select; Python max/ratio",
+        "scenario": "oltp_point_select"
+      },
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3 在 oltp_read_only 的采样峰值 QPS 为 52,086.84（512 并发），32→峰值扩展 4.49x；1,000 并发比峰值下降 5.65%，P95 从峰值处 163.74 升至 330.30 ms。",
+        "source": "data/compare.json records: product=TDSQL-B v22.7.3, scenario=oltp_read_only; Python max/ratio",
+        "scenario": "oltp_read_only"
+      },
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3 在 oltp_read_write 的采样峰值 QPS 为 36,053.83（512 并发），32→峰值扩展 4.52x；1,000 并发比峰值下降 6.22%，P95 从峰值处 364.41 升至 732.19 ms。",
+        "source": "data/compare.json records: product=TDSQL-B v22.7.3, scenario=oltp_read_write; Python max/ratio",
+        "scenario": "oltp_read_write"
+      },
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3 在 oltp_write_only 的采样峰值 QPS 为 67,175.43（512 并发），32→峰值扩展 4.59x；1,000 并发比峰值下降 7.49%，P95 从峰值处 36.92 升至 73.08 ms。",
+        "source": "data/compare.json records: product=TDSQL-B v22.7.3, scenario=oltp_write_only; Python max/ratio",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "TDSQL-B v22.7.3 在 oltp_update_index 的采样峰值 QPS 为 14,746.99（512 并发），32→峰值扩展 4.51x；1,000 并发比峰值下降 5.30%，P95 从峰值处 50.85 升至 100.99 ms。",
+        "source": "data/compare.json records: product=TDSQL-B v22.7.3, scenario=oltp_update_index; Python max/ratio",
+        "scenario": "oltp_update_index"
+      }
+    ],
+    "MySQL 8.0.32": [
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32 在 oltp_point_select 的采样峰值 QPS 为 71,646.19（512 并发），32→峰值扩展 4.46x；1,000 并发比峰值下降 6.01%，P95 从峰值处 7.99 升至 15.89 ms。",
+        "source": "data/compare.json records: product=MySQL 8.0.32, scenario=oltp_point_select; Python max/ratio",
+        "scenario": "oltp_point_select"
+      },
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32 在 oltp_read_only 的采样峰值 QPS 为 41,167.67（512 并发），32→峰值扩展 4.51x；1,000 并发比峰值下降 4.63%，P95 从峰值处 166.22 升至 332.48 ms。",
+        "source": "data/compare.json records: product=MySQL 8.0.32, scenario=oltp_read_only; Python max/ratio",
+        "scenario": "oltp_read_only"
+      },
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32 在 oltp_read_write 的采样峰值 QPS 为 30,020.65（512 并发），32→峰值扩展 4.53x；1,000 并发比峰值下降 5.12%，P95 从峰值处 363.68 升至 731.16 ms。",
+        "source": "data/compare.json records: product=MySQL 8.0.32, scenario=oltp_read_write; Python max/ratio",
+        "scenario": "oltp_read_write"
+      },
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32 在 oltp_write_only 的采样峰值 QPS 为 52,251.17（512 并发），32→峰值扩展 4.51x；1,000 并发比峰值下降 5.43%，P95 从峰值处 36.16 升至 73.64 ms。",
+        "source": "data/compare.json records: product=MySQL 8.0.32, scenario=oltp_write_only; Python max/ratio",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "MySQL 8.0.32 在 oltp_update_index 的采样峰值 QPS 为 12,009.86（512 并发），32→峰值扩展 4.53x；1,000 并发比峰值下降 5.44%，P95 从峰值处 50.95 升至 103.42 ms。",
+        "source": "data/compare.json records: product=MySQL 8.0.32, scenario=oltp_update_index; Python max/ratio",
+        "scenario": "oltp_update_index"
+      }
+    ],
+    "OceanBase 4.2": [
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2 在 oltp_point_select 的采样峰值 QPS 为 79,641.75（512 并发），32→峰值扩展 4.59x；1,000 并发比峰值下降 6.00%，P95 从峰值处 7.84 升至 15.86 ms。",
+        "source": "data/compare.json records: product=OceanBase 4.2, scenario=oltp_point_select; Python max/ratio",
+        "scenario": "oltp_point_select"
+      },
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2 在 oltp_read_only 的采样峰值 QPS 为 46,372.94（512 并发），32→峰值扩展 4.52x；1,000 并发比峰值下降 5.98%，P95 从峰值处 164.39 升至 334.03 ms。",
+        "source": "data/compare.json records: product=OceanBase 4.2, scenario=oltp_read_only; Python max/ratio",
+        "scenario": "oltp_read_only"
+      },
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2 在 oltp_read_write 的采样峰值 QPS 为 33,315.16（512 并发），32→峰值扩展 4.60x；1,000 并发比峰值下降 6.29%，P95 从峰值处 359.37 升至 731.99 ms。",
+        "source": "data/compare.json records: product=OceanBase 4.2, scenario=oltp_read_write; Python max/ratio",
+        "scenario": "oltp_read_write"
+      },
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2 在 oltp_write_only 的采样峰值 QPS 为 60,428.22（512 并发），32→峰值扩展 4.59x；1,000 并发比峰值下降 6.62%，P95 从峰值处 36.55 升至 72.95 ms。",
+        "source": "data/compare.json records: product=OceanBase 4.2, scenario=oltp_write_only; Python max/ratio",
+        "scenario": "oltp_write_only"
+      },
+      {
+        "level": "L1",
+        "text": "OceanBase 4.2 在 oltp_update_index 的采样峰值 QPS 为 13,057.94（512 并发），32→峰值扩展 4.52x；1,000 并发比峰值下降 5.61%，P95 从峰值处 51.43 升至 100.69 ms。",
+        "source": "data/compare.json records: product=OceanBase 4.2, scenario=oltp_update_index; Python max/ratio",
+        "scenario": "oltp_update_index"
+      }
+    ]
+  },
+  "product_compare_insights": [
+    {
+      "level": "L1",
+      "text": "oltp_point_select：TDSQL-B v22.7.3 采样峰值 QPS 89,928.71，高于 OceanBase 4.2（79,641.75）12.92%，高于 MySQL 8.0.32（71,646.19）25.52%；三者峰值均位于 512 并发。仅为本次数据的条件性比较。",
+      "source": "data/compare.json records: scenario=oltp_point_select, threads=512; Python max/ratio",
+      "scenario": "oltp_point_select"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_read_only：TDSQL-B v22.7.3 采样峰值 QPS 52,086.84，高于 OceanBase 4.2（46,372.94）12.32%，高于 MySQL 8.0.32（41,167.67）26.52%；三者峰值均位于 512 并发。仅为本次数据的条件性比较。",
+      "source": "data/compare.json records: scenario=oltp_read_only, threads=512; Python max/ratio",
+      "scenario": "oltp_read_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_read_write：TDSQL-B v22.7.3 采样峰值 QPS 36,053.83，高于 OceanBase 4.2（33,315.16）8.22%，高于 MySQL 8.0.32（30,020.65）20.10%；三者峰值均位于 512 并发。仅为本次数据的条件性比较。",
+      "source": "data/compare.json records: scenario=oltp_read_write, threads=512; Python max/ratio",
+      "scenario": "oltp_read_write"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_write_only：TDSQL-B v22.7.3 采样峰值 QPS 67,175.43，高于 OceanBase 4.2（60,428.22）11.17%，高于 MySQL 8.0.32（52,251.17）28.56%；三者峰值均位于 512 并发。仅为本次数据的条件性比较。",
+      "source": "data/compare.json records: scenario=oltp_write_only, threads=512; Python max/ratio",
+      "scenario": "oltp_write_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index：TDSQL-B v22.7.3 采样峰值 QPS 14,746.99，高于 OceanBase 4.2（13,057.94）12.94%，高于 MySQL 8.0.32（12,009.86）22.79%；三者峰值均位于 512 并发。仅为本次数据的条件性比较。",
+      "source": "data/compare.json records: scenario=oltp_update_index, threads=512; Python max/ratio",
+      "scenario": "oltp_update_index"
+    }
+  ],
+  "selection_insights": []
+}

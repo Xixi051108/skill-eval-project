@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "A": "所需中间文件、方案、三格式及3图完整，大小达标，Todo全完成",
+  "B": "3×2×2=12；每产品一表；全部12记录及36项指标与原文一致；三指标无空值；并发完整",
+  "C": "中文标题；主图、档位对照、尾延迟验证图齐全；check_text_overlap均为空；其他场景不适用",
+  "D": "3条摘要含主要发现与不确定性；洞察均含level/source；无L3；元数据公平性一致，未披露条件已说明；D5按用户指定完整两档执行",
+  "E": "章节标题层级、表格、相对图片路径正确；Word全部正文run字体及各表头颜色检查通过，嵌图3；HTML head/CSS/TOC/字体fallback完整",
+  "F": "无占位符；md/html/docx全部36项原始指标一致",
+  "input_unchanged": true,
+  "skill_source_modified": false,
+  "chart_text_overlaps": {
+    "qps": [],
+    "p95_ms": [],
+    "p99_ms": []
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "status": "FAIL",
+  "score": 33.33,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": false,
+      "actual": "未生成标准提取文件",
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "PENDING: 解释、来源支持、限制和过程另行复核",
+  "id": "D01",
+  "model": "gpt-6-luna",
+  "suite": "db",
+  "run": "D01-gpt-6-luna",
+  "seconds": 115.453,
+  "usage": {
+    "input_tokens": 418873,
+    "cached_input_tokens": 340224,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5998,
+    "reasoning_output_tokens": 1660
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "edc66b1eadddf0731d23f239a6bbb0252e6357a59d878086235b9d0338915f70",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true
+}

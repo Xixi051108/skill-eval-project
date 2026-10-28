@@ -1,0 +1,7 @@
+已生成 custom 专项报告，完整列出指定范围内的 12 条记录及 QPS、P95、P99，并核对全部 36 个指标值。
+
+- [Markdown 报告](artifacts/report.md)
+- [Word 报告](artifacts/report.docx)
+- [HTML 报告](artifacts/report.html)
+
+主要建议：吞吐优先考虑 TDSQL-B；尾延迟优先需按场景选择。三产品在两个场景从 512 增至 1000 并发时，均出现 QPS 下降、P95/P99 上升。报告已说明具体差异及单次测试的不确定性。

@@ -1,0 +1,21 @@
+{
+  "method": "independent_original_D04_scope",
+  "expected_scenarios": [
+    "oltp_write_only",
+    "oltp_update_index"
+  ],
+  "expected_threads": [
+    512,
+    1000
+  ],
+  "expected_rows": 12,
+  "actual_rows": 12,
+  "extracted_matches": true,
+  "custom_buckets_match": true,
+  "sha256": {
+    "答卷\\data\\compare.json": "4640ff7f9fa4fc1cf7c9e964798fa1fa337fc2b96782f16ff0f06c9fd58bc514",
+    "补测\\out\\db-r2\\D04-gpt-6.1-sol\\work\\artifacts\\data\\extracted_data.json": "7c9c20a85d2f4d4c332a6fb78d87669a0b869094c0a133d5818142a43cbbcb51",
+    "补测\\out\\db-r2\\D04-gpt-6.1-sol\\work\\artifacts\\data\\analysis_results.json": "3ae2f2af01f4ad81262b732ef8d146de120c1aebdd880537cc83d744e9eb47b6"
+  },
+  "note": "按冻结D04原用户范围过滤原始输入，以rows_equal独立比较产品/场景/并发与四指标；不覆盖原自动FAIL。"
+}

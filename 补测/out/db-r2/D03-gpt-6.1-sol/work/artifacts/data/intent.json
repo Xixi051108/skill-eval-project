@@ -1,0 +1,35 @@
+{
+  "data_source_type": "local_file",
+  "data_source_value": "data/iter.json",
+  "report_type": "iteration",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "tool_name": null,
+    "tool_version_keywords": [],
+    "component_name": null,
+    "component_version": null
+  },
+  "results_key_filters": {
+    "threads": null,
+    "tables": null,
+    "table_size": null,
+    "time": null,
+    "warehouses": null
+  },
+  "task_filters": {
+    "task_id": null,
+    "plan_id": null,
+    "report_id": null
+  },
+  "iteration_config": {
+    "version_range": [
+      "TDSQL-B v22.6",
+      "TDSQL-B v22.7",
+      "TDSQL-B v22.8",
+      "TDSQL-B v22.9"
+    ],
+    "regression_threshold_pct": 5
+  },
+  "custom_config": null,
+  "other_info": "按来源 meta.products 顺序计算相邻版本变化；下降严格超过 5% 为回退。固定当前时间 2026-06-19T16:00:00+08:00。"
+}

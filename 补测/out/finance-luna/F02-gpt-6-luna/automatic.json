@@ -1,0 +1,323 @@
+{
+  "status": "FAIL",
+  "score": 76.47,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "核查主需断言正确",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "contradicted",
+      "expected": "contradicted",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "候选评分或不评分符合用户请求",
+      "dimension": "R4",
+      "passed": true,
+      "actual": 0,
+      "expected": 0,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "westock-data实际调用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "mx-finance-search",
+        "westock-data"
+      ],
+      "expected": "westock-data",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "westock-data取得成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "mx-finance-search实际调用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "mx-finance-search",
+        "westock-data"
+      ],
+      "expected": "mx-finance-search",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "mx-finance-search取得成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "facts为对象列表",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实名称不重复",
+      "dimension": "R5",
+      "passed": false,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 revenue_yi",
+      "dimension": "R3",
+      "passed": false,
+      "actual": 7129.9,
+      "expected": 6602.57,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "revenue_yi引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-001",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 revenue_yoy_pct",
+      "dimension": "R3",
+      "passed": false,
+      "actual": 6.09,
+      "expected": 8,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "revenue_yoy_pct引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-001",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 currency",
+      "dimension": "R3",
+      "passed": false,
+      "actual": "HKD",
+      "expected": "CNY",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "currency引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-001",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 report_period",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "2024-12-31",
+      "expected": "2024-12-31",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "report_period引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-001",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yi",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yoy_pct",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 currency",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 report_period",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yi",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 currency",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 report_period",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yoy_pct",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "有面向用户的解释",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 0.25,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 0.6666666666666666,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "evidence_support_review": "原始回执未自动解释成真值；逐项引用支持、冲突处理及口径需LLM复核。",
+  "semantic_review": "PENDING: 解释、来源支持、限制和过程另行复核",
+  "id": "F02",
+  "model": "gpt-6-luna",
+  "suite": "finance",
+  "run": "F02-gpt-6-luna",
+  "seconds": 67.688,
+  "usage": {
+    "input_tokens": 215350,
+    "cached_input_tokens": 167936,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1748,
+    "reasoning_output_tokens": 696
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "2450a2815a0fe2d08d22f3d43b69e6068690a12cecd7012e5b1c01ee226eb387",
+  "final_response": true,
+  "tool_calls": 3,
+  "skill_read_observed": true
+}

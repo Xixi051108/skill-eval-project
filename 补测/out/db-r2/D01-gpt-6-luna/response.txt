@@ -1,0 +1,9 @@
+已生成 single 性能报告，文件位于 `artifacts/single/`：
+
+- [Markdown 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D01-gpt-6-luna/work/artifacts/single/report.md>)
+- [Word 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D01-gpt-6-luna/work/artifacts/single/report.docx>)
+- [HTML 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D01-gpt-6-luna/work/artifacts/single/report.html>)
+
+报告保留了源日志中的产品 `TDSQL-B-v22.7.2`、300 秒测试时长，以及全部 30 条记录的 TPS、QPS、P95、P99 指标；包含 11 张图表，报告日期按任务指定为 2026-06-19。相关中间数据和交付材料也已写入 `artifacts/single/data/` 与 `artifacts/single/docs/`。
+
+核查确认三种报告均存在，Markdown、HTML 大小达标，Word 包含 11 张嵌入图表；四项性能指标均无空值。源日志和 Skill 源码未修改。

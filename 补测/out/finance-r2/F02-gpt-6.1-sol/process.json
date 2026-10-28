@@ -1,0 +1,49 @@
+{
+  "command_count": 10,
+  "observations": [
+    {
+      "step": "read_skill",
+      "command_index": 0,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'skill/SKILL.md'\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 1,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"rg --files -g '*.md' -g 'tool.py'\""
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 4,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"Get-Content -LiteralPath 'dependencies/westock-data/references/routing-guide.md'; Select-String -Path 'dependencies/westock-data/references/commands.md','dependencies/westock-data/references/ai_usage_guide.md' -Pattern 'finance|财报|财务' -Context 3,20\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 5,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py westock-data finance hk00700 --num 8\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 6,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py mx-finance-search search '腾讯控股 00700 2024年度业绩公告 2025年3月19日 全年 收入 人民币 660257百万元 同比 2023 609015 截至2024年12月31日 请提供腾讯官方公告来源及发布日期，仅使用2026年6月19日之前资料'\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 7,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py mx-finance-search search '腾讯 2024年全年业绩 营业收入 同比 2025年3月19日 2024年报'\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 8,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py mx-finance-search search '腾讯公布二零二四年第四季及全年业绩 2025 660257 609015 site:tencent.com'\""
+    },
+    {
+      "step": "finance_tool_request",
+      "command_index": 9,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command \"& 'C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\python\\\\python.exe' tool.py mx-finance-search search '腾讯 2024 营收6602.57亿元 同比8.41%'\""
+    }
+  ],
+  "skill_bytes_unchanged": true,
+  "input_bytes_unchanged": true,
+  "skill_read_observed": true,
+  "note": "命令匹配是可观察线索，动态读取与阶段顺序另行复核；不宣称强物理隔离。"
+}

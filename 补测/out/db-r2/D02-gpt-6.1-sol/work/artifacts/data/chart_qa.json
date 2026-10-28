@@ -1,0 +1,102 @@
+[
+  {
+    "file": "peak_oltp_point_select.png",
+    "title": "点查场景：采样峰值对比",
+    "overlaps": []
+  },
+  {
+    "file": "qps_oltp_point_select.png",
+    "title": "点查场景：并发与QPS对比",
+    "overlaps": []
+  },
+  {
+    "file": "p95_oltp_point_select.png",
+    "title": "点查场景：并发与P95 (ms)对比",
+    "overlaps": []
+  },
+  {
+    "file": "peak_oltp_read_only.png",
+    "title": "只读场景：采样峰值对比",
+    "overlaps": []
+  },
+  {
+    "file": "qps_oltp_read_only.png",
+    "title": "只读场景：并发与QPS对比",
+    "overlaps": []
+  },
+  {
+    "file": "p95_oltp_read_only.png",
+    "title": "只读场景：并发与P95 (ms)对比",
+    "overlaps": []
+  },
+  {
+    "file": "peak_oltp_read_write.png",
+    "title": "混合读写场景：采样峰值对比",
+    "overlaps": []
+  },
+  {
+    "file": "qps_oltp_read_write.png",
+    "title": "混合读写场景：并发与QPS对比",
+    "overlaps": []
+  },
+  {
+    "file": "p95_oltp_read_write.png",
+    "title": "混合读写场景：并发与P95 (ms)对比",
+    "overlaps": []
+  },
+  {
+    "file": "peak_oltp_write_only.png",
+    "title": "写入场景：采样峰值对比",
+    "overlaps": []
+  },
+  {
+    "file": "qps_oltp_write_only.png",
+    "title": "写入场景：并发与QPS对比",
+    "overlaps": []
+  },
+  {
+    "file": "p95_oltp_write_only.png",
+    "title": "写入场景：并发与P95 (ms)对比",
+    "overlaps": []
+  },
+  {
+    "file": "peak_oltp_update_index.png",
+    "title": "索引更新场景：采样峰值对比",
+    "overlaps": []
+  },
+  {
+    "file": "qps_oltp_update_index.png",
+    "title": "索引更新场景：并发与QPS对比",
+    "overlaps": []
+  },
+  {
+    "file": "p95_oltp_update_index.png",
+    "title": "索引更新场景：并发与P95 (ms)对比",
+    "overlaps": []
+  },
+  {
+    "file": "product_1.png",
+    "title": "TDSQL-B v22.7.3：各场景独立扩展曲线",
+    "overlaps": []
+  },
+  {
+    "file": "product_2.png",
+    "title": "MySQL 8.0.32：各场景独立扩展曲线",
+    "overlaps": []
+  },
+  {
+    "file": "product_3.png",
+    "title": "OceanBase 4.2：各场景独立扩展曲线",
+    "overlaps": []
+  },
+  {
+    "file": "radar.png",
+    "title": "场景内峰值归一化雷达图",
+    "overlaps": []
+  },
+  {
+    "file": "ladder.png",
+    "title": "五场景独立天梯图",
+    "overlaps": []
+  }
+]

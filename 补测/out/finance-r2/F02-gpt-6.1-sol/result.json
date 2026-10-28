@@ -1,0 +1,312 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "核查主需断言正确",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "contradicted",
+      "expected": "contradicted",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "候选评分或不评分符合用户请求",
+      "dimension": "R4",
+      "passed": true,
+      "actual": 0,
+      "expected": 0,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "westock-data实际调用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "mx-finance-search",
+        "westock-data"
+      ],
+      "expected": "westock-data",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "westock-data取得成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "mx-finance-search实际调用",
+      "dimension": "R2",
+      "passed": true,
+      "actual": [
+        "mx-finance-search",
+        "westock-data"
+      ],
+      "expected": "mx-finance-search",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "mx-finance-search取得成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "facts为对象列表",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实名称不重复",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 revenue_yi",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 6602.57,
+      "expected": 6602.57,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "revenue_yi引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-005",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003",
+        "LIVE-004",
+        "LIVE-005"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 revenue_yoy_pct",
+      "dimension": "R3",
+      "passed": true,
+      "actual": 8.41,
+      "expected": 8,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "revenue_yoy_pct引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-005",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003",
+        "LIVE-004",
+        "LIVE-005"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 currency",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "CNY",
+      "expected": "CNY",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "currency引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-003",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003",
+        "LIVE-004",
+        "LIVE-005"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "独立官方真值 report_period",
+      "dimension": "R3",
+      "passed": true,
+      "actual": "2024-12-31",
+      "expected": "2024-12-31",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "report_period引用本次成功回执",
+      "dimension": "R2",
+      "passed": true,
+      "actual": "LIVE-001",
+      "expected": [
+        "LIVE-001",
+        "LIVE-002",
+        "LIVE-003",
+        "LIVE-004",
+        "LIVE-005"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yi",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 revenue_yoy_pct",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 currency",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "事实引用实际回执 report_period",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "有面向用户的解释",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "语义复核通过",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "LIVE-005中NW202504093370482893_1中国证券报·中证网2025-04-09报道明确给出6602.57亿元、同比8.41%；LIVE-003中NW202504103373439323_1界面新闻2025-04-10报道明确人民币6603亿元、同比8%。LIVE-001报告期2024-12-31、港元金额及6.09%同比与正文披露一致；回答未擅自把差异解释为已证实的换算原因。用户13000亿元、25%的两个主断言被正确否定并评0分；独立真值及补测容差允许8.41%与公告整数8%的差异。五次调用成功，来源日期在固定锚点之前；明确未取得原公告，不把媒体报道当独立官方全文。LLM复核通过，非人工评审。",
+      "expected": "论证、边界与来源一致",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "evidence_support_review": "原始回执未自动解释成真值；逐项引用支持、冲突处理及口径需LLM复核。",
+  "semantic_review": "COMPLETE: LLM",
+  "id": "F02",
+  "model": "gpt-6.1-sol",
+  "suite": "finance",
+  "run": "F02-gpt-6.1-sol",
+  "seconds": 110.235,
+  "usage": {
+    "input_tokens": 461988,
+    "cached_input_tokens": 367360,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 1475,
+    "reasoning_output_tokens": 128
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "2450a2815a0fe2d08d22f3d43b69e6068690a12cecd7012e5b1c01ee226eb387",
+  "final_response": true,
+  "tool_calls": 5,
+  "skill_read_observed": true,
+  "review": {
+    "run": "F02-gpt-6.1-sol",
+    "response_sha256": "f7e8c34aff1d5cd1c0702c8e14a85f43b0a44a013ca8d60d37b6b7bc09ee63c7",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "LIVE-005中NW202504093370482893_1中国证券报·中证网2025-04-09报道明确给出6602.57亿元、同比8.41%；LIVE-003中NW202504103373439323_1界面新闻2025-04-10报道明确人民币6603亿元、同比8%。LIVE-001报告期2024-12-31、港元金额及6.09%同比与正文披露一致；回答未擅自把差异解释为已证实的换算原因。用户13000亿元、25%的两个主断言被正确否定并评0分；独立真值及补测容差允许8.41%与公告整数8%的差异。五次调用成功，来源日期在固定锚点之前；明确未取得原公告，不把媒体报道当独立官方全文。LLM复核通过，非人工评审。"
+  }
+}

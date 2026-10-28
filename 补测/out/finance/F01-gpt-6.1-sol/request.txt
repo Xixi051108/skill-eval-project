@@ -1,0 +1,10 @@
+执行真实金融 Skill 用户任务。先读取 skill/SKILL.md。当前工作区是本次任务唯一工作区，不读取父目录、裁判、密钥或环境变量，不修改 Skill 或附件，不创建子 Agent。
+任务的固定日期锚点：2026-06-19T16:00:00+08:00。本轮实际联网，不提供合成行情。
+已配置真实金融工具，密钥只由宿主提供给原工具子进程。读取 dependencies/ 下对应工具 Skill 与所需 references。
+逻辑命令 westock-data 对应：python tool.py westock-data COMMAND ARGUMENTS；支持只读 finance/quote/kline/search/help，finance 可用 hk00700 --num 8。资讯对应：python tool.py mx-finance-search search 查询文本。工具返回 LIVE-xxx 证据ID与原始正文，不能把原始接口返回自动当独立事实，必须校验时间、市场、币种和报告期。
+只能通过上述入口调用外部金融工具，不直接访问网络或其他金融服务。每任务最多8次真实工具调用。失败回执不得假装成功；无法核实时保留未知并说明原因。
+最终 JSON 字段：action(verify/answer/clarify/insufficient/blocked/refuse)、label(supported/contradicted/insufficient_evidence)、score(0/1/2或null)、facts([{name,value,evidence_id}])、secondary_label(字符串或null)、conflict(布尔)、missing(字符串列表)、answer(面向用户的结论、明细、口径风险和修正答案)。财报事实统一命名 revenue_yi(亿元)、revenue_yoy_pct(同比百分比)、currency(如CNY)、report_period(日期)。每个事实引用实际回执 LIVE-xxx，核对来源矛盾，不能声称未完成的交叉验证。
+Python运行时：C:\Users\43521\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe
+用户请求：
+请核查：腾讯控股 hk00700 2024 年全年营收约 6600 亿元人民币，同比增长约 8%。只核查这两个断言。
+执行预算内完成任务并给出最终用户答复。遵守原Skill及references，不修改原Skill源码；无法满足任务或强制交付时明确列出失败与已有产物，不伪称完成。测试只评估当前任务，不要求修改评估标准或修复原Skill。

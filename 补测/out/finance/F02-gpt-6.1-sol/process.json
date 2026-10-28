@@ -1,0 +1,34 @@
+{
+  "command_count": 9,
+  "observations": [
+    {
+      "step": "read_skill",
+      "command_index": 0,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath skill/SKILL.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 4,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath dependencies/westock-data/references/routing-guide.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 5,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath dependencies/westock-data/references/commands.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 6,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath dependencies/westock-data/references/ai_usage_guide.md'"
+    },
+    {
+      "step": "read_reference_candidate",
+      "command_index": 7,
+      "command": "\"C:\\\\Users\\\\43521\\\\.cache\\\\codex-runtimes\\\\codex-primary-runtime\\\\dependencies\\\\native\\\\powershell\\\\pwsh.exe\" -Command 'Get-Content -LiteralPath dependencies/westock-data/references/routing-guide.md'"
+    }
+  ],
+  "skill_bytes_unchanged": true,
+  "input_bytes_unchanged": true,
+  "skill_read_observed": true,
+  "note": "命令匹配是可观察线索，动态读取与阶段顺序另行复核；不宣称强物理隔离。"
+}

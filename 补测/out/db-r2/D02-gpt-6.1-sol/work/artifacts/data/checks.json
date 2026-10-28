@@ -1,0 +1,290 @@
+[
+  {
+    "id": "A1",
+    "description": "data/intent.json",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A2",
+    "description": "data/extracted_data.json",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A4",
+    "description": "data/analysis_results.json",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A5",
+    "description": "data/insights.json",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A3",
+    "description": "内容映射",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A6",
+    "description": "comparison图表不少于17+3",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A7",
+    "description": "分析方案",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A9",
+    "description": "report.md",
+    "passed": true,
+    "detail": "34655"
+  },
+  {
+    "id": "A10",
+    "description": "report.docx",
+    "passed": true,
+    "detail": "1529330"
+  },
+  {
+    "id": "A11",
+    "description": "report.html",
+    "passed": true,
+    "detail": "45758"
+  },
+  {
+    "id": "B1",
+    "description": "三个意图产品一致",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "B2",
+    "description": "90条且组合唯一",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "B3",
+    "description": "每产品一表，30条",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "B4",
+    "description": "全90条输入一致及正文数值一致",
+    "passed": true,
+    "detail": "超过6条抽检要求"
+  },
+  {
+    "id": "B5",
+    "description": "必需指标无空值",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "B6",
+    "description": "每产品场景六档完整",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "B7",
+    "description": "实际数据源标记完整",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C1-C3",
+    "description": "五场景峰值/QPS/P95图",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C4",
+    "description": "雷达图场景内归一化",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C5",
+    "description": "五场景独立天梯",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C6",
+    "description": "三产品扩展曲线",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C7",
+    "description": "图表含中文标题",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "C8",
+    "description": "check_text_overlap全部返回空",
+    "passed": true,
+    "detail": "20图Matplotlib实际渲染后文字边界框两两检查"
+  },
+  {
+    "id": "D1",
+    "description": "全部洞察含level",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D2",
+    "description": "全部洞察含source",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D3a",
+    "description": "L3仅selection",
+    "passed": true,
+    "detail": "未生成任何推测性L3洞察"
+  },
+  {
+    "id": "D3b",
+    "description": "正文无越界L3",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D4",
+    "description": "数据集一致",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D5",
+    "description": "并发档全部使用",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D6",
+    "description": "第1章核心结论4至7条",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D7",
+    "description": "第4章五场景独立",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "D8",
+    "description": "STRONG警告正文显著标注",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E1.1",
+    "description": "章/节/小节标题层级",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E1.2",
+    "description": "表格结构",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E1.3",
+    "description": "Markdown图相对路径",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E2.1",
+    "description": "Word全部文本显式微软雅黑",
+    "passed": true,
+    "detail": "1265处文本run"
+  },
+  {
+    "id": "E2.2",
+    "description": "全部Word表头浅蓝",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E2.3",
+    "description": "图片20张且嵌入完整",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E3.1",
+    "description": "HTML完整head与内联CSS",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E3.2",
+    "description": "HTML中文字体回退",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "E3.3",
+    "description": "HTML图片相对路径且存在",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "F1",
+    "description": "无未替换占位符",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "F2",
+    "description": "建议使用实测并发数",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "F3",
+    "description": "三格式15个场景峰值数字一致",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "额外1",
+    "description": "Skill和输入哈希全部不变",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "额外2",
+    "description": "Skill及输入目录未新增文件",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "额外3",
+    "description": "日期使用固定锚点",
+    "passed": true,
+    "detail": ""
+  },
+  {
+    "id": "A8",
+    "description": "Todo全完成",
+    "passed": true,
+    "detail": ""
+  }
+]

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库性能对比报告</title>
+
+<style>
+  body { font-family: 'Microsoft YaHei', 'PingFang SC', 'Heiti TC', 'Hiragino Sans GB', Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 20px; color: #333; }
+  h1 { text-align: center; font-size: 2em; margin-bottom: 4px; }
+  h1 + p { text-align: center; color: #666; font-size: 1.1em; }
+  h2 { border-bottom: 2px solid #1f77b4; padding-bottom: 6px; margin-top: 32px; }
+  h3 { margin-top: 24px; color: #1f77b4; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th { background: #D9E2F3; padding: 8px 12px; text-align: left; border: 1px solid #bbb; }
+  td { padding: 6px 12px; border: 1px solid #ddd; }
+  tr:nth-child(even) td { background: #f9f9f9; }
+  .cover { text-align: center; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 24px; }
+  .cover .meta { color: #888; margin-top: 8px; }
+  .toc { background: #f5f5f5; padding: 16px 24px; border-radius: 6px; margin: 16px 0; }
+  .toc ul { list-style: none; padding-left: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: #1f77b4; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+  .caption { text-align: center; color: #666; font-size: 0.9em; margin-bottom: 16px; }
+  .insight { padding: 10px 16px; margin: 8px 0; border-left: 4px solid #1f77b4; background: #f0f5ff; }
+  .insight.L1 { border-left-color: #2ca02c; background: #f0fff0; }
+  .insight.L2 { border-left-color: #ff7f0e; background: #fff8f0; }
+  .insight.L3 { border-left-color: #9467bd; background: #f8f0ff; }
+  .insight .level { font-weight: bold; margin-right: 8px; }
+  ul.bullet { padding-left: 20px; }
+  ul.bullet li { margin: 4px 0; }
+</style>
+
+</head>
+<body>
+
+<div class="cover">
+  <h1>数据库性能对比报告</h1>
+  <p>TDSQL-B v22.7.3 vs MySQL 8.0.32 vs OceanBase 4.2</p>
+  <p class="meta">日期：2026-06-19 &nbsp;|&nbsp; 版本：v1.0</p>
+</div>
+
+<div class="toc">
+  <h3>目录</h3>
+  <ul>
+    <li><a href="#ch1">第 1 章 测试结论</a></li><li><a href="#ch2">第 2 章 环境与公平性</a></li><li><a href="#ch3">第 3 章 全量性能数据</a></li><li><a href="#ch4">第 4 章 按场景横向对比</a></li><li><a href="#ch5">第 5 章 选型建议与边界</a></li><li><a href="#ch6">第 6 章 附录</a></li>
+  </ul>
+</div>
+
+<div class="section"><h2 id="ch1">第 1 章 测试结论</h2>
+<p>本报告对比 3 个产品、5 个场景及 90 条记录。数据集配置、测试时长、场景和并发档对齐；公平性存在 STRONG 限制，结论仅为描述性比较。</p>
+<table><thead><tr><th>场景</th><th>第一名</th><th>峰值QPS</th><th>峰值并发</th><th>第二名</th><th>第二名QPS</th><th>第三名</th></tr></thead><tbody><tr><td>点查</td><td>TDSQL-B v22.7.3</td><td>89,929</td><td>512</td><td>OceanBase 4.2</td><td>79,642</td><td>MySQL 8.0.32</td></tr><tr><td>只读</td><td>TDSQL-B v22.7.3</td><td>52,087</td><td>512</td><td>OceanBase 4.2</td><td>46,373</td><td>MySQL 8.0.32</td></tr><tr><td>读写</td><td>TDSQL-B v22.7.3</td><td>36,054</td><td>512</td><td>OceanBase 4.2</td><td>33,315</td><td>MySQL 8.0.32</td></tr><tr><td>写入</td><td>TDSQL-B v22.7.3</td><td>67,175</td><td>512</td><td>OceanBase 4.2</td><td>60,428</td><td>MySQL 8.0.32</td></tr><tr><td>更新索引</td><td>TDSQL-B v22.7.3</td><td>14,747</td><td>512</td><td>OceanBase 4.2</td><td>13,058</td><td>MySQL 8.0.32</td></tr></tbody></table>
+<div class="insight L1"><span class="level">[L1]</span>点查峰值QPS排序：TDSQL-B v22.7.3 > OceanBase 4.2 > MySQL 8.0.32；第一名较第二名高12.9%。</div>
+<div class="insight L1"><span class="level">[L1]</span>只读峰值QPS排序：TDSQL-B v22.7.3 > OceanBase 4.2 > MySQL 8.0.32；第一名较第二名高12.3%。</div>
+<div class="insight L1"><span class="level">[L1]</span>读写峰值QPS排序：TDSQL-B v22.7.3 > OceanBase 4.2 > MySQL 8.0.32；第一名较第二名高8.2%。</div>
+<div class="insight L1"><span class="level">[L1]</span>写入峰值QPS排序：TDSQL-B v22.7.3 > OceanBase 4.2 > MySQL 8.0.32；第一名较第二名高11.2%。</div>
+<div class="insight L1"><span class="level">[L1]</span>更新索引峰值QPS排序：TDSQL-B v22.7.3 > OceanBase 4.2 > MySQL 8.0.32；第一名较第二名高12.9%。</div></div><div class="section"><h2 id="ch2">第 2 章 环境与公平性</h2>
+<h3 id="ch2a">2.1 测试批次与数据集</h3>
+<table><thead><tr><th>产品</th><th>引擎</th><th>开始时间</th><th>时长秒</th><th>数据配置</th><th>任务ID</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>sysbench</td><td>2026-06-11 09:30:00</td><td>300</td><td>tables=16, table_size=1000000</td><td>aa112233_tdsql_intel_x86</td></tr><tr><td>MySQL 8.0.32</td><td>sysbench</td><td>2026-06-11 13:30:00</td><td>300</td><td>tables=16, table_size=1000000</td><td>bb445566_mysql_intel_x86</td></tr><tr><td>OceanBase 4.2</td><td>sysbench</td><td>2026-06-11 17:30:00</td><td>300</td><td>tables=16, table_size=1000000</td><td>cc778899_ob_intel_x86</td></tr></tbody></table>
+<p>三产品均为 tables=16、table_size=1,000,000，运行 300 秒；覆盖同五场景及 32、64、128、256、512、1000 并发。</p>
+<h3 id="ch2b">2.2 硬件与公平性限制</h3>
+<table><thead><tr><th>环境项</th><th>声明</th></tr></thead><tbody><tr><td>CPU</td><td>Intel(R) Xeon(R) Gold 6133 @ 2.50GHz, 64 cores</td></tr><tr><td>Memory</td><td>256GB DDR4</td></tr><tr><td>Disk</td><td>NVMe SSD 3.84TB</td></tr><tr><td>Network</td><td>25Gbps</td></tr><tr><td>OS</td><td>TencentOS Server 3.1</td></tr><tr><td>sysbench_version</td><td>1.0.20</td></tr></tbody></table>
+<p>公平性限制（STRONG）：测试分别在 09:30、13:30、17:30 开始，且 task_id 不同，非同步同批次交叉测试；元数据仅有共享硬件声明，未提供逐产品主机及资源分配核验；未提供逐产品数据库配置和资源配额，无法确认除产品外变量完全相同；每个产品只有一轮结果，缺少重复运行、预热和波动范围</p>
+<ul class="bullet"><li>测试分别在 09:30、13:30、17:30 开始，且 task_id 不同，非同步同批次交叉测试</li><li>元数据仅有共享硬件声明，未提供逐产品主机及资源分配核验</li><li>未提供逐产品数据库配置和资源配额，无法确认除产品外变量完全相同</li><li>每个产品只有一轮结果，缺少重复运行、预热和波动范围</li></ul>
+<h3 id="ch2c">2.3 数据质量</h3>
+<p>来源 test-resource/mock_records_aggregation.json；90 条记录，TPS/QPS/P95/P99 均有值。输入为汇总数据，不含原始 sysbench 日志。</p></div><div class="section"><h2 id="ch3">第 3 章 全量性能数据</h2>
+<h3 id="ch31">3.1 TDSQL-B v22.7.3</h3>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 ms</th><th>P99 ms</th></tr></thead><tbody><tr><td>点查</td><td>32</td><td>19,494.95</td><td>19,494.95</td><td>1.14</td><td>1.64</td></tr><tr><td>点查</td><td>64</td><td>34,925.66</td><td>34,925.66</td><td>1.39</td><td>2.00</td></tr><tr><td>点查</td><td>128</td><td>63,461.25</td><td>63,461.25</td><td>2.52</td><td>3.58</td></tr><tr><td>点查</td><td>256</td><td>82,178.62</td><td>82,178.62</td><td>4.25</td><td>6.10</td></tr><tr><td>点查</td><td>512</td><td>89,928.71</td><td>89,928.71</td><td>7.95</td><td>11.41</td></tr><tr><td>点查</td><td>1000</td><td>84,599.90</td><td>84,599.90</td><td>15.62</td><td>21.71</td></tr><tr><td>只读</td><td>32</td><td>828.61</td><td>11,600.60</td><td>24.28</td><td>32.80</td></tr><tr><td>只读</td><td>64</td><td>1,458.11</td><td>20,413.59</td><td>29.61</td><td>42.40</td></tr><tr><td>只读</td><td>128</td><td>2,676.63</td><td>37,472.87</td><td>54.35</td><td>76.63</td></tr><tr><td>只读</td><td>256</td><td>3,515.52</td><td>49,217.26</td><td>88.54</td><td>123.43</td></tr><tr><td>只读</td><td>512</td><td>3,720.49</td><td>52,086.84</td><td>163.74</td><td>236.25</td></tr><tr><td>只读</td><td>1000</td><td>3,510.42</td><td>49,145.88</td><td>330.30</td><td>460.76</td></tr><tr><td>读写</td><td>32</td><td>398.73</td><td>7,974.60</td><td>52.26</td><td>74.48</td></tr><tr><td>读写</td><td>64</td><td>717.34</td><td>14,346.84</td><td>64.15</td><td>92.98</td></tr><tr><td>读写</td><td>128</td><td>1,291.52</td><td>25,830.30</td><td>114.76</td><td>155.59</td></tr><tr><td>读写</td><td>256</td><td>1,684.73</td><td>33,694.61</td><td>187.47</td><td>260.10</td></tr><tr><td>读写</td><td>512</td><td>1,802.69</td><td>36,053.83</td><td>364.41</td><td>523.22</td></tr><tr><td>读写</td><td>1000</td><td>1,690.58</td><td>33,811.66</td><td>732.19</td><td>999.62</td></tr><tr><td>写入</td><td>32</td><td>4,873.50</td><td>14,620.51</td><td>5.34</td><td>7.70</td></tr><tr><td>写入</td><td>64</td><td>8,617.85</td><td>25,853.55</td><td>6.46</td><td>9.31</td></tr><tr><td>写入</td><td>128</td><td>15,818.31</td><td>47,454.94</td><td>11.78</td><td>16.72</td></tr><tr><td>写入</td><td>256</td><td>20,790.68</td><td>62,372.04</td><td>19.54</td><td>28.18</td></tr><tr><td>写入</td><td>512</td><td>22,391.81</td><td>67,175.43</td><td>36.92</td><td>51.88</td></tr><tr><td>写入</td><td>1000</td><td>20,713.72</td><td>62,141.15</td><td>73.08</td><td>102.59</td></tr><tr><td>更新索引</td><td>32</td><td>3,273.38</td><td>3,273.38</td><td>7.25</td><td>10.05</td></tr><tr><td>更新索引</td><td>64</td><td>5,830.92</td><td>5,830.92</td><td>8.94</td><td>12.70</td></tr><tr><td>更新索引</td><td>128</td><td>10,598.84</td><td>10,598.84</td><td>16.25</td><td>22.76</td></tr><tr><td>更新索引</td><td>256</td><td>13,567.85</td><td>13,567.85</td><td>27.60</td><td>37.76</td></tr><tr><td>更新索引</td><td>512</td><td>14,746.99</td><td>14,746.99</td><td>50.85</td><td>71.63</td></tr><tr><td>更新索引</td><td>1000</td><td>13,965.57</td><td>13,965.57</td><td>100.99</td><td>137.41</td></tr></tbody></table>
+<h3 id="ch32">3.2 MySQL 8.0.32</h3>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 ms</th><th>P99 ms</th></tr></thead><tbody><tr><td>点查</td><td>32</td><td>16,074.87</td><td>16,074.87</td><td>1.16</td><td>1.64</td></tr><tr><td>点查</td><td>64</td><td>28,323.44</td><td>28,323.44</td><td>1.39</td><td>1.92</td></tr><tr><td>点查</td><td>128</td><td>51,088.25</td><td>51,088.25</td><td>2.54</td><td>3.59</td></tr><tr><td>点查</td><td>256</td><td>66,856.78</td><td>66,856.78</td><td>4.26</td><td>5.85</td></tr><tr><td>点查</td><td>512</td><td>71,646.19</td><td>71,646.19</td><td>7.99</td><td>11.33</td></tr><tr><td>点查</td><td>1000</td><td>67,337.58</td><td>67,337.58</td><td>15.89</td><td>22.27</td></tr><tr><td>只读</td><td>32</td><td>651.85</td><td>9,125.96</td><td>24.03</td><td>32.93</td></tr><tr><td>只读</td><td>64</td><td>1,177.93</td><td>16,491.00</td><td>29.61</td><td>40.50</td></tr><tr><td>只读</td><td>128</td><td>2,099.20</td><td>29,388.81</td><td>54.17</td><td>73.19</td></tr><tr><td>只读</td><td>256</td><td>2,761.20</td><td>38,656.85</td><td>86.59</td><td>122.84</td></tr><tr><td>只读</td><td>512</td><td>2,940.55</td><td>41,167.67</td><td>166.22</td><td>227.19</td></tr><tr><td>只读</td><td>1000</td><td>2,804.41</td><td>39,261.75</td><td>332.48</td><td>463.32</td></tr><tr><td>读写</td><td>32</td><td>331.28</td><td>6,625.69</td><td>53.05</td><td>72.02</td></tr><tr><td>读写</td><td>64</td><td>588.92</td><td>11,778.34</td><td>63.01</td><td>85.92</td></tr><tr><td>读写</td><td>128</td><td>1,087.87</td><td>21,757.36</td><td>116.14</td><td>164.18</td></tr><tr><td>读写</td><td>256</td><td>1,387.86</td><td>27,757.19</td><td>188.54</td><td>262.82</td></tr><tr><td>读写</td><td>512</td><td>1,501.03</td><td>30,020.65</td><td>363.68</td><td>525.48</td></tr><tr><td>读写</td><td>1000</td><td>1,424.25</td><td>28,484.97</td><td>731.16</td><td>1,057.62</td></tr><tr><td>写入</td><td>32</td><td>3,865.91</td><td>11,597.72</td><td>5.23</td><td>7.52</td></tr><tr><td>写入</td><td>64</td><td>6,942.02</td><td>20,826.05</td><td>6.39</td><td>8.98</td></tr><tr><td>写入</td><td>128</td><td>12,480.43</td><td>37,441.30</td><td>11.60</td><td>16.12</td></tr><tr><td>写入</td><td>256</td><td>16,295.91</td><td>48,887.74</td><td>19.12</td><td>26.79</td></tr><tr><td>写入</td><td>512</td><td>17,417.06</td><td>52,251.17</td><td>36.16</td><td>51.07</td></tr><tr><td>写入</td><td>1000</td><td>16,471.39</td><td>49,414.16</td><td>73.64</td><td>100.31</td></tr><tr><td>更新索引</td><td>32</td><td>2,652.17</td><td>2,652.17</td><td>7.29</td><td>10.11</td></tr><tr><td>更新索引</td><td>64</td><td>4,731.63</td><td>4,731.63</td><td>9.00</td><td>12.90</td></tr><tr><td>更新索引</td><td>128</td><td>8,501.76</td><td>8,501.76</td><td>16.09</td><td>21.76</td></tr><tr><td>更新索引</td><td>256</td><td>11,060.74</td><td>11,060.74</td><td>26.82</td><td>37.02</td></tr><tr><td>更新索引</td><td>512</td><td>12,009.86</td><td>12,009.86</td><td>50.95</td><td>72.89</td></tr><tr><td>更新索引</td><td>1000</td><td>11,356.38</td><td>11,356.38</td><td>103.42</td><td>148.48</td></tr></tbody></table>
+<h3 id="ch33">3.3 OceanBase 4.2</h3>
+<table><thead><tr><th>场景</th><th>并发</th><th>TPS</th><th>QPS</th><th>P95 ms</th><th>P99 ms</th></tr></thead><tbody><tr><td>点查</td><td>32</td><td>17,343.76</td><td>17,343.76</td><td>1.16</td><td>1.60</td></tr><tr><td>点查</td><td>64</td><td>30,700.18</td><td>30,700.18</td><td>1.42</td><td>2.01</td></tr><tr><td>点查</td><td>128</td><td>56,880.38</td><td>56,880.38</td><td>2.59</td><td>3.65</td></tr><tr><td>点查</td><td>256</td><td>73,250.45</td><td>73,250.45</td><td>4.26</td><td>5.89</td></tr><tr><td>点查</td><td>512</td><td>79,641.75</td><td>79,641.75</td><td>7.84</td><td>11.24</td></tr><tr><td>点查</td><td>1000</td><td>74,860.15</td><td>74,860.15</td><td>15.86</td><td>22.39</td></tr><tr><td>只读</td><td>32</td><td>732.19</td><td>10,250.68</td><td>23.90</td><td>33.22</td></tr><tr><td>只读</td><td>64</td><td>1,315.13</td><td>18,411.79</td><td>29.05</td><td>40.85</td></tr><tr><td>只读</td><td>128</td><td>2,368.33</td><td>33,156.64</td><td>53.36</td><td>74.61</td></tr><tr><td>只读</td><td>256</td><td>3,104.37</td><td>43,461.17</td><td>86.63</td><td>120.77</td></tr><tr><td>只读</td><td>512</td><td>3,312.35</td><td>46,372.94</td><td>164.39</td><td>236.92</td></tr><tr><td>只读</td><td>1000</td><td>3,114.31</td><td>43,600.36</td><td>334.03</td><td>477.14</td></tr><tr><td>读写</td><td>32</td><td>362.48</td><td>7,249.67</td><td>51.57</td><td>72.99</td></tr><tr><td>读写</td><td>64</td><td>647.62</td><td>12,952.36</td><td>63.82</td><td>88.14</td></tr><tr><td>读写</td><td>128</td><td>1,181.64</td><td>23,632.87</td><td>115.64</td><td>163.14</td></tr><tr><td>读写</td><td>256</td><td>1,543.89</td><td>30,877.75</td><td>188.86</td><td>262.39</td></tr><tr><td>读写</td><td>512</td><td>1,665.76</td><td>33,315.16</td><td>359.37</td><td>501.07</td></tr><tr><td>读写</td><td>1000</td><td>1,560.91</td><td>31,218.13</td><td>731.99</td><td>1,031.50</td></tr><tr><td>写入</td><td>32</td><td>4,391.70</td><td>13,175.11</td><td>5.29</td><td>7.39</td></tr><tr><td>写入</td><td>64</td><td>7,827.30</td><td>23,481.89</td><td>6.54</td><td>9.37</td></tr><tr><td>写入</td><td>128</td><td>14,272.38</td><td>42,817.14</td><td>11.67</td><td>16.25</td></tr><tr><td>写入</td><td>256</td><td>18,632.36</td><td>55,897.09</td><td>19.50</td><td>28.27</td></tr><tr><td>写入</td><td>512</td><td>20,142.74</td><td>60,428.22</td><td>36.55</td><td>51.93</td></tr><tr><td>写入</td><td>1000</td><td>18,810.26</td><td>56,430.79</td><td>72.95</td><td>100.08</td></tr><tr><td>更新索引</td><td>32</td><td>2,890.43</td><td>2,890.43</td><td>7.29</td><td>10.43</td></tr><tr><td>更新索引</td><td>64</td><td>5,214.30</td><td>5,214.30</td><td>9.18</td><td>13.26</td></tr><tr><td>更新索引</td><td>128</td><td>9,508.19</td><td>9,508.19</td><td>16.48</td><td>23.53</td></tr><tr><td>更新索引</td><td>256</td><td>12,244.84</td><td>12,244.84</td><td>27.14</td><td>36.94</td></tr><tr><td>更新索引</td><td>512</td><td>13,057.94</td><td>13,057.94</td><td>51.43</td><td>70.27</td></tr><tr><td>更新索引</td><td>1000</td><td>12,325.56</td><td>12,325.56</td><td>100.69</td><td>140.96</td></tr></tbody></table></div><div class="section"><h2 id="ch4">第 4 章 按场景横向对比</h2>
+<h3 id="ch41">4.1 点查（oltp_point_select）</h3>
+<p>本场景独立比较；峰值取每产品六档并发中的最大 QPS。</p>
+<table><thead><tr><th>产品</th><th>峰值并发</th><th>峰值QPS</th><th>峰值P95</th><th>峰值P99</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>512</td><td>89,929</td><td>7.95</td><td>11.41</td></tr><tr><td>MySQL 8.0.32</td><td>512</td><td>71,646</td><td>7.99</td><td>11.33</td></tr><tr><td>OceanBase 4.2</td><td>512</td><td>79,642</td><td>7.84</td><td>11.24</td></tr></tbody></table>
+<table><thead><tr><th>并发</th><th>TDSQL-B v22.7.3 QPS</th><th>MySQL 8.0.32 QPS</th><th>OceanBase 4.2 QPS</th><th>TDSQL-B v22.7.3 P95(ms)</th><th>MySQL 8.0.32 P95(ms)</th><th>OceanBase 4.2 P95(ms)</th></tr></thead><tbody><tr><td>32</td><td>19,495</td><td>16,075</td><td>17,344</td><td>1.14</td><td>1.16</td><td>1.16</td></tr><tr><td>64</td><td>34,926</td><td>28,323</td><td>30,700</td><td>1.39</td><td>1.39</td><td>1.42</td></tr><tr><td>128</td><td>63,461</td><td>51,088</td><td>56,880</td><td>2.52</td><td>2.54</td><td>2.59</td></tr><tr><td>256</td><td>82,179</td><td>66,857</td><td>73,250</td><td>4.25</td><td>4.26</td><td>4.26</td></tr><tr><td>512</td><td>89,929</td><td>71,646</td><td>79,642</td><td>7.95</td><td>7.99</td><td>7.84</td></tr><tr><td>1000</td><td>84,600</td><td>67,338</td><td>74,860</td><td>15.62</td><td>15.89</td><td>15.86</td></tr></tbody></table>
+<img src="charts/comparison_peak_oltp_point_select.png" alt="点查峰值QPS">
+<p class="caption">点查峰值QPS</p>
+<img src="charts/comparison_qps_oltp_point_select.png" alt="点查并发-QPS">
+<p class="caption">点查并发-QPS</p>
+<img src="charts/comparison_p95_oltp_point_select.png" alt="点查并发-P95">
+<p class="caption">点查并发-P95</p>
+<h3 id="ch42">4.2 只读（oltp_read_only）</h3>
+<p>本场景独立比较；峰值取每产品六档并发中的最大 QPS。</p>
+<table><thead><tr><th>产品</th><th>峰值并发</th><th>峰值QPS</th><th>峰值P95</th><th>峰值P99</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>512</td><td>52,087</td><td>163.74</td><td>236.25</td></tr><tr><td>MySQL 8.0.32</td><td>512</td><td>41,168</td><td>166.22</td><td>227.19</td></tr><tr><td>OceanBase 4.2</td><td>512</td><td>46,373</td><td>164.39</td><td>236.92</td></tr></tbody></table>
+<table><thead><tr><th>并发</th><th>TDSQL-B v22.7.3 QPS</th><th>MySQL 8.0.32 QPS</th><th>OceanBase 4.2 QPS</th><th>TDSQL-B v22.7.3 P95(ms)</th><th>MySQL 8.0.32 P95(ms)</th><th>OceanBase 4.2 P95(ms)</th></tr></thead><tbody><tr><td>32</td><td>11,601</td><td>9,126</td><td>10,251</td><td>24.28</td><td>24.03</td><td>23.90</td></tr><tr><td>64</td><td>20,414</td><td>16,491</td><td>18,412</td><td>29.61</td><td>29.61</td><td>29.05</td></tr><tr><td>128</td><td>37,473</td><td>29,389</td><td>33,157</td><td>54.35</td><td>54.17</td><td>53.36</td></tr><tr><td>256</td><td>49,217</td><td>38,657</td><td>43,461</td><td>88.54</td><td>86.59</td><td>86.63</td></tr><tr><td>512</td><td>52,087</td><td>41,168</td><td>46,373</td><td>163.74</td><td>166.22</td><td>164.39</td></tr><tr><td>1000</td><td>49,146</td><td>39,262</td><td>43,600</td><td>330.30</td><td>332.48</td><td>334.03</td></tr></tbody></table>
+<img src="charts/comparison_peak_oltp_read_only.png" alt="只读峰值QPS">
+<p class="caption">只读峰值QPS</p>
+<img src="charts/comparison_qps_oltp_read_only.png" alt="只读并发-QPS">
+<p class="caption">只读并发-QPS</p>
+<img src="charts/comparison_p95_oltp_read_only.png" alt="只读并发-P95">
+<p class="caption">只读并发-P95</p>
+<h3 id="ch43">4.3 读写（oltp_read_write）</h3>
+<p>本场景独立比较；峰值取每产品六档并发中的最大 QPS。</p>
+<table><thead><tr><th>产品</th><th>峰值并发</th><th>峰值QPS</th><th>峰值P95</th><th>峰值P99</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>512</td><td>36,054</td><td>364.41</td><td>523.22</td></tr><tr><td>MySQL 8.0.32</td><td>512</td><td>30,021</td><td>363.68</td><td>525.48</td></tr><tr><td>OceanBase 4.2</td><td>512</td><td>33,315</td><td>359.37</td><td>501.07</td></tr></tbody></table>
+<table><thead><tr><th>并发</th><th>TDSQL-B v22.7.3 QPS</th><th>MySQL 8.0.32 QPS</th><th>OceanBase 4.2 QPS</th><th>TDSQL-B v22.7.3 P95(ms)</th><th>MySQL 8.0.32 P95(ms)</th><th>OceanBase 4.2 P95(ms)</th></tr></thead><tbody><tr><td>32</td><td>7,975</td><td>6,626</td><td>7,250</td><td>52.26</td><td>53.05</td><td>51.57</td></tr><tr><td>64</td><td>14,347</td><td>11,778</td><td>12,952</td><td>64.15</td><td>63.01</td><td>63.82</td></tr><tr><td>128</td><td>25,830</td><td>21,757</td><td>23,633</td><td>114.76</td><td>116.14</td><td>115.64</td></tr><tr><td>256</td><td>33,695</td><td>27,757</td><td>30,878</td><td>187.47</td><td>188.54</td><td>188.86</td></tr><tr><td>512</td><td>36,054</td><td>30,021</td><td>33,315</td><td>364.41</td><td>363.68</td><td>359.37</td></tr><tr><td>1000</td><td>33,812</td><td>28,485</td><td>31,218</td><td>732.19</td><td>731.16</td><td>731.99</td></tr></tbody></table>
+<img src="charts/comparison_peak_oltp_read_write.png" alt="读写峰值QPS">
+<p class="caption">读写峰值QPS</p>
+<img src="charts/comparison_qps_oltp_read_write.png" alt="读写并发-QPS">
+<p class="caption">读写并发-QPS</p>
+<img src="charts/comparison_p95_oltp_read_write.png" alt="读写并发-P95">
+<p class="caption">读写并发-P95</p>
+<h3 id="ch44">4.4 写入（oltp_write_only）</h3>
+<p>本场景独立比较；峰值取每产品六档并发中的最大 QPS。</p>
+<table><thead><tr><th>产品</th><th>峰值并发</th><th>峰值QPS</th><th>峰值P95</th><th>峰值P99</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>512</td><td>67,175</td><td>36.92</td><td>51.88</td></tr><tr><td>MySQL 8.0.32</td><td>512</td><td>52,251</td><td>36.16</td><td>51.07</td></tr><tr><td>OceanBase 4.2</td><td>512</td><td>60,428</td><td>36.55</td><td>51.93</td></tr></tbody></table>
+<table><thead><tr><th>并发</th><th>TDSQL-B v22.7.3 QPS</th><th>MySQL 8.0.32 QPS</th><th>OceanBase 4.2 QPS</th><th>TDSQL-B v22.7.3 P95(ms)</th><th>MySQL 8.0.32 P95(ms)</th><th>OceanBase 4.2 P95(ms)</th></tr></thead><tbody><tr><td>32</td><td>14,621</td><td>11,598</td><td>13,175</td><td>5.34</td><td>5.23</td><td>5.29</td></tr><tr><td>64</td><td>25,854</td><td>20,826</td><td>23,482</td><td>6.46</td><td>6.39</td><td>6.54</td></tr><tr><td>128</td><td>47,455</td><td>37,441</td><td>42,817</td><td>11.78</td><td>11.60</td><td>11.67</td></tr><tr><td>256</td><td>62,372</td><td>48,888</td><td>55,897</td><td>19.54</td><td>19.12</td><td>19.50</td></tr><tr><td>512</td><td>67,175</td><td>52,251</td><td>60,428</td><td>36.92</td><td>36.16</td><td>36.55</td></tr><tr><td>1000</td><td>62,141</td><td>49,414</td><td>56,431</td><td>73.08</td><td>73.64</td><td>72.95</td></tr></tbody></table>
+<img src="charts/comparison_peak_oltp_write_only.png" alt="写入峰值QPS">
+<p class="caption">写入峰值QPS</p>
+<img src="charts/comparison_qps_oltp_write_only.png" alt="写入并发-QPS">
+<p class="caption">写入并发-QPS</p>
+<img src="charts/comparison_p95_oltp_write_only.png" alt="写入并发-P95">
+<p class="caption">写入并发-P95</p>
+<h3 id="ch45">4.5 更新索引（oltp_update_index）</h3>
+<p>本场景独立比较；峰值取每产品六档并发中的最大 QPS。</p>
+<table><thead><tr><th>产品</th><th>峰值并发</th><th>峰值QPS</th><th>峰值P95</th><th>峰值P99</th></tr></thead><tbody><tr><td>TDSQL-B v22.7.3</td><td>512</td><td>14,747</td><td>50.85</td><td>71.63</td></tr><tr><td>MySQL 8.0.32</td><td>512</td><td>12,010</td><td>50.95</td><td>72.89</td></tr><tr><td>OceanBase 4.2</td><td>512</td><td>13,058</td><td>51.43</td><td>70.27</td></tr></tbody></table>
+<table><thead><tr><th>并发</th><th>TDSQL-B v22.7.3 QPS</th><th>MySQL 8.0.32 QPS</th><th>OceanBase 4.2 QPS</th><th>TDSQL-B v22.7.3 P95(ms)</th><th>MySQL 8.0.32 P95(ms)</th><th>OceanBase 4.2 P95(ms)</th></tr></thead><tbody><tr><td>32</td><td>3,273</td><td>2,652</td><td>2,890</td><td>7.25</td><td>7.29</td><td>7.29</td></tr><tr><td>64</td><td>5,831</td><td>4,732</td><td>5,214</td><td>8.94</td><td>9.00</td><td>9.18</td></tr><tr><td>128</td><td>10,599</td><td>8,502</td><td>9,508</td><td>16.25</td><td>16.09</td><td>16.48</td></tr><tr><td>256</td><td>13,568</td><td>11,061</td><td>12,245</td><td>27.60</td><td>26.82</td><td>27.14</td></tr><tr><td>512</td><td>14,747</td><td>12,010</td><td>13,058</td><td>50.85</td><td>50.95</td><td>51.43</td></tr><tr><td>1000</td><td>13,966</td><td>11,356</td><td>12,326</td><td>100.99</td><td>103.42</td><td>100.69</td></tr></tbody></table>
+<img src="charts/comparison_peak_oltp_update_index.png" alt="更新索引峰值QPS">
+<p class="caption">更新索引峰值QPS</p>
+<img src="charts/comparison_qps_oltp_update_index.png" alt="更新索引并发-QPS">
+<p class="caption">更新索引并发-QPS</p>
+<img src="charts/comparison_p95_oltp_update_index.png" alt="更新索引并发-P95">
+<p class="caption">更新索引并发-P95</p>
+<h3 id="ch4ratio">4.6 峰值QPS比值矩阵</h3>
+<p>以 TDSQL-B v22.7.3 为 1.00 基线，各产品取自身峰值。</p>
+<table><thead><tr><th>场景</th><th>TDSQL-B v22.7.3</th><th>MySQL 8.0.32</th><th>OceanBase 4.2</th></tr></thead><tbody><tr><td>点查</td><td>1.000x</td><td>0.797x</td><td>0.886x</td></tr><tr><td>只读</td><td>1.000x</td><td>0.790x</td><td>0.890x</td></tr><tr><td>读写</td><td>1.000x</td><td>0.833x</td><td>0.924x</td></tr><tr><td>写入</td><td>1.000x</td><td>0.778x</td><td>0.900x</td></tr><tr><td>更新索引</td><td>1.000x</td><td>0.814x</td><td>0.885x</td></tr></tbody></table>
+<img src="charts/comparison_radar.png" alt="峰值QPS场景雷达图">
+<p class="caption">峰值QPS场景雷达图</p>
+<img src="charts/comparison_ladder.png" alt="各场景峰值QPS天梯图">
+<p class="caption">各场景峰值QPS天梯图</p>
+<h3 id="ch4single">4.7 单产品并发曲线</h3>
+<p>各产品各场景的独立 QPS 曲线：</p>
+<img src="charts/product_1_oltp_point_select.png" alt="TDSQL-B v22.7.3｜点查">
+<p class="caption">TDSQL-B v22.7.3｜点查</p>
+<img src="charts/product_1_oltp_read_only.png" alt="TDSQL-B v22.7.3｜只读">
+<p class="caption">TDSQL-B v22.7.3｜只读</p>
+<img src="charts/product_1_oltp_read_write.png" alt="TDSQL-B v22.7.3｜读写">
+<p class="caption">TDSQL-B v22.7.3｜读写</p>
+<img src="charts/product_1_oltp_write_only.png" alt="TDSQL-B v22.7.3｜写入">
+<p class="caption">TDSQL-B v22.7.3｜写入</p>
+<img src="charts/product_1_oltp_update_index.png" alt="TDSQL-B v22.7.3｜更新索引">
+<p class="caption">TDSQL-B v22.7.3｜更新索引</p>
+<img src="charts/product_2_oltp_point_select.png" alt="MySQL 8.0.32｜点查">
+<p class="caption">MySQL 8.0.32｜点查</p>
+<img src="charts/product_2_oltp_read_only.png" alt="MySQL 8.0.32｜只读">
+<p class="caption">MySQL 8.0.32｜只读</p>
+<img src="charts/product_2_oltp_read_write.png" alt="MySQL 8.0.32｜读写">
+<p class="caption">MySQL 8.0.32｜读写</p>
+<img src="charts/product_2_oltp_write_only.png" alt="MySQL 8.0.32｜写入">
+<p class="caption">MySQL 8.0.32｜写入</p>
+<img src="charts/product_2_oltp_update_index.png" alt="MySQL 8.0.32｜更新索引">
+<p class="caption">MySQL 8.0.32｜更新索引</p>
+<img src="charts/product_3_oltp_point_select.png" alt="OceanBase 4.2｜点查">
+<p class="caption">OceanBase 4.2｜点查</p>
+<img src="charts/product_3_oltp_read_only.png" alt="OceanBase 4.2｜只读">
+<p class="caption">OceanBase 4.2｜只读</p>
+<img src="charts/product_3_oltp_read_write.png" alt="OceanBase 4.2｜读写">
+<p class="caption">OceanBase 4.2｜读写</p>
+<img src="charts/product_3_oltp_write_only.png" alt="OceanBase 4.2｜写入">
+<p class="caption">OceanBase 4.2｜写入</p>
+<img src="charts/product_3_oltp_update_index.png" alt="OceanBase 4.2｜更新索引">
+<p class="caption">OceanBase 4.2｜更新索引</p></div><div class="section"><h2 id="ch5">第 5 章 选型建议与边界</h2>
+<h3 id="ch5a">5.1 选型建议</h3>
+<ul class="bullet"><li>按目标业务场景和并发查看各节，不将五个场景合并成单一总分。</li><li>形成生产选型前，建议同环境、同配置进行多轮交叉运行并报告中位数及波动范围。</li><li>[待确认] 补充业务场景占比、延迟 SLA 和成本权重后再做加权决策；当前数据不足以指定综合胜者。</li></ul>
+<h3 id="ch5b">5.2 测试边界</h3>
+<p>结果仅描述本次 sysbench 汇总数据，受测试时间、批次及运行次数限制，不能直接外推到所有生产负载。</p></div><div class="section"><h2 id="ch6">第 6 章 附录</h2>
+<h3 id="ch6a">6.1 数据来源</h3>
+<p>test-resource/mock_records_aggregation.json</p></div>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+{
+  "data_source_type": "local_file",
+  "data_source_value": "data/compare.json",
+  "report_type": "custom",
+  "dimension_filters": {
+    "test_name_keywords_or": [
+      [
+        "oltp_write_only"
+      ],
+      [
+        "oltp_update_index"
+      ]
+    ],
+    "tool_name": "sysbench"
+  },
+  "results_key_filters": {
+    "threads": null
+  },
+  "task_filters": {},
+  "iteration_config": null,
+  "custom_config": {
+    "focus_dimension": "自定义",
+    "dimensions": {
+      "scenarios": [
+        "oltp_write_only",
+        "oltp_update_index"
+      ],
+      "threads": [
+        512,
+        1000
+      ],
+      "metrics": [
+        "qps",
+        "p95_ms",
+        "p99_ms"
+      ]
+    },
+    "extra_questions": [
+      "仅分析三个产品在 oltp_write_only、oltp_update_index 两场景和 512、1000 并发下的 QPS、P95、P99，逐产品逐场景列出数据并给出有依据的产品选择建议。"
+    ]
+  },
+  "other_info": "固定报告时间 2026-06-19T16:00:00+08:00；仅使用显式指定的两档并发，不扩展到其他档位。"
+}

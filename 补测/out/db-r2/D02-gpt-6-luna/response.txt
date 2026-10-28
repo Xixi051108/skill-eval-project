@@ -1,0 +1,9 @@
+已生成三款产品的五场景独立比较报告，包含六档并发数据、峰值 QPS 比值、公平性限制，以及 Markdown、Word、HTML 三种格式。
+
+- [Markdown 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D02-gpt-6-luna/work/artifacts/report.md>)
+- [Word 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D02-gpt-6-luna/work/artifacts/report.docx>)
+- [HTML 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D02-gpt-6-luna/work/artifacts/report.html>)
+
+核查确认 90 条记录完整、32 张图表已生成，Word 文档嵌入了全部图表。公平性限制已明确披露：测试时间和任务批次不同，且缺少逐产品资源配置核验与重复运行数据，因此报告结论仅适用于这组测试结果。
+
+**图表限制：**当前 Python 绘图环境缺少可用的中文字体，生成图表时出现中文缺字警告；报告正文和图注仍提供场景名称。

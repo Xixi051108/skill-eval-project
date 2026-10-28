@@ -22,3 +22,11 @@ __pycache__/
 
 # Personal job application materials stay local
 /求职/
+
+# Supplementary local session configuration and caches
+补测/out/**/work/endpoint.json
+补测/out/**/work/skill/
+补测/out/**/work/dependencies/
+补测/out/**/mpl/
+补测/out/**/.mpl/
+补测/out/**/mplconfig/

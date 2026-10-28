@@ -1,0 +1,19 @@
+{
+  "data_source_type": "local_file",
+  "data_source_value": "E:\\项目\\skill性能评估考题\\补测\\out\\db-r2\\D03-gpt-6-luna\\work\\data\\iter.json",
+  "report_type": "iteration",
+  "dimension_filters": {
+    "test_name_keywords": [],
+    "tool_version_keywords": []
+  },
+  "iteration_config": {
+    "version_range": [
+      "TDSQL-B v22.6",
+      "TDSQL-B v22.7",
+      "TDSQL-B v22.8",
+      "TDSQL-B v22.9"
+    ],
+    "regression_threshold_pct": 5
+  },
+  "other_info": null
+}

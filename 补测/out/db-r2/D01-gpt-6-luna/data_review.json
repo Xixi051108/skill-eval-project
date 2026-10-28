@@ -1,0 +1,12 @@
+{
+  "method": "independent_source_record_comparison",
+  "matched": true,
+  "actual_rows": 30,
+  "expected_rows": 30,
+  "scope": "按product/scenario/threads比较全部TPS/QPS/P95/P99；专项筛选集合另由原Judge检查",
+  "sha256": {
+    "E:\\项目\\skill性能评估考题\\补测\\audit.py": "e9575263ca67745380846de4306640f510cf798665b4aa1879f04499e3e827e8",
+    "答卷\\data\\single.log": "68ca345e661ff759202571c9f87d2f7f817523b8a762db5ee874b7edf2443ea5",
+    "补测\\out\\db-r2\\D01-gpt-6-luna\\work\\artifacts\\single\\data\\extracted_data.json": "bbfe5795c71e3750c40b6cf6c530f3d40526c79bdc4ebc1ae3569ba54866307c"
+  }
+}

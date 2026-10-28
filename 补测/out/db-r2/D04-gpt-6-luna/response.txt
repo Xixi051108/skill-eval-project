@@ -1,0 +1,9 @@
+已完成 custom 专项报告，覆盖 3 款产品、2 个指定场景和 512/1000 并发，共 12 条记录。
+
+报告建议：如果目标是最高 QPS，两个场景下都优先考虑 TDSQL-B；如果更看重 P95/P99，则应按场景和并发分别选择，报告列出了对应数据和依据。报告也说明了各产品任务标识、开始时间不同，因此横向结论存在可比性限制。
+
+- [Markdown 报告](E:/项目/skill性能评估考题/补测/out/db-r2/D04-gpt-6-luna/work/artifacts/report.md)
+- [Word 报告](E:/项目/skill性能评估考题/补测/out/db-r2/D04-gpt-6-luna/work/artifacts/report.docx)
+- [HTML 报告](E:/项目/skill性能评估考题/补测/out/db-r2/D04-gpt-6-luna/work/artifacts/report.html)
+
+已核对 12 条记录与原始数据一致，三张图表均已生成并引用，三种报告格式也满足最小文件大小要求。

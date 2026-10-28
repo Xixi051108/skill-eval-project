@@ -1,0 +1,12 @@
+已完成迭代历史趋势报告，按 `data/iter.json` 中的版本顺序分析，并以“降幅超过 5%”作为回退阈值。
+
+报告检出 3 个回退，均发生在 v22.9 相对 v22.8：只读 **-21.02%**、混合读写 **-6.75%**、写入 **-5.16%**。其余场景未超过回退阈值。
+
+交付文件位于 `artifacts/`：
+
+- [Markdown 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D03-gpt-6-luna/work/artifacts/report.md>)
+- [Word 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D03-gpt-6-luna/work/artifacts/report.docx>)
+- [HTML 报告](</E:/项目/skill性能评估考题/补测/out/db-r2/D03-gpt-6-luna/work/artifacts/report.html>)
+- [分析说明](</E:/项目/skill性能评估考题/补测/out/db-r2/D03-gpt-6-luna/work/artifacts/docs/analysis_proposal.md>)
+
+已核对三种报告中的日期、数据来源和环境信息；120 条记录均已接入，生成 12 张图表，报告引用的图表均存在。未修改输入数据或 Skill 源码。

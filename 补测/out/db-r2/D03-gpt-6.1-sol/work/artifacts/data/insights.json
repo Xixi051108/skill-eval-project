@@ -1,0 +1,54 @@
+{
+  "single_product_insights": {},
+  "iteration_insights": [
+    {
+      "level": "L1",
+      "scenario": "oltp_point_select",
+      "source": "analysis_results.iteration.trend.oltp_point_select",
+      "text": "点查（oltp_point_select）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 79,274.90 → 87,702.72，累计 +10.63%。"
+    },
+    {
+      "level": "L1",
+      "scenario": "oltp_read_only",
+      "source": "analysis_results.iteration.trend.oltp_read_only",
+      "text": "只读（oltp_read_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 45,755.56 → 40,809.21，累计 -10.81%。"
+    },
+    {
+      "level": "L1",
+      "scenario": "oltp_read_write",
+      "source": "analysis_results.iteration.trend.oltp_read_write",
+      "text": "混合读写（oltp_read_write）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 42,301.62 → 41,135.99，累计 -2.76%。"
+    },
+    {
+      "level": "L1",
+      "scenario": "oltp_write_only",
+      "source": "analysis_results.iteration.trend.oltp_write_only",
+      "text": "写入（oltp_write_only）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 59,854.62 → 62,966.27，累计 +5.20%。"
+    },
+    {
+      "level": "L1",
+      "scenario": "oltp_update_index",
+      "source": "analysis_results.iteration.trend.oltp_update_index",
+      "text": "索引更新（oltp_update_index）：TDSQL-B v22.6 → TDSQL-B v22.9，峰值 QPS 13,266.57 → 13,760.60，累计 +3.72%。"
+    },
+    {
+      "level": "L2",
+      "scenario": "oltp_read_only",
+      "source": "analysis_results.iteration.regression_points",
+      "text": "回退：TDSQL-B v22.8 → TDSQL-B v22.9，只读峰值 QPS 下降 21.02%（严格超过 5%）。"
+    },
+    {
+      "level": "L2",
+      "scenario": "oltp_read_write",
+      "source": "analysis_results.iteration.regression_points",
+      "text": "回退：TDSQL-B v22.8 → TDSQL-B v22.9，混合读写峰值 QPS 下降 6.75%（严格超过 5%）。"
+    },
+    {
+      "level": "L2",
+      "scenario": "oltp_write_only",
+      "source": "analysis_results.iteration.regression_points",
+      "text": "回退：TDSQL-B v22.8 → TDSQL-B v22.9，写入峰值 QPS 下降 5.16%（严格超过 5%）。"
+    }
+  ],
+  "selection_insights": []
+}

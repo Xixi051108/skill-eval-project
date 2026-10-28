@@ -1,0 +1,161 @@
+{
+  "checks": [
+    {
+      "item": "A intent",
+      "passed": true,
+      "evidence": "JSON 已重新解析"
+    },
+    {
+      "item": "A extracted_data",
+      "passed": true,
+      "evidence": "JSON 已重新解析"
+    },
+    {
+      "item": "A analysis_results",
+      "passed": true,
+      "evidence": "JSON 已重新解析"
+    },
+    {
+      "item": "A insights",
+      "passed": true,
+      "evidence": "JSON 已重新解析"
+    },
+    {
+      "item": "A data/block_map.md",
+      "passed": true,
+      "evidence": "文件存在"
+    },
+    {
+      "item": "A docs/analysis_proposal.md",
+      "passed": true,
+      "evidence": "文件存在"
+    },
+    {
+      "item": "A report.md",
+      "passed": true,
+      "evidence": "21715 bytes"
+    },
+    {
+      "item": "A report.docx",
+      "passed": true,
+      "evidence": "1119693 bytes"
+    },
+    {
+      "item": "A report.html",
+      "passed": true,
+      "evidence": "34283 bytes"
+    },
+    {
+      "item": "A6/C1-C6 charts",
+      "passed": true,
+      "evidence": "5 峰值 + 5 P95 + 累计 + 回退 + 归一化 + 4 版本曲线"
+    },
+    {
+      "item": "C7/C8 chart text",
+      "passed": true,
+      "evidence": "17 图标题中文；标题、轴标签、刻度、图例包围盒检测均无交叠"
+    },
+    {
+      "item": "B1/B2/B5/B6",
+      "passed": true,
+      "evidence": "完整唯一 4×5×6 网格；逐项验证必需指标为正有限数"
+    },
+    {
+      "item": "B3 full tables",
+      "passed": true,
+      "evidence": "4 张全量表各 30 条，保留原始两位小数"
+    },
+    {
+      "item": "B4 source equality",
+      "passed": true,
+      "evidence": "全部 120 条与原始记录逐字段一致，覆盖要求的 6 条抽检"
+    },
+    {
+      "item": "B7 source",
+      "passed": true,
+      "evidence": "实际路径、记录数、SHA-256 已记录"
+    },
+    {
+      "item": "D1-D3 insight",
+      "passed": true,
+      "evidence": "无 L3；第 1 章 6 条结论，5 条累计变化及 1 条回退"
+    },
+    {
+      "item": "D4/D8 fairness",
+      "passed": true,
+      "evidence": "数据集、时长一致；逐版本硬件证据不足已披露"
+    },
+    {
+      "item": "D5/D7 scope",
+      "passed": true,
+      "evidence": "五场景独立分析；六档并发全保留"
+    },
+    {
+      "item": "E1 Markdown",
+      "passed": true,
+      "evidence": "章 #、节 ##；表含分隔行；17 个相对图片链接存在"
+    },
+    {
+      "item": "E2.1 fonts",
+      "passed": true,
+      "evidence": "检查全部 1218 个 run"
+    },
+    {
+      "item": "E2.2 headers",
+      "passed": true,
+      "evidence": "全部 18 张表表头"
+    },
+    {
+      "item": "E2.3 images",
+      "passed": true,
+      "evidence": "DOCX 图片数量 17"
+    },
+    {
+      "item": "E3 HTML",
+      "passed": true,
+      "evidence": "head/CSS/TOC/font fallback/17 图片路径"
+    },
+    {
+      "item": "F1 placeholders",
+      "passed": true,
+      "evidence": "Markdown 与 HTML 占位符扫描为空"
+    },
+    {
+      "item": "F3 three formats",
+      "passed": true,
+      "evidence": "20 个场景版本峰值跨三格式核对，按两位小数与千分位展示"
+    },
+    {
+      "item": "source untouched",
+      "passed": true,
+      "evidence": "skill 全部文件及原始 data/iter.json SHA-256 前后相同"
+    }
+  ],
+  "passed": true,
+  "input_hashes": {
+    "skill\\SKILL.md": "b68a38c42c857db31b6492a22a5428b1d83e7db92c04fa1789bc3b0918648c14",
+    "skill\\references\\三格式输出规范.md": "94536a88f63d4808cf40779af04b78bd1bc60d929423391129285e00cb9af655",
+    "skill\\references\\分析方法论.md": "1cb00e421e2de0cb08ff86547d5eb608e0cb975dd18c2aa28a147a414f02ced5",
+    "skill\\references\\意图解析规范.md": "b5669ce819345996fa34a5d3d77c55c60f74ac5d0424296210aadf1eebf88749",
+    "skill\\references\\报告类型模板规范.md": "84775cd5c920734580f5b00e7b6b8aca0a2220eaf4be44977b87a6a7c9a8c38f",
+    "skill\\references\\数据源接入规范.md": "f2f253625bad703664cbae078ba31a952db6bf8f199b8ee5e8223a0eb616e851",
+    "skill\\references\\最小交付标准.md": "e4c7f2051c5dea8c4e67b7cdd08ffba9f3a87cbfcdcc4afbed3418d327b84ce2",
+    "skill\\scripts\\analyze.py": "9de2b9bcc782daeb4ffa5f8fb799ae22711cac19b413df2f9e5c1959dea74d5b",
+    "skill\\scripts\\analyze_core.py": "885e48d9cad62a78c9f43e5781352190a48d3371b59a741b3a466c5c2c01fd5e",
+    "skill\\scripts\\constants.py": "ba8c9af2fd2ee400402f8633e8b54bc736755607f94f2ef1f871a2384271dea7",
+    "skill\\scripts\\data_source_adapter.py": "43a10d9f39e7a5bf05b06a47c548fe65da599b7cb226ec5227857c79de4f0f07",
+    "skill\\scripts\\detect_input.py": "ad6b198ca086fe58223142418aa4731ac9b8e2837c80c5840c93ad5a1919d0b4",
+    "skill\\scripts\\generate_charts.py": "578ccd50c992cff358fee6c2a210651e44c942c542d38d6f8f0257b421998cb6",
+    "skill\\scripts\\log_parser.py": "cd6f7d126f33674f3e7e9c0310df42f2cd65ce5c824e3dc8c0775a4c5994ca6d",
+    "skill\\scripts\\parse_intent.py": "9e0f452c945df870872e98356ef4fe16c75faa41d30c76c34991233be1e208f2",
+    "skill\\scripts\\render_all.py": "8640b03f13ca91ccc5f71b825f3efac8165ae8f35e0b957b97dd2c7d0e441679",
+    "skill\\scripts\\render_core.py": "95d6ea0fd1c72717ed0ff3185ae3a5939ffa3439f57a8200624c5a94e84bd63d",
+    "skill\\scripts\\run_pipeline.py": "3fe9c7fe571e998bb5085e8d9f4cccb54c7f0ce39ff93482257f943698f64d1b",
+    "skill\\templates\\comparison_report.py": "dddcb0c4705951ae24a79c12d9f0dfd50efdbcfb15ff9c9fb4374430258976e7",
+    "skill\\templates\\custom_report.py": "361fa226c42446ba514305f4264abbb64a9b62beb62eb1c5018a41e66cb1aa1d",
+    "skill\\templates\\iteration_report.py": "a2528450cc03c247bcfcf6b83a97e03dbf0167632681f9bea8dc1bffc99ac43b",
+    "skill\\templates\\single_report.py": "e3c590fb4b385d84f0ec80d10d695975895bcfd58bcebfc565fe642911e5e4fe",
+    "skill\\templates\\__init__.py": "552ef61b151d38c2dd67b286b6cabe9a1fe6c740f001365be06ab1fef2c2636d",
+    "data\\iter.json": "49c9874206b3a24d216e2befd09af75dce060d5980dc96ea92ecbef4f24663f4"
+  }
+}

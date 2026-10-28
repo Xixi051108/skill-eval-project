@@ -1,0 +1,1283 @@
+{
+  "kind": "meta_validation",
+  "at": "2026-10-27T12:27:01.691284+00:00",
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "case IDs unique",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: rubric weights sum 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: required sections",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage and",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage comparison",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage consistency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage custom",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage delivery",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage diagnostic",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage edge",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage empty",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage english",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage equivalence",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage failure",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage filter",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage happy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage insufficient",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage internal",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage iteration",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage missing_data",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage missing_file",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage null",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage or",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage pasted",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage raw_truth",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage redline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage reference",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage single",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage trend",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage unfair",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage user_contract",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage xlsx",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "db: coverage zero",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: rubric weights sum 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: required sections",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage announcement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage conflict",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage cross_source",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage currency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage date",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage dependency",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage environment",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage financial",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage fund",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage injection",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage internal",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage market",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage missing_context",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage missing_key",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage period",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage question_only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage quote",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage redline",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage rounding",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage score0",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage score1",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage score2",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage secondary",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage secret",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage stale",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage status",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage technical",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage threshold",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance: coverage unknown",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D01: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D01: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D01: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D01: fixture data/single.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D02: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D02: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D02: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D02: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D03: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D03: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D03: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D03: fixture data/iter.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D04: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D04: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D04: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D04: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D05: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D05: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D05: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D06: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D06: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D06: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D07: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D07: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D07: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D07: fixture data/null.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D08: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D08: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D08: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D08: fixture data/valid.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D09: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D09: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D09: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D09: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D10: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D10: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D10: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D10: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D11: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D11: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D11: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D11: fixture data/compare.csv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D12: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D12: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D12: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D12: fixture data/compare.xlsx",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D13: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D13: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D13: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D13: fixture data/unfair.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D14: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D14: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D14: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D14: fixture data/two.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D15: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D15: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D15: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D15: fixture data/empty.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D16: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D16: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D16: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D16: fixture data/zero.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D17: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D17: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D17: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D17: fixture data/null_array.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D18: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D18: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D18: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D19: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D19: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D19: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D19: fixture data/single.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D20: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D20: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D20: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D20: fixture data/single.log",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D21: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D21: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D21: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D21: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D22: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D22: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D22: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "D22: fixture data/compare.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F01: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F01: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F01: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F01: fixture data/F01.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F02: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F02: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F02: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F02: fixture data/F02.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F03: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F03: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F03: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F03: fixture data/F03.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F04: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F04: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F04: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F04: fixture data/F04.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F05: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F05: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F05: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F05: fixture data/F05.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F06: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F06: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F06: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F06: fixture data/F06.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F07: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F07: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F07: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F07: fixture data/F07.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F08: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F08: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F08: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F08: fixture data/F08.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F09: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F09: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F09: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F09: fixture data/F09.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F10: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F10: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F10: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F10: fixture data/F10.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F11: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F11: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F11: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F11: fixture data/F11.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F12: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F12: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F12: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F12: fixture data/F12.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F13: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F13: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F13: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F13: fixture data/F13.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F14: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F14: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F14: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F14: fixture data/F14.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F15: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F15: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F15: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F15: fixture data/F15.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F16: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F16: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F16: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F16: fixture data/F16.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F17: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F17: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F17: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F17: fixture data/F17.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F18: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F18: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F18: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F18: fixture data/F18.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F19: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F19: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F19: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F19: fixture data/F19.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F20: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F20: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F20: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F20: fixture data/F20.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F21: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F21: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F21: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F21: fixture data/F21.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F22: fields complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F22: rubric references valid",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F22: no gold in public input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "F22: fixture data/F22.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "database format and path coverage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "finance scores 0/1/2/unknown all covered",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "environment fault pairs keep identical user input",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "pinned source and fixture hashes unchanged",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator db.yaml",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator finance.yaml",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator run.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator judge.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator tool.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator test_judge.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator collect.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator review.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator live.py",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator sources.json",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "frozen evaluator requirements.txt",
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "note": "本地自检；未取得官方完整版 Meta-Testcase，不能声称通过官方80分验收。"
+}

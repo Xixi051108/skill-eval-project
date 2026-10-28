@@ -1,0 +1,29 @@
+{
+  "action": "answer",
+  "label": "supported",
+  "score": null,
+  "facts": [
+    {
+      "name": "revenue_yi",
+      "value": 6602.57,
+      "evidence_id": "LIVE-005"
+    },
+    {
+      "name": "currency",
+      "value": "CNY",
+      "evidence_id": "LIVE-005"
+    },
+    {
+      "name": "report_period",
+      "value": "2024-12-31",
+      "evidence_id": "LIVE-005"
+    }
+  ],
+  "secondary_label": "原始公告未直接核验；结构化数据存在币种口径差异",
+  "conflict": true,
+  "missing": [
+    "未取得2024年度原始公告全文",
+    "未核实结构化接口港元数据的换算方法"
+  ],
+  "answer": "腾讯控股（港交所 00700）2024年全年营收为人民币6602.57亿元，口径为截至2024年12月31日止年度的集团总收入。\n\n来源：第一财经2025年3月19日报道明确列出6602.57亿元；腾讯新闻2025年3月20日报道同时明确币种为人民币，两者金额一致（LIVE-005）。可查看：https://www.yicai.com/news/102524619.html 及 https://news.qq.com/rain/a/20250320A0067500 。\n\n口径说明：结构化接口返回同报告期7129.90亿港元（LIVE-001），币种不同，不能直接当作人民币营收；其换算方法未核实。本次未取得原始公告全文，以上结论依据公告相关报道交叉核对，所引报道均早于指定日期锚点。"
+}

@@ -1,0 +1,101 @@
+{
+  "status": "FAIL",
+  "score": 60.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": false,
+      "actual": "未生成标准提取文件",
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "语义复核通过",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "语义复核PASS但自动FAIL保留。Agent将报告和中间数据放在artifacts/single/，原补测Judge固定定位artifacts/data，因找不到标准路径提前返回FAIL；这说明输出根目录约定/产物发现不一致，不是没有报告。在实际目录进行离线data_review及table_review，30条提取记录与三格式各30行/120指标均匹配原日志；三种报告及11张图真实存在，产品与300秒时长正确，原Skill与输入字节未改。公开prompt仅要求写入artifacts/，未明确禁止其下子目录，不把此失败直接称为业务能力错误。当前报告保留原自动状态，不用重新定位后的局部审计宣称完整规范通过。未进行Word分页/浏览器视觉检查；本轮只评已生成产物，不是重做数据库压测。",
+      "expected": "论证、边界与来源一致",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 0.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "COMPLETE: LLM",
+  "id": "D01",
+  "model": "gpt-6-luna",
+  "suite": "db",
+  "run": "D01-gpt-6-luna",
+  "seconds": 115.453,
+  "usage": {
+    "input_tokens": 418873,
+    "cached_input_tokens": 340224,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 5998,
+    "reasoning_output_tokens": 1660
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "edc66b1eadddf0731d23f239a6bbb0252e6357a59d878086235b9d0338915f70",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true,
+  "review": {
+    "run": "D01-gpt-6-luna",
+    "response_sha256": "b5f98bc14a087bc84f27645ac5e19bfef6899e96bdf873dad6fa5c7bfb07089a",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "语义复核PASS但自动FAIL保留。Agent将报告和中间数据放在artifacts/single/，原补测Judge固定定位artifacts/data，因找不到标准路径提前返回FAIL；这说明输出根目录约定/产物发现不一致，不是没有报告。在实际目录进行离线data_review及table_review，30条提取记录与三格式各30行/120指标均匹配原日志；三种报告及11张图真实存在，产品与300秒时长正确，原Skill与输入字节未改。公开prompt仅要求写入artifacts/，未明确禁止其下子目录，不把此失败直接称为业务能力错误。当前报告保留原自动状态，不用重新定位后的局部审计宣称完整规范通过。未进行Word分页/浏览器视觉检查；本轮只评已生成产物，不是重做数据库压测。"
+  }
+}

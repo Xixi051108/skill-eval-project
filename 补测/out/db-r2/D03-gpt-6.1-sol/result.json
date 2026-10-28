@@ -1,0 +1,305 @@
+{
+  "status": "PASS",
+  "score": 100.0,
+  "fatal": false,
+  "checks": [
+    {
+      "name": "目标功能正常返回",
+      "dimension": "R2",
+      "passed": true,
+      "actual": null,
+      "expected": "success",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "回退集合符合独立计算",
+      "dimension": "R4",
+      "passed": true,
+      "actual": [
+        [
+          "TDSQL-B v22.9",
+          "oltp_read_only",
+          -21.023043
+        ],
+        [
+          "TDSQL-B v22.9",
+          "oltp_read_write",
+          -6.752574
+        ],
+        [
+          "TDSQL-B v22.9",
+          "oltp_write_only",
+          -5.157411
+        ]
+      ],
+      "expected": [
+        [
+          "TDSQL-B v22.9",
+          "oltp_read_only",
+          -21.023043
+        ],
+        [
+          "TDSQL-B v22.9",
+          "oltp_read_write",
+          -6.752574
+        ],
+        [
+          "TDSQL-B v22.9",
+          "oltp_write_only",
+          -5.157411
+        ]
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "版本顺序符合来源",
+      "dimension": "R4",
+      "passed": true,
+      "actual": [
+        "TDSQL-B v22.6",
+        "TDSQL-B v22.7",
+        "TDSQL-B v22.8",
+        "TDSQL-B v22.9"
+      ],
+      "expected": [
+        "TDSQL-B v22.6",
+        "TDSQL-B v22.7",
+        "TDSQL-B v22.8",
+        "TDSQL-B v22.9"
+      ],
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/intent.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/intent.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/extracted_data.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/extracted_data.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/analysis_results.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/analysis_results.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/insights.json",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/insights.json",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 data/block_map.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "data/block_map.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 docs/analysis_proposal.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "docs/analysis_proposal.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.md",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.md",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.docx",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.docx",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "强制交付文件 report.html",
+      "dimension": "R5",
+      "passed": true,
+      "actual": "report.html",
+      "expected": "存在",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "图表达到 reference 基线",
+      "dimension": "R5",
+      "passed": true,
+      "actual": 17,
+      "expected": 12,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "md无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "html无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "docx无模板占位残留",
+      "dimension": "R5",
+      "passed": true,
+      "actual": null,
+      "expected": "无占位符",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "Markdown 图表均指向有效相对路径",
+      "dimension": "R5",
+      "passed": true,
+      "actual": [
+        "charts/iter_version_1.png",
+        "charts/iter_version_2.png",
+        "charts/iter_version_3.png",
+        "charts/iter_version_4.png",
+        "charts/iter_trend_qps_oltp_point_select.png",
+        "charts/iter_trend_p95_oltp_point_select.png",
+        "charts/iter_trend_qps_oltp_read_only.png",
+        "charts/iter_trend_p95_oltp_read_only.png",
+        "charts/iter_trend_qps_oltp_read_write.png",
+        "charts/iter_trend_p95_oltp_read_write.png",
+        "charts/iter_trend_qps_oltp_write_only.png",
+        "charts/iter_trend_p95_oltp_write_only.png",
+        "charts/iter_trend_qps_oltp_update_index.png",
+        "charts/iter_trend_p95_oltp_update_index.png",
+        "charts/iter_cumulative.png",
+        "charts/iter_summary.png",
+        "charts/iter_regression.png"
+      ],
+      "expected": "有效相对路径",
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "被测Skill字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "公开输入字节未改变",
+      "dimension": "R6",
+      "passed": true,
+      "actual": null,
+      "expected": null,
+      "mandatory": true,
+      "fatal": false
+    },
+    {
+      "name": "语义复核通过",
+      "dimension": "R4",
+      "passed": true,
+      "actual": "轨迹读取原Skill、输入和对应references后执行自身build.py，生成三格式及17图。最初两次运行失败后修正生成脚本，最后退出0；Skill和附件字节保持不变。原Judge独立计算来源版本顺序及相邻峰值下降严格超过5%的回退集合，均匹配；离线data_review另核对全部120条身份与四指标匹配。报告正文给出v22.6至v22.9顺序、三处v22.8到v22.9回退（21.02%、6.75%、5.16%），与最终答复一致；披露共享环境无法独立证明硬件一致，未宣称重新压测或生产因果诊断。26项是Agent自身检查数，不计作新增独立测试数；未做完整三格式视觉验收。LLM复核PASS。",
+      "expected": "论证、边界与来源一致",
+      "mandatory": true,
+      "fatal": false
+    }
+  ],
+  "dimensions": {
+    "R1": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 15
+    },
+    "R2": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R3": {
+      "applicable": false,
+      "ratio": null,
+      "weight": 20
+    },
+    "R4": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 20
+    },
+    "R5": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 15
+    },
+    "R6": {
+      "applicable": true,
+      "ratio": 1.0,
+      "weight": 10
+    }
+  },
+  "semantic_review": "COMPLETE: LLM",
+  "id": "D03",
+  "model": "gpt-6.1-sol",
+  "suite": "db",
+  "run": "D03-gpt-6.1-sol",
+  "seconds": 277.812,
+  "usage": {
+    "input_tokens": 602085,
+    "cached_input_tokens": 525696,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 10004,
+    "reasoning_output_tokens": 312
+  },
+  "monetary_cost": null,
+  "prompt_sha256": "66d140e00fb5657454aff56bc26679396ccce887c206d99852a83780f3eaafe0",
+  "final_response": true,
+  "tool_calls": 0,
+  "skill_read_observed": true,
+  "review": {
+    "run": "D03-gpt-6.1-sol",
+    "response_sha256": "10c2737278714e03fdb03d4da7203531d7f5f58cd2a1c2924a4ca3ed1b0d98e8",
+    "reviewer": "Codex（LLM）",
+    "method": "LLM",
+    "decision": "PASS",
+    "notes": "轨迹读取原Skill、输入和对应references后执行自身build.py，生成三格式及17图。最初两次运行失败后修正生成脚本，最后退出0；Skill和附件字节保持不变。原Judge独立计算来源版本顺序及相邻峰值下降严格超过5%的回退集合，均匹配；离线data_review另核对全部120条身份与四指标匹配。报告正文给出v22.6至v22.9顺序、三处v22.8到v22.9回退（21.02%、6.75%、5.16%），与最终答复一致；披露共享环境无法独立证明硬件一致，未宣称重新压测或生产因果诊断。26项是Agent自身检查数，不计作新增独立测试数；未做完整三格式视觉验收。LLM复核PASS。"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "level": "L1",
+      "text": "oltp_write_only、512 并发：QPS 最高为 TDSQL-B v22.7.3（67,175.43）；P95 最低为 MySQL 8.0.32（36.16 ms）；P99 最低为 MySQL 8.0.32（51.07 ms）。",
+      "source": "data/compare.json 筛选记录",
+      "scenario": "oltp_write_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_write_only、1000 并发：QPS 最高为 TDSQL-B v22.7.3（62,141.15）；P95 最低为 OceanBase 4.2（72.95 ms）；P99 最低为 OceanBase 4.2（100.08 ms）。",
+      "source": "data/compare.json 筛选记录",
+      "scenario": "oltp_write_only"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index、512 并发：QPS 最高为 TDSQL-B v22.7.3（14,746.99）；P95 最低为 TDSQL-B v22.7.3（50.85 ms）；P99 最低为 OceanBase 4.2（70.27 ms）。",
+      "source": "data/compare.json 筛选记录",
+      "scenario": "oltp_update_index"
+    },
+    {
+      "level": "L1",
+      "text": "oltp_update_index、1000 并发：QPS 最高为 TDSQL-B v22.7.3（13,965.57）；P95 最低为 OceanBase 4.2（100.69 ms）；P99 最低为 TDSQL-B v22.7.3（137.41 ms）。",
+      "source": "data/compare.json 筛选记录",
+      "scenario": "oltp_update_index"
+    }
+  ],
+  "report_type": "custom"
+}

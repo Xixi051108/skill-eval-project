@@ -1,0 +1,32 @@
+# 数据块映射
+
+- 第 1 条：single.log 第 8 行 → records[0] → 第 3 章全量表；场景 oltp_point_select，并发 32。
+- 第 2 条：single.log 第 9 行 → records[1] → 第 3 章全量表；场景 oltp_point_select，并发 64。
+- 第 3 条：single.log 第 10 行 → records[2] → 第 3 章全量表；场景 oltp_point_select，并发 128。
+- 第 4 条：single.log 第 11 行 → records[3] → 第 3 章全量表；场景 oltp_point_select，并发 256。
+- 第 5 条：single.log 第 12 行 → records[4] → 第 3 章全量表；场景 oltp_point_select，并发 512。
+- 第 6 条：single.log 第 13 行 → records[5] → 第 3 章全量表；场景 oltp_point_select，并发 1000。
+- 第 7 条：single.log 第 15 行 → records[6] → 第 3 章全量表；场景 oltp_read_only，并发 32。
+- 第 8 条：single.log 第 16 行 → records[7] → 第 3 章全量表；场景 oltp_read_only，并发 64。
+- 第 9 条：single.log 第 17 行 → records[8] → 第 3 章全量表；场景 oltp_read_only，并发 128。
+- 第 10 条：single.log 第 18 行 → records[9] → 第 3 章全量表；场景 oltp_read_only，并发 256。
+- 第 11 条：single.log 第 19 行 → records[10] → 第 3 章全量表；场景 oltp_read_only，并发 512。
+- 第 12 条：single.log 第 20 行 → records[11] → 第 3 章全量表；场景 oltp_read_only，并发 1000。
+- 第 13 条：single.log 第 22 行 → records[12] → 第 3 章全量表；场景 oltp_read_write，并发 32。
+- 第 14 条：single.log 第 23 行 → records[13] → 第 3 章全量表；场景 oltp_read_write，并发 64。
+- 第 15 条：single.log 第 24 行 → records[14] → 第 3 章全量表；场景 oltp_read_write，并发 128。
+- 第 16 条：single.log 第 25 行 → records[15] → 第 3 章全量表；场景 oltp_read_write，并发 256。
+- 第 17 条：single.log 第 26 行 → records[16] → 第 3 章全量表；场景 oltp_read_write，并发 512。
+- 第 18 条：single.log 第 27 行 → records[17] → 第 3 章全量表；场景 oltp_read_write，并发 1000。
+- 第 19 条：single.log 第 29 行 → records[18] → 第 3 章全量表；场景 oltp_write_only，并发 32。
+- 第 20 条：single.log 第 30 行 → records[19] → 第 3 章全量表；场景 oltp_write_only，并发 64。
+- 第 21 条：single.log 第 31 行 → records[20] → 第 3 章全量表；场景 oltp_write_only，并发 128。
+- 第 22 条：single.log 第 32 行 → records[21] → 第 3 章全量表；场景 oltp_write_only，并发 256。
+- 第 23 条：single.log 第 33 行 → records[22] → 第 3 章全量表；场景 oltp_write_only，并发 512。
+- 第 24 条：single.log 第 34 行 → records[23] → 第 3 章全量表；场景 oltp_write_only，并发 1000。
+- 第 25 条：single.log 第 36 行 → records[24] → 第 3 章全量表；场景 oltp_update_index，并发 32。
+- 第 26 条：single.log 第 37 行 → records[25] → 第 3 章全量表；场景 oltp_update_index，并发 64。
+- 第 27 条：single.log 第 38 行 → records[26] → 第 3 章全量表；场景 oltp_update_index，并发 128。
+- 第 28 条：single.log 第 39 行 → records[27] → 第 3 章全量表；场景 oltp_update_index，并发 256。
+- 第 29 条：single.log 第 40 行 → records[28] → 第 3 章全量表；场景 oltp_update_index，并发 512。
+- 第 30 条：single.log 第 41 行 → records[29] → 第 3 章全量表；场景 oltp_update_index，并发 1000。

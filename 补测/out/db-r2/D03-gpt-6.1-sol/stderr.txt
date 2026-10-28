@@ -1,0 +1,3 @@
+2026-10-27T12:02:42.074397Z  WARN codex_core::shell_snapshot: Failed to create shell snapshot for powershell: Shell snapshot not supported yet for PowerShell
+2026-10-27T12:02:43.159617Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out
+2026-10-27T12:06:04.031334Z  WARN codex_sandboxing::violation: recorded sandbox violation: resource=filesystem backend=windows_sandbox reason=permission_denied path=unknown

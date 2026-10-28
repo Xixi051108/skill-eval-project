@@ -1,0 +1,11 @@
+{
+  "report_type": "custom",
+  "fairness_warnings": [
+    "INFO: 所有产品的 data_config 均为 tables=16, table_size=1000000，duration_sec=300；task_id 和 start_time 按产品不同，硬件为单一共享元数据，未提供逐任务核验信息。"
+  ],
+  "custom": {
+    "focus_dimension": "自定义",
+    "sample_size": 12,
+    "main_finding": "两个场景的两档并发中，TDSQL-B 均取得最高 QPS；尾延迟领先项随场景、并发与指标变化。"
+  }
+}

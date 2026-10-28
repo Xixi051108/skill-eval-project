@@ -1,0 +1,70 @@
+{
+  "iter_trend_qps_oltp_point_select.png": {
+    "title": "点查峰值吞吐演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_p95_oltp_point_select.png": {
+    "title": "点查同并发延迟演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_qps_oltp_read_only.png": {
+    "title": "只读峰值吞吐演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_p95_oltp_read_only.png": {
+    "title": "只读同并发延迟演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_qps_oltp_read_write.png": {
+    "title": "混合读写峰值吞吐演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_p95_oltp_read_write.png": {
+    "title": "混合读写同并发延迟演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_qps_oltp_write_only.png": {
+    "title": "写入峰值吞吐演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_p95_oltp_write_only.png": {
+    "title": "写入同并发延迟演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_qps_oltp_update_index.png": {
+    "title": "索引更新峰值吞吐演进",
+    "check_text_overlap": []
+  },
+  "iter_trend_p95_oltp_update_index.png": {
+    "title": "索引更新同并发延迟演进",
+    "check_text_overlap": []
+  },
+  "iter_cumulative.png": {
+    "title": "首版至末版累计变化",
+    "check_text_overlap": []
+  },
+  "iter_regression.png": {
+    "title": "相邻版本变化与回退点",
+    "check_text_overlap": []
+  },
+  "iter_summary.png": {
+    "title": "各场景归一化演进趋势",
+    "check_text_overlap": []
+  },
+  "iter_version_1.png": {
+    "title": "v22.6 各场景并发吞吐曲线",
+    "check_text_overlap": []
+  },
+  "iter_version_2.png": {
+    "title": "v22.7 各场景并发吞吐曲线",
+    "check_text_overlap": []
+  },
+  "iter_version_3.png": {
+    "title": "v22.8 各场景并发吞吐曲线",
+    "check_text_overlap": []
+  },
+  "iter_version_4.png": {
+    "title": "v22.9 各场景并发吞吐曲线",
+    "check_text_overlap": []
+  }
+}
